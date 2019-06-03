@@ -1,0 +1,3 @@
+#!/bin/bash
+cmus-remote -r
+~/.bin/spotify-control.sh prev

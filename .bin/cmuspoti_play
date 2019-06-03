@@ -1,0 +1,3 @@
+#!/bin/bash
+cmus-remote -u
+~/.bin/spotify-control.sh play
