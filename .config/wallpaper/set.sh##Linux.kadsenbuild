@@ -1,3 +1,0 @@
-#!/bin/bash
-swaymsg output "HDMI-A-1" background /home/ole/pic/wallpaper/movie/simple_favor_08.jpg fill
-swaymsg output "DP-3" background /home/ole/pic/wallpaper/movie/simple_favor_03.jpg fill
