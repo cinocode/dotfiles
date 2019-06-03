@@ -1,0 +1,4 @@
+#!/bin/bash
+swaymsg output DP-3 pos 1440 250 res 2560x1440
+swaymsg output HDMI-A-1 pos 0 0 res 2560x1440
+swaymsg output HDMI-A-1 transform 270
