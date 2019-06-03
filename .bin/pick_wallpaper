@@ -1,0 +1,5 @@
+#!/bin/bash
+base_path=~/pic/wallpaper/.scripts
+choice=$(ls ${base_path} | rofi -dmenu -lines 30)
+ln -sf "${base_path}/${choice}" ~/.config/wallpaper/set
+sh ~/.config/wallpaper/set

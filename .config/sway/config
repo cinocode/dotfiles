@@ -3,7 +3,7 @@ input * xkb_options lv3:ralt_switch
 input "7847:2311:SEMITEK_USB-HID_Gaming_Keyboard" xkb_options lv3:switch
 
 exec_always ~/.config/dots/monitor.sh
-exec_always ~/.config/wallpaper/set.sh
+exec_always ~/.config/wallpaper/set
 
 set $gnome-schema org.gnome.desktop.interface
 
@@ -163,7 +163,7 @@ assign [class="Spotify"] $ws10
 bindsym $mod+Shift+p reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+y exec sh ~/.dotfiles/init_configs.sh && i3-msg restart
+bindsym $mod+Shift+y swaymsg restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+period exec swaynag -t warning -m 'Byeeeeeeeeeeeez?!?!' -b 'Cya!' 'swaymsg exit'
@@ -239,6 +239,9 @@ bindsym $mod+z exec sudo xbacklight -inc 10
 
 bindsym $mod+minus exec kb-light.py -
 bindsym $mod+slash exec kb-light.py +
+
+bindsym $mod+w exec ~/pic/wallpaper/.scripts/default_tree_art
+bindsym $mod+Shift+w exec ~/.config/wallpaper/set
 
 bar {
   swaybar_command waybar
