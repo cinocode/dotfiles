@@ -1,2 +1,0 @@
-#!/bin/bash
-swaymsg output "*" background /home/ole/.config/wallpaper/background.png fill

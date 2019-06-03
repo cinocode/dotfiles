@@ -1,1 +1,0 @@
-/home/ole/.config/wallpaper/set.sh##
