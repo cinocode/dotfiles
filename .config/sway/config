@@ -2,7 +2,8 @@ input * xkb_layout dvorak_ger_io,de
 input * xkb_options lv3:switch
 #input * xkb_options lv3:ralt_switch
 
-output "*" background /home/ole/.config/wallpaper/background1.png fill
+exec_always ~/.monitor.sh
+exec_always ~/.config/wallpaper/set.sh
 
 set $gnome-schema org.gnome.desktop.interface
 
