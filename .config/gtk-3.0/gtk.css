@@ -1,0 +1,10 @@
+@define-color YOUR_BACKGROUND_COLOR #222222;
+
+window#vim-main-window {
+    background-color: @YOUR_BACKGROUND_COLOR;
+}
+
+.titlebar.default-decoration {
+    margin: -200px;
+    opacity: 0;
+}

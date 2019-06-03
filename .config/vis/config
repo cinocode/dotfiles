@@ -1,0 +1,5 @@
+visualizers=spectrum
+visualizer.spectrum.bar.width=1
+visualizer.spectrum.falloff.mode=top
+visualizer.spectrum.falloff.weight=0.93
+colors.scheme=rainbow
