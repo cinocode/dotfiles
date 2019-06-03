@@ -4,7 +4,7 @@
 [core]
 	autocrlf = input
 	text = auto
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.config/dots/gitignore_global
 [difftool]
 	prompt = false
 [difftool "sourcetree"]
