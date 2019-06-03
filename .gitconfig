@@ -1,0 +1,41 @@
+[user]
+	name = Ole Hansen
+	email = ole.hansen@fortis-it.de
+[core]
+	autocrlf = input
+	text = auto
+	excludesfile = ~/.gitignore_global
+[difftool]
+	prompt = false
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files/Vim/vim74/gvim.exe' -d $LOCAL $REMOTE
+	prompt = false
+[mergetool]
+	prompt = false
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files/Vim/vim74/gvim.exe' -d $LOCAL $REMOTE
+	trustExitCode = true
+[push]
+	default = matching
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all --max-count=20
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=20
+	ln = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=40
+	lm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	lt = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --since="4am"
+	br = branch
+	co = checkout
+	st = status
+	mc = merge --no-ff
+	aun = update-index --assume-unchanged
+	ach = update-index --no-assume-unchanged
+	laun = ls-files -v | grep '^[[:lower:]]'
+	chs = config credential.helper store
+	aa = add **/*.js **/*.json **/*.html **/*.java
+	amend = commit --amend --no-edit
+[include]
+	path = .gitconfig.local
+[credential]
+	helper = store
+[http]
+	postBuffer = 524288000

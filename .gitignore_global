@@ -1,0 +1,50 @@
+#ignore thumbnails created by windows
+Thumbs.db
+.thumbnails/
+#ignore files build by Visual Studio
+*.obj
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+#HOMDIR ignores
+NTUSER.DAT*
+*.LOG*
+*.pfx
+#ignore file types
+*.swp
+*.pyc
+#ignore tags files
+tags
+tags-ja
+.lvimrc
+.netrwhist
+#ignore idea
+.idea/
+*.ipr
+*.iws
+#ignore eclipse
+.classpath
+.project
+#ignore gradle
+.gradle/
+gradlew
+gradlew.bat
+#ignore intellij
+*.iml
+scratch.sql
+
+*oh_custom_ignore*

@@ -1,0 +1,66 @@
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+! Transparency
+URxvt*.transparent: true
+URxvt*.shading: 20
+URxvt*.foreground:#e8e9ca
+URxvt*.color0:    #222222
+URxvt*.color1:    #8b3e2f
+URxvt*.color2:    #526f33
+URxvt*.color3:    #665847
+URxvt*.color4:    #4a708b
+URxvt*.color5:    #7a378b
+URxvt*.color6:    #528b8b
+URxvt*.color7:    #999999
+URxvt*.color8:    #4c4c4c
+URxvt*.color9:    #d75f00
+URxvt*.color10:   #cee318
+URxvt*.color11:   #eee685
+URxvt*.color12:   #9ac0cd
+URxvt*.color13:   #9f79ee
+URxvt*.color14:   #79cdcd
+URxvt*.color15:   #e8e9ca
+
+! ! Misc plugin junk
+URxvt*.scrollBar: false
+URxvt*.perl-ext-common:  default,matcher,vtwheel,selection-to-clipboard,fullscreen
+URxvt.matcher.button: 1
+URxvt*.keysym.F11: perl:fullscreen:switch
+URxvt*.url-launcher:      /usr/bin/google-chrome-stable
+URxvt*.matcher.button:   1
+URxvt*.colorUL: #4682B4
+
+! ! Fonts
+URxvt*.font: xft:Meslo\ LG\ M\ for\ Powerline:style=RegularForPowerline:size=8,xft:Anonymous\ Pro\ for\ Powerline:size=8
+
+! ! Copypasta 
+URxvt.keysym.C-v:   perl:clipboard:paste
+
+! ! Icon
+URxvt*.iconFile: /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg
+
+! ! Ctrl-Arrow nav
+URxvt*.keysym.Control-Up:   \033[1;5A
+URxvt*.keysym.Control-Down:    \033[1;5B
+URxvt*.keysym.Control-Left:    \033[1;5D
+URxvt*.keysym.Control-Right:    \033[1;5C
+
+URxvt.geometry:60x35
+URxvt.depth:32
+URxvt*background: rgba:1111/1111/1111/cccc
+URxvt.font:xft:Liberation Mono:pixelsize=13:antialias=true
+URxvt.inheritPixmap:false
+URxvt.xftAntialias:true
+URxvt.termName:rxvt
+
+rofi.color-enabled: true
+rofi.color-window: #393939, #393939, #268bd2
+rofi.color-normal: #393939, #ffffff, #393939, #268bd2, #ffffff
+rofi.color-active: #393939, #268bd2, #393939, #268bd2, #205171
+rofi.color-urgent: #393939, #f3843d, #393939, #268bd2, #ffc39c

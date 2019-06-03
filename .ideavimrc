@@ -1,0 +1,77 @@
+set surround
+
+noremap \ ,
+let mapleader = ","
+vnoremap < <gv
+vnoremap > >gv
+
+noremap <leader>b :action Back<cr>
+noremap <leader>f :action Forward<cr>
+
+noremap <leader>db :action CompileDirty<cr>
+noremap <leader>dd :action ChooseDebugConfiguration<cr>
+noremap <leader>dr :action ChooseRunConfiguration<cr>
+noremap <leader>ds :action Stop<cr>
+noremap <leader>du :action RunTargetAction<cr>
+
+noremap <leader>ga :action Git.Add<cr>
+noremap <leader>gc :action CheckinProject<cr>
+noremap <leader>gd :action Compare.SameVersion<cr>
+noremap <leader>gf :action Git.Fetch<cr>
+noremap <leader>gh :action Vcs.Show.Log<cr>
+noremap <leader>gr :action Git.Rebase<cr>
+noremap <leader>gR :action Git.Rebase.Continue<cr>
+noremap <leader>gs :action Vcs.Show.Local.Changes<cr>
+noremap <leader>gx :action Git.Reset<cr>
+noremap <leader>gz :action Git.Stash<cr>
+noremap <leader>gZ :action Git.Unstash<cr>
+
+noremap <leader>jc :action CompileProject<cr>
+noremap <leader>jd :action GotoDeclaration<cr>
+noremap <leader>jef :action ExtractFunction<cr>
+noremap <leader>jec :action ExtractClass<cr>
+noremap <leader>jem :action ExtractMethod<cr>
+noremap <leader>jev :action ExtractVariable<cr>
+noremap <leader>jf :action ReformatCode<cr>
+noremap <leader>jgc :action GenerateConstructor<cr>
+noremap <leader>jgg :action GenerateGetter<cr>
+noremap <leader>jgs :action GenerateSetter<cr>
+noremap <leader>jgb :action GenerateGetterAndSetter<cr>
+noremap <leader>jgt :action GenerateTestMethod<cr>
+noremap <leader>jh :action CallHierarchy<cr>
+noremap <leader>ji :action GotoImplementation<cr>
+noremap <leader>jn :action NewClass<cr>
+noremap <leader>jo :action CodeCleanup<cr>
+noremap <leader>jr :action RenameElement<cr>
+noremap <leader>js :action FileStructurePopup<cr>
+noremap <leader>jt :action GotoTest<cr>
+noremap <leader>jz :action RerunTests<cr>
+noremap <leader>jZ :action RerunFailedTests<cr>
+
+noremap <leader>kn :action Kotlin.NewFile<cr>
+
+noremap <leader>r :action Refactorings.QuickListPopupAction<cr>
+
+noremap <leader>sa :action $SelectAll<cr>
+noremap <leader>sb :action Rerun<cr>
+noremap <leader>sc :action GotoClass<cr>
+noremap <leader>sf :action GotoFile<cr>
+noremap <leader>sg :action Gradle.ExecuteTask<cr>
+noremap <leader>sn :action NextOccurence<cr>
+noremap <leader>sN :action PreviousOccurence<cr>
+noremap <leader>sr :action SearchEverywhere<cr>
+noremap <leader>ss :action GotoAction<cr>
+noremap <leader>st :action QuickChangeScheme<cr>
+noremap <leader>so :action HideAllWindows<cr>
+noremap <leader>sO <c-w>o:action HideAllWindows<cr>
+noremap <leader>sp :action FindInPath<cr>
+noremap <leader>sP :action ReplaceInPath<cr>
+noremap <leader>sz :action ShowSettings<cr>
+
+noremap <leader>wb :action ActivateDatabaseToolWindow<cr>
+noremap <leader>wd :action ActivateDebugToolWindow<cr>
+noremap <leader>wi :action ActivateTODOToolWindow<cr>
+noremap <leader>wm :action ActivateMessagesToolWindow<cr>
+noremap <leader>wp :action ActivateProjectToolWindow<cr>
+noremap <leader>wr :action ActivateRunToolWindow<cr>
+noremap <leader>wt :action ActivateTerminalToolWindow<cr>
