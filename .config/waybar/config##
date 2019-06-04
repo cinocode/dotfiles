@@ -4,7 +4,7 @@
     "height": 30,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/cmus", "custom/spotify"],
-    "modules-right": ["custom/weather", "cpu", "memory", "custom/storage", "pulseaudio", "battery", "clock", "tray"],
+    "modules-right": ["custom/weather", "cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
     "sway/mode": {
         "format": " {}"
     },
@@ -59,7 +59,7 @@
         "interval": 2,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/cmus.sh",
-        "exec-if": "pgrep cmus",
+        "exec-if": "cmus-remote -Q | grep 'status playing'",
         "escape": true
     },
     "custom/spotify": {
@@ -83,7 +83,8 @@
         "format-alt-click": "click-right",
         "return-type": "json",
         "interval": 60,
-        "exec": "~/.config/waybar/modules/storage-tor.sh"
+        "exec": "~/.config/waybar/modules/storage-tor.sh",
+        "exec-if": "ls ~ | grep tor"
     },
     "backlight": {
         "format": "{icon}",
