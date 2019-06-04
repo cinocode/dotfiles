@@ -37,7 +37,7 @@ URxvt*.matcher.button:   1
 URxvt*.colorUL: #4682B4
 
 ! ! Fonts
-URxvt*.font: xft:Meslo\ LG\ M\ for\ Powerline:style=RegularForPowerline:size=8,xft:Anonymous\ Pro\ for\ Powerline:size=8
+! ! URxvt*.font: xft:Meslo\ LG\ M\ for\ Powerline:style=RegularForPowerline:size=8,xft:Anonymous\ Pro\ for\ Powerline:size=8
 
 ! ! Copypasta 
 URxvt.keysym.C-v:   perl:clipboard:paste
@@ -54,7 +54,10 @@ URxvt*.keysym.Control-Right:    \033[1;5C
 URxvt.geometry:60x35
 URxvt.depth:32
 URxvt*background: rgba:1111/1111/1111/cccc
-URxvt.font:xft:Liberation Mono:pixelsize=13:antialias=true
+! ! URxvt.font:xft:Liberation Mono:pixelsize=13:antialias=true
+URxvt.font:             xft:inconsolata:pixelsize=17:antialias=true:hinting=true
+! ! , xft:dejavu sans mono:pixelsize=13:antialias=true,hinting=true
+
 URxvt.inheritPixmap:false
 URxvt.xftAntialias:true
 URxvt.termName:rxvt
