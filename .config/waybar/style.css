@@ -26,7 +26,7 @@ window#waybar.solo {
 
 #workspaces button {
     transition: none;
-    color: #f8f8f2;
+    color:      rgba(217, 216, 216, 0.4);
     background: transparent;
 }
 

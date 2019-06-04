@@ -2,8 +2,7 @@
     "layer": "bottom",
     "position": "top",
     "height": 30,
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["custom/cmus", "custom/spotify"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus", "custom/spotify"],
     "modules-right": ["custom/weather", "cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
     "sway/mode": {
         "format": " {}"
