@@ -1,8 +1,9 @@
 * {
     border:        none;
     border-radius: 0;
-    font-family:   Sans;
-    font-size:     15px;
+    font-family:   Inconsolata;
+    font-size:     16px;
+    font-weight:     bold;
     box-shadow:    none;
     text-shadow:   none;
     transition-duration: 0s;
@@ -10,16 +11,16 @@
 
 window {
     color:      rgba(217, 216, 216, 1);
-    background: rgba(35, 31, 32, 0.50);
+    background: rgba(1, 1, 1, 0.40);
 }
 
 window#waybar.solo {
-    background: rgba(35, 31, 32, 0.60);
+    background: rgba(1, 1, 1, 0.40);
 }
 
 #workspaces {
     border-radius: 20px;
-    background: #282a36;
+    background: rgba(40, 42, 54, 0.85);
     transition: none;
 }
 
@@ -63,7 +64,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #6b8e23;
+    background: rgba(107, 142, 35, 0.85);
 }
 
 #custom-cmus {
@@ -74,7 +75,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #bc8f8f;
+    background: rgba(188, 143, 143, 0.85);
 }
 
 #battery.warning {
@@ -96,7 +97,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #da70d6;
+    background: rgba(218, 112, 214, 0.85);
 }
 
 #custom-storage {
@@ -107,7 +108,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #9aedfe;
+    background: rgba(154, 237, 254, 0.85);
 }
 
 #custom-storage-tor {
@@ -118,7 +119,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #9aedfe;
+    background: rgba(154, 237, 254, 0.85);
 }
 
 #pulseaudio {
@@ -129,7 +130,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #bdb76b;
+    background: rgba(189, 183, 107, 0.85);
 }
 
 #cpu {
@@ -140,7 +141,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #cd5c5c;
+    background: rgba(205, 92, 92, 0.85);
 }
 
 #battery {
@@ -151,7 +152,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #b0c4de;
+    background: rgba(176, 196, 222, 0.85);
 }
 
 #memory {
@@ -162,7 +163,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #deb887;
+    background: rgba(222, 184, 135, 0.85);
 }
 
 #tray {
@@ -173,7 +174,7 @@ window#waybar.solo {
     border-radius: 20px;
     transition: none;
     color: #4d4d4d;
-    background: #778899;
+    background: rgba(119, 136, 153, 0.85);
 }
 
 #custom-storage.warning {
