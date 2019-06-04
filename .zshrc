@@ -67,3 +67,40 @@ compinit
 unset SSH_ASKPASS
 
 stty -ixon
+
+source ~/.config/dots/zshrc.local
+
+function proxy_on() {
+    source ~/.config/dots/proxy
+
+    echo "export http_proxy=\"${hold_http_proxy}\"" > ~/.config/dots/zshrc.local
+    echo "export no_proxy=\"${hold_no_proxy}\"" >> ~/.config/dots/zshrc.local
+    echo "export https_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
+    echo "export ftp_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
+    echo "export rsync_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
+
+    cat ~/.config/dots/gitconfig.local.sample > ~/.config/dots/gitconfig.local
+    echo "  proxy = ${hold_http_proxy}" >> ~/.config/dots/gitconfig.local
+
+    source ~/.config/dots/zshrc.local
+
+    echo -e "ON"
+}
+
+function proxy_off(){
+    rm ~/.config/dots/gitconfig.local
+    touch ~/.config/dots/gitconfig.local
+    rm ~/.config/dots/zshrc.local
+    touch ~/.config/dots/zshrc.local
+
+    unset http_proxy
+    unset https_proxy
+    unset ftp_proxy
+    unset rsync_proxy
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset FTP_PROXY
+    unset RSYNC_PROXY
+
+    echo -e "OFF"
+}

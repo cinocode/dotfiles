@@ -34,7 +34,7 @@
 	aa = add **/*.js **/*.json **/*.html **/*.java
 	amend = commit --amend --no-edit
 [include]
-	path = .gitconfig.local
+	path = .config/dots/.gitconfig.local
 [credential]
 	helper = store
 [http]
