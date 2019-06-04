@@ -125,6 +125,16 @@ set $ws7 "7 "
 set $ws8 "8 ♪"
 set $ws9 "9 "
 set $ws10 "10 ☕"
+set $ws11 "F1"
+set $ws12 "F2"
+set $ws13 "F3"
+set $ws14 "F4"
+set $ws15 "F5"
+set $ws16 "F6"
+set $ws17 "F7"
+set $ws18 "F8"
+set $ws19 "F9"
+set $ws20 "F10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -137,6 +147,16 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+F1 workspace $ws11
+bindsym $mod+F2 workspace $ws12
+bindsym $mod+F3 workspace $ws13
+bindsym $mod+F4 workspace $ws14
+bindsym $mod+F5 workspace $ws15
+bindsym $mod+F6 workspace $ws16
+bindsym $mod+F7 workspace $ws17
+bindsym $mod+F8 workspace $ws18
+bindsym $mod+F9 workspace $ws19
+bindsym $mod+F10 workspace $ws20
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -149,6 +169,16 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+F1 move container to workspace $ws11
+bindsym $mod+Shift+F2 move container to workspace $ws12
+bindsym $mod+Shift+F3 move container to workspace $ws13
+bindsym $mod+Shift+F4 move container to workspace $ws14
+bindsym $mod+Shift+F5 move container to workspace $ws15
+bindsym $mod+Shift+F6 move container to workspace $ws16
+bindsym $mod+Shift+F7 move container to workspace $ws17
+bindsym $mod+Shift+F8 move container to workspace $ws18
+bindsym $mod+Shift+F9 move container to workspace $ws19
+bindsym $mod+Shift+F10 move container to workspace $ws20
 
 # move current workspace between monitors
 bindsym $mod+Control+d move workspace to output left
