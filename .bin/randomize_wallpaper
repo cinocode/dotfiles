@@ -1,5 +1,6 @@
 #!/bin/bash
+rm ~/.config/wallpaper/set
 base_path=~/pic/wallpaper/.scripts
 choice=$(ls ${base_path} |sort -R |tail -1)
-ln -sf "${base_path}/${choice}" ~/.config/wallpaper/set
+ln -s "${base_path}/${choice}" ~/.config/wallpaper/set
 sh ~/.config/wallpaper/set
