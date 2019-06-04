@@ -9,7 +9,8 @@
         "format": " {}"
     },
     "sway/workspaces": {
-        "format": "{name}"
+        "format": "{name}",
+        "disable-scroll-wraparound": true
     },
     "sway/window": {
         "max-length": 80,
