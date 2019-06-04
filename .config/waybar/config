@@ -3,7 +3,8 @@
     "position": "top",
     "height": 30,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus", "custom/spotify"],
-    "modules-right": ["custom/weather", "cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
+    "modules-center": ["custom/time", "custom/weather"],
+    "modules-right": ["cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
     "sway/mode": {
         "format": " {}"
     },
@@ -15,7 +16,7 @@
         "tooltip": false
     },
     "clock": {
-        "format": "{:%R - %F (Week %V)}",
+        "format": "{:%F (Week %V)}",
         "tooltip": false
     },
     "battery": {
@@ -92,6 +93,12 @@
         "format-icons": ["", ""],
         "on-scroll-down": "light -A 1",
         "on-scroll-up": "light -U 1"
+    },
+    "custom/time": {
+        "format": "{}",
+        "interval": 5,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/time.sh"
     },
     "custom/weather": {
         "format": "{}",
