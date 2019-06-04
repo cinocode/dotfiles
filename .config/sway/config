@@ -204,7 +204,7 @@ hide_edge_borders both
 
 bindsym $mod+l exec swaylock-blur
 
-bindsym $mod+Shift+l exec swaylock-blur & systemctl suspend
+bindsym $mod+Shift+l exec swaylock-blur & sleep 5 && systemctl suspend
 
 bindsym $mod+Shift+z exec swaynag -t warning -m 'Sleepy time?!?!' -b 'ZzZz...' 'systemctl hibernate'
 
