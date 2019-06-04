@@ -2,10 +2,9 @@
     "layer": "bottom",
     "position": "top",
     "height": 30,
-
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/weather", "custom/storage", "pulseaudio", "battery"],
+    "modules-center": ["custom/cmus", "custom/spotify"],
+    "modules-right": ["custom/weather", "cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
     "sway/mode": {
         "format": " {}"
     },
@@ -17,7 +16,7 @@
         "tooltip": false
     },
     "clock": {
-        "format": "{:%a %d %b %H:%M}",
+        "format": "{:%R - %F (Week %V)}",
         "tooltip": false
     },
     "battery": {
@@ -44,7 +43,7 @@
     "tooltip": false
     },
     "pulseaudio": {
-        "format": "{icon}",
+        "format": "{volume} {icon}",
         "format-alt": "{volume} {icon}",
         "format-alt-click": "click-right",
         "format-muted": "",
@@ -56,8 +55,15 @@
         "on-click": "pavucontrol",
         "tooltip": false
     },
+    "custom/cmus": {
+        "interval": 2,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/cmus.sh",
+        "exec-if": "pgrep cmus",
+        "escape": true
+    },
     "custom/spotify": {
-        "interval": 1,
+        "interval": 2,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/spotify.sh",
         "exec-if": "pgrep spotify",
@@ -70,6 +76,14 @@
         "return-type": "json",
         "interval": 60,
         "exec": "~/.config/waybar/modules/storage.sh"
+    },
+    "custom/storage-tor": {
+        "format": "{} ",
+        "format-alt": "{percentage}% ",
+        "format-alt-click": "click-right",
+        "return-type": "json",
+        "interval": 60,
+        "exec": "~/.config/waybar/modules/storage-tor.sh"
     },
     "backlight": {
         "format": "{icon}",
@@ -113,5 +127,13 @@
     },
     "tray": {
         "icon-size": 18
+    },
+    "cpu": {
+        "tooltip": false,
+        "format": "{}% "
+    },
+    "memory": {
+        "tooltip": false,
+        "format": "{}% "
     }
 }
