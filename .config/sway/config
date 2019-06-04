@@ -240,8 +240,8 @@ bindsym $mod+z exec sudo xbacklight -inc 10
 bindsym $mod+minus exec kb-light.py -
 bindsym $mod+slash exec kb-light.py +
 
-bindsym $mod+w exec ~/pic/wallpaper/.scripts/default_tree_art
-bindsym $mod+Shift+w exec ~/.config/wallpaper/set
+bindsym $mod+w exec pick_wallpaper
+bindsym $mod+Shift+w exec randomize_wallpaper
 
 bar {
   swaybar_command waybar
