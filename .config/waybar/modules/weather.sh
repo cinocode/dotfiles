@@ -1,4 +1,5 @@
 #!/bin/bash
+source ~/.config/dots/zshrc.local
 
 cachedir=~/.cache/rbn
 cachefile=${0##*/}-$1
