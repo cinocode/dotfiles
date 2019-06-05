@@ -20,6 +20,7 @@ set $black       #282828
 set $darkblack   #1d2021
 set $transparent #000000AA
 
+default_border none
 smart_gaps on
 gaps inner 2
 gaps outer 4
