@@ -194,10 +194,7 @@ workspace_auto_back_and_forth yes
 assign [class="Spotify"] $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+p reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+y swaymsg restart
+bindsym $mod+Shift+p exec ~/.config/sway/setup && swaymsg reload
 
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+period exec swaynag -t warning -m 'Byeeeeeeeeeeeez?!?!' -b 'Cya!' 'swaymsg exit'
