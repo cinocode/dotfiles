@@ -96,6 +96,9 @@ bindsym $mod+h split h
 # split in vertical orientation
 bindsym $mod+k split v
 
+bindsym $mod+f exec clipman -s --max-items=15 --selector="rofi"
+bindsym $mod+Shift+f exec ~/.bin/clipclear
+
 # enter fullscreen mode for the focused container
 bindsym $mod+i fullscreen toggle
 
@@ -291,3 +294,4 @@ for_window [class="(?i)calc"] floating enable, move position mouse
 exec nm-applet --indicator
 #exec pasystray
 exec enpass
+exec clipman -d --max-items=15 &
