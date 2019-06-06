@@ -233,9 +233,9 @@ hide_edge_borders both
 # Show the first scratchpad window
 #bindsym $mod+minus scratchpad show
 
-bindsym $mod+l exec swaylock-blur
+bindsym $mod+l exec swaylock-blur -- -K --font Inconsolata --ring-color 11111111 --ring-clear-color 11111111 --key-hl-color 11111199 --inside-color 99999900
 
-bindsym $mod+Shift+l exec swaylock-blur & sleep 5 && systemctl suspend
+bindsym $mod+Shift+l exec swaylock-blur -- -K --font Inconsolata --ring-color 11111111 --ring-clear-color 11111111 --key-hl-color 11111199 --inside-color 99999900 & sleep 5 && systemctl suspend
 
 bindsym $mod+Shift+z exec swaynag -t warning -m 'Sleepy time?!?!' -b 'ZzZz...' 'systemctl hibernate'
 
