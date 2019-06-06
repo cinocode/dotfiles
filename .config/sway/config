@@ -289,4 +289,5 @@ for_window [class="(?i)Veracrypt"] floating enable, move position mouse
 for_window [class="(?i)calc"] floating enable, move position mouse
 
 exec nm-applet --indicator
-exec pasystray
+#exec pasystray
+exec enpass
