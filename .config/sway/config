@@ -1,3 +1,6 @@
+set $lock swaylock-blur -- -K --font Inconsolata --ring-color 11111111 --ring-clear-color 11111111 --key-hl-color 11111199 --inside-color 99999900
+set $suspend $lock & sleep 5 && systemctl suspend
+
 input * xkb_layout dvorak_ger_io,de
 input * xkb_options lv3:ralt_switch
 input "7847:2311:SEMITEK_USB-HID_Gaming_Keyboard" xkb_options lv3:switch
@@ -200,7 +203,24 @@ bindsym $mod+Shift+p reload
 bindsym $mod+Shift+y swaymsg restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+period exec swaynag -t warning -m 'Byeeeeeeeeeeeez?!?!' -b 'Cya!' 'swaymsg exit'
+#bindsym $mod+Shift+period exec swaynag -t warning -m 'Byeeeeeeeeeeeez?!?!' -b 'Cya!' 'swaymsg exit'
+
+set $mode_system System: (l) lock, (e) logout, (s) suspend, (R) reboot, (P) poweroff, (U) UEFI
+mode "$mode_system" {
+        bindsym l exec $lock, mode "default"
+        bindsym e exit
+        bindsym s exec $suspend, mode "default"
+        bindsym Shift+r exec reboot
+        bindsym Shift+p exec poweroff
+        bindsym Shift+u exec systemctl reboot --firmware-setup, mode "default"
+
+        # return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+l exec $lock
+bindsym $mod+Shift+l mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -245,10 +265,6 @@ hide_edge_borders both
 
 # Show the first scratchpad window
 #bindsym $mod+minus scratchpad show
-
-bindsym $mod+l exec swaylock-blur -- -K --font Inconsolata --ring-color 11111111 --ring-clear-color 11111111 --key-hl-color 11111199 --inside-color 99999900
-
-bindsym $mod+Shift+l exec swaylock-blur -- -K --font Inconsolata --ring-color 11111111 --ring-clear-color 11111111 --key-hl-color 11111199 --inside-color 99999900 & sleep 5 && systemctl suspend
 
 bindsym $mod+Shift+z exec swaynag -t warning -m 'Sleepy time?!?!' -b 'ZzZz...' 'systemctl hibernate'
 
