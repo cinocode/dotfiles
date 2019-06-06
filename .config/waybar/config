@@ -17,7 +17,7 @@
         "tooltip": false
     },
     "clock": {
-        "format": "{:%F (Week %V)}",
+        "format": "{:%d.%m.%y %a / W: %V}",
         "tooltip": false
     },
     "battery": {
