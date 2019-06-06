@@ -214,7 +214,8 @@ mode "$mode_system" {
 }
 
 bindsym $mod+l exec $lock
-bindsym $mod+Shift+l mode "$mode_system"
+bindsym $mod+Shift+l exec $suspend
+bindsym $mod+Shift+period mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
