@@ -99,9 +99,6 @@ bindsym $mod+h split h
 # split in vertical orientation
 bindsym $mod+k split v
 
-bindsym $mod+f exec clipman -s --max-items=15 --selector="rofi"
-bindsym $mod+Shift+f exec ~/.bin/clipclear
-
 # enter fullscreen mode for the focused container
 bindsym $mod+i fullscreen toggle
 
@@ -303,6 +300,9 @@ bindsym $mod+slash exec kb-light.py +
 bindsym $mod+w exec pick_wallpaper
 bindsym $mod+Shift+w exec randomize_wallpaper
 
+bindsym $mod+f exec clipman -s --max-items=15 --selector="rofi"
+bindsym $mod+Shift+f exec ~/.bin/clipmand --max-items=30
+
 bar {
   swaybar_command waybar
 }
@@ -320,4 +320,4 @@ for_window [class="(?i)calc"] floating enable, move position mouse
 exec nm-applet --indicator
 #exec pasystray
 exec enpass
-exec clipman -d --max-items=15 &
+exec ~/.bin/clipmand --max-items=30
