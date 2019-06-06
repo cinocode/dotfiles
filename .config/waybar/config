@@ -2,7 +2,7 @@
     "layer": "bottom",
     "position": "top",
     "height": 30,
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus", "custom/spotify"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/notif", "custom/cmus", "custom/spotify"],
     "modules-center": ["custom/time", "custom/weather"],
     "modules-right": ["cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
     "sway/mode": {
@@ -55,6 +55,12 @@
         "scroll-step": 10,
         "on-click": "pavucontrol",
         "tooltip": false
+    },
+    "custom/notif": {
+        "interval": 1,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/notif.sh",
+        "exec-if": "ls ~/.config/dots | grep notification"
     },
     "custom/cmus": {
         "interval": 2,

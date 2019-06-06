@@ -201,9 +201,9 @@ bindsym $mod+Shift+p exec ~/.config/sway/setup && swaymsg reload
 
 set $mode_system System: (l) lock, (e) logout, (s) suspend, (R) reboot, (P) poweroff, (U) UEFI
 mode "$mode_system" {
-        bindsym l exec $lock, mode "default"
+        bindsym l exec notif 'locking' & $lock, mode "default"
         bindsym e exit
-        bindsym s exec $suspend, mode "default"
+        bindsym s exec notif 'suspending' & $suspend, mode "default"
         bindsym Shift+r exec reboot
         bindsym Shift+p exec poweroff
         bindsym Shift+u exec systemctl reboot --firmware-setup, mode "default"
@@ -213,8 +213,8 @@ mode "$mode_system" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+l exec $lock
-bindsym $mod+Shift+l exec $suspend
+bindsym $mod+l exec notif 'locking' & $lock
+bindsym $mod+Shift+l exec notif 'suspending' & $suspend
 bindsym $mod+Shift+period mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
@@ -284,10 +284,10 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+g exec grim -g "$(slurp)" screenshot_`date +%F_%HH%MM%SS`.png
 bindsym $mod+c exec grim screenshot_`date +%F_%HH%MM%SS`.png
 
-bindsym $mod+bar exec --no-startup-id ~/.bin/cmuspoti_prev
-bindsym $mod+q exec --no-startup-id ~/.bin/cmuspoti_next
+bindsym $mod+bar exec --no-startup-id cmuspoti_prev
+bindsym $mod+q exec --no-startup-id cmuspoti_next
 
-bindsym $mod+question exec --no-startup-id ~/.bin/cmuspoti_play
+bindsym $mod+question exec --no-startup-id cmuspoti_play
 
 bindsym $mod+t exec sudo xbacklight -dec 10
 bindsym $mod+z exec sudo xbacklight -inc 10
@@ -299,7 +299,7 @@ bindsym $mod+w exec pick_wallpaper
 bindsym $mod+Shift+w exec randomize_wallpaper
 
 bindsym $mod+f exec clipman -s --max-items=15 --selector="rofi"
-bindsym $mod+Shift+f exec ~/.bin/clipmand --max-items=30
+bindsym $mod+Shift+f exec clipmand --max-items=30
 
 bar {
   swaybar_command waybar
@@ -318,4 +318,4 @@ for_window [class="(?i)calc"] floating enable, move position mouse
 exec nm-applet --indicator
 #exec pasystray
 exec enpass
-exec ~/.bin/clipmand --max-items=30
+exec clipmand --max-items=30

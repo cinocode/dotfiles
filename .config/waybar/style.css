@@ -67,6 +67,17 @@ window#waybar.solo {
     background: rgba(107, 142, 35, 0.85);
 }
 
+#custom-notif {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    transition: none;
+    color: #4d4d4d;
+    background: rgb(238,130,238);
+}
+
 #custom-cmus {
     margin-left: 4px;
     margin-right: 4px;
