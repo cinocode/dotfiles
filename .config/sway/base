@@ -217,6 +217,10 @@ bindsym $mod+l exec notif 'locking' & $lock
 bindsym $mod+Shift+l exec notif 'suspending' & $suspend
 bindsym $mod+Shift+period mode "$mode_system"
 
+exec swayidle -w \
+         timeout 90 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+         resume 'swaymsg "output * dpms on"'
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
