@@ -325,3 +325,4 @@ exec nm-applet --indicator
 #exec pasystray
 exec enpass
 exec clipmand --max-items=30
+exec redshift -m wayland -l 53.55:9.993
