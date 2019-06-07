@@ -1,6 +1,3 @@
-set $lock swaylock-blur -- -K --font Inconsolata --ring-color 11111111 --ring-clear-color 11111111 --key-hl-color 11111199 --inside-color 99999900
-set $suspend $lock & sleep 5 && systemctl suspend
-
 input * xkb_layout dvorak_ger_io,de
 input * xkb_options lv3:ralt_switch
 input "7847:2311:SEMITEK_USB-HID_Gaming_Keyboard" xkb_options lv3:switch
@@ -199,9 +196,10 @@ bindsym $mod+Shift+p exec ~/.config/sway/setup && swaymsg reload
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+period exec swaynag -t warning -m 'Byeeeeeeeeeeeez?!?!' -b 'Cya!' 'swaymsg exit'
 
+set $suspend ~/.bin/lock.sh && sleep 5 && systemctl suspend
 set $mode_system System: (l) lock, (e) logout, (s) suspend, (R) reboot, (P) poweroff, (U) UEFI
 mode "$mode_system" {
-        bindsym l exec notif 'locking' & $lock, mode "default"
+        bindsym l exec notif 'locking' & ~/.bin/lock.sh, mode "default"
         bindsym e exit
         bindsym s exec notif 'suspending' & $suspend, mode "default"
         bindsym Shift+r exec reboot
@@ -213,12 +211,16 @@ mode "$mode_system" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+l exec notif 'locking' & $lock
+bindsym $mod+l exec notif 'locking' & ~/.bin/lock.sh
 bindsym $mod+Shift+l exec notif 'suspending' & $suspend
 bindsym $mod+Shift+period mode "$mode_system"
 
 exec swayidle -w \
          timeout 90 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+         resume 'swaymsg "output * dpms on"'
+
+exec swayidle -w \
+         timeout 180 'if ! pgrep -x swaylock; then sh ~/.bin/lock.sh && swaymsg "output * dpms off"; fi' \
          resume 'swaymsg "output * dpms on"'
 
 # resize window (you can also use the mouse for that)
