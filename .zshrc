@@ -6,6 +6,14 @@ bindkey "^[[1;5D" backward-word
 
 alias r="ranger $@"
 alias n='vim ~/note/orga/scram.txt'
+alias t="trash-put $@"
+
+alias ffeh="feh --auto-rotate -zxYN $@"
+alias fehz="feh --auto-rotate -xYNZF $@"
+alias fehs="feh --auto-rotate -ZzxFYND $@"
+alias ffehs="feh --zoom fill --auto-rotate -zxFYND $@"
+alias fehr="feh --auto-rotate -rZzxFYND $@"
+alias ffehr="feh --zoom fill --auto-rotate -rzxFYND $@"
 
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
