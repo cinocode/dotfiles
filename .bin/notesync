@@ -1,0 +1,10 @@
+#!/bin/bash
+# crontab:
+# */10 * * * * /home/ole/.bin/notesync
+note_dir=~/note
+
+cd ${note_dir}
+
+result=$(git pull && git add . && (git diff-index --quiet HEAD || git commit -m 'Notesync') && git push)
+
+echo ${result}
