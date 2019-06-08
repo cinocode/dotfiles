@@ -83,6 +83,7 @@ function proxy_on() {
     echo "  proxy = ${hold_http_proxy}" >> ~/.config/dots/gitconfig.local
 
     source ~/.config/dots/zshrc.local
+    source ~/.zshrc
 
     echo -e "ON"
 }
@@ -101,6 +102,8 @@ function proxy_off(){
     unset HTTPS_PROXY
     unset FTP_PROXY
     unset RSYNC_PROXY
+
+    source ~/.zshrc
 
     echo -e "OFF"
 }
