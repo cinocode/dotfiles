@@ -4,6 +4,9 @@ export EDITOR=/usr/bin/vim
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+alias r="ranger $@"
+alias n='vim ~/note/orga/scram.txt'
+
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
