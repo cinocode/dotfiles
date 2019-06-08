@@ -3,4 +3,5 @@ rm ~/.config/wallpaper/set
 base_path=~/pic/wallpaper/.scripts
 choice=$(ls ${base_path} |sort -R |tail -1)
 ln -s "${base_path}/${choice}" ~/.config/wallpaper/set
+chmod +x ~/.config/wallpaper/set
 sh ~/.config/wallpaper/set
