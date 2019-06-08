@@ -219,10 +219,6 @@ exec swayidle -w \
          timeout 90 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
          resume 'swaymsg "output * dpms on"'
 
-exec swayidle -w \
-         timeout 180 'if ! pgrep -x swaylock; then sh ~/.bin/lock.sh && swaymsg "output * dpms off"; fi' \
-         resume 'swaymsg "output * dpms on"'
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
