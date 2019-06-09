@@ -1,6 +1,7 @@
 #!/bin/bash
 # crontab:
 # */10 * * * * /home/ole/.bin/notesync
+source ~/.config/dots/zshrc.local
 note_dir=~/note
 
 cd ${note_dir}
