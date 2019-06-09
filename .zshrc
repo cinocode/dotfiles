@@ -5,6 +5,12 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 alias r="ranger $@"
+alias rc="ranger ~/code"
+alias rd="ranger ~/down"
+alias rn="ranger ~/note"
+alias rp="ranger ~/pic"
+alias rv="ranger ~/vid"
+
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
 
