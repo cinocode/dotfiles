@@ -29,6 +29,8 @@ alias grep='grep --color=tty -d skip'
 alias cp="cp -i"                          # confirm before overwriting something
 alias free='free -m'                      # show sizes in MB
 
+alias passg="diceware -n 3 -d _ | pass insert -e $@"
+
 alias raspi='ssh pi@192.168.1.181'
 alias media='ssh media@192.168.1.181'
 
