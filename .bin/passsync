@@ -1,0 +1,8 @@
+#!/bin/bash
+# crontab:
+# */13 * * * * /home/ole/.bin/passsync
+source ~/.config/dots/zshrc.local
+
+result=$(pass git pull && pass git push)
+
+echo ${result}
