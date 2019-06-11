@@ -5,7 +5,7 @@ workspace $ws4 output DP-5
 workspace $ws5 output DP-5
 workspace $ws6 output DP-5
 workspace $ws7 output DP-4
-workspace $ws8 output HDMI-A-1
+workspace $ws8 output eDP-1
 #workspace $ws9 output HDMI-A-1
 workspace $ws10 output DP-5
 
