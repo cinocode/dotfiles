@@ -6,3 +6,5 @@ export PATH=~/.npm-global/bin:$PATH
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export GOPATH=~/.config/go
+
+export WLR_NO_HARDWARE_CURSORS=1
