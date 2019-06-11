@@ -1,4 +1,4 @@
-input * xkb_layout dvorak_ger_io,de
+input * xkb_layout dvorak_ger_io
 input * xkb_options lv3:ralt_switch
 input "7847:2311:SEMITEK_USB-HID_Gaming_Keyboard" xkb_options lv3:switch
 
