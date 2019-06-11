@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ "0" == "$(cat ~/.config/waybar/state)" ];
+then
+  ~/.config/waybar/toggle
+fi

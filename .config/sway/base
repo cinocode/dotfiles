@@ -138,11 +138,11 @@ set $ws19 "F9"
 set $ws20 "F10"
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
+bindsym $mod+1 exec ~/.config/waybar/ensure_on && swaymsg "workspace $ws1"
+bindsym $mod+2 exec ~/.config/waybar/ensure_on && swaymsg "workspace $ws2"
+bindsym $mod+3 exec ~/.config/waybar/ensure_off && swaymsg "workspace $ws3"
+bindsym $mod+4 exec ~/.config/waybar/ensure_off && swaymsg "workspace $ws4"
+bindsym $mod+5 exec ~/.config/waybar/ensure_off && swaymsg "workspace $ws5"
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
@@ -180,6 +180,9 @@ bindsym $mod+Shift+F7 move container to workspace $ws17
 bindsym $mod+Shift+F8 move container to workspace $ws18
 bindsym $mod+Shift+F9 move container to workspace $ws19
 bindsym $mod+Shift+F10 move container to workspace $ws20
+
+exec_always ~/.config/waybar/init
+bindsym $mod+j exec ~/.config/waybar/toggle
 
 # move current workspace between monitors
 bindsym $mod+Control+d move workspace to output left
@@ -308,8 +311,6 @@ bindsym $mod+x exec pass_rofi
 bar {
   swaybar_command waybar
 }
-
-bindsym $mod+j exec killall -SIGUSR1 waybar 
 
 no_focus [window_role="pop-up"]
 

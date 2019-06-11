@@ -1,0 +1,8 @@
+#!/bin/bash
+killall -SIGUSR1 waybar 
+if [ "1" == "$(cat ~/.config/waybar/state)" ];
+then
+  echo 0 > ~/.config/waybar/state
+else
+  echo 1 > ~/.config/waybar/state
+fi
