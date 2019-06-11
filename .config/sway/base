@@ -21,9 +21,9 @@ set $darkblack   #1d2021
 set $transparent #000000AA
 
 default_border none
-smart_gaps on
-gaps inner 2
-gaps outer 4
+smart_gaps off
+gaps outer 0
+gaps inner 0
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -308,6 +308,8 @@ bindsym $mod+x exec pass_rofi
 bar {
   swaybar_command waybar
 }
+
+bindsym $mod+j exec killall -SIGUSR1 waybar 
 
 no_focus [window_role="pop-up"]
 
