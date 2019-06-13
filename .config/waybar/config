@@ -111,7 +111,7 @@
         "format": "{}",
         "format-alt": "{alt}: {}",
         "format-alt-click": "click-right",
-        "interval": 1800,
+        "interval": 220,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/weather.sh hamburg"
     },
