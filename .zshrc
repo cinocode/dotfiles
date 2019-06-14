@@ -101,7 +101,6 @@ function proxy_on() {
     cat ~/.config/dots/gitconfig.local.sample > ~/.config/dots/gitconfig.local
     echo "  proxy = ${hold_http_proxy}" >> ~/.config/dots/gitconfig.local
 
-    source ~/.config/dots/zshrc.local
     source ~/.zshrc
 
     echo -e "ON"
@@ -113,14 +112,14 @@ function proxy_off(){
     rm ~/.config/dots/zshrc.local
     touch ~/.config/dots/zshrc.local
 
-    unset http_proxy
-    unset https_proxy
-    unset ftp_proxy
-    unset rsync_proxy
-    unset HTTP_PROXY
-    unset HTTPS_PROXY
-    unset FTP_PROXY
-    unset RSYNC_PROXY
+    echo "unset http_proxy" > ~/.config/dots/zshrc.local
+    echo "unset https_proxy" >> ~/.config/dots/zshrc.local
+    echo "unset ftp_proxy" >> ~/.config/dots/zshrc.local
+    echo "unset rsync_proxy" >> ~/.config/dots/zshrc.local
+    echo "unset HTTP_PROXY" >> ~/.config/dots/zshrc.local
+    echo "unset HTTPS_PROXY" >> ~/.config/dots/zshrc.local
+    echo "unset FTP_PROXY" >> ~/.config/dots/zshrc.local
+    echo "unset RSYNC_PROXY" >> ~/.config/dots/zshrc.local
 
     source ~/.zshrc
 
