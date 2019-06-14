@@ -274,8 +274,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 20 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
@@ -294,8 +294,8 @@ bindsym $mod+q exec --no-startup-id cmuspoti_next
 
 bindsym $mod+question exec --no-startup-id cmuspoti_play
 
-bindsym $mod+t exec sudo xbacklight -dec 10
-bindsym $mod+z exec sudo xbacklight -inc 10
+bindsym $mod+t exec light -U 20
+bindsym $mod+z exec light -A 20
 
 bindsym $mod+minus exec kb-light.py -
 bindsym $mod+slash exec kb-light.py +
