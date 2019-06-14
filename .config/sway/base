@@ -199,7 +199,7 @@ bindsym $mod+Shift+p exec ~/.config/sway/setup && swaymsg reload
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+period exec swaynag -t warning -m 'Byeeeeeeeeeeeez?!?!' -b 'Cya!' 'swaymsg exit'
 
-set $suspend ~/.bin/lock.sh && sleep 5 && systemctl suspend
+set $suspend ~/.bin/lock.sh && sleep 5 && ~/.bin/suspend
 set $mode_system System: (l) lock, (e) logout, (s) suspend, (R) reboot, (P) poweroff, (U) UEFI
 mode "$mode_system" {
         bindsym l exec notif 'locking' & ~/.bin/lock.sh, mode "default"
