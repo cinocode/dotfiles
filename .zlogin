@@ -1,4 +1,5 @@
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    sh ~/.config/sway/setup
     printf "Start sway/i3/none? (s/i/n)"
     read -t 1 -k 1 answer
     case $answer in
