@@ -21,9 +21,9 @@ set $darkblack   #1d2021
 set $transparent #000000AA
 
 default_border none
-smart_gaps off
-gaps outer 0
-gaps inner 0
+smart_gaps on
+gaps outer 2
+gaps inner 4
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -138,11 +138,11 @@ set $ws19 "F9"
 set $ws20 "F10"
 
 # switch to workspace
-bindsym $mod+1 exec ~/.config/waybar/ensure_on && swaymsg "workspace $ws1"
-bindsym $mod+2 exec ~/.config/waybar/ensure_on && swaymsg "workspace $ws2"
-bindsym $mod+3 exec ~/.config/waybar/ensure_off && swaymsg "workspace $ws3"
-bindsym $mod+4 exec ~/.config/waybar/ensure_off && swaymsg "workspace $ws4"
-bindsym $mod+5 exec ~/.config/waybar/ensure_off && swaymsg "workspace $ws5"
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8

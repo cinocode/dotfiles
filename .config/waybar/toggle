@@ -3,6 +3,14 @@ killall -SIGUSR1 waybar
 if [ "1" == "$(cat ~/.config/waybar/state)" ];
 then
   echo 0 > ~/.config/waybar/state
+  swaymsg "gaps outer all set 0"
+  swaymsg "gaps outer 0"
+  swaymsg "gaps inner all set 0"
+  swaymsg "gaps inner 0"
 else
   echo 1 > ~/.config/waybar/state
+  swaymsg "gaps outer all set 2"
+  swaymsg "gaps outer 2"
+  swaymsg "gaps inner all set 4"
+  swaymsg "gaps inner 4"
 fi
