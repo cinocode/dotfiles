@@ -10,7 +10,9 @@
     },
     "sway/workspaces": {
         "format": "{name}",
-        "disable-scroll-wraparound": true
+        "disable-scroll-wraparound": true,
+        "enable-bar-scroll": true,
+        "smooth-scrolling-threshold": 30
     },
     "sway/window": {
         "max-length": 80,
