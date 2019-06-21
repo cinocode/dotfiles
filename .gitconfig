@@ -39,3 +39,9 @@
 	helper = store
 [http]
 	postBuffer = 524288000
+[url "https://github.com/"]
+        insteadOf = "gh:"
+        pushInsteadOf = "gh:"
+[url "https://lht.app.lufthansa.com/stash/scm/vip/"]
+        insteadOf = "vi:"
+        pushInsteadOf = "vi:"
