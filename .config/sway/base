@@ -22,8 +22,8 @@ set $transparent #000000AA
 
 default_border none
 smart_gaps on
-gaps outer 2
-gaps inner 4
+gaps outer 0
+gaps inner 1
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
