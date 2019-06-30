@@ -3,7 +3,7 @@
     "position": "top",
     "height": 30,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/notif", "custom/cmus", "custom/spotify"],
-    "modules-center": ["custom/time", "custom/weather"],
+    "modules-center": ["custom/tidepool", "custom/time", "custom/weather"],
     "modules-right": ["cpu", "memory", "custom/storage", "custom/storage-tor", "pulseaudio", "battery", "clock", "tray"],
     "sway/mode": {
         "format": " {}"
@@ -102,6 +102,12 @@
         "format-icons": ["", ""],
         "on-scroll-down": "light -A 1",
         "on-scroll-up": "light -U 1"
+    },
+    "custom/tidepool": {
+        "format": "{}",
+        "interval": 180,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/tidepool.sh"
     },
     "custom/time": {
         "format": "{}",

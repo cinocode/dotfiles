@@ -101,6 +101,32 @@ window#waybar.solo {
     color:      rgba(217, 216, 216, 1);
 }
 
+#custom-tidepool {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    transition: none;
+    color: #4d4d4d;
+}
+
+#custom-tidepool.red {
+    background: rgba(205, 92, 92, 0.85);
+}
+
+#custom-tidepool.orange {
+    background: rgba(243, 156, 18, 0.85);
+}
+
+#custom-tidepool.yellow {
+    background: rgba(252, 214, 112, 0.85);
+}
+
+#custom-tidepool.green {
+    background: rgba(154, 205, 50, 0.85);
+}
+
 #custom-time {
     margin-left: 4px;
     margin-right: 4px;
