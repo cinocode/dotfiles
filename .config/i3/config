@@ -1,0 +1,295 @@
+# It will not be overwritten, so edit it as you like.
+#
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+#
+
+# i3 config file (v4)
+exec xsetroot -solid "#333333"
+exec_always --no-startup-id autorandr --change
+exec_always xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
+
+set $bg-color            #333333
+set $inactive-bg-color   #333333
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $focus-text-color     #87CEEB
+
+set $black       #282828
+set $darkblack   #1d2021
+set $transparent #000000AA
+
+smart_gaps on
+gaps inner 1
+gaps outer 0
+
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:System San Francisco Display 10 
+
+font pango: Inconsolata 12
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+Shift+question kill
+
+bindsym Print exec screenshot
+
+# start dmenu (a program launcher)
+#bindsym $mod+e exec dmenu_run
+bindsym $mod+e exec rofi -show run -lines 5 -eh 1 -width 30 -padding 30 -opacity "75" -bw 0 -bc $bg-color -bg $bg-color -fg $text-color -hlbg $bg-color -hlfg #9575cd -font "System San Francisco Display 10"
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+d focus left
+bindsym $mod+r focus down
+bindsym $mod+n focus up
+bindsym $mod+s focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+d move left
+bindsym $mod+Shift+r move down
+bindsym $mod+Shift+n move up
+bindsym $mod+Shift+s move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+k split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+i fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+o layout stacking
+bindsym $mod+comma layout tabbed
+bindsym $mod+period layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+set $ws1 "1 "
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 "
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 ♪"
+set $ws9 "9 "
+set $ws10 "10 ☕"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# move current workspace between monitors
+bindsym $mod+Control+d move workspace to output left
+bindsym $mod+Control+s move workspace to output right
+
+workspace_auto_back_and_forth yes
+
+#assign [class="dolphin"] $ws9
+assign [class="Spotify"] $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+p exec i3-msg reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+y exec i3-msg restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+period exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym d resize shrink width 10 px or 5 ppt
+        bindsym r resize grow height 10 px or 5 ppt
+        bindsym n resize shrink height 10 px or 5 ppt
+        bindsym s resize grow width 10 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize grow height 10 px or 5 ppt
+        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "resize"
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+hide_edge_borders both
+
+bar {
+    i3bar_command i3bar -t
+
+    colors {
+        statusline         $text-color
+        background         $transparent
+        separator          $transparent
+
+#                          BORDER       BACKGROUND   TEXT
+        focused_workspace  $transparent $transparent $text-color
+        inactive_workspace $transparent $transparent $inactive-text-color
+        active_workspace   $transparent $transparent $focus-text-color
+        urgent_workspace   $urgent-bg-color     $urgent-bg-color     $transparent
+        binding_mode       $urgent-bg-color     $urgent-bg-color     $transparent
+    }
+
+    position top
+
+    tray_output primary
+
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+}
+
+
+# Make the currently focused window a scratchpad
+#bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+#bindsym $mod+minus scratchpad show
+
+bindsym $mod+l exec ~/.bin/i3lock.sh
+
+bindsym $mod+Shift+l exec ~/.bin/i3lock_fork.sh && systemctl suspend
+
+#bindsym $mod+Shift+l exec i3lock -B=10 --insidevercolor=0000a0bf --insidewrongcolor=ff8000bf --insidecolor=010101bf --ringvercolor=0020ffff --ringwrongcolor=4040ffff --ringcolor=404090ff --textcolor=ffffffff --separatorcolor=aaaaaaff --keyhlcolor=30ccccff --bshlcolor=ff8000ff -r --clock --indicator --timecolor=ffffffff --datecolor=ffffffff --datestr="%d.%m.%Y" && systemctl suspend
+
+bindsym $mod+Shift+a exec xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym $mod+g exec screengrab --region
+bindsym $mod+c exec screengrab --fullscreen
+
+bindsym $mod+bar exec --no-startup-id ~/.bin/cmuspoti_prev
+bindsym $mod+q exec --no-startup-id ~/.bin/cmuspoti_next
+
+bindsym $mod+question exec --no-startup-id ~/.bin/cmuspoti_play
+
+bindsym $mod+t exec sudo xbacklight -dec 10
+bindsym $mod+z exec sudo xbacklight -inc 10
+
+bindsym $mod+minus exec kb-light.py -
+bindsym $mod+slash exec kb-light.py +
+
+# get random wallpaper by script
+exec_always /home/ole/.config/wallpaper/random.sh
+
+bindsym $mod+w exec /home/ole/.config/wallpaper/default.sh
+bindsym $mod+Shift+w exec /home/ole/.config/wallpaper/random.sh
+
+no_focus [window_role="pop-up"]
+
+for_window [class="^.*"] border pixel 0
+
+for_window [class="(?i)Enpass"] floating enable, move position mouse
+for_window [class="(?i)pavucontrol"] floating enable, move position mouse
+for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down 34px
+for_window [class="(?i)Veracrypt"] floating enable, move position mouse
+for_window [class="(?i)calc"] floating enable, move position mouse
+
+exec --no-startup-id nm-applet
+#exec --no-startup-id pasystray
+#exec --no-startup-id enpass
+#exec --no-startup-id redshift -l 53.55:9.993
+exec compton -f
