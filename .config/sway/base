@@ -2,6 +2,8 @@ input * xkb_layout dvorak_ger_io
 input * xkb_options lv3:ralt_switch
 input "7847:2311:SEMITEK_USB-HID_Gaming_Keyboard" xkb_options lv3:switch
 
+seat * hide_cursor 2000
+
 exec_always ~/.config/dots/monitor.sh
 exec_always ~/.config/wallpaper/set
 
