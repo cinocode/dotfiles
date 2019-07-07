@@ -31,8 +31,7 @@ alias free='free -m'                      # show sizes in MB
 
 alias passg="diceware -n 3 -d _ | pass insert -e $@"
 
-alias raspi='ssh pi@192.168.1.181'
-alias media='ssh media@192.168.1.181'
+alias raspi='ssh ole@192.168.1.181'
 
 alias vipapps='lh_keychain.sh && ssh -i .ssh/lh_ssh_key vipapps@rlx-v138.ham.dlh.de'
 alias cpvipapp='lh_keychain.sh && ssh -i .ssh/lh_ssh_key cpvipapp@rlx-v138.ham.dlh.de'
