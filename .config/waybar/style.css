@@ -171,6 +171,17 @@ window#waybar.solo {
     background: rgba(154, 237, 254, 0.85);
 }
 
+#custom-snapcount {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    transition: none;
+    color: #4d4d4d;
+    background: rgba(154, 237, 254, 0.85);
+}
+
 #pulseaudio {
     margin-left: 4px;
     margin-right: 4px;
