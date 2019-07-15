@@ -1,3 +1,2 @@
 #!/bin/bash
 eval `keychain -q --eval id_rsa`
-ssh ole@192.168.1.181
