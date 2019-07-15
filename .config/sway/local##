@@ -9,4 +9,4 @@
 # workspace $ws9 output HDMI-A-1
 # workspace $ws10 output DP-3
 
-# exec tmux new -d -s pcloudsync "pcloud"
+# exec pcloud
