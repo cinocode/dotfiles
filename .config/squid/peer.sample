@@ -1,0 +1,8 @@
+cache_peer url parent port 0 no-query no-digest login=user:password
+
+acl lufthansa-servers dstdomain .lufthansa.com
+acl dlh-servers dstdomain .dlh.de
+always_direct allow lufthansa-servers
+always_direct allow dlh-servers
+
+never_direct allow all
