@@ -1,0 +1,17 @@
+#!/bin/bash
+type=${1}
+project_name=${2}
+build_name=${3}
+
+oc project $project_name
+
+if [ $type = 'jar' ]; then
+    mkdir -p target/oc_deploy/deployments
+    rm -rf target/oc_deploy/deployments
+    cp -r config/spring/ target/oc_deploy/deployments
+    cp target/*.jar target/oc_deploy/deployments
+
+    oc start-build $build_name --from-dir=target/oc_deploy --follow
+elif [ $type = 'ng' ]; then
+    oc start-build $build_name --from-dir=src/main/frontend/dist --follow
+fi

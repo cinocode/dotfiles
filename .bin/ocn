@@ -1,0 +1,79 @@
+#!/bin/bash
+img_type=${1}
+app_name=${3}
+build_name="${app_name}-${img_type}"
+stage=${4}
+amappid=${5}
+amappname=${6}
+
+if [ $stage = 'production' ]; then
+    project_name="${2}-prod"
+else
+    project_name="${2}-nonprod"
+fi
+
+if [ $stage = 'production' ] && [ $img_type = 'spring' ]; then
+    url_pref="api-${app_name}"
+elif [ $stage = 'staging' ] && [ $img_type = 'spring' ]; then
+    url_pref="api-${app_name}-test"
+elif [ $stage = 'production' ] && [ $img_type = 'ng' ]; then
+    url_pref="${app_name}"
+elif [ $stage = 'staging' ] && [ $img_type = 'ng' ]; then
+    url_pref="${app_name}-test"
+fi
+
+oc project $project_name
+
+if [ $img_type = 'spring' ]; then
+    oc new-build --name $build_name custom-images/openjdk18-openshift --binary=true
+
+    ocb jar $project_name $build_name
+
+    oc new-app $build_name
+    oc expose svc $build_name --hostname="${url_pref}.app.lht.ham.dlh.de" --port 8080-tcp
+    if [ $stage = 'production' ]; then
+        oc scale dc/$build_name --replicas 2
+    fi
+
+    oc set env dc/$build_name SPRING_PROFILES_ACTIVE=$stage
+    oc set env dc/$build_name APP_ID=$amappid
+    oc set env dc/$build_name AM_APP_NAME=$amappname
+    oc set env dc/$build_name BATCH_LEADER_PRIORITY=2
+    oc set env dc/$build_name LD_LIBRARY_PATH=/deployments
+    oc set env dc/$build_name AM_CERT=/deployments/am-client.cert
+    oc set env dc/$build_name TRUST_STORE=/deployments/.truststore
+    oc set env dc/$build_name JAVA_OPTIONS=-Xmx1400m
+elif [ $img_type = 'ng' ]; then
+    oc new-app --name $build_name custom-images/nginx-112-rhel7~./dist/*
+
+    ocb ng $project_name $build_name
+
+    oc expose svc $build_name --hostname="${url_pref}.app.lht.ham.dlh.de"
+    if [ $stage = 'production' ]; then
+        oc scale dc/$build_name --replicas 2
+    fi
+
+    oc set env dc/$build_name APP_ID=$amappid
+    oc set env dc/$build_name AM_APP_NAME=$app_name
+fi
+
+echo "oc edit route $build_name"
+echo "under spec add"
+echo "tls:"
+echo "   insecureEdgeTerminationPolicy: Redirect"
+echo "   termination: edge"
+
+echo "oc edit dc $build_name"
+echo "under spec.template.spec.container add"
+echo "livenessProbe:"
+echo "  httpGet:"
+echo "    path: /actuator/health"
+echo "    port: 8080"
+echo "    scheme: HTTP"
+echo "    initialDelaySeconds: 180"
+echo "readinessProbe:"
+echo "  httpGet:"
+echo "    path: /actuator/health"
+echo "    port: 8080"
+echo "    scheme: HTTP"
+echo "    initialDelaySeconds: 30"

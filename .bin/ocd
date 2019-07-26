@@ -1,0 +1,19 @@
+#!/bin/bash
+img_type=${1}
+app_name=${3}
+build_name="${app_name}-${img_type}"
+stage=${4}
+
+if [ $stage = 'production' ]; then
+    project_name="${2}-prod"
+else
+    project_name="${2}-nonprod"
+fi
+
+oc project $project_name
+
+oc delete is $build_name
+oc delete bc $build_name
+oc delete dc $build_name
+oc delete svc $build_name
+oc delete route $build_name

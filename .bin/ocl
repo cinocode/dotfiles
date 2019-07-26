@@ -1,0 +1,2 @@
+#!/bin/bash
+oc login https://master.app.lht.ham.dlh.de:8443
