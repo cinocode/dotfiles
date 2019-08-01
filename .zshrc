@@ -123,3 +123,5 @@ function proxy_off(){
 
     echo -e "OFF"
 }
+
+source <(oc completion zsh)
