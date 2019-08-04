@@ -30,13 +30,12 @@
 	aun = update-index --assume-unchanged
 	ach = update-index --no-assume-unchanged
 	laun = ls-files -v | grep '^[[:lower:]]'
-	chs = config credential.helper store
 	aa = add **/*.js **/*.json **/*.html **/*.java
 	amend = commit --amend --no-edit
 [include]
 	path = .config/dots/.gitconfig.local
 [credential]
-	helper = store
+	helper = /usr/bin/pass-git-helper
 [http]
 	postBuffer = 524288000
 [url "https://github.com/"]
