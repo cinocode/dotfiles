@@ -327,3 +327,4 @@ for_window [class="(?i)calc"] floating enable, move position mouse
 exec nm-applet --indicator
 exec clipmand --max-items=30
 #exec redshift -m wayland -l 53.55:9.993
+exec urxvt -e ghsync
