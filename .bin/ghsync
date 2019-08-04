@@ -1,5 +1,5 @@
 #!/bin/bash
-passsync
-notesync
-docsync
-ssync
+~/.bin/passsync
+~/.bin/notesync
+~/.bin/docsync
+~/.bin/ssync
