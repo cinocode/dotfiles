@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo /home/ole/.bin/mount_nas

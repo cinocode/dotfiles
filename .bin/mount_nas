@@ -1,0 +1,5 @@
+#!/bin/bash
+status_text=$(ls /home/ole/nas | grep movie)
+if [ -z "$status_text" ]; then
+    sudo mount -t cifs //192.168.1.193/media_001 /home/ole/nas -o credentials=/etc/samba/credentials/media,workgroup=WORKGROUP,uid=ole,vers=1.0,sec=ntlm
+fi
