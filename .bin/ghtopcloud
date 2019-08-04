@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ $(ls -l ~/pCloudDrive | grep archive) ]]; then
+    rsync -avP --delete /home/ole/note/ /home/ole/pCloudDrive/note
+    rsync -avP --delete /home/ole/doc/ /home/ole/pCloudDrive/doc
+    rsync -avP --delete /home/ole/sync/ /home/ole/pCloudDrive/sync
+fi
