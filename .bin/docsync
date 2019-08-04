@@ -1,0 +1,9 @@
+#!/bin/bash
+source ~/.config/dots/zshrc.local
+note_dir=~/doc
+
+cd ${note_dir}
+
+result=$(git pull && git add . && (git diff-index --quiet HEAD || git commit -m 'docsync') && git push)
+
+echo ${result}

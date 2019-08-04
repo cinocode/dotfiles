@@ -1,0 +1,10 @@
+#!/bin/bash
+# crontab:
+source ~/.config/dots/zshrc.local
+note_dir=~/sync
+
+cd ${note_dir}
+
+result=$(git pull && git add . && (git diff-index --quiet HEAD || git commit -m 'ssync') && git push)
+
+echo ${result}
