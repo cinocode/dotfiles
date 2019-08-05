@@ -124,4 +124,6 @@ function proxy_off(){
     echo -e "OFF"
 }
 
-source <(oc completion zsh)
+if [[ $(find /usr/local/bin -name 'oc') ]]; then
+    source <(oc completion zsh)
+fi
