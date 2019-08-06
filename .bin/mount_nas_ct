@@ -1,6 +1,6 @@
 #!/bin/bash
+sleep 60
 status_text=$(ls /home/ole/nas | grep movie)
 if [ -z "$status_text" ]; then
-    sleep 60
     sudo /home/ole/.bin/mount_nas
 fi
