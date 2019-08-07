@@ -10,9 +10,9 @@ if [ $type = 'spring' ]; then
     rm -rf target/oc_spring/
     mkdir -p target/oc_spring/
     cp -r config/spring/ target/oc_spring/deployments
-    cp target/*.spring target/oc_spring/deployments
+    cp target/*.jar target/oc_spring/deployments
 
-    oc start-build $build_name --from-dir=target/oc_jar --follow
+    oc start-build $build_name --from-dir=target/oc_spring --follow
 elif [ $type = 'ng' ]; then
     mkdir -p target/oc_ng/
     rm -rf target/oc_ng/

@@ -5,11 +5,14 @@ build_name="${app_name}-${img_type}"
 stage=${4}
 amappid=${5}
 amappname=${6}
+secret_name='jasypt-key'
 
 if [ $stage = 'production' ]; then
     project_name="${2}-prod"
+    pass_jasypt_key="lht/jasypt_prod"
 else
     project_name="${2}-nonprod"
+    pass_jasypt_key="lht/jasypt_test"
 fi
 
 if [ $stage = 'production' ] && [ $img_type = 'spring' ]; then
@@ -25,9 +28,10 @@ fi
 oc project $project_name
 
 if [ $img_type = 'spring' ]; then
-    read -s -p "Enter jasypt key (or press enter if the secret already exists): " opt_jasypt
-    if [[ "$opt_jasypt" ]]; then
-        oc create secret generic jasypt-key --from-literal=JASYPT_ENCRYPTOR_PASSWORD=$opt_jasypt
+    opt_jasypt=$(oc get secret | grep $secret_name)
+    if [ -z "$opt_jasypt" ]; then
+        pw_jasypt=$(pass show "$pass_jasypt_key" | head -n 1)
+        oc create secret generic $secret_name --from-literal=JASYPT_ENCRYPTOR_PASSWORD=$pw_jasypt
     fi
 
     oc new-build --name $build_name custom-images/openjdk18-openshift --binary=true
@@ -52,7 +56,7 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name TRUST_STORE=/deployments/.truststore
     oc set env dc/$build_name JAVA_OPTIONS="-Xmx1400m -XX:MaxMetaspaceSize=300m"
 
-    oc set env --from=secret/jasypt-key dc/$build_name
+    oc set env --from=secret/${secret_name} dc/$build_name
 
     oc rollout resume dc/$build_name
 
