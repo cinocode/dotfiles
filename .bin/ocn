@@ -57,9 +57,6 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name JAVA_OPTIONS="-Xmx1400m -XX:MaxMetaspaceSize=300m"
 
     oc set env --from=secret/${secret_name} dc/$build_name
-
-    oc rollout resume dc/$build_name
-
 elif [ $img_type = 'ng' ]; then
     oc new-app --name $build_name custom-images/nginx-112-rhel7~./target/oc_ng
 
@@ -74,8 +71,6 @@ elif [ $img_type = 'ng' ]; then
 
     oc set env dc/$build_name APP_ID=$amappid
     oc set env dc/$build_name AM_APP_NAME=$app_name
-
-    oc rollout resume dc/$build_name
 fi
 
 echo "oc edit route $build_name"
@@ -84,6 +79,8 @@ echo "tls:"
 echo "   insecureEdgeTerminationPolicy: Redirect"
 echo "   termination: edge"
 
+echo "---"
+
 echo "oc edit dc $build_name"
 echo "under spec.template.spec.container add"
 echo "livenessProbe:"
@@ -91,10 +88,14 @@ echo "  httpGet:"
 echo "    path: /actuator/health"
 echo "    port: 8080"
 echo "    scheme: HTTP"
-echo "    initialDelaySeconds: 180"
+echo "  initialDelaySeconds: 180"
 echo "readinessProbe:"
 echo "  httpGet:"
 echo "    path: /actuator/health"
 echo "    port: 8080"
 echo "    scheme: HTTP"
-echo "    initialDelaySeconds: 30"
+echo "  initialDelaySeconds: 30"
+
+echo "---"
+
+echo "oc rollout resume dc/$build_name"
