@@ -83,6 +83,8 @@ compinit
 # End of lines added by compinstall
 unset SSH_ASKPASS
 
+bindkey '^R' history-incremental-search-backward
+
 stty -ixon
 
 source ~/.config/dots/zshrc.local
