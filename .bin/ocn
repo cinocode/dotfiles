@@ -1,4 +1,6 @@
 #!/bin/bash
+# usage:    ocn <type> <openshiftnamspace-without-nonprod/prod> <build_name> <env_staging_or_production> <am_app_id> <am_app_name>
+# example:  ocn spring  t-shiftbook                             shiftbook    staging                     123         tshiftbook
 img_type=${1}
 app_name=${3}
 build_name="${app_name}-${img_type}"
