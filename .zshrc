@@ -126,6 +126,6 @@ function proxy_off(){
     echo -e "OFF"
 }
 
-if [[ $(which oc) ]]; then
+if [ -z $(which oc | grep 'not found') ]; then
     source <(oc completion zsh)
 fi
