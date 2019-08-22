@@ -58,6 +58,7 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name TRUST_STORE=/deployments/.truststore
     oc set env dc/$build_name JAVA_OPTIONS="-Xms500m -Xmx1000m"
     oc set env dc/$build_name GC_MAX_METASPACE_SIZE="200"
+    oc set env dc/$build_name TZ="Europe/Berlin"
 
     oc set env --from=secret/${secret_name} dc/$build_name
 elif [ $img_type = 'ng' ]; then
@@ -74,6 +75,7 @@ elif [ $img_type = 'ng' ]; then
 
     oc set env dc/$build_name APP_ID=$amappid
     oc set env dc/$build_name AM_APP_NAME=$app_name
+    oc set env dc/$build_name TZ="Europe/Berlin"
 fi
 
 echo "oc edit route $build_name"
