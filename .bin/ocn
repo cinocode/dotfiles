@@ -36,7 +36,7 @@ if [ $img_type = 'spring' ]; then
         oc create secret generic $secret_name --from-literal=JASYPT_ENCRYPTOR_PASSWORD=$pw_jasypt
     fi
 
-    oc new-build --name $build_name custom-images/openjdk18-openshift --binary=true
+    oc new-build --name $build_name custom-images/lht-platform-java11 --binary=true
 
     ocb spring $project_name $build_name
 
