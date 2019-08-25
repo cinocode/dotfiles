@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo umount $1
+rmdir $1
