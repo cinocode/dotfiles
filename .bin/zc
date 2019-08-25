@@ -1,0 +1,20 @@
+#!/bin/bash
+path=$(pwd)
+dir="${path}/${1}"
+cdir="${path}/.${1}"
+zex_dir="${dir}/.zextract"
+
+zex_init=$(ls "${zex_dir}")
+if [[ -z $zex_init ]]; then
+    echo 'zextract not initialized'
+    exit;
+fi
+
+zex_state=$(cat "${zex_dir}/state")
+if [[ $zex_state == 'closed' ]]; then
+    echo 'project already closed'
+    exit;
+fi
+
+sh "${zex_dir}/down.sh"
+mv "${dir}" "${cdir}"

@@ -11,6 +11,11 @@ alias rn="ranger ~/note"
 alias rp="ranger ~/pic"
 alias rv="ranger ~/vid"
 
+alias cl="source ~/.bin/codelist $@"
+alias mcp="mvn clean package -Dmaven.test.skip=true"
+alias mct="mvn test"
+alias mcr="mvn spring-boot:run"
+
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
 

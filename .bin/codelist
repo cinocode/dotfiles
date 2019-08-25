@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+    echo 'Closed Projects:'
+    find ~/code -mindepth 1 -maxdepth 1 -type d -iname '.*'
+    echo ''
+    echo 'Open Projects:'
+    find ~/code -mindepth 1 -maxdepth 1 -type d -iname '[^.]*'
+else
+    check=$(ls ~/code | grep "$1")
+    if [[ -z $check ]]; then
+        cd ~/code
+        zo "$1"
+        cd "$1"
+    else
+        cd ~/code/"$1"
+    fi
+fi

@@ -1,0 +1,35 @@
+#!/bin/bash
+path=$(pwd)
+dir="${path}/${1}"
+zex_dir="${path}/.zextract"
+
+zfs_extract_exists=$(zfs list | grep extract)
+if [[ -z $zfs_extract_exists ]]; then
+    echo 'zfs extract ds not found'
+    exit;
+fi
+zfs_extract=$(zfs list | grep extract | head -n1 | awk '{ print $1;}')
+zfs_ds="${zfs_extract}/$(uuidgen)"
+
+mkdir -p ${dir}
+mkdir -p ${zex_dir}
+echo "sudo zfs create -o mountpoint=\"${dir}\" \"${zfs_ds}\"" >> "${zex_dir}/up.sh"
+echo "echo open > ${zex_dir}/state" >> "${zex_dir}/up.sh"
+echo "sudo zfs destroy \"${zfs_ds}\"" >> "${zex_dir}/down.sh"
+echo "echo closed > ${zex_dir}/state" >> "${zex_dir}/down.sh"
+
+empty_check=$(ls -a "${dir}")
+who_is=$(whoami)
+if [[ -z $empty_check ]]; then
+    sudo zfs create -o mountpoint="${dir}" "${zfs_ds}"
+    echo 'open' > "${zex_dir}/state"
+    sudo chown -R "${who_is}:users" "dir"
+else
+    mv "${dir}" "${dir}_tmp"
+    mkdir "${dir}"
+    sudo zfs create -o mountpoint="${dir}" "${zfs_ds}"
+    echo 'open' > "${zex_dir}/state"
+    sudo rsync -avP "${dir}_tmp/" "${dir}"
+    sudo chown -R "${who_is}:users" "${dir}"
+    rm -rf "${dir}_tmp"
+fi

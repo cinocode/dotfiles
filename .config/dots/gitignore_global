@@ -48,3 +48,4 @@ gradlew.bat
 scratch.sql
 
 *oh_custom_ignore*
+.zextract/
