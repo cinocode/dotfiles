@@ -1,4 +1,5 @@
 #!/bin/bash
+who_is=$(whoami)
 path=$(pwd)
 dir="${path}/${1}"
 zex_dir="${path}/.zextract"
@@ -14,16 +15,16 @@ zfs_ds="${zfs_extract}/$(uuidgen)"
 mkdir -p ${dir}
 mkdir -p ${zex_dir}
 echo "sudo zfs create -o mountpoint=\"${dir}\" \"${zfs_ds}\"" >> "${zex_dir}/up.sh"
+echo "sudo chown -R ${who_is}:users ${dir}" >> "${zex_dir}/up.sh"
 echo "echo open > ${zex_dir}/state" >> "${zex_dir}/up.sh"
 echo "sudo zfs destroy \"${zfs_ds}\"" >> "${zex_dir}/down.sh"
 echo "echo closed > ${zex_dir}/state" >> "${zex_dir}/down.sh"
 
 empty_check=$(ls -a "${dir}")
-who_is=$(whoami)
 if [[ -z $empty_check ]]; then
     sudo zfs create -o mountpoint="${dir}" "${zfs_ds}"
     echo 'open' > "${zex_dir}/state"
-    sudo chown -R "${who_is}:users" "dir"
+    sudo chown -R "${who_is}:users" "${dir}"
 else
     mv "${dir}" "${dir}_tmp"
     mkdir "${dir}"

@@ -1,0 +1,19 @@
+#!/bin/bash
+who_is=$(whoami)
+path=$(pwd)
+dir="${path}/${1}"
+
+zfs_extract_exists=$(zfs list | grep extract)
+if [[ -z $zfs_extract_exists ]]; then
+    echo 'zfs extract ds not found'
+    exit;
+fi
+zfs_extract=$(zfs list | grep extract | head -n1 | awk '{ print $1;}')
+zfs_ds="${zfs_extract}/$(uuidgen)"
+
+mv "${dir}" "${dir}_tmp"
+mkdir "${dir}"
+sudo zfs create -o mountpoint="${dir}" "${zfs_ds}"
+sudo rsync -avP "${dir}_tmp/" "${dir}"
+sudo chown -R "${who_is}:users" "${dir}"
+rm -rf "${dir}_tmp"
