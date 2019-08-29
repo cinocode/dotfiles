@@ -211,9 +211,9 @@ bar {
         separator          $transparent
 
 #                          BORDER       BACKGROUND   TEXT
-        focused_workspace  $transparent $transparent $text-color
+        focused_workspace  $transparent $transparent $focus-text-color
         inactive_workspace $transparent $transparent $inactive-text-color
-        active_workspace   $transparent $transparent $focus-text-color
+        active_workspace   $transparent $transparent $inactive-text-color
         urgent_workspace   $urgent-bg-color     $urgent-bg-color     $transparent
         binding_mode       $urgent-bg-color     $urgent-bg-color     $transparent
     }
