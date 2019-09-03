@@ -19,6 +19,8 @@ alias mcr="mvn spring-boot:run"
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
 
+alias dockerprox="sudoedit /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
+
 alias ffeh="feh --auto-rotate -zxYN $@"
 alias fehz="feh --auto-rotate -xYNZF $@"
 alias fehs="feh --auto-rotate -ZzxFYND $@"
