@@ -1,0 +1,5 @@
+#!/bin/bash
+if [[ -d 'src/main/frontend' ]]; then
+    cd src/main/frontend
+fi
+npm $@
