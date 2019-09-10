@@ -2,3 +2,4 @@
 swaymsg "input * xkb_layout dvorak_ger_io"
 swaymsg "input * xkb_options lv3:ralt_switch"
 swaymsg "input \"7847:2311:SEMITEK_USB-HID_Gaming_Keyboard\" xkb_options lv3:switch"
+xmodmap ~/code/dvorak_ger_io/xmodmap/Xmodmap

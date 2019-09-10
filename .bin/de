@@ -1,2 +1,3 @@
 #!/bin/bash
 swaymsg "input * xkb_layout de"
+setxkbmap de
