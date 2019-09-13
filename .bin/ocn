@@ -61,6 +61,10 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name TZ="Europe/Berlin"
 
     oc set env --from=secret/${secret_name} dc/$build_name
+
+    oc rollout resume dc/$build_name
+
+    oc set triggers --from-config=false dc/$build_name
 elif [ $img_type = 'ng' ]; then
     oc new-app --name $build_name custom-images/nginx-112-rhel7~./target/oc_ng
 
@@ -76,6 +80,10 @@ elif [ $img_type = 'ng' ]; then
     oc set env dc/$build_name APP_ID=$amappid
     oc set env dc/$build_name AM_APP_NAME=$app_name
     oc set env dc/$build_name TZ="Europe/Berlin"
+
+    oc rollout resume dc/$build_name
+
+    oc set triggers --from-config=false dc/$build_name
 fi
 
 echo "oc edit route $build_name"
@@ -100,7 +108,3 @@ echo "    path: /actuator/health"
 echo "    port: 8080"
 echo "    scheme: HTTP"
 echo "  initialDelaySeconds: 30"
-
-echo "---"
-
-echo "oc rollout resume dc/$build_name"
