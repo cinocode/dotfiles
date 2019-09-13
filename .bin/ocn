@@ -7,7 +7,8 @@ build_name="${app_name}-${img_type}"
 stage=${4}
 amappid=${5}
 amappname=${6}
-secret_name='jasypt-key'
+jasypt_secret_name='jasypt-key'
+redis_secret_name='redis-password'
 
 if [ $stage = 'production' ]; then
     project_name="${2}-prod"
@@ -16,6 +17,7 @@ else
     project_name="${2}-nonprod"
     pass_jasypt_key="lht/jasypt_test"
 fi
+pass_redis_key="lht/redis"
 
 if [ $stage = 'production' ] && [ $img_type = 'spring' ]; then
     url_pref="${app_name}"
@@ -30,10 +32,10 @@ fi
 oc project $project_name
 
 if [ $img_type = 'spring' ]; then
-    opt_jasypt=$(oc get secret | grep $secret_name)
+    opt_jasypt=$(oc get secret | grep $jasypt_secret_name)
     if [ -z "$opt_jasypt" ]; then
         pw_jasypt=$(pass show "$pass_jasypt_key" | head -n 1)
-        oc create secret generic $secret_name --from-literal=JASYPT_ENCRYPTOR_PASSWORD=$pw_jasypt
+        oc create secret generic $jasypt_secret_name --from-literal=JASYPT_ENCRYPTOR_PASSWORD=$pw_jasypt
     fi
 
     oc new-build --name $build_name custom-images/lht-platform-java11 --binary=true
@@ -60,11 +62,19 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name GC_MAX_METASPACE_SIZE="200"
     oc set env dc/$build_name TZ="Europe/Berlin"
 
-    oc set env --from=secret/${secret_name} dc/$build_name
+    oc set env --from=secret/${jasypt_secret_name} dc/$build_name
 
     oc rollout resume dc/$build_name
 
     oc set triggers --from-config=false dc/$build_name
+elif [ $img_type = 'redis' ]; then
+    opt_redis=$(oc get secret | grep $redis_secret_name)
+    if [ -z "$opt_redis" ]; then
+        pw_redis=$(pass show "$pass_redis_key" | head -n 1)
+        oc create secret generic $redis_secret_name --from-literal=REDIS_PASSWORD=$pw_redis
+    fi
+    oc new-app --name $build_name --docker-image registry.access.redhat.com/rhscl/redis-32-rhel7
+    oc set env --from=secret/${redis_secret_name} dc/$build_name
 elif [ $img_type = 'ng' ]; then
     oc new-app --name $build_name custom-images/nginx-112-rhel7~./target/oc_ng
 

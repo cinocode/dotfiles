@@ -12,8 +12,10 @@ fi
 
 oc project $project_name
 
-oc delete is $build_name
-oc delete bc $build_name
-oc delete dc $build_name
 oc delete svc $build_name
-oc delete route $build_name
+oc delete dc $build_name
+if [[ ${img_type} != 'redis' ]]; then
+    oc delete route $build_name
+    oc delete bc $build_name
+fi
+oc delete is $build_name
