@@ -65,6 +65,7 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name GC_MAX_METASPACE_SIZE="200"
     oc set env dc/$build_name TZ="Europe/Berlin"
 
+    oc set env --from=secret/${redis_secret_name} dc/$build_name
     oc set env --from=secret/${jasypt_secret_name} dc/$build_name
 
     oc rollout resume dc/$build_name
