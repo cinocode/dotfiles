@@ -21,6 +21,10 @@ alias t="trash-put $@"
 
 alias dockerprox="sudoedit /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
 
+alias pretty='prettier --print-width 120 --single-quote --trailing-comma es5 --write "src/main/frontend/src/{app,__{tests,mocks}__}/**/*.{js,ts,html,css,scss}"'
+alias ktformat='ktlint -F "src/**/*.kt"'
+alias ktpr='pretty && ktformat'
+
 alias ffeh="feh --auto-rotate -zxYN $@"
 alias fehz="feh --auto-rotate -xYNZF $@"
 alias fehs="feh --auto-rotate -ZzxFYND $@"
@@ -37,6 +41,7 @@ alias cp="cp -i"                          # confirm before overwriting something
 alias free='free -m'                      # show sizes in MB
 
 alias passg="diceware -n 3 -d _ | pass insert -e $@"
+alias diceg="diceware -n 3 -d _"
 
 alias raspi='source ~/.bin/id_keychain.sh && ssh ole@192.168.1.181'
 
