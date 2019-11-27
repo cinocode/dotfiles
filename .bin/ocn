@@ -1,22 +1,21 @@
 #!/bin/bash
-# usage:    ocn <type> <openshiftnamspace-without-nonprod/prod> <build_name> <env_staging_or_production> <am_app_id> <am_app_name>
-# example:  ocn spring  t-shiftbook                             shiftbook    staging                     123         tshiftbook
+# usage:    ocn <type> <openshiftnamspace-without-nonprod/prod> <build_name> <env_staging_or_production> <am_app_id> <am_app_name> <db_pass_key>
+# example:  ocn spring  t-shiftbook                             shiftbook    staging                     123         tshiftbook db/ma_vmars_test
 img_type=${1}
 app_name=${3}
 build_name="${app_name}-${img_type}"
 stage=${4}
 amappid=${5}
 amappname=${6}
-jasypt_secret_name='jasypt-key'
+db_pass_key=${7}
+db_secret_name="${app_name}-db-key"
 redis_secret_name='redis-password'
 
 if [ $stage = 'production' ]; then
     project_name="${2}-prod"
-    pass_jasypt_key="lht/jasypt_prod"
     redis_profile="redisp"
 else
     project_name="${2}-nonprod"
-    pass_jasypt_key="lht/jasypt_test"
     redis_profile="redist"
 fi
 pass_redis_key="lht/redis"
@@ -34,10 +33,10 @@ fi
 oc project $project_name
 
 if [ $img_type = 'spring' ]; then
-    opt_jasypt=$(oc get secret | grep $jasypt_secret_name)
-    if [ -z "$opt_jasypt" ]; then
-        pw_jasypt=$(pass show "$pass_jasypt_key" | head -n 1)
-        oc create secret generic $jasypt_secret_name --from-literal=JASYPT_ENCRYPTOR_PASSWORD=$pw_jasypt
+    opt_db_pass=$(oc get secret | grep $db_secret_name)
+    if [ -z "$opt_db_pass" ]; then
+        pw_db=$(pass show "$db_pass_key" | head -n 1)
+        oc create secret generic $db_secret_name --from-literal=DB_PASS=$pw_db
     fi
 
     #oc new-build --name $build_name custom-images/openjdk18-openshift --binary=true
@@ -60,13 +59,13 @@ if [ $img_type = 'spring' ]; then
     oc set env dc/$build_name BATCH_LEADER_PRIORITY=2
     oc set env dc/$build_name LD_LIBRARY_PATH=/deployments
     oc set env dc/$build_name AM_CERT=/deployments/am-client.cert
-    oc set env dc/$build_name TRUST_STORE=/deployments/.truststore
-    oc set env dc/$build_name JAVA_OPTIONS="-Xms500m -Xmx1000m"
+    #oc set env dc/$build_name TRUST_STORE=/deployments/.truststore
+    oc set env dc/$build_name JAVA_OPTIONS="-Xms500m -Xmx1000m -Dfile.encoding=UTF8"
     oc set env dc/$build_name GC_MAX_METASPACE_SIZE="200"
     oc set env dc/$build_name TZ="Europe/Berlin"
 
     oc set env --from=secret/${redis_secret_name} dc/$build_name
-    oc set env --from=secret/${jasypt_secret_name} dc/$build_name
+    oc set env --from=secret/${db_secret_name} dc/$build_name
 
     oc rollout resume dc/$build_name
 
