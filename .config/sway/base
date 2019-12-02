@@ -221,7 +221,7 @@ bindsym $mod+Shift+l exec notif 'suspending' & $suspend
 bindsym $mod+Shift+period mode "$mode_system"
 
 exec swayidle -w \
-         timeout 90 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+         timeout 90 'idle_handler.sh' \
          resume 'swaymsg "output * dpms on"'
 
 # resize window (you can also use the mouse for that)
