@@ -291,6 +291,9 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+g exec grim -g "$(slurp)" screenshot_`date +%F_%HH%MM%SS`.png
 bindsym $mod+c exec grim screenshot_`date +%F_%HH%MM%SS`.png
 
+bindsym $mod+Shift+bar exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym $mod+Shift+q exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+
 bindsym $mod+bar exec --no-startup-id cmuspoti_prev
 bindsym $mod+q exec --no-startup-id cmuspoti_next
 
