@@ -1,0 +1,4 @@
+#!/bin/bash
+REPO_PATH=${1}
+COMMIT_HASH=${2}
+git --git-dir="${REPO_PATH}/.git" format-patch -k -1 --stdout "${COMMIT_HASH}" | git am -3 -k
