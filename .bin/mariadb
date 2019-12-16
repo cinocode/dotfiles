@@ -1,4 +1,0 @@
-#!/bin/bash
-sudo docker stop $(sudo docker ps -a -q)
-sudo docker rm $(sudo docker ps -a -q)
-sudo docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=dev -e MYSQL_DATABASE=dev -d mariadb/server
