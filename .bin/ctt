@@ -1,0 +1,5 @@
+#!/bin/bash
+# copy then trash
+SOURCE=$1
+TARGET=$2
+cp -r "${SOURCE}" "${TARGET}" && trash-put "${SOURCE}"
