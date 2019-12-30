@@ -1,2 +1,2 @@
 #!/bin/bash
-tidepool-cli -c 3
+tidepool-cli -c 1

@@ -119,7 +119,7 @@
     },
     "custom/tidepool": {
         "format": "{}",
-        "interval": 183,
+        "interval": 63,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/tidepool.sh"
     },
