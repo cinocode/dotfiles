@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo umount /home/ole/stick
+rmdir /home/ole/stick

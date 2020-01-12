@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir -p /home/ole/stick
+sudo mount /dev/disk/by-uuid/53A379612E5128AD /home/ole/stick -o umask=000
