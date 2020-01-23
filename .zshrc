@@ -23,6 +23,7 @@ alias t="trash-put $@"
 
 alias dockerprox="sudoedit /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
 alias dcu="sudo docker-compose up -d"
+alias dcfu="docker_fresh && sudo docker-compose up -d"
 alias dcd="sudo docker-compose down"
 alias dcr="sudo docker-compose down && sudo docker-compose up -d"
 

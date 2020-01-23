@@ -1,0 +1,7 @@
+#!/bin/bash
+sudo systemctl start docker
+sleep 2
+sudo docker stop $(sudo docker ps -a -q)
+sudo docker rm $(sudo docker ps -a -q)
+sudo systemctl daemon-reload
+sudo systemctl restart docker
