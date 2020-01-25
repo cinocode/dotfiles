@@ -3,5 +3,5 @@ mkdir -p /home/ole/stick
 if [[ $1 ]]; then
     sudo mount "${1}" /home/ole/stick -o umask=000
 else
-    sudo mount /dev/disk/by-uuid/1F22-79E3 /home/ole/stick -o umask=000
+    sudo mount /dev/disk/by-uuid/E571-1D60 /home/ole/stick -o umask=000
 fi
