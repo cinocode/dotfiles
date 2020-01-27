@@ -1,4 +1,0 @@
-#!/bin/bash
-tmux kill-session -t clipmand &
-echo '[" "]' > ~/.local/share/clipman.json
-sleep 2 && tmux new -d -s clipmand "clipman -d $@"

@@ -307,8 +307,7 @@ bindsym $mod+slash exec kb-light.py +
 bindsym $mod+w exec pick_wallpaper
 bindsym $mod+Shift+w exec randomize_wallpaper
 
-bindsym $mod+f exec clipman -s --max-items=15 --selector="rofi"
-bindsym $mod+Shift+f exec clipmand --max-items=30
+bindsym $mod+f exec clipman pick --max-items=15 --tool=rofi
 
 bindsym $mod+x exec pass_rofi
 
@@ -328,7 +327,7 @@ for_window [class="(?i)calc"] floating enable, move position mouse
 
 exec_always kanshi_restart
 exec nm-applet --indicator
-exec clipmand --max-items=30
+exec wl-paste -t text --watch clipman store
 exec urxvt -e ghsync
 exec flashfocus
 exec redshift -m wayland -l 53.55:9.993
