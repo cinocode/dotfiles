@@ -23,6 +23,4 @@ else
         xdotool type --clearmodifiers --file -
 fi
 
-#pass_clear=$(pass show $password | head -n 1)
-sleep 46 && clipmand --max-items=30 &
-#sleep 47 && sed "s/\[\"${pass_clear}\"\]/\[\" \"\]/g;s/,\"${pass_clear}\"//g;s/\"${pass_clear}\",//g" ~/.local/share/clipman.json > ~/.local/share/clipman.json &
+sleep 44 && clipman clear -a &

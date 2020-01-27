@@ -1,3 +1,4 @@
 #!/bin/bash
 pass -c $@
 pass tail $@
+sleep 44 && clipman clear -a
