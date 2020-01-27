@@ -1,0 +1,3 @@
+#!/bin/bash
+killall kanshi &
+sleep 1 && kanshi &

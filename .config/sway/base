@@ -4,7 +4,6 @@ input "7847:2311:SEMITEK_USB-HID_Gaming_Keyboard" xkb_options lv3:switch
 
 seat * hide_cursor 2000
 
-exec_always ~/.config/dots/monitor.sh
 exec_always ~/.config/wallpaper/set
 
 set $gnome-schema org.gnome.desktop.interface
@@ -327,6 +326,7 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down 34px
 for_window [class="(?i)Veracrypt"] floating enable, move position mouse
 for_window [class="(?i)calc"] floating enable, move position mouse
 
+exec_always kanshi_restart
 exec nm-applet --indicator
 exec clipmand --max-items=30
 #exec redshift -m wayland -l 53.55:9.993

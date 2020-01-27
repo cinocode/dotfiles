@@ -1,0 +1,16 @@
+{
+    # Kadsenbuild
+    output DP-3 position 0,0 mode 2560x1440 transform 270
+    output HDMI-A-1 position 1440,250 mode 2560x1440
+}
+{
+    # T495 Home Office
+    output HDMI-A-1 position 0,0 mode 2560x1440 transform 270
+    output DP-2 position 1440,250 mode 2560x1440
+}
+{
+    # LHT Office
+    output eDP-1 position 0,0 mode 1920x1080
+    output DP-1 position 1920,0 mode 1920x1200
+    output HDMI-A-1 position 3840,0 mode 1920x1200
+}
