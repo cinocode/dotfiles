@@ -1,2 +1,8 @@
 #!/bin/bash
+if [[ $1 ]]; then
+    if [[ $1 = 'azure' ]]; then
+        oc login https://master.ocp01.az.lhtcloud.com:443 && exit 0
+    fi
+fi
+
 oc login https://master.app.lht.ham.dlh.de:8443
