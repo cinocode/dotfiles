@@ -16,6 +16,9 @@ oc delete svc $build_name
 oc delete dc $build_name
 if [[ ${img_type} != 'redis' ]]; then
     oc delete route $build_name
+    if [ $stage = 'production' ]; then
+        oc delete route $build_name-extern
+    fi
     oc delete bc $build_name
 fi
 oc delete is $build_name

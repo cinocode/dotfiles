@@ -14,8 +14,10 @@ redis_profile="redis"
 
 if [ $stage = 'production' ]; then
     project_name="${2}-prod"
+    domain_base=".ocp01.az.lhtcloud.com"
 else
     project_name="${2}-nonprod"
+    domain_base=".app.lht.ham.dlh.de"
 fi
 pass_redis_key="lht/redis"
 
@@ -47,8 +49,9 @@ if [ $img_type = 'spring' ]; then
 
     oc rollout pause dc/$build_name
 
-    oc expose svc $build_name --hostname="${url_pref}.app.lht.ham.dlh.de" --port 8080-tcp
+    oc expose svc $build_name --hostname="${url_pref}${domain_base}" --port 8080-tcp
     if [ $stage = 'production' ]; then
+        oc expose svc $build_name --hostname="${url_pref}-extern${domain_base}" --port 8080-tcp -l "internet=true" --name "${build_name}-extern"
         oc scale dc/$build_name --replicas 2
     fi
 
@@ -107,7 +110,7 @@ elif [ $img_type = 'ng' ]; then
 
     ocb ng $project_name $build_name
 
-    oc expose svc $build_name --hostname="${url_pref}.app.lht.ham.dlh.de"
+    oc expose svc $build_name --hostname="${url_pref}${domain_base}"
     if [ $stage = 'production' ]; then
         oc scale dc/$build_name --replicas 2
     fi
