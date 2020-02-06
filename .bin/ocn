@@ -10,13 +10,12 @@ amappname=${6}
 db_pass_key=${7}
 db_secret_name="${app_name}-db-key"
 redis_secret_name='redis-password'
+redis_profile="redis"
 
 if [ $stage = 'production' ]; then
     project_name="${2}-prod"
-    redis_profile="redisp"
 else
     project_name="${2}-nonprod"
-    redis_profile="redist"
 fi
 pass_redis_key="lht/redis"
 
