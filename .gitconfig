@@ -36,7 +36,7 @@
 [include]
 	path = .config/dots/.gitconfig.local
 [credential]
-	helper = /usr/bin/pass-git-helper
+	helper = /usr/local/bin/passm-git-helper
 [http]
 	postBuffer = 524288000
 [url "https://github.com/"]
