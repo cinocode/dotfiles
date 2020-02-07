@@ -1,3 +1,6 @@
 #!/bin/bash
-swaymsg "input * xkb_layout de"
-setxkbmap de
+if [[ $(pgrep sway) ]]; then
+    swaymsg "input * xkb_layout de"
+else
+    setxkbmap de
+fi
