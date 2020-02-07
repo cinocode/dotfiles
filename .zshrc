@@ -4,6 +4,8 @@ export EDITOR=/usr/bin/vim
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+alias passv="PASSWORD_STORE_DIR=~/code/.vipappspass pass"
+
 alias r="ranger $@"
 alias rc="ranger ~/code"
 alias rd="ranger ~/down"
