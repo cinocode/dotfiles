@@ -1,0 +1,15 @@
+#!/bin/bash
+DEF_KERNEL_POSTFIX=linux
+ZRPOOL=zt495
+ZROOT=${ZRPOOL}/enc/root
+
+echo reverting initramfs
+sudo rm /boot/initramfs-${DEF_KERNEL_POSTFIX}.img
+sudo cp /boot/initramfs-default-one.img /boot/initramfs-${DEF_KERNEL_POSTFIX}.img
+
+echo reverting kernel
+sudo rm /boot/vmlinuz-${DEF_KERNEL_POSTFIX}
+sudo cp /boot/vmlinuz-default-one /boot/vmlinuz-${DEF_KERNEL_POSTFIX}
+
+echo rolling back
+sudo zfs rollback -r ${ZROOT}/default@one
