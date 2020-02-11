@@ -19,7 +19,7 @@ else
     project_name="${2}-nonprod"
     domain_base=".app.lht.ham.dlh.de"
 fi
-pass_redis_key="lht/redis"
+pass_redis_key="misc/redis"
 
 if [ $stage = 'production' ] && [ $img_type = 'spring' ]; then
     url_pref="${app_name}"
@@ -36,7 +36,7 @@ oc project $project_name
 if [ $img_type = 'spring' ]; then
     opt_db_pass=$(oc get secret | grep $db_secret_name)
     if [ -z "$opt_db_pass" ]; then
-        pw_db=$(pass show "$db_pass_key" | head -n 1)
+        pw_db=$(passv show "$db_pass_key" | head -n 1)
         oc create secret generic $db_secret_name --from-literal=DB_PASS=$pw_db
     fi
 
@@ -98,7 +98,7 @@ if [ $img_type = 'spring' ]; then
 elif [ $img_type = 'redis' ]; then
     opt_redis=$(oc get secret | grep $redis_secret_name)
     if [ -z "$opt_redis" ]; then
-        pw_redis=$(pass show "$pass_redis_key" | head -n 1)
+        pw_redis=$(passv show "$pass_redis_key" | head -n 1)
         oc create secret generic $redis_secret_name --from-literal=REDIS_PASSWORD=$pw_redis
     fi
     oc new-app --name $build_name --docker-image registry.access.redhat.com/rhscl/redis-32-rhel7
