@@ -50,6 +50,7 @@ alias passg="diceware -n 3 -d _ | pass insert -e $@"
 alias diceg="diceware -n 3 -d _"
 
 alias raspi='source ~/.bin/id_keychain.sh && ssh ole@192.168.1.181'
+alias ssh_media='source ~/.bin/id_keychain.sh && ssh ole@192.168.1.172'
 
 alias vipapps='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key vipapps@rlx-v138.ham.dlh.de'
 alias cpvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key cpvipapp@rlx-v138.ham.dlh.de'
