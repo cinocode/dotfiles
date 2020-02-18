@@ -1,0 +1,19 @@
+#!/bin/bash
+AUTH_USER=U898296
+
+read -sp "Enter your ebase password: " AUTH_PASS
+
+if [[ $AUTH_PASS ]]; then
+    echo 'Messing with your ~/.npmrc'
+    sed -i '/^_auth.*/d' ~/.npmrc
+    sed -i '/^always\-auth.*/d' ~/.npmrc
+    sed -i '/^email.*/d' ~/.npmrc
+    curl -u "${AUTH_USER}:${AUTH_PASS}" https://lht.app.lufthansa.com/artifactory/api/npm/auth >> ~/.npmrc
+
+    echo 'Messing with your ~/.m2/settings.xml'
+    MVN_MASTER=$(mvn --encrypt-master-password thisisnotthepasswordulook4 | sed 's/\//\\\//g')
+    sed -i "s/[<]master.*master[>]/<master>${MVN_MASTER}<\/master>/g" ~/.m2/settings-security.xml
+    MVN_ENC_PW=$(mvn --encrypt-password ${AUTH_PASS} | sed 's/\//\\\//g')
+    sed -i "s/[<]username.*username[>]/<username>${AUTH_USER}<\/username>/g" ~/.m2/settings.xml
+    sed -i "s/[<]password.*password[>]/<password>${MVN_ENC_PW}<\/password>/g" ~/.m2/settings.xml
+fi
