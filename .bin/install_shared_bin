@@ -1,0 +1,14 @@
+#!/bin/bash
+LOCATION="/opt/shared_bin"
+
+if [[ -d $LOCATION ]]; then
+    echo "Updating ${LOCATION}"
+    cd $LOCATION
+    git pull
+else
+    echo "Installing ${LOCATION}"
+    git clone https://github.com/cinocode/shared_bin.git ~/shared_bin
+    sudo mv ~/shared_bin $LOCATION
+    sudo chown -R ole:ole $LOCATION
+fi
+sudo ln -sf "${LOCATION}"/* /usr/local/bin
