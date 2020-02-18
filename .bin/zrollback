@@ -1,15 +1,32 @@
 #!/bin/bash
-DEF_KERNEL_POSTFIX=linux
-ZRPOOL=zt495
+echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
+if [[ $1 ]]; then
+    TARGET_ROLLBACK=$1
+else
+    TARGET_ROLLBACK=one
+fi
+echo "Rolling back to: ${TARGET_ROLLBACK}"
+
+DEF_KERNEL_POSTFIX=$(sudo head ${BOOT_LOADER} | grep vmlinuz- | sed 's/linux \/vmlinuz-//')
+ZRPOOL=$(df | grep root | sed 's/\/.*//')
+
+if [[ -z ${ZRPOOL} ]]; then
+    echo 'Error: no zrpool' && exit 1
+elif [[ -z ${DEF_KERNEL_POSTFIX} ]]; then
+    echo 'Error: no def kernel postfix' && exit 1
+fi
+
+echo "Using Zrpool: ${ZRPOOL}"
+echo "Using Kernel Postfix: ${DEF_KERNEL_POSTFIX}"
 ZROOT=${ZRPOOL}/enc/root
 
 echo reverting initramfs
 sudo rm /boot/initramfs-${DEF_KERNEL_POSTFIX}.img
-sudo cp /boot/initramfs-default-one.img /boot/initramfs-${DEF_KERNEL_POSTFIX}.img
+sudo cp /boot/initramfs-default-${TARGET_ROLLBACK}.img /boot/initramfs-${DEF_KERNEL_POSTFIX}.img
 
 echo reverting kernel
 sudo rm /boot/vmlinuz-${DEF_KERNEL_POSTFIX}
-sudo cp /boot/vmlinuz-default-one /boot/vmlinuz-${DEF_KERNEL_POSTFIX}
+sudo cp /boot/vmlinuz-default-${TARGET_ROLLBACK} /boot/vmlinuz-${DEF_KERNEL_POSTFIX}
 
 echo rolling back
-sudo zfs rollback -r ${ZROOT}/default@one
+sudo zfs rollback -r ${ZROOT}/default@${TARGET_ROLLBACK}

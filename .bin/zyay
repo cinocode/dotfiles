@@ -1,0 +1,68 @@
+#!/bin/bash
+BOOT_LOADER=/boot/loader/entries/arch.conf
+
+echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
+
+echo clean package cache
+yay -Sc --noconfirm
+
+echo clean up trash
+trash-empty 3
+
+if [[ $(pacman -Qs docker) ]]; then
+    sudo systemctl start docker
+    sudo docker system prune -af
+fi
+
+if [[ $(pacman -Qs zfs) ]]; then
+    DEF_KERNEL_POSTFIX=$(sudo head ${BOOT_LOADER} | grep vmlinuz- | sed 's/linux \/vmlinuz-//')
+    ZRPOOL=$(df | grep root | sed 's/\/.*//')
+
+    if [[ -z ${ZRPOOL} ]]; then
+        echo 'Error: no zrpool' && exit 1
+    elif [[ -z ${DEF_KERNEL_POSTFIX} ]]; then
+        echo 'Error: no def kernel postfix' && exit 1
+    fi
+
+    echo "Using Zrpool: ${ZRPOOL}"
+    echo "Using Kernel Postfix: ${DEF_KERNEL_POSTFIX}"
+    ZROOT=${ZRPOOL}/enc/root
+
+    echo cycle initramfs
+    sudo rm /boot/initramfs-default-three.img
+    sudo mv /boot/initramfs-default-two.img /boot/initramfs-default-three.img
+    sudo mv /boot/initramfs-default-one.img /boot/initramfs-default-two.img
+    sudo cp /boot/initramfs-${DEF_KERNEL_POSTFIX}.img /boot/initramfs-default-one.img
+
+    echo cycle kernel
+    sudo rm /boot/vmlinuz-default-three
+    sudo mv /boot/vmlinuz-default-two /boot/vmlinuz-default-three
+    sudo mv /boot/vmlinuz-default-one /boot/vmlinuz-default-two
+    sudo cp /boot/vmlinuz-${DEF_KERNEL_POSTFIX} /boot/vmlinuz-default-one
+
+    echo cycle snaps and clones
+    sudo zfs destroy -R ${ZROOT}/default@three
+    sudo zfs rename ${ZROOT}/default@two ${ZROOT}/default@three
+    sudo zfs rename ${ZROOT}/two ${ZROOT}/three
+    sudo zfs rename ${ZROOT}/default@one ${ZROOT}/default@two
+    sudo zfs rename ${ZROOT}/one ${ZROOT}/two
+
+    echo create new snap one
+    sudo zfs snapshot ${ZROOT}/default@one
+    sudo zfs clone ${ZROOT}/default@one ${ZROOT}/one
+    sudo zfs set canmount=noauto ${ZROOT}/one
+    sudo zfs set mountpoint=/ ${ZROOT}/one
+fi
+
+if [[ -f ~/.bin/zyay_extra ]]; then
+    ~/.bin/zyay_extra
+fi
+
+echo update the system
+sudo reflector --country France --country Germany --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
+if [[ $(pacman -Qs zfs) ]]; then
+    yay -Syu znapzend rxvt-unicode-pixbuf $@
+else
+    yay -Syu rxvt-unicode-pixbuf $@
+fi
