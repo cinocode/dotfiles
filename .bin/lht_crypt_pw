@@ -11,7 +11,8 @@ if [[ $AUTH_PASS ]]; then
     curl -u "${AUTH_USER}:${AUTH_PASS}" https://lht.app.lufthansa.com/artifactory/api/npm/auth >> ~/.npmrc
 
     echo 'Messing with your ~/.m2/settings.xml'
-    MVN_MASTER=$(mvn --encrypt-master-password thisisnotthepasswordulook4 | sed 's/\//\\\//g')
+    RANDO=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
+    MVN_MASTER=$(mvn --encrypt-master-password ${RANDO} | sed 's/\//\\\//g')
     sed -i "s/[<]master.*master[>]/<master>${MVN_MASTER}<\/master>/g" ~/.m2/settings-security.xml
     MVN_ENC_PW=$(mvn --encrypt-password ${AUTH_PASS} | sed 's/\//\\\//g')
     sed -i "s/[<]username.*username[>]/<username>${AUTH_USER}<\/username>/g" ~/.m2/settings.xml
