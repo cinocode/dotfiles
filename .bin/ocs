@@ -1,0 +1,9 @@
+#!/bin/bash
+PROJ=${1}
+SECRET_NAME=${2}
+KEY_NAME=${3}
+PASSK=${4}
+PASSW=$(passv show "$PASSK" | head -n 1)
+
+oc project ${PROJ}
+oc create secret generic ${SECRET_NAME} --from-literal=${KEY_NAME}=${PASSW}
