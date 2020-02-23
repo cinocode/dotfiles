@@ -10,6 +10,7 @@ echo clean up trash
 trash-empty 3
 
 if [[ $(pacman -Qs docker) ]]; then
+    echo clean up docker images
     sudo systemctl start docker
     sudo docker system prune -af
 fi
@@ -65,4 +66,15 @@ if [[ $(pacman -Qs zfs) ]]; then
     yay -Syu znapzend rxvt-unicode-pixbuf $@
 else
     yay -Syu rxvt-unicode-pixbuf $@
+fi
+
+if [[ -d ~/.rice ]]; then
+    echo 'updating packages listed in ~/.rice'
+    cd ~/.rice
+    git pull
+    ./install_packages.sh
+fi
+
+if [[ -f ~/.bin/install_shared_bin ]]; then
+    ~/.bin/install_shared_bin
 fi
