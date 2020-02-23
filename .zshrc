@@ -6,6 +6,8 @@ bindkey "^[[1;5D" backward-word
 
 alias passv="PASSWORD_STORE_DIR=~/code/.vipappspass pass"
 
+alias cat=bat
+
 alias r="ranger $@"
 alias rc="ranger ~/code"
 alias rd="ranger ~/down"
