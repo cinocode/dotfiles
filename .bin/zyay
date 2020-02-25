@@ -12,7 +12,7 @@ trash-empty 3
 if [[ $(pacman -Qs docker) ]]; then
     echo clean up docker images
     sudo systemctl start docker
-    sudo docker system prune -af
+    sudo docker system prune -f
 fi
 
 if [[ $(pacman -Qs zfs) ]]; then
