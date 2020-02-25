@@ -3,7 +3,7 @@ PROJ=${1}
 SECRET_NAME=${2}
 KEY_NAME=${3}
 PASSK=${4}
-PASSW=$(passv show "$PASSK" | head -n 1)
+PASSW=$(PASSWORD_STORE_DIR=~/code/.vipappspass pass show "$PASSK" | head -n 1)
 
 oc project ${PROJ}
 oc create secret generic ${SECRET_NAME} --from-literal=${KEY_NAME}=${PASSW}
