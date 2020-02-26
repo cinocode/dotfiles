@@ -182,6 +182,9 @@ bindsym $mod+Shift+F8 move container to workspace $ws18
 bindsym $mod+Shift+F9 move container to workspace $ws19
 bindsym $mod+Shift+F10 move container to workspace $ws20
 
+assign [window_role="browser"] workspace $ws2
+assign [class="jetbrains-idea"] workspace $ws3
+
 exec_always ~/.config/waybar/init
 bindsym $mod+j exec ~/.config/waybar/toggle
 
