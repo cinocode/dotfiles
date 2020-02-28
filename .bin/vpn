@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ $1 = 'off' ]]; then
+    tmux kill-session -t lga
+else
+    read -sp "Enter your password: " AUTH_PASS
+    tmux new-session -d -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin"
+fi
