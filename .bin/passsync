@@ -3,4 +3,11 @@ source ~/.config/dots/zshrc.local
 
 result=$(pass git pull && pass git push)
 
+PASSV_DIR=/home/ole/code/.vipappspass
+if [[ -d ${PASSV_DIR} ]]; then
+    cd ${PASSV_DIR}
+    git pull
+    git push
+fi
+
 echo ${result}
