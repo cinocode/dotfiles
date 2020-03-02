@@ -1,0 +1,14 @@
+#!/bin/bash
+rm ~/.config/dots/gitconfig.local
+touch ~/.config/dots/gitconfig.local
+rm ~/.config/dots/zshrc.local
+touch ~/.config/dots/zshrc.local
+
+echo "unset http_proxy" > ~/.config/dots/zshrc.local
+echo "unset https_proxy" >> ~/.config/dots/zshrc.local
+echo "unset ftp_proxy" >> ~/.config/dots/zshrc.local
+echo "unset rsync_proxy" >> ~/.config/dots/zshrc.local
+echo "unset HTTP_PROXY" >> ~/.config/dots/zshrc.local
+echo "unset HTTPS_PROXY" >> ~/.config/dots/zshrc.local
+echo "unset FTP_PROXY" >> ~/.config/dots/zshrc.local
+echo "unset RSYNC_PROXY" >> ~/.config/dots/zshrc.local

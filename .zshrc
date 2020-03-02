@@ -8,6 +8,9 @@ alias passv="PASSWORD_STORE_DIR=~/code/.vipappspass pass"
 
 alias cat=bat
 
+alias vp="proxy_off && sh ~/.bin/vpn && proxy_on"
+alias vpd="proxy_off && sh ~/.bin/vpn off"
+
 alias r="ranger $@"
 alias rc="ranger ~/code"
 alias rd="ranger ~/down"
@@ -114,40 +117,15 @@ stty -ixon
 source ~/.config/dots/zshrc.local
 
 function proxy_on() {
-    source ~/.config/dots/proxy
-
-    echo "export http_proxy=\"${hold_http_proxy}\"" > ~/.config/dots/zshrc.local
-    echo "export no_proxy=\"${hold_no_proxy}\"" >> ~/.config/dots/zshrc.local
-    echo "export https_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
-    echo "export ftp_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
-    echo "export rsync_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
-
-    cat ~/.config/dots/gitconfig.local.sample > ~/.config/dots/gitconfig.local
-    echo "  proxy = ${hold_http_proxy}" >> ~/.config/dots/gitconfig.local
-
+    proxy_vars_up
     source ~/.zshrc
-
-    echo -e "ON"
+    echo -e "PROXY ON"
 }
 
 function proxy_off(){
-    rm ~/.config/dots/gitconfig.local
-    touch ~/.config/dots/gitconfig.local
-    rm ~/.config/dots/zshrc.local
-    touch ~/.config/dots/zshrc.local
-
-    echo "unset http_proxy" > ~/.config/dots/zshrc.local
-    echo "unset https_proxy" >> ~/.config/dots/zshrc.local
-    echo "unset ftp_proxy" >> ~/.config/dots/zshrc.local
-    echo "unset rsync_proxy" >> ~/.config/dots/zshrc.local
-    echo "unset HTTP_PROXY" >> ~/.config/dots/zshrc.local
-    echo "unset HTTPS_PROXY" >> ~/.config/dots/zshrc.local
-    echo "unset FTP_PROXY" >> ~/.config/dots/zshrc.local
-    echo "unset RSYNC_PROXY" >> ~/.config/dots/zshrc.local
-
+    proxy_vars_down
     source ~/.zshrc
-
-    echo -e "OFF"
+    echo -e "PROXY OFF"
 }
 
 oc_not_found=$(which oc | grep 'not found')

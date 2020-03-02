@@ -23,15 +23,15 @@ else
         read -sp "Enter rsa digits: " AUTH_RSA
     fi
     AUTH_PASS="${RSA_PREFIX}${AUTH_RSA}"
-    tmux new-session -d -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin | tee ${LOGFILE}"
+    tmux new-session -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin | tee ${LOGFILE}"
 
-    for i in {1..15}; do 
-        sleep 1
+    for i in {1..5}; do 
         if [[ $(cat ${LOGFILE} | grep 'Established DTLS connection') ]]; then
             echo 'LGA UP' && exit 0
         elif [[ $(cat ${LOGFILE} | grep '302 Temporary moved') ]]; then
             echo 'LGA ERROR (Temporary moved)' && cleanup && exit 1
         fi
+        sleep 1
     done
     echo 'LGA ERROR: ' && cat ${LOGFILE} && cleanup && exit 1
 fi

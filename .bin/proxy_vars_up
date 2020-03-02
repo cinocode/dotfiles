@@ -1,0 +1,11 @@
+#!/bin/bash
+source ~/.config/dots/proxy
+
+echo "export http_proxy=\"${hold_http_proxy}\"" > ~/.config/dots/zshrc.local
+echo "export no_proxy=\"${hold_no_proxy}\"" >> ~/.config/dots/zshrc.local
+echo "export https_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
+echo "export ftp_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
+echo "export rsync_proxy=\"${hold_http_proxy}\"" >> ~/.config/dots/zshrc.local
+
+cat ~/.config/dots/gitconfig.local.sample > ~/.config/dots/gitconfig.local
+echo "  proxy = ${hold_http_proxy}" >> ~/.config/dots/gitconfig.local
