@@ -14,9 +14,14 @@ cleanup
 if [[ $1 = 'off' ]]; then
     echo 'LGA DOWN'
 else
+
     echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
     RSA_PREFIX=$(pass show "${PASS_KEY_PREFIX}" | head -n 1)
-    read -sp "Enter rsa digits: " AUTH_RSA
+    if [[ $1 ]]; then
+        AUTH_RSA=${1}
+    else
+        read -sp "Enter rsa digits: " AUTH_RSA
+    fi
     AUTH_PASS="${RSA_PREFIX}${AUTH_RSA}"
     tmux new-session -d -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin | tee ${LOGFILE}"
 
