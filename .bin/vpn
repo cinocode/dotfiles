@@ -1,8 +1,32 @@
 #!/bin/bash
+LOGFILE=/tmp/lga.log
+PASS_KEY_PREFIX=lht/rsa_token_prefix
+
+function cleanup() {
+    tmux kill-session -t lga > /dev/null 2>&1
+    if [[ -f ${LOGFILE} ]]; then
+        rm ${LOGFILE}
+    fi
+}
+
+cleanup
+
 if [[ $1 = 'off' ]]; then
-    tmux kill-session -t lga
+    echo 'LGA DOWN'
 else
     echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
-    read -sp "Enter your password: " AUTH_PASS
-    tmux new-session -d -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin"
+    RSA_PREFIX=$(pass show "${PASS_KEY_PREFIX}" | head -n 1)
+    read -sp "Enter rsa digits: " AUTH_RSA
+    AUTH_PASS="${RSA_PREFIX}${AUTH_RSA}"
+    tmux new-session -d -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin | tee ${LOGFILE}"
+
+    for i in {1..15}; do 
+        sleep 1
+        if [[ $(cat ${LOGFILE} | grep 'Established DTLS connection') ]]; then
+            echo 'LGA UP' && exit 0
+        elif [[ $(cat ${LOGFILE} | grep '302 Temporary moved') ]]; then
+            echo 'LGA ERROR (Temporary moved)' && cleanup && exit 1
+        fi
+    done
+    echo 'LGA ERROR: ' && cat ${LOGFILE} && cleanup && exit 1
 fi
