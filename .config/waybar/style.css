@@ -101,6 +101,22 @@ window#waybar.solo {
     color:      rgba(217, 216, 216, 1);
 }
 
+#custom-lhtping {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+    transition: none;
+    background: rgba(40, 42, 54, 0.85);
+    color: #4d4d4d;
+    background: rgba(222, 184, 135, 0.85);
+}
+
+#custom-lhtping.red {
+    background: rgba(205, 92, 92, 0.85);
+}
+
 #custom-tidepool {
     margin-left: 4px;
     margin-right: 4px;
