@@ -1,0 +1,15 @@
+#!/bin/bash
+NAS_PATH=/home/ole/nas
+CRED_PATH=/etc/samba/credentials
+
+mkdir -p ${NAS_PATH}
+sudo mkdir -p ${CRED_PATH}
+
+sudo chown root:root ${CRED_PATH}
+sudo chmod 700 ${CRED_PATH}
+
+PASSW=$(pass show hardware/cinonas_media | head -n 1)
+sudo sh -c "echo username=media > ${CRED_PATH}/media"
+sudo sh -c "echo password=${PASSW} >> ${CRED_PATH}/media"
+
+sudo chmod 600 ${CRED_PATH}/media
