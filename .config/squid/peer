@@ -1,4 +1,4 @@
-cache_peer url parent port 0 no-query no-digest login=user:password
+cache_peer prx-fralh-v01.sec.fra.dlh.de parent 8080 0 no-query no-digest login=U898296:supersecret
 
 acl lufthansa-servers dstdomain .lufthansa.com
 acl dlh-servers dstdomain .dlh.de

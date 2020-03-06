@@ -13,9 +13,6 @@ alias passv="PASSWORD_STORE_DIR=~/code/.vipappspass pass"
 
 alias cat=bat
 
-alias vp="proxy_off && sh ~/.bin/vpn && proxy_on"
-alias vpd="proxy_off && sh ~/.bin/vpn off"
-
 alias r="ranger $@"
 alias rc="ranger ~/code"
 alias rd="ranger ~/down"

@@ -1,12 +1,12 @@
 #!/bin/bash
+unset http_proxy
+unset https_proxy
 if [[ $(curl -skm 1 https://coversheet.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
     echo 2
-elif [[ $(curl -skm 1 https://vipbatch.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
-    echo 2
-elif [[ $(cat /home/ole/.config/dots/zshrc.local | grep 'export http_proxy') ]]; then
+elif [[ $(cat /home/ole/.config/dots/zshrc.local | grep 'U898296') ]]; then
     # unreachable but proxy set
     echo 3
-elif [[ $(curl -skm 10 https://www.google.com | grep doctype) ]]; then
+elif [[ $(curl -skm 2 https://www.google.com | grep doctype) ]]; then
     echo 1
 else
     echo 0

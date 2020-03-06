@@ -1,0 +1,24 @@
+#!/bin/bash
+if [[ -z $(pacman -Qs "^squid$") ]]; then
+    echo "Installing squid"
+    yay -S squid
+    sudo systemctl enable squid
+fi
+
+PASSW=$(pass show lht/proxy | head -n 1)
+sudo sh -c 'cat /home/ole/.config/squid/base > /etc/squid/squid.conf.base'
+sudo sh -c "cat /home/ole/.config/squid/peer | sed 's/supersecret/${PASSW}/g' > /etc/squid/squid.conf.peer"
+sudo mkdir -p /etc/NetworkManager/dispatcher.d/
+if [[ -f /etc/NetworkManager/dispatcher.d/squid_manage ]]; then
+    sudo rm /etc/NetworkManager/dispatcher.d/squid_manage
+fi
+sudo cp /home/ole/.bin/squid_manage /etc/NetworkManager/dispatcher.d/
+sudo chmod 700 /etc/NetworkManager/dispatcher.d/squid_manage
+sudo chown root:root /etc/NetworkManager/dispatcher.d/squid_manage
+~/.bin/squid_manage
+sudo systemctl start squid
+
+sudo mkdir -p /etc/systemd/system/docker.service.d
+echo '[Service]' > /etc/systemd/system/docker.service.d/10_docker_proxy.conf
+echo 'Environment="HTTP_PROXY=http://localhost:3128"' >> /etc/systemd/system/docker.service.d/10_docker_proxy.conf
+echo 'Environment="HTTPS_PROXY=http://localhost:3128"' >> /etc/systemd/system/docker.service.d/10_docker_proxy.conf

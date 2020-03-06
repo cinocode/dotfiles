@@ -1,4 +1,0 @@
-#!/bin/bash
-sudo sh -c 'cat /home/ole/.config/squid/base > /etc/squid/squid.conf'
-sudo sh -c 'cat /home/ole/.config/squid/peer >> /etc/squid/squid.conf'
-sudo systemctl restart squid
