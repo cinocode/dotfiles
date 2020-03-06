@@ -81,6 +81,5 @@ if [[ -d ~/.rice ]]; then
     ./install_packages.sh
 fi
 
-if [[ -f ~/.bin/install_shared_bin ]]; then
-    ~/.bin/install_shared_bin
-fi
+~/.bin/install_shared_bin
+~/.bin/install_zsh

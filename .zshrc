@@ -1,4 +1,9 @@
 #!/bin/zsh
+export ZSH="/opt/oh-my-zsh"
+ZSH_THEME="robbyrussell"
+source ${ZSH}/oh-my-zsh.sh
+plugins=(git)
+
 export EDITOR=/usr/bin/vim
 
 bindkey "^[[1;5C" forward-word
@@ -71,29 +76,8 @@ alias ctvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key ctvipapp@
 alias ttvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key ttvipapp@rlx-v171.ham.dlh.de'
 alias htvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key htvipapp@rlx-v171.ham.dlh.de'
 alias patriciat='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key patricia@rlx-v171.ham.dlh.de'
-autoload -U colors && colors
-
-if [[ -e /usr/share/zsh/site-contrib/powerline.zsh ]]; then
-	# Powerline support is enabled if available, otherwise use a regular PS1
-	. /usr/share/zsh/site-contrib/powerline.zsh
-	VIRTUAL_ENV_DISABLE_PROMPT=true
-else
-	local _path="%B%{$fg[green]%}%(8~|...|)%7~"
-	local _prompt="%{$fg[white]%}${(r:$SHLVL*1::%#:)}"
-
-	PROMPT="$_path$_prompt "
-fi
 
 setopt autocd # assume "cd" when a command is a directory
-export TERM="xterm-256color"
-
-if command -V dircolors >/dev/null 2>&1; then
-	eval "$(dircolors -b)"
-	# Only alias ls colors if dircolors is installed
-	alias ls="ls -F --color=auto"
-	alias dir="dir --color=auto"
-	alias vdir="vdir --color=auto"
-fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile

@@ -5,6 +5,7 @@
 	autocrlf = input
 	text = auto
 	excludesfile = ~/.config/dots/gitignore_global
+	pager = more
 [difftool]
 	prompt = false
 [difftool "sourcetree"]
