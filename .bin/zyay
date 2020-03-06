@@ -3,12 +3,6 @@ BOOT_LOADER=/boot/loader/entries/arch.conf
 
 echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
 
-echo tracking package list in /etc/packages
-sudo touch /etc/packages
-WHO_ME=$(whoami)
-sudo chown "${WHO_ME}:{WHO_ME}" /etc/packages
-pacman -Qe > /etc/packages
-
 echo clean package cache
 yay -Sc --noconfirm
 
