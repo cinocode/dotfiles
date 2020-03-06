@@ -10,6 +10,11 @@
     output eDP-1 disable
 }
 {
+    # T495 Fortis 3.1
+    output eDP-1 position 0,0 mode 1920x1080
+    output DP-2 position 1920,0 mode 2560x1440
+}
+{
     # LHT Office
     output eDP-1 position 0,0 mode 1920x1080
     output DP-1 position 1920,0 mode 1920x1200
