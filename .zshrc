@@ -1,6 +1,6 @@
 #!/bin/zsh
 export ZSH="/opt/oh-my-zsh"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="typewritten"
 source ${ZSH}/oh-my-zsh.sh
 plugins=(git)
 
