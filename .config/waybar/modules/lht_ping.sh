@@ -1,4 +1,5 @@
 #!/bin/sh
+source ~/.config/dots/zshrc.local
 ping_result=$(~/.bin/lht_ping)
 
 if [[ $ping_result = 0 ]]; then
