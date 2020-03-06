@@ -1,9 +1,9 @@
 #!/bin/bash
-if [[ $(curl -skm 10 https://coversheet.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
+if [[ $(curl -skm 1 https://coversheet.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
     echo 2
-elif [[ $(curl -skm 10 https://vipbatch.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
+elif [[ $(curl -skm 1 https://vipbatch.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
     echo 2
-elif [[ $(cat ~/.config/dots/zshrc.local | grep 'export http_proxy') ]]; then
+elif [[ $(cat /home/ole/.config/dots/zshrc.local | grep 'export http_proxy') ]]; then
     # unreachable but proxy set
     echo 3
 elif [[ $(curl -skm 10 https://www.google.com | grep doctype) ]]; then
