@@ -14,6 +14,6 @@ sudo chown root:root /etc/NetworkManager/dispatcher.d/squid_manage
 sudo systemctl start squid
 
 sudo mkdir -p /etc/systemd/system/docker.service.d
-echo '[Service]' > /etc/systemd/system/docker.service.d/10_docker_proxy.conf
-echo 'Environment="HTTP_PROXY=http://localhost:3128"' >> /etc/systemd/system/docker.service.d/10_docker_proxy.conf
-echo 'Environment="HTTPS_PROXY=http://localhost:3128"' >> /etc/systemd/system/docker.service.d/10_docker_proxy.conf
+sudo sh -c "echo '[Service]' > /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
+sudo sh -c "echo 'Environment=\"HTTP_PROXY=http://localhost:3128\"' >> /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
+sudo sh -c "echo 'Environment=\"HTTPS_PROXY=http://localhost:3128\"' >> /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
