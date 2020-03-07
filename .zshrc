@@ -95,17 +95,21 @@ bindkey '^R' history-incremental-search-backward
 
 stty -ixon
 
-source ~/.config/dots/zshrc.local
+export no_proxy=".lufthansa.com,.dlh.de,.lhtcloud.com,localhost,127.0.0.1"
+export http_proxy="http://localhost:3128"
+export https_proxy="http://localhost:3128"
+export ftp_proxy="http://localhost:3128"
+export rsync_proxy="http://localhost:3128"
 
 function proxy_on() {
     proxy_vars_up
-    source ~/.zshrc
+    source ~/.config/dots/zshrc.local
     echo -e "PROXY ON"
 }
 
 function proxy_off(){
     proxy_vars_down
-    source ~/.zshrc
+    source ~/.config/dots/zshrc.local
     echo -e "PROXY OFF"
 }
 

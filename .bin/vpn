@@ -1,41 +1,6 @@
 #!/bin/bash
-LOGFILE=/tmp/lga.log
-PASS_KEY_PREFIX=lht/rsa_token_prefix
-
-function cleanup() {
-    tmux kill-session -t lga > /dev/null 2>&1
-    if [[ -f ${LOGFILE} ]]; then
-        rm ${LOGFILE}
-    fi
-}
-
-cleanup
-
 if [[ $1 = 'off' ]]; then
-    echo 'LGA DOWN'
+    nmcli connection down LGA
 else
-
-    echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
-    RSA_PREFIX=$(pass show "${PASS_KEY_PREFIX}" | head -n 1)
-    if [[ $1 ]]; then
-        AUTH_RSA=${1}
-    else
-        read -sp "Enter rsa digits: " AUTH_RSA
-    fi
-    AUTH_PASS="${RSA_PREFIX}${AUTH_RSA}"
-    unset http_proxy
-    unset https_proxy
-    tmux new-session -s lga "echo ${AUTH_PASS} | sudo openconnect lga.lufthansa.de -u U898296@LGA -g LGAv2 --passwd-on-stdin | tee ${LOGFILE}"
-
-    for i in {1..5}; do 
-        if [[ $(cat ${LOGFILE} | grep '200 OK') ]]; then
-            echo 'LGA UP' && exit 0
-        elif [[ $(cat ${LOGFILE} | grep '302 Temporary moved') ]]; then
-            echo 'LGA ERROR (Temporary moved)' && cleanup && exit 1
-        fi
-        sleep 1
-    done
-    echo 'LGA ERROR: ' && cat ${LOGFILE} && cleanup && exit 1
+    nmcli connection up LGA
 fi
-
-~/.bin/squid_manage &

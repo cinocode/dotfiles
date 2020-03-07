@@ -35,7 +35,7 @@
 	aa = add **/*.js **/*.json **/*.html **/*.java
 	amend = commit --amend --no-edit
 [include]
-	path = .config/dots/.gitconfig.local
+	path = /home/ole/.gitconfig.local
 [credential]
 	helper = /home/ole/.bin/passm-git-helper
 [http]

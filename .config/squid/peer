@@ -1,8 +1,0 @@
-cache_peer prx-fralh-v01.sec.fra.dlh.de parent 8080 0 no-query no-digest login=U898296:supersecret
-
-acl lufthansa-servers dstdomain .lufthansa.com
-acl dlh-servers dstdomain .dlh.de
-always_direct allow lufthansa-servers
-always_direct allow dlh-servers
-
-never_direct allow all

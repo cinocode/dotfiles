@@ -1,9 +1,7 @@
 #!/bin/bash
-unset http_proxy
-unset https_proxy
 if [[ $(curl -skm 1 https://coversheet.app.lht.ham.dlh.de/actuator/health | grep UP) ]]; then
     echo 2
-elif [[ $(cat /home/ole/.config/dots/zshrc.local | grep 'U898296') ]]; then
+elif [[ $(nmcli connection show --active | grep LGA) ]]; then
     # unreachable but proxy set
     echo 3
 elif [[ $(curl -skm 2 https://www.google.com | grep doctype) ]]; then
