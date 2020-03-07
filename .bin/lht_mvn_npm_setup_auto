@@ -1,0 +1,2 @@
+#!/bin/bash
+lht_mvn_npm_setup U898296 lht/sso
