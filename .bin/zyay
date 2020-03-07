@@ -77,3 +77,4 @@ fi
 
 ~/.bin/install_shared_bin
 ~/.bin/install_zsh
+~/.bin/install_squid
