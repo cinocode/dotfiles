@@ -1,0 +1,5 @@
+#!/bin/bash
+TARGET_PATH=~/code/lht_util
+if [[ ! -d ${TARGET_PATH} ]]; then
+    git clone https://github.com/fortis-it-services/lht_util ~/code/lht_util
+fi
