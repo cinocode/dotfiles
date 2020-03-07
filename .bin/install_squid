@@ -1,10 +1,5 @@
 #!/bin/bash
-if [[ -z $(pacman -Qs "^squid$") ]]; then
-    echo "Installing squid"
-    yay -S squid
-    sudo systemctl enable squid
-fi
-
+sudo systemctl enable squid
 PASSW=$(pass show lht/proxy | head -n 1)
 sudo sh -c 'cat /home/ole/.config/squid/base > /etc/squid/squid.conf.base'
 sudo sh -c "cat /home/ole/.config/squid/peer | sed 's/supersecret/${PASSW}/g' > /etc/squid/squid.conf.peer"
