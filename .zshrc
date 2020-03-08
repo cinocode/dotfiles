@@ -74,6 +74,7 @@ alias ttvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key ttvipapp@
 alias htvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key htvipapp@rlx-v171.ham.dlh.de'
 alias patriciat='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key patricia@rlx-v171.ham.dlh.de'
 
+export TERM="xterm-256color"
 setopt autocd # assume "cd" when a command is a directory
 
 # Lines configured by zsh-newuser-install
