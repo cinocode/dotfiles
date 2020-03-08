@@ -1,0 +1,2 @@
+#!/bin/bash
+PASSWORD_STORE_DIR=~/code/.vipappspass ocs $@
