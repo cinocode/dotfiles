@@ -38,13 +38,6 @@ alias pretty='prettier --print-width 120 --single-quote --trailing-comma es5 --w
 alias ktformat='ktlint -F "src/**/*.kt"'
 alias ktpr='pretty && ktformat'
 
-alias ffeh="feh --auto-rotate -zxYN $@"
-alias fehz="feh --auto-rotate -xYNZF $@"
-alias fehs="feh --auto-rotate -ZzxFYND $@"
-alias ffehs="feh --zoom fill --auto-rotate -zxFYND $@"
-alias fehr="feh --auto-rotate -rZzxFYND $@"
-alias ffehr="feh --zoom fill --auto-rotate -rzxFYND $@"
-
 alias mpvd="mpv --af=dynaudnorm=f=75:g=10:n=0:p=0.58 Chi-Raq.2015.HDRip.XviD.Ac3-EVO.avi"
 alias mpvl="mpv --af=loudnorm=I=-16:TP=-1.5:LRA=11 Chi-Raq.2015.HDRip.XviD.Ac3-EVO.avi"
 
