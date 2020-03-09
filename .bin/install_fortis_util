@@ -1,0 +1,5 @@
+#!/bin/bash
+TARGET_PATH=~/code/fortis_util
+if [[ ! -d ${TARGET_PATH} ]]; then
+    git clone https://gitlab.com/fortis-it-services/fortis_util.git ${TARGET_PATH}
+fi

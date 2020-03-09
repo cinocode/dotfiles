@@ -77,5 +77,6 @@ fi
 
 ~/.bin/install_shared_bin
 ~/.bin/install_zsh
+~/.bin/install_fortis_util
 ~/.bin/lht_mvn_npm_setup_auto
 ~/.bin/lht_squid_install_auto
