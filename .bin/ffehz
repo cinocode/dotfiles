@@ -1,2 +1,2 @@
 #!/bin/bash
-feh --auto-rotate -xYNZF $@
+feh --auto-rotate -xYNZF "$@"

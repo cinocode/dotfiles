@@ -1,2 +1,2 @@
 #!/bin/bash
-feh --zoom fill --auto-rotate -rzxFYND $@
+feh --zoom fill --auto-rotate -rzxFYND "$@"
