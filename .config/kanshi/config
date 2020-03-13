@@ -6,7 +6,7 @@
 {
     # T495 Home Office
     output HDMI-A-1 position 0,0 mode 2560x1440 transform 270
-    output DP-1 position 1440,250 mode 2560x1440
+    output DP-2 position 1440,250 mode 2560x1440
     output eDP-1 disable
 }
 {
