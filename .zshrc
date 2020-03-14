@@ -38,9 +38,6 @@ alias pretty='prettier --print-width 120 --single-quote --trailing-comma es5 --w
 alias ktformat='ktlint -F "src/**/*.kt"'
 alias ktpr='pretty && ktformat'
 
-alias mpvd="mpv --af=dynaudnorm=f=75:g=10:n=0:p=0.58 Chi-Raq.2015.HDRip.XviD.Ac3-EVO.avi"
-alias mpvl="mpv --af=loudnorm=I=-16:TP=-1.5:LRA=11 Chi-Raq.2015.HDRip.XviD.Ac3-EVO.avi"
-
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
