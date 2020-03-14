@@ -1,11 +1,13 @@
 #!/bin/bash
-if [[ $(whoami) != 'root' ]]; then
-    echo 'run as root' && exit 1
+if ! whoami | grep -q 'root'; then
+    sudo mount_nas
+else
+    NAS_PATH=/home/ole/nas
+    CRED_PATH=/etc/samba/credentials
+    if [[ ! -f ${CRED_PATH}/media ]]; then
+        echo Run mount_nas_init && exit 1
+    fi
+
+    mkdir -p ${NAS_PATH}
+    mount -t cifs //192.168.1.193/media_001 ${NAS_PATH} -o credentials=/etc/samba/credentials/media,workgroup=WORKGROUP,uid=ole,vers=1.0,sec=ntlm
 fi
-NAS_PATH=/home/ole/nas
-CRED_PATH=/etc/samba/credentials
-if [[ ! -f ${CRED_PATH}/media ]]; then
-    echo Run mount_nas_init && exit 1
-fi
-mkdir -p ${NAS_PATH}
-mount -t cifs //192.168.1.193/media_001 ${NAS_PATH} -o credentials=/etc/samba/credentials/media,workgroup=WORKGROUP,uid=ole,vers=1.0,sec=ntlm
