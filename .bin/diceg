@@ -1,0 +1,4 @@
+#!/bin/bash
+RANUM=$(head /dev/urandom |  tr -dc 0-9 | head -c 1 ; echo '')
+PASSD=$(diceware -n 3 -d _)
+echo "${PASSD}${RANUM}"

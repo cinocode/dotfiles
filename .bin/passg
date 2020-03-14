@@ -1,0 +1,19 @@
+#!/bin/bash
+ENTRY_NAME=$1
+LOGIN_NAME=$2
+URL_OVERRIDE=$3
+
+PASSW=$(diceg)
+
+if [[ ${URL_OVERRIDE} ]]; then
+echo "${PASSW}
+login: ${LOGIN_NAME}
+url: ${URL_OVERRIDE}" | pass insert -m "${ENTRY_NAME}"
+elif [[ ${LOGIN_NAME} ]]; then
+echo "${PASSW}
+login: ${LOGIN_NAME}
+url: ${ENTRY_NAME}" | pass insert -m "${ENTRY_NAME}"
+else
+echo "${PASSW}
+url: ${ENTRY_NAME}" | pass insert -m "${ENTRY_NAME}"
+fi
