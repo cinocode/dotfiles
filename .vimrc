@@ -233,11 +233,13 @@ nnoremap <silent> <leader>rl 5<c-w>>
 nnoremap <silent> <leader>rj 5<c-w>-
 nnoremap <silent> <leader>rk 5<c-w>+
 
+nnoremap <silent> <leader>s :ShellCheck<cr>
+
 nnoremap <silent> <leader>ta :JUnit *<cr>
 nnoremap <silent> <leader>tf :JUnitFindTest<cr>
 nnoremap <silent> <leader>ti :JUnitImpl<cr>
 nnoremap <silent> <leader>tt :JUnit %<cr>
-map <unique> <Leader>tz	<Plug>AM_tt
+" map <unique> <Leader>tz	<Plug>AM_tt
 
 nnoremap <silent> <leader>va :setlocal ts=4 sts=0 sw=4 expandtab<cr>
 nnoremap <silent> <leader>vb :CtrlPBuffer<cr>
