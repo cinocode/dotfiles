@@ -261,6 +261,9 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+g exec screengrab --region
 bindsym $mod+c exec screengrab --fullscreen
 
+bindsym $mod+Shift+bar exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym $mod+Shift+q exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+
 bindsym $mod+bar exec --no-startup-id ~/.bin/cmuspoti_prev
 bindsym $mod+q exec --no-startup-id ~/.bin/cmuspoti_next
 
