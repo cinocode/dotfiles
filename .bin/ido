@@ -4,7 +4,9 @@ if ! command -v idea; then
 fi
 
 if [[ -z $1 ]]; then
-    idea
+    urxvt -e sh -c 'echo no path && sleep 2'
 elif [[ -d ~/code/"${1}" ]]; then
     idea ~/code/"${1}"
+else
+    urxvt -e sh -c 'echo invalid path && sleep 2'
 fi
