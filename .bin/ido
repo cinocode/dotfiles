@@ -1,0 +1,10 @@
+#!/bin/bash
+if ! command -v idea; then
+    exit 1
+fi
+
+if [[ -z $1 ]]; then
+    idea
+elif [[ -d ~/code/"${1}" ]]; then
+    idea ~/code/"${1}"
+fi
