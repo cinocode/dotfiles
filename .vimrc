@@ -233,7 +233,7 @@ nnoremap <silent> <leader>rl 5<c-w>>
 nnoremap <silent> <leader>rj 5<c-w>-
 nnoremap <silent> <leader>rk 5<c-w>+
 
-nnoremap <silent> <leader>s :ShellCheck<cr>
+nnoremap <silent> <leader>s :ShellCheck<cr>:copen<cr><c-w><c-k>:cfirst<cr>
 
 nnoremap <silent> <leader>ta :JUnit *<cr>
 nnoremap <silent> <leader>tf :JUnitFindTest<cr>
