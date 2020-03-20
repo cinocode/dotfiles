@@ -1,0 +1,13 @@
+#!/bin/bash
+if ! command -v idea; then
+    exit 1
+fi
+
+if [[ -z $1 ]]; then
+    urxvt -e sh -c 'echo no path && sleep 2'
+elif [[ -d ~/code/"${1}" ]]; then
+    urxvt --hold -cd ~/code/"${1}" &
+    idea ~/code/"${1}" &
+else
+    urxvt -e sh -c 'echo invalid path && sleep 2'
+fi
