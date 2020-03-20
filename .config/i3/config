@@ -6,7 +6,9 @@
 
 # i3 config file (v4)
 exec xsetroot -solid "#333333"
-exec_always --no-startup-id autorandr --change
+
+## autorandr then set wallpaper
+exec_always --no-startup-id sleep 1 && autorandr --change && sleep 1 && /home/ole/.config/wallpaper/random.sh
 exec_always xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
 
 set $bg-color            #333333
@@ -274,9 +276,6 @@ bindsym $mod+z exec sudo xbacklight -inc 10
 
 bindsym $mod+minus exec kb-light.py -
 bindsym $mod+slash exec kb-light.py +
-
-# get random wallpaper by script
-exec_always /home/ole/.config/wallpaper/random.sh
 
 bindsym $mod+w exec /home/ole/.config/wallpaper/default.sh
 bindsym $mod+Shift+w exec /home/ole/.config/wallpaper/random.sh
