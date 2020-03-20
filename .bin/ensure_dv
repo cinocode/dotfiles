@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [[ $(pgrep sway) ]]; then
+    echo 'Sway running - exiting'
+    exit 1
+fi
+
+if [[ $1 = 'teardown' ]]; then
+    rm ~/.config/dots/ensure_dv
+    echo "Stop keeping 'dvorak_ger_io' up"
+    exit 0
+elif [[ ! -d ~/code/dvorak_ger_io/xmodmap ]]; then
+    echo "'dvorak_ger_io' not fonud"
+    exit 1
+else
+    touch ~/.config/dots/ensure_dv
+fi
+
+echo "Keeping 'dvorak_ger_io' up"
+
+function keepDvorakUp() {
+    while :
+    do
+
+        if [[ ! -f ~/.config/dots/ensure_dv ]]; then
+            exit 0
+        elif ! xmodmap -pke | grep -q '25 = comma semicolon'; then
+            xmodmap ~/code/dvorak_ger_io/xmodmap/Xmodmap
+        fi
+
+        sleep 1
+    done
+
+    rm ~/.config/dots/ensure_dv
+}
+
+keepDvorakUp &
