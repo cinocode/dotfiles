@@ -1,6 +1,11 @@
 #!/bin/bash
 BOOT_LOADER=/boot/loader/entries/arch.conf
 
+if ! cat /etc/vconsole.conf | grep -q dvorak_ger_io; then¬
+    echo 'error: dvorak kmap not set up'
+    exit 1
+fi
+
 echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
 
 echo clean package cache
