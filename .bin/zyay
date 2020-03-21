@@ -68,13 +68,7 @@ else
     yay -Syu rxvt-unicode-pixbuf $@
 fi
 
-if [[ -d ~/.rice ]]; then
-    echo 'updating packages listed in ~/.rice'
-    cd ~/.rice
-    git pull
-    ./install_packages.sh
-fi
-
+~/.bin/install_packages
 ~/.bin/install_shared_bin
 ~/.bin/install_zsh
 ~/.bin/lht_mvn_npm_setup_auto
