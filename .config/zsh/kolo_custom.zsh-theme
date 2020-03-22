@@ -8,7 +8,9 @@ zstyle ':vcs_info:*' enable git svn
 theme_precmd () {
     if [[ $(pwd) = "/home/$(whoami)" ]]; then
         cd "/home/$(whoami)/.config/yadm/repo.git"
-        if [[ -z $(git ls-files --exclude-standard 2> /dev/null) ]] {
+        if git status | grep -Pzoq "Your branch is up to date with 'origin/master'.*\n+.*nothing to commit \(use -u to show untracked files"; then
+            zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
+        elif [[ -z $(git ls-files --exclude-standard 2> /dev/null) ]] {
             zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
         } else {
             zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{red}●%F{green}]'
@@ -17,7 +19,11 @@ theme_precmd () {
         cd "/home/$(whoami)"
     else
         if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-            zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
+            if git status 2> /dev/null | grep -Pzoq "Your branch is up to date with 'origin/master'.*\n+.*nothing to commit, working tree clean"; then
+                zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
+            else
+                zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
+            fi
         } else {
             zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{red}●%F{green}]'
         }
