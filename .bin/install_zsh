@@ -1,18 +1,26 @@
 #!/bin/bash
 ZSH="${HOME}/.oh-my-zsh"
 TARGET_PATH="/opt/oh-my-zsh"
+
 if [[ -d "${TARGET_PATH}" ]]; then
-    exit 0
-else
-    echo installing oh my zsh
-    export KEEP_ZSHRC=yes
-    export RUNZSH=no
-    curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    sh install.sh
-    rm install.sh
-    rm ${ZSH}/lib/key-bindings.zsh
-    touch ${ZSH}/lib/key-bindings.zsh
-    chmod +x ${ZSH}/lib/key-bindings.zsh
-    sudo mv $ZSH $TARGET_PATH
-    sudo chown -R ole:ole $TARGET_PATH
+    if [[ $1 == '--force' ]]; then
+        sudo rm -rf ${TARGET_PATH}
+    else
+        exit 0
+    fi
 fi
+
+echo installing oh my zsh
+
+export KEEP_ZSHRC=yes
+export RUNZSH=no
+
+curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sh install.sh
+rm install.sh
+
+rm "${ZSH}/lib/key-bindings.zsh"
+touch "${ZSH}/lib/key-bindings.zsh"
+
+sudo mv "$ZSH" "$TARGET_PATH"
+sudo chown -R ole:ole "$TARGET_PATH"

@@ -1,10 +1,9 @@
 #!/bin/zsh
+export EDITOR=/usr/bin/vim
 export ZSH="/opt/oh-my-zsh"
 ZSH_THEME="kolo"
 source ${ZSH}/oh-my-zsh.sh
 plugins=(git)
-
-export EDITOR=/usr/bin/vim
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
