@@ -21,6 +21,7 @@ rm install.sh
 
 rm "${ZSH}/lib/key-bindings.zsh"
 touch "${ZSH}/lib/key-bindings.zsh"
+cp ~/.config/zsh/kolo_custom.zsh-theme "${ZSH}/themes"
 
 sudo mv "$ZSH" "$TARGET_PATH"
 sudo chown -R ole:ole "$TARGET_PATH"

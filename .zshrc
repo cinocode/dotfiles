@@ -1,7 +1,7 @@
 #!/bin/zsh
 export EDITOR=/usr/bin/vim
 export ZSH="/opt/oh-my-zsh"
-ZSH_THEME="kolo"
+ZSH_THEME="kolo_custom"
 source ${ZSH}/oh-my-zsh.sh
 plugins=(git)
 
