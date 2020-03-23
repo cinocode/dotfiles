@@ -1,7 +1,7 @@
 #!/bin/bash
 BOOT_LOADER=/boot/loader/entries/arch.conf
 
-if ! cat /etc/vconsole.conf | grep -q dvorak_ger_io; then¬
+if [[ -z $(cat /etc/vconsole.conf | grep dvorak_ger_io) ]]; then
     echo 'error: dvorak kmap not set up'
     exit 1
 fi
@@ -79,6 +79,6 @@ fi
 ~/.bin/lht_mvn_npm_setup_auto
 ~/.bin/lht_squid_install_auto
 
-if ! cat /etc/vconsole.conf | grep -q dvorak_ger_io; then¬
+if [[ -z $(cat /etc/vconsole.conf | grep dvorak_ger_io) ]]; then
     echo 'warning: dvorak kmap not set up - mkinit might have run with wrong settings'
 fi
