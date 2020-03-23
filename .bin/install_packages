@@ -101,6 +101,7 @@ ensureInstalled docker
 ensureInstalled squid
 ensureInstalled shellcheck
 ensureInstalled git-delta
+ensureInstalled zip
 
 ensureUninstalled wofi
 ensureUninstalled gotop
