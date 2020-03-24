@@ -82,7 +82,6 @@ bindkey '^R' history-incremental-search-backward
 
 stty -ixon
 
-export no_proxy=".lufthansa.com,.dlh.de,.lhtcloud.com,localhost,127.0.0.1"
 export http_proxy="http://localhost:3128"
 export https_proxy="http://localhost:3128"
 export ftp_proxy="http://localhost:3128"
