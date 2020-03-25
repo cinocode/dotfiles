@@ -102,6 +102,7 @@ ensureInstalled squid
 ensureInstalled shellcheck
 ensureInstalled git-delta
 ensureInstalled zip
+ensureInstalled ttf-fira-code
 
 ensureUninstalled wofi
 ensureUninstalled gotop
