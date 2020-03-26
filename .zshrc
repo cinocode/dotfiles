@@ -2,6 +2,7 @@
 export EDITOR=/usr/bin/vim
 export ZSH="/opt/oh-my-zsh"
 ZSH_THEME="kolo_custom"
+DISABLE_AUTO_UPDATE="true"
 source ${ZSH}/oh-my-zsh.sh
 plugins=(git)
 
