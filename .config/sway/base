@@ -56,6 +56,12 @@ bindsym $mod+Return exec urxvt
 # kill focused window
 bindsym $mod+Shift+question kill
 
+# start main stack
+bindsym $mod+Shift+g   layout splitv;\
+                       move left;\
+                       resize grow right 20 px or 20 ppt;\
+                       split v
+
 bindsym Print exec screenshot
 
 # start dmenu (a program launcher)
