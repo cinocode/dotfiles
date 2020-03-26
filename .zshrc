@@ -86,6 +86,7 @@ export http_proxy="http://localhost:3128"
 export https_proxy="http://localhost:3128"
 export ftp_proxy="http://localhost:3128"
 export rsync_proxy="http://localhost:3128"
+export socks_proxy="http://localhost:3128"
 
 function proxy_on() {
     proxy_vars_up
