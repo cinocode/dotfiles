@@ -28,6 +28,9 @@ alias mcr="mvn spring-boot:run"
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
 
+alias tsc="ts-node"
+alias jsc="node"
+
 alias dockerprox="sudoedit /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
 alias dcu="sudo docker-compose up -d"
 alias dcfu="docker_fresh && sudo docker-compose up -d"
