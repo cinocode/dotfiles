@@ -28,8 +28,16 @@ alias mcr="mvn spring-boot:run"
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
 
-alias tsc="ts-node"
+if [[ -d /usr/local/opt/java11 ]]; then
+    JAVA_EXEC=/usr/local/opt/java11
+else
+    JAVA_EXEC=/usr/lib/jvm/java11-openjdk
+fi
+alias tscs="TS_NODE_COMPILER_OPTIONS='{\"strict\": true}' ts-node"
+alias tscl="ts-node"
 alias jsc="node"
+alias j11="${JAVA_EXEC}/bin/jshell"
+alias ktl="JAVA_HOME=${JAVA_EXEC} kotlinc-jvm -Djava.awt.headless=false"
 
 alias dockerprox="sudoedit /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
 alias dcu="sudo docker-compose up -d"

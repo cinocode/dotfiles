@@ -22,6 +22,7 @@ brew update
 brew upgrade
 
 ensurePackageInstalled openjdk@11
+ensurePackageInstalled kotlin
 ensurePackageInstalled git
 ensurePackageInstalled git-delta
 ensurePackageInstalled bat
