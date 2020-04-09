@@ -1,0 +1,42 @@
+[user]
+	name = Ole Hansen
+	email = ole.hansen@fortis-it.de
+[core]
+	autocrlf = input
+	text = auto
+	excludesfile = ~/.config/dots/gitignore_global
+	pager = delta --dark
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[push]
+	default = matching
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit --all --max-count=20
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=20
+	ln = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=40
+	lm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	lt = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --since="4am"
+	lgs = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %<(130,trunc)%s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=200
+	br = branch
+	co = checkout
+	st = status
+	mc = merge --no-ff
+	aun = update-index --assume-unchanged
+	ach = update-index --no-assume-unchanged
+	laun = ls-files -v | grep '^[[:lower:]]'
+	aa = add **/*.js **/*.json **/*.html **/*.java
+	amend = commit --amend --no-edit
+[include]
+	path = /Users/ole/.gitconfig.local
+[credential]
+	helper = /Users/ole/.bin/passm-git-helper
+[http]
+	postBuffer = 524288000
+[url "https://github.com/"]
+        insteadOf = "gh:"
+        pushInsteadOf = "gh:"
+[url "https://lht.app.lufthansa.com/stash/scm/vip/"]
+        insteadOf = "vi:"
+        pushInsteadOf = "vi:"
