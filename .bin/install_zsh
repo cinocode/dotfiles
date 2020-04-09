@@ -24,4 +24,8 @@ touch "${ZSH}/lib/key-bindings.zsh"
 cp ~/.config/zsh/kolo_custom.zsh-theme "${ZSH}/themes"
 
 sudo mv "$ZSH" "$TARGET_PATH"
-sudo chown -R ole:ole "$TARGET_PATH"
+if uname -s | grep -q 'Darwin'; then
+    sudo chown -R ole:everyone "$TARGET_PATH"
+else
+    sudo chown -R ole:ole "$TARGET_PATH"
+fi
