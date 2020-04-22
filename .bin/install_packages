@@ -103,6 +103,7 @@ ensureInstalled shellcheck
 ensureInstalled git-delta
 ensureInstalled zip
 ensureInstalled ttf-fira-code
+ensureInstalled mediainfo
 
 ensureUninstalled wofi
 ensureUninstalled gotop
