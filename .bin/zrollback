@@ -1,4 +1,6 @@
 #!/bin/bash
+BOOT_LOADER=/boot/loader/entries/arch.conf
+
 echo 'Gaining sudo' && (sudo echo 'Granted' || exit 2)
 if [[ $1 ]]; then
     TARGET_ROLLBACK=$1
