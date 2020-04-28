@@ -27,6 +27,7 @@ alias mcr="mvn spring-boot:run"
 
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
+alias squid_manage="sudo systemctl restart squid && lht_squid_manage"
 
 if [[ -d /usr/local/opt/java11 ]]; then
     JAVA_EXEC=/usr/local/opt/java11
