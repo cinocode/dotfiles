@@ -1,0 +1,6 @@
+#!/bin/bash
+VAL=$(mediainfo --fullscan "$1")
+echo "${VAL}" | grep 'File size' | head -n 2 | tail -n 1
+echo "${VAL}" | grep 'Width' | head -n 1
+echo "${VAL}" | grep 'Height' | head -n 1
+echo "${VAL}" | grep 'Channel(s)' | head -n 1

@@ -1,0 +1,15 @@
+#!/bin/bash
+VAL=$(mediainfo --fullscan "$1")
+RETC=0
+
+if ! echo "${VAL}" | grep -q 'Width                                    : 19'; then
+    echo 'Width not 19XX'
+    RETC=1
+fi
+
+if ! echo "${VAL}" | grep -q 'Channel(s)                               : 6 channels'; then
+    echo 'Channels is not 6'
+    RETC=1
+fi
+
+exit "$RETC"

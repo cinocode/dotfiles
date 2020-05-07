@@ -2,4 +2,5 @@
 # copy then trash
 SOURCE=$1
 TARGET=$2
+miv "${SOURCE}"
 cp -r "${SOURCE}" "${TARGET}" && trash-put "${SOURCE}"
