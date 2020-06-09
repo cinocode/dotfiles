@@ -266,8 +266,8 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+g exec screengrab --region
-bindsym $mod+c exec screengrab --fullscreen
+bindsym $mod+g exec exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg'
+bindsym $mod+c exec exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg'
 
 bindsym $mod+Shift+bar exec pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym $mod+Shift+q exec pactl set-sink-volume @DEFAULT_SINK@ +2%

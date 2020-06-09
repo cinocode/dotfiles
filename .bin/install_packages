@@ -104,6 +104,7 @@ ensureInstalled git-delta
 ensureInstalled zip
 ensureInstalled ttf-fira-code
 ensureInstalled mediainfo
+ensureInstalled scrot
 
 ensureUninstalled wofi
 ensureUninstalled gotop
