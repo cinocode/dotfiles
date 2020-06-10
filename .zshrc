@@ -73,6 +73,14 @@ alias ttvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key ttvipapp@
 alias htvipapp='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key htvipapp@rlx-v171.ham.dlh.de'
 alias patriciat='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key patricia@rlx-v171.ham.dlh.de'
 
+alias ttvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key ttvip@rlx-v772.ham.dlh.de'
+alias ntvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key ntvip@rlx-v772.ham.dlh.de'
+alias htvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key htvip@rlx-v772.ham.dlh.de'
+
+alias tpvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key tpvip@rlx-v773.ham.dlh.de'
+alias npvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key npvip@rlx-v773.ham.dlh.de'
+alias hpvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key hpvip@rlx-v773.ham.dlh.de'
+
 export TERM="xterm-256color"
 setopt autocd # assume "cd" when a command is a directory
 
