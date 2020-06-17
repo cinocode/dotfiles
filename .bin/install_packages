@@ -25,7 +25,7 @@ ensureInstalled jdk8-openjdk
 ensureInstalled jdk11-openjdk
 ensureInstalled mpv
 ensureInstalled vlc
-ensureInstalled arc-gtk-theme
+# ensureInstalled arc-gtk-theme
 ensureInstalled viewnior
 ensureInstalled tumbler
 ensureInstalled ffmpegthumbnailer
