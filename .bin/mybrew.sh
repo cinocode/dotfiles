@@ -44,6 +44,10 @@ ensureCaskInstalled font-inconsolata
 ensureCaskInstalled font-fontawesome
 ensureCaskInstalled font-fira-code
 
+ensureCaskInstalled xquartz
+ensurePackageInstalled feh
+ensurePackageInstalled mpv
+
 ensureCaskInstalled google-chrome
 ensureCaskInstalled intellij-idea
 
