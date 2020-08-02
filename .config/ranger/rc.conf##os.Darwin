@@ -1,0 +1,4 @@
+set preview_images true
+set preview_images_method iterm2
+
+map <DELETE> shell -s trash-put %s
