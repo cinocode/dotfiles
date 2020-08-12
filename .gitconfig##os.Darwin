@@ -40,3 +40,6 @@
 [url "https://lht.app.lufthansa.com/stash/scm/vip/"]
         insteadOf = "vi:"
         pushInsteadOf = "vi:"
+[pull]
+    rebase = false
+    ff = only
