@@ -18,6 +18,11 @@ if ! which brew; then
   brew tap homebrew/cask-fonts
 fi
 
+if ! which brew; then
+    echo 'need homebrew'
+    exit 1
+fi
+
 brew update
 brew upgrade
 
@@ -50,6 +55,10 @@ ensurePackageInstalled mpv
 
 ensureCaskInstalled google-chrome
 ensureCaskInstalled intellij-idea
+
+ensureCaskInstalled slack
+ensureCaskInstalled microsoft-teams
+ensureCaskInstalled microsoft-office
 
 sudo chmod 755 /usr/local/share/zsh
 sudo chmod 755 /usr/local/share/zsh/site-functions
