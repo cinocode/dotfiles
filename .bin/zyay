@@ -68,9 +68,11 @@ echo update the system
 sudo reflector --country France --country Germany --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 if [[ $(pacman -Qs zfs) ]]; then
-    yay -Syu znapzend rxvt-unicode-pixbuf $@
+    sudo pacman -Syu
+    yay -S znapzend rxvt-unicode-pixbuf pass-git-helper $@
 else
-    yay -Syu rxvt-unicode-pixbuf $@
+    sudo pacman -Syu
+    yay -S rxvt-unicode-pixbuf pass-git-helper $@
 fi
 
 ~/.bin/install_packages

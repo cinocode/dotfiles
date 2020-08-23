@@ -106,6 +106,7 @@ ensureInstalled zip
 ensureInstalled ttf-fira-code
 ensureInstalled mediainfo
 ensureInstalled scrot
+ensureInstalled youtube-dl
 
 ensureUninstalled wofi
 ensureUninstalled gotop
