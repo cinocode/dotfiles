@@ -1,6 +1,6 @@
 {
     # Kadsenbuild
-    output DP-3 position 0,0 mode 2560x1440 transform 270
+    output DP-3 position 0,0 mode 2560x1440 transform 90
     output HDMI-A-1 position 1440,250 mode 2560x1440
 }
 {
