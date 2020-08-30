@@ -33,6 +33,7 @@ if [[ $(pacman -Qs zfs) ]]; then
     echo "Using Zrpool: ${ZRPOOL}"
     echo "Using Kernel Postfix: ${DEF_KERNEL_POSTFIX}"
     ZROOT=${ZRPOOL}/enc/root
+    ZPKG=${ZRPOOL}/enc/co/pkg
 
     echo cycle initramfs
     sudo rm /boot/initramfs-default-three.img
@@ -58,6 +59,12 @@ if [[ $(pacman -Qs zfs) ]]; then
     sudo zfs clone ${ZROOT}/default@one ${ZROOT}/one
     sudo zfs set canmount=noauto ${ZROOT}/one
     sudo zfs set mountpoint=/ ${ZROOT}/one
+
+    echo cycling package snaps
+    sudo zfs destroy ${ZPKG}@three
+    sudo zfs rename ${ZPKG}@two ${ZPKG}@three
+    sudo zfs rename ${ZPKG}@one ${ZPKG}@two
+    sudo zfs snapshot ${ZPKG}@one
 fi
 
 if [[ -f ~/.bin/zyay_extra ]]; then
