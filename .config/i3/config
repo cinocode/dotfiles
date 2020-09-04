@@ -272,7 +272,7 @@ bindsym $mod+c exec exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg'
 bindsym $mod+Shift+bar exec pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym $mod+Shift+q exec pactl set-sink-volume @DEFAULT_SINK@ +2%
 
-bindsym $mod+Shift+i exec pactl set-source-mute 1 toggle
+bindsym $mod+Shift+i exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 bindsym $mod+bar exec --no-startup-id ~/.bin/cmuspoti_prev
 bindsym $mod+q exec --no-startup-id ~/.bin/cmuspoti_next
