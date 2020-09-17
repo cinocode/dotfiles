@@ -1,4 +1,6 @@
 #!/bin/zsh
+source ~/.config/dots/java8home.sh
+
 export EDITOR=/usr/bin/vim
 export ZSH="/opt/oh-my-zsh"
 ZSH_THEME="kolo_custom"
@@ -21,7 +23,8 @@ alias rp="ranger ~/pic"
 alias rv="ranger ~/vid"
 
 alias cl="source ~/.bin/codelist $@"
-alias mcp="mvn clean package -Dmaven.test.skip=true"
+alias mcp="mvn -T 1.1C clean package -Dmaven.test.skip=true"
+alias mcp8="JAVA_HOME=${JAVA8_HOME} mvn -T 1.1C clean package -Dmaven.test.skip=true"
 alias mct="mvn test"
 alias mcr="mvn spring-boot:run"
 
