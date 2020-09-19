@@ -16,6 +16,8 @@ if ! which brew; then
   xcode-select --install
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   brew tap homebrew/cask-fonts
+  brew tap homebrew/services
+  brew tap amar1729/formulae
 fi
 
 if ! which brew; then
@@ -39,26 +41,47 @@ ensurePackageInstalled ktlint
 ensurePackageInstalled tmux
 ensurePackageInstalled pass
 ensurePackageInstalled pass-git-helper
+ensurePackageInstalled browserpass
 ensurePackageInstalled ranger
 ensurePackageInstalled squid
 ensurePackageInstalled zsh
 ensurePackageInstalled yadm
 ensurePackageInstalled grep
+ensurePackageInstalled gnu-sed
+ensurePackageInstalled glances
+ensurePackageInstalled openshift-cli
+ensurePackageInstalled stern
+ensurePackageInstalled openconnect
+ensurePackageInstalled keychain
 
 ensureCaskInstalled font-inconsolata
 ensureCaskInstalled font-fontawesome
 ensureCaskInstalled font-fira-code
+ensureCaskInstalled karabiner-elements
 
-ensureCaskInstalled xquartz
-ensurePackageInstalled feh
 ensurePackageInstalled mpv
 
 ensureCaskInstalled google-chrome
 ensureCaskInstalled intellij-idea
+ensureCaskInstalled iterm2
+
+ensureCaskInstalled amethyst
+# ensureCaskInstalled alfred
 
 ensureCaskInstalled slack
 ensureCaskInstalled microsoft-teams
 ensureCaskInstalled microsoft-office
+
+ensurePackageInstalled docker
+ensurePackageInstalled docker-machine
+ensurePackageInstalled docker-compose
+ensureCaskInstalled virtualbox
+# docker-machine create --driver virtualbox default
+# docker-machine env default
+# eval "$(docker-machine env default)"
+# docker-machine stop default
+#  -> VirtualBox Settings - Network - Advanced - Port Forwarading - Enter Common Ports
+# docker-machine start default
 
 sudo chmod 755 /usr/local/share/zsh
 sudo chmod 755 /usr/local/share/zsh/site-functions
