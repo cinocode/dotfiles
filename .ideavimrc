@@ -1,4 +1,6 @@
 set surround
+set number
+set relativenumber
 
 noremap \ ,
 let mapleader = ","
