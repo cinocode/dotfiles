@@ -53,9 +53,9 @@ alias pretty='prettier --print-width 120 --single-quote --trailing-comma es5 --w
 alias ktformat='ktlint -F "src/**/*.kt"'
 alias ktpr='pretty && ktformat'
 
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+# alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+# alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+# alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 
 alias grep='grep --color=tty -d skip'
 alias cp="cp -i"                          # confirm before overwriting something
@@ -108,9 +108,6 @@ stty -ixon
 
 export http_proxy="http://localhost:3128"
 export https_proxy="http://localhost:3128"
-export ftp_proxy="http://localhost:3128"
-export rsync_proxy="http://localhost:3128"
-export socks_proxy="http://localhost:3128"
 
 function proxy_on() {
     proxy_vars_up
