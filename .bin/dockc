@@ -1,4 +1,9 @@
 #!/bin/bash
 docker-machine start default
 eval "$(docker-machine env default)"
-docker-compose $@
+if [[ $1 == 'x' ]]; then
+    docker-compose down
+    docker-machine stop default
+else
+    docker-compose $@
+fi
