@@ -20,7 +20,7 @@ set $focus-text-color     #87CEEB
 
 set $black       #282828
 set $darkblack   #1d2021
-set $transparent #000000AA
+set $transparent #000000FF
 
 smart_gaps on
 gaps inner 1
@@ -302,5 +302,6 @@ exec --no-startup-id nm-applet
 #exec --no-startup-id pasystray
 #exec --no-startup-id enpass
 #exec --no-startup-id redshift -l 53.55:9.993
-exec compton -f
+#exec compton -f
+exec picom
 exec --no-startup-id flashfocus
