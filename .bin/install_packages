@@ -61,7 +61,7 @@ ensureInstalled i3
 ensureInstalled i3blocks
 ensureInstalled xorg-server
 ensureInstalled xorg-xinit
-ensureInstalled compton
+ensureInstalled picom
 ensureInstalled autorandr
 ensureInstalled arandr
 ensureInstalled sway
@@ -111,3 +111,4 @@ ensureInstalled youtube-dl
 
 ensureUninstalled wofi
 ensureUninstalled gotop
+ensureUninstalled compton
