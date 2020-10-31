@@ -63,6 +63,8 @@ alias grep='grep --color=tty -d skip'
 alias cp="cp -i"                          # confirm before overwriting something
 alias free='free -m'                      # show sizes in MB
 
+alias mpv="mpv --sid=no"
+
 alias raspi='source ~/.bin/id_keychain.sh && ssh pi@192.168.1.181'
 alias ssh_media='source ~/.bin/id_keychain.sh && ssh ole@192.168.1.172'
 
