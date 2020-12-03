@@ -1,0 +1,4 @@
+#!/bin/bash
+PROTONVERSION=5.13
+cd "/home/ole/.local/share/Steam/steamapps/common/Proton ${PROTONVERSION}/dist/share/default_pfx"
+WINE_PREFIX="/home/ole/.local/share/Steam/steamapps/common/Proton ${PROTONVERSION}/dist/share/default_pfx" "/home/ole/.local/share/Steam/steamapps/common/Proton ${PROTONVERSION}/dist/bin/wine" $1
