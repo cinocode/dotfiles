@@ -1,0 +1,7 @@
+#!/bin/bash
+SRC_FOLDER='src/'
+if [[ -d src/main/frontend ]]; then
+    SRC_FOLDER='src/main/frontend/src/'
+fi
+
+prettier --print-width 120 --single-quote --trailing-comma es5 --write "${SRC_FOLDER}{app,__{tests,mocks}__}/**/*.{js,ts,html,css,scss}"'

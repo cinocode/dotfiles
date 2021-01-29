@@ -51,7 +51,6 @@ alias dcfu="docker_fresh && sudo docker-compose up -d"
 alias dcd="sudo docker-compose down"
 alias dcr="sudo docker-compose down && sudo docker-compose up -d"
 
-alias pretty='prettier --print-width 120 --single-quote --trailing-comma es5 --write "src/main/frontend/src/{app,__{tests,mocks}__}/**/*.{js,ts,html,css,scss}"'
 alias ktformat='ktlint -F "src/**/*.kt"'
 alias ktpr='pretty && ktformat'
 
