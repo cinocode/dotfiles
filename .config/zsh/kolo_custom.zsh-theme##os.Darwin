@@ -7,7 +7,7 @@ zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
 zstyle ':vcs_info:*' enable git svn
 theme_precmd () {
     if [[ $(pwd) = "/Users/$(whoami)" ]]; then
-        cd "/Users/$(whoami)/.config/yadm/repo.git"
+        cd "/Users/$(whoami)/.local/share/yadm/repo.git"
         if git status | ggrep -Pzoq "Your branch is up to date with 'origin/master'.*\n+.*nothing to commit \(use -u to show untracked files"; then
             zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
         elif [[ -z $(git ls-files --exclude-standard 2> /dev/null) ]] {
