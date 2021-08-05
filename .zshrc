@@ -87,6 +87,12 @@ alias tpvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key tpvip@rlx-v7
 alias npvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key npvip@rlx-v773.ham.dlh.de'
 alias hpvip='source ~/.bin/lh_keychain.sh && ssh -i .ssh/lh_ssh_key hpvip@rlx-v773.ham.dlh.de'
 
+# PLW
+# tepw6@rlx-v271.ham.dlh.de
+# tkpw6@rlx-v273.ham.dlh.de
+# tppw6@rlx-v328.ham.dlh.de
+# tppw6@rlx-v537.ham.dlh.de
+
 export TERM="xterm-256color"
 setopt autocd # assume "cd" when a command is a directory
 
