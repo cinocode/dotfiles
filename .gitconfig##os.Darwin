@@ -19,6 +19,7 @@
 	lm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
 	lt = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --since="4am"
 	lgs = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %<(130,trunc)%s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=200
+	lch = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s' --abbrev-commit --all
 	br = branch
 	co = checkout
 	st = status
