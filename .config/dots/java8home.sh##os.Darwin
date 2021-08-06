@@ -1,1 +1,2 @@
 export JAVA8_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+export JAVA11_HOME=/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home

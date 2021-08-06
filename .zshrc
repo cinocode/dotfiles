@@ -23,12 +23,12 @@ alias rp="ranger ~/pic"
 alias rv="ranger ~/vid"
 
 alias cl="source ~/.bin/codelist $@"
-alias mcp="mvn -T 1.1C clean package -Dmaven.test.skip=true"
+alias mcp="JAVA_HOME=${JAVA11_HOME} mvn -T 1.1C clean package -Dmaven.test.skip=true"
 alias mcp8="JAVA_HOME=${JAVA8_HOME} mvn -T 1.1C clean package -Dmaven.test.skip=true"
-alias msb="mvn -T 1.1C spring-boot:run"
+alias msb="JAVA_HOME=${JAVA11_HOME} mvn -T 1.1C spring-boot:run"
 alias msb8="JAVA_HOME=${JAVA8_HOME} mvn -T 1.1C spring-boot:run"
-alias mct="mvn test"
-alias mcr="mvn spring-boot:run"
+alias mct="JAVA_HOME=${JAVA11_HOME} mvn test"
+alias mcr="JAVA_HOME=${JAVA11_HOME} mvn spring-boot:run"
 
 alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
