@@ -45,6 +45,8 @@ trim() { head -n "$maxln"; }
 highlight() { command highlight "$@"; test $? = 0 -o $? = 141; }
 
 case "$extension" in
+    part)
+        exit 1;;
     # Archive extensions:
     7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
     rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
