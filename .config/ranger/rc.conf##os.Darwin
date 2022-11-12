@@ -5,3 +5,4 @@ set preview_images_method iterm2
 # wget -O ~/bin/imgcat https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
 
 map <DELETE> shell -s trash-put %s
+map , bulkrename %s
