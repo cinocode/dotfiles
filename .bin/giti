@@ -1,6 +1,6 @@
 #!/bin/bash
-git checkout master
+git checkout main
 git merge --no-ff $1
-git push origin master
+git push origin main
 git branch -D $1
 git push origin ":${1}"

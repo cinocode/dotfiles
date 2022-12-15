@@ -3,5 +3,5 @@ echo "Keeping up sync - Press [CTRL+C] to stop.."
 while true
 do
     ~/.bin/ghsync
-    sleep 2000
+    sleep 500
 done

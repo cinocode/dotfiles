@@ -137,3 +137,5 @@ if [ -z $oc_not_found ]; then
     source <(oc completion zsh)
 fi
 export PATH="/usr/local/opt/node@16/bin:$PATH"
+
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"

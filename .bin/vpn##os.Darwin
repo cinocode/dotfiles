@@ -1,11 +1,12 @@
 #!/bin/bash
-CONF_LOC='/usr/local/etc/'
+echo "use cisco anyconnect :("
+# CONF_LOC='/usr/local/etc/'
 
-sudo sh -c "cat "${CONF_LOC}"/squid.conf.base > "${CONF_LOC}"/squid.conf"
-sudo sh -c "cat "${CONF_LOC}"/squid.conf.peer >> "${CONF_LOC}"/squid.conf"
-sleep 15 && brew services restart squid &
+# sudo sh -c "cat "${CONF_LOC}"/squid.conf.base > "${CONF_LOC}"/squid.conf"
+# sudo sh -c "cat "${CONF_LOC}"/squid.conf.peer >> "${CONF_LOC}"/squid.conf"
+# sleep 15 && brew services restart squid &
 
-sudo openconnect --user=U898296@LGA --cafile=/Users/ole/.cert/root_ca_lufthansa.pem LGA.Lufthansa.de/LGAv2
+# sudo openconnect --user=U898296@LGA --cafile=/Users/ole/.cert/root_ca_lufthansa.pem LGA.Lufthansa.de/LGAv2
 
-sudo sh -c "cat "${CONF_LOC}"/squid.conf.base > "${CONF_LOC}"/squid.conf"
-sleep 3 && brew services restart squid &
+# sudo sh -c "cat "${CONF_LOC}"/squid.conf.base > "${CONF_LOC}"/squid.conf"
+# sleep 3 && brew services restart squid &

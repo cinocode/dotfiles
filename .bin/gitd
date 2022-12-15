@@ -1,2 +1,2 @@
 #!/bin/bash
-git diff $@ -- ':!src/main/frontend/package-lock.json' ':!package-lock.json' ':!ci/package-lock.json' ':!yarn.lock'
+git diff $@ -- ':!**/package-lock.json' ':!package-lock.json' ':!**/yarn.lock' ':!yarn.lock' ':!**/*.svg'
