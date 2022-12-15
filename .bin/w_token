@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+source ~/.bin/id_keychain.sh && GH_TOKEN=$(pass show fortis/gh_token | head -n 1) $@
