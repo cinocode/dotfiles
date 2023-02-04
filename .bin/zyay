@@ -76,10 +76,12 @@ sudo reflector --country France --country Germany --age 12 --protocol https --so
 
 if [[ $(pacman -Qs zfs) ]]; then
     sudo pacman -Syu
-    yay -S znapzend rxvt-unicode-pixbuf pass-git-helper $@
+    #yay -S znapzend rxvt-unicode-pixbuf pass-git-helper $@
+    yay -S znapzend pass-git-helper $@
 else
     sudo pacman -Syu
-    yay -S rxvt-unicode-pixbuf pass-git-helper $@
+    #yay -S rxvt-unicode-pixbuf pass-git-helper $@
+    yay -S pass-git-helper $@
 fi
 
 ~/.bin/install_packages

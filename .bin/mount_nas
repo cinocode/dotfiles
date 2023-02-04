@@ -9,5 +9,5 @@ else
     fi
 
     mkdir -p ${NAS_PATH}
-    mount -t cifs //192.168.1.193/media_001 ${NAS_PATH} -o credentials=/etc/samba/credentials/media,workgroup=WORKGROUP,uid=ole,vers=1.0,sec=ntlm
+    mount -t cifs //192.168.1.193/media_001 ${NAS_PATH} -o credentials=/etc/samba/credentials/media,workgroup=WORKGROUP,uid=ole,vers=1.0
 fi
