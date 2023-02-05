@@ -1,0 +1,2 @@
+#!/bin/bash
+node ~/.bin/delay_ass.js "$1" "$2"
