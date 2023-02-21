@@ -1,5 +1,11 @@
 #!/bin/bash
 for name in $@
 do
-  node ~/.bin/delay_ass.js "$name" "-134" "0:12:19:-60"
+  #node ~/.bin/delay_ass.js "$name" "-134" "0:12:19:-60"
+  #node ~/.bin/delay_ass.js "$name" "-139" "0:12:19:-60"
+  #node ~/.bin/delay_ass.js "$name" "-144" "0:12:19:-60"
+  #node ~/.bin/delay_ass.js "$name" "-139"
+  #node ~/.bin/delay_ass.js "$name" "-139" "0:12:09:-60"
+  #node ~/.bin/delay_ass.js "$name" "-139" "0:10:44:-60"
+  node ~/.bin/delay_ass.js "$name" "-140" "0:10:44:-60"
 done

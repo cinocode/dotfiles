@@ -46,7 +46,7 @@ ensureInstalled pass-extension-tail
 ensureInstalled pass-git-helper
 ensureInstalled grim
 ensureInstalled slurp
-ensureInstalled rxvt-unicode-pixbuf
+# ensureInstalled rxvt-unicode-pixbuf
 ensureInstalled flashfocus-git
 ensureInstalled networkmanager
 ensureInstalled networkmanager-openconnect
