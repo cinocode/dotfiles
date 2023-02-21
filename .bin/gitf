@@ -1,0 +1,2 @@
+#!/bin/bash
+git fetch && git remote prune origin
