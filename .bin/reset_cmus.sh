@@ -12,3 +12,4 @@ echo set repeat=true >> ~/.config/cmus/rc
 echo set continue=true >> ~/.config/cmus/rc
 echo set show_remaining_time=true >> ~/.config/cmus/rc
 echo set shuffle=false >> ~/.config/cmus/rc
+echo set status_display_program=cmusfm >> ~/.config/cmus/rc
