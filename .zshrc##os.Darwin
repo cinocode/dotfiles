@@ -1,6 +1,9 @@
 #!/bin/zsh
 source ~/.config/dots/java8home.sh
 
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 export EDITOR=/usr/bin/vim
 export ZSH="/opt/oh-my-zsh"
 ZSH_THEME="kolo_custom"
@@ -117,19 +120,19 @@ bindkey '^R' history-incremental-search-backward
 
 stty -ixon
 
-export http_proxy="http://localhost:3128"
-export https_proxy="http://localhost:3128"
+# export http_proxy="http://localhost:3128"
+# export https_proxy="http://localhost:3128"
 
 function proxy_on() {
     proxy_vars_up
     source ~/.config/dots/zshrc.local
-    echo -e "PROXY ON"
+    # echo -e "PROXY ON"
 }
 
 function proxy_off(){
     proxy_vars_down
     source ~/.config/dots/zshrc.local
-    echo -e "PROXY OFF"
+    # echo -e "PROXY OFF"
 }
 
 oc_not_found=$(which oc | grep 'not found')
@@ -139,3 +142,6 @@ fi
 export PATH="/usr/local/opt/node@16/bin:$PATH"
 
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+export PATH="/usr/local/opt/python@3.11/bin:$PATH"
+export PATH="/Users/ole/.pyenv/shims:$PATH"

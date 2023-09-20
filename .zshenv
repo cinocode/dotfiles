@@ -8,6 +8,7 @@ export PATH=~/.npm-global/bin:$PATH
 export PATH="/usr/local/node@16/bin:$PATH"
 export PATH="/usr/local/node@16/lib/node_modules:$PATH"
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/python@3.11/bin:$PATH"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
