@@ -1,0 +1,11 @@
+soundtrack
+audiobook
+metal
+pop
+electronic
+experimental
+hip hop
+jpop
+jazz
+classical
+trap

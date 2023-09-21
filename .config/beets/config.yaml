@@ -1,0 +1,54 @@
+directory: ~/music/
+library: ~/.local/share/beets/library.db
+plugins:
+  - scrub
+  - info
+  - duplicates
+  - fromfilename
+  - fuzzy
+  - fetchart
+  - lastgenre
+  - lyrics
+  - the
+  - replaygain
+  - missing
+  - zero
+
+paths:
+    default: $albumartist/($year) $album%aunique{}/$track $title
+    singleton: Singles/$artist/$title ($year)
+    comp: Compilations/$album%aunique{} ($year)/$track $title
+    albumtype:soundtrack: Soundtracks/$album/$track $title
+    albumtype:audiobook: Audiobooks/%the{$albumartist}/($year) $album%aunique{}/$track $title
+    albumtype:podcast: Podcasts/%the{$albumartist}/$title
+
+format_album: '$albumartist - $original_year - $album'
+sort_album: 'albumartist+ original_year+ album+'
+sort_artist: 'artist+'
+sort_albumartist: 'albumartist+'
+original_date: yes
+
+import:
+  from_scratch: yes
+  log: ~/.local/share/beets/beets.log
+
+match:
+  preferred:
+    original_years: yes
+
+zero:
+  fields: comments images artist_sort albumartist_sort composer_sort
+  update_database: true
+
+fetchart:
+  minwidth: 100
+  maxwidth: 1500
+  quality: 75
+
+lastgenre:
+  canonical: yes
+  source: artist
+  whitelist: ~/.config/beets/genres.txt
+
+replaygain:
+  backend: gstreamer

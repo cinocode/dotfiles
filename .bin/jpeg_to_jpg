@@ -1,0 +1,11 @@
+#!/bin/bash
+
+seqnum=1
+find $1 -type f -name '*.jpeg' -print0 \
+    |   while IFS= read -r -d '' jpg_path ; do
+            new_jpg_path=$(echo $jpg_path | sed s/\.jpeg/\.jpg/g)
+            #dir=${jpg_path%/*}
+            #printf -v new_jpg_path '%s.jpg' "$dir" $((seqnum++))
+            echo mv -i -- "$jpg_path" "$new_jpg_path"
+            mv -i -- "$jpg_path" "$new_jpg_path"
+        done

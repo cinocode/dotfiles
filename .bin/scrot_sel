@@ -1,0 +1,1 @@
+scrot -s 'tor/%Y-%m-%d-%s_screenshot_$wx$h.jpg'

@@ -115,20 +115,20 @@ bindkey '^R' history-incremental-search-backward
 
 stty -ixon
 
-export http_proxy="http://localhost:3128"
-export https_proxy="http://localhost:3128"
+# export http_proxy="http://localhost:3128"
+# export https_proxy="http://localhost:3128"
 
-function proxy_on() {
-    proxy_vars_up
-    source ~/.config/dots/zshrc.local
-    echo -e "PROXY ON"
-}
+#function proxy_on() {
+    #proxy_vars_up
+    #source ~/.config/dots/zshrc.local
+    #echo -e "PROXY ON"
+#}
 
-function proxy_off(){
-    proxy_vars_down
-    source ~/.config/dots/zshrc.local
-    echo -e "PROXY OFF"
-}
+#function proxy_off(){
+    #proxy_vars_down
+    #source ~/.config/dots/zshrc.local
+    #echo -e "PROXY OFF"
+#}
 
 oc_not_found=$(which oc | grep 'not found')
 if [ -z $oc_not_found ]; then

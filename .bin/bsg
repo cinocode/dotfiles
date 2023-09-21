@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+
+if [[ ! -z $1 && $1 != "force" ]]; then
+    TOKEN="$1"
+fi
+if [[ -z $2 ]]; then
+    WARN_SCRIPT=~/.bin/ak_diab.sh
+else
+    WARN_SCRIPT="$2"
+fi
+
+CACHE_FILE=/tmp/.nscache
+CACHE_EXPIRE_TIME=59
+CACHE_DROP_TIME=300
+
+MAX_WARN_TIME=3600
+WARN_BSG_BLOCK=/tmp/.nsblock
+
+GREEN_VAL="#74B72E"
+ORANGE_VAL="#FCAE1E"
+RED_VAL="#DD571C"
+
+ARROW_STABLE="→"
+ARROW_RISING_FAST="↑"
+ARROW_RISING="↗"
+ARROW_FALLING_FAST="↓"
+ARROW_FALLING="↘"
+
+USE_CACHE='yes'
+if [[ ! -f "${CACHE_FILE}" ]]; then
+    USE_CACHE='no'
+elif [[ "$1" = 'force' ]]; then
+    USE_CACHE='no'
+else
+    CURTIME=$(date +%s)
+    FILETIME=$(stat $CACHE_FILE -c %Y)
+    TIMEDIFF=$(expr $CURTIME - $FILETIME)
+
+    if [[ $TIMEDIFF -gt $CACHE_DROP_TIME ]]; then
+        rm $CACHE_FILE
+        USE_CACHE='no'
+    elif [[ $TIMEDIFF -gt $CACHE_EXPIRE_TIME ]]; then
+        USE_CACHE='no'
+    fi
+fi
+
+if [[ $USE_CACHE = 'no' ]]; then
+    if [[ -z $TOKEN ]]; then
+        TOKEN=$(pass nightscout.mongodb.com_cli | head -n 1)
+    fi
+    RES=$(curl -s get "https://naito-scouto.fly.dev/api/v1/entries.json?token=${TOKEN}")
+    if echo $RES | grep -q '"sgv"'; then
+        DATA=$(echo "$RES" | jq '.[0]')
+        echo "$DATA" > $CACHE_FILE
+    elif [[ -f $CACHE_FILE ]]; then
+        DATA=$(cat $CACHE_FILE)
+    else
+        echo No data
+        echo No data
+        echo "$RED_VAL"
+        exit 1
+    fi
+else
+    DATA=$(cat $CACHE_FILE)
+fi
+
+SGV=$(echo $DATA | jq '.sgv')
+DELTA=$(echo $DATA | jq '.delta' | sed 's/\..*//g')
+
+WHEN=$(echo $DATA | jq '.date')
+NOWW=$(date +%s%N | cut -b1-13)
+((DIFF=$NOWW - $WHEN))
+((DIFFMIN=$DIFF/60000))
+TPOST=""
+if [[ $DIFFMIN -gt 1 ]]; then
+    TPOST=" ($DIFFMIN min)"
+fi
+
+COLOR="$GREEN_VAL"
+POSTFIX=" $ARROW_STABLE"
+HAS_VALS="yes"
+if [[ $DIFF -gt 3600000 ]]; then
+    COLOR="$ORANGE_VAL"
+    HAS_VALS="no"
+    echo 'Stale'
+    echo 'Stale'
+    echo "$RED_VAL"
+    exit 1
+elif [[ $DIFF -gt 420000 ]]; then
+    COLOR="$RED_VAL"
+    HAS_VALS="no"
+    echo 'Missing'
+    echo 'Missing'
+    echo "$RED_VAL"
+    exit 0
+elif [[ $DELTA -gt 9 ]]; then
+    COLOR="$ORANGE_VAL"
+    POSTFIX=" $ARROW_RISING_FAST"
+elif [[ $DELTA -gt 4 ]]; then
+    POSTFIX=" $ARROW_RISING"
+elif [[ $DELTA -lt -13 ]]; then
+    COLOR="$RED_VAL"
+    POSTFIX=" $ARROW_FALLING_FAST"
+elif [[ $DELTA -lt -9 ]]; then
+    COLOR="$ORANGE_VAL"
+    POSTFIX=" $ARROW_FALLING_FAST"
+elif [[ $DELTA -lt -4 ]]; then
+    COLOR="$ORANGE_VAL"
+    POSTFIX=" $ARROW_FALLING"
+fi
+DPOST=""
+if [[ $DELTA -gt 2 || $DELTA -lt -2 ]]; then
+    DPOST=$(echo " (+$DELTA)" | sed 's/+-/-/g')
+fi
+
+if [[ $SGV -gt 200 ]]; then
+    COLOR="$RED_VAL"
+elif [[ $SGV -lt 110 ]]; then
+    COLOR="$RED_VAL"
+fi
+
+if [[ $COLOR = "$RED_VAL" ]]; then
+    BSG_WARN="yes"
+    if [[ -f $WARN_BSG_BLOCK ]]; then
+        WCURTIME=$(date +%s)
+        WFILETIME=$(stat $WARN_BSG_BLOCK -c %Y)
+        WTIMEDIFF=$(expr $WCURTIME - $WFILETIME)
+
+        if [[ $WTIMEDIFF -lt $MAX_WARN_TIME ]]; then
+            BSG_WARN="no"
+        else
+            rm $WARN_BSG_BLOCK
+        fi
+    fi
+
+    if [[ $BSG_WARN = "yes" ]]; then
+        touch $WARN_BSG_BLOCK
+        if [[ -f $SOUND_FILE ]]; then
+            sleep $((60 - $(date +%S) )) && $WARN_SCRIPT &
+        fi
+    fi
+fi
+
+if [[ $HAS_VALS = "yes" ]]; then
+    echo "$SGV$POSTFIX$DPOST$TPOST"
+    echo "$SGV$POSTFIX"
+    echo "$COLOR"
+fi
