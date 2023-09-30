@@ -4,5 +4,5 @@ for var in "$@"
 do
     SRC="$var"
     TAR=$(echo $SRC | sed 's/\.webp/\.png/g')
-    dwebp $SRC -o $TAR && rm $SRC
+    dwebp "$SRC" -o "$TAR" && rm "$SRC"
 done

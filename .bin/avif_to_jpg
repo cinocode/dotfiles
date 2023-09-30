@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for var in "$@"
+do
+    SRC="$var"
+    TAR=$(echo $SRC | sed 's/\.avif/\.jpg/g')
+    magick -quality 100 "$SRC" "$TAR" && rm "$SRC"
+done
