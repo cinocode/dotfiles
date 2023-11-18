@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+MON_CON=$(pass show nightscout.mongodb.com_monbak | head -n 1)
+DTSTR=$(date +"%Y-%m-%d")
+mkdir -p ~/mongo_baks/"$DTSTR"
+mongoexport --uri $MON_CON --collection activity --type json --out ~/mongo_baks/$DTSTR/backup_activity.json
+mongoexport --uri $MON_CON --collection auth_roles --type json --out ~/mongo_baks/$DTSTR/backup_auth_roles.json
+mongoexport --uri $MON_CON --collection auth_subjects --type json --out ~/mongo_baks/$DTSTR/backup_auth_subjects.json
+mongoexport --uri $MON_CON --collection devicestatus --type json --out ~/mongo_baks/$DTSTR/backup_devicestatus.json
+mongoexport --uri $MON_CON --collection entries --type json --out ~/mongo_baks/$DTSTR/backup_entries.json
+mongoexport --uri $MON_CON --collection food --type json --out ~/mongo_baks/$DTSTR/backup_food.json
+mongoexport --uri $MON_CON --collection profile --type json --out ~/mongo_baks/$DTSTR/backup_profile.json
+mongoexport --uri $MON_CON --collection settings --type json --out ~/mongo_baks/$DTSTR/backup_settings.json
+mongoexport --uri $MON_CON --collection treatments --type json --out ~/mongo_baks/$DTSTR/backup_treatments.json
