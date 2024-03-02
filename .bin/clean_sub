@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+for var in "$@"
+do
+    MAIN_FILE="$var"
+    BAK_FILE="$var.bak"
+    #DIFF_FILE="$var.diff"
+
+    cp $MAIN_FILE $BAK_FILE
+
+    sed -i '/^.*♪.*/d' $MAIN_FILE
+
+    sed -i '/^(.*)$/d' $MAIN_FILE
+    sed -i '/^[.*]$/d' $MAIN_FILE
+    sed -i '/^（.*）$/d' $MAIN_FILE
+
+    sed -i 's/^(.*)//g' $MAIN_FILE
+    sed -i 's/^[.*]//g' $MAIN_FILE
+    sed -i 's/^（.*）//g' $MAIN_FILE
+
+    #diff -u $BAK_FILE $MAIN_FILE > $DIFF_FILE
+done
