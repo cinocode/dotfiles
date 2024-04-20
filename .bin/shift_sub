@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# 1: "-5" or "5" seconds
+# 2: infile
+# 3: outfile
+ffmpeg -itsoffset "$1" -i "$2" -c copy "$3"
