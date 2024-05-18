@@ -2,6 +2,7 @@
 DROID_DIR="/home/ole/droid"
 SOURCE_MUS="/home/ole/music/"
 TARGET_MUS="${DROID_DIR}/SD card/Music/"
+CMUS_PL_DIR="/home/ole/.config/cmus/playlists"
 
 mount_droid "$DROID_DIR"
 
@@ -13,11 +14,10 @@ else
     TO_DIR="${TARGET_MUS}${1}/"
 fi
 
-if [[ -d "${SOURCE_MUS}Playlists" ]]; then
-    find "${SOURCE_MUS}Playlists" -type f -iname '*.m3u' -exec sed -i 's/\/home\/.*\/music/\.\./g' '{}' ';'
-else
-    echo "Playlist dir not found"
-fi
+mkdir -p "${SOURCE_MUS}Playlists"
+rm -rf "${SOURCE_MUS}Playlists"
+cp -r "${CMUS_PL_DIR}" "${SOURCE_MUS}Playlists"
+find "${SOURCE_MUS}Playlists" -type f -iname '*.m3u' -exec sed -i 's/\/home\/.*\/music/\.\./g' '{}' ';'
 
 if [[ -d "${FROM_DIR}" && -d "${TO_DIR}" ]]; then
     #LC_ALL=de_DE.ISO8859-1 rsync -rltDvP --update --delete --inplace --exclude=".*" "${FROM_DIR}" "${TO_DIR}"
