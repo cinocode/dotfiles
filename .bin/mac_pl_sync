@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+LOCAL_PL="/Users/ole/.config/cmus/playlists"
+SYNCED_PL="/Users/ole/music/Playlists"
+
+mkdir -p "${LOCAL_PL}"
+rm -rf "${LOCAL_PL}"
+cp -r "${SYNCED_PL}" "${LOCAL_PL}"
+
+find "${LOCAL_PL}" -type f -iname '*.m3u' -exec sed -i 's/\.\.\//\/Users\/ole\/music\//g' '{}' ';'
