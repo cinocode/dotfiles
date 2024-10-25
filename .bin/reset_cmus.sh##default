@@ -14,3 +14,7 @@ echo set show_remaining_time=true >> ~/.config/cmus/rc
 echo set shuffle=false >> ~/.config/cmus/rc
 
 echo set status_display_program=cmusfm >> ~/.config/cmus/rc
+
+echo set dsp.coreaudio.sync_sample_rate=true >> ~/.config/cmus/rc
+echo set softvol=false >> ~/.config/cmus/rc
+echo set output_plugin=ao >> ~/.config/cmus/rc
