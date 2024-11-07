@@ -1,0 +1,4 @@
+#!/bin/zsh
+source ~/.config/dots/java_home.sh
+
+JAVA_HOME=${JAVA8_HOME} $@

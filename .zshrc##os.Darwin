@@ -1,5 +1,5 @@
 #!/bin/zsh
-source ~/.config/dots/java8home.sh
+source ~/.config/dots/java_home.sh
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -26,14 +26,9 @@ alias rp="ranger ~/pic"
 alias rv="ranger ~/vid"
 
 alias cl="source ~/.bin/codelist $@"
-alias mcp="JAVA_HOME=${JAVA17_HOME} mvn -T 1.1C clean package -Dmaven.test.skip=true"
-alias mcp11="JAVA_HOME=${JAVA11_HOME} mvn -T 1.1C clean package -Dmaven.test.skip=true"
-alias mcp8="JAVA_HOME=${JAVA8_HOME} mvn -T 1.1C clean package -Dmaven.test.skip=true"
-alias msb="JAVA_HOME=${JAVA17_HOME} mvn -T 1.1C spring-boot:run"
-alias msb11="JAVA_HOME=${JAVA11_HOME} mvn -T 1.1C spring-boot:run"
-alias msb8="JAVA_HOME=${JAVA8_HOME} mvn -T 1.1C spring-boot:run"
-alias mct="JAVA_HOME=${JAVA11_HOME} mvn test"
-alias mcr="JAVA_HOME=${JAVA11_HOME} mvn spring-boot:run"
+alias mcp="mvn -T 1.1C clean package -Dmaven.test.skip=true"
+alias msb="mvn -T 1.1C spring-boot:run"
+alias mct="mvn test"
 
 alias npmupd="npx npm-check-updates -u && npm install --legacy-peer-deps"
 
@@ -41,16 +36,10 @@ alias n='vim ~/note/orga/scram.txt'
 alias t="trash-put $@"
 alias squid_manage="sudo systemctl restart squid && lht_squid_manage"
 
-if [[ -d /usr/local/opt/java11 ]]; then
-    JAVA_EXEC=/usr/local/opt/java11
-else
-    JAVA_EXEC=/usr/lib/jvm/java11-openjdk
-fi
 alias tscs="TS_NODE_COMPILER_OPTIONS='{\"strict\": true}' ts-node"
 alias tscl="ts-node"
 alias jsc="node"
-alias j11="${JAVA_EXEC}/bin/jshell"
-alias ktl="JAVA_HOME=${JAVA_EXEC} kotlinc-jvm -Djava.awt.headless=false"
+alias ktl="kotlinc-jvm -Djava.awt.headless=false"
 
 alias dockerprox="sudoedit /etc/systemd/system/docker.service.d/10_docker_proxy.conf"
 alias dcu="sudo docker-compose up -d"
