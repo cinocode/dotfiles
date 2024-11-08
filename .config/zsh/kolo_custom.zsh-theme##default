@@ -19,7 +19,7 @@ theme_precmd () {
         cd "/home/$(whoami)"
     else
         if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-            if git status 2> /dev/null | grep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit, working tree clean"; then
+            if git status 2> /dev/null | grep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit \(use -u to show untracked files"; then
                 zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
             else
                 zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
