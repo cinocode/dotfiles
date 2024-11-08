@@ -8,7 +8,7 @@ zstyle ':vcs_info:*' enable git svn
 theme_precmd () {
     if [[ $(pwd) = "/Users/$(whoami)" ]]; then
         cd "/Users/$(whoami)/.local/share/yadm/repo.git"
-        if git status | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit \(use -u to show untracked files"; then
+        if git status | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit"; then
             zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
         elif [[ -z $(git ls-files --exclude-standard 2> /dev/null) ]] {
             zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
@@ -19,7 +19,7 @@ theme_precmd () {
         cd "/Users/$(whoami)"
     else
         if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-            if git status 2> /dev/null | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit \(use -u to show untracked files"; then
+            if git status 2> /dev/null | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit"; then
                 zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
             else
                 zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
