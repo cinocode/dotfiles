@@ -32,7 +32,7 @@ alias mct="mvn test"
 
 alias npmupd="npx npm-check-updates -u && npm install --legacy-peer-deps"
 
-alias n='vim ~/note/orga/scram.txt'
+alias n='vim ~/note/orga/inbox.txt'
 alias t="trash-put $@"
 alias squid_manage="sudo systemctl restart squid && lht_squid_manage"
 
