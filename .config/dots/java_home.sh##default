@@ -1,0 +1,5 @@
+#export JAVA8_HOME=
+#export JAVA11_HOME=
+#export JAVA17_HOME=
+
+#export JAVA_HOME=${JAVA17_HOME}
