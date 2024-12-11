@@ -17,6 +17,18 @@ theme_precmd () {
         }
         vcs_info
         cd "/Users/$(whoami)"
+
+        if [[ -f ~/.notesync_pending ]]; then
+            extra_msg_sync=" [note sync] "
+        elif [[ -f ~/.docsync_pending ]]; then
+            extra_msg_sync=" [doc sync] "
+        elif [[ -f ~/.ssync_pending ]]; then
+            extra_msg_sync=" [ssync] "
+        elif [[ -f ~/.passsync_pending ]]; then
+            extra_msg_sync=" [pass sync] "
+        else
+            extra_msg_sync=""
+        fi
     else
         if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
             if git status 2> /dev/null | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit"; then
@@ -32,7 +44,7 @@ theme_precmd () {
 }
 
 setopt prompt_subst
-PROMPT='%B%F{magenta}%c%B%F{green}${vcs_info_msg_0_}%B%F{magenta} %{$reset_color%}%% '
+PROMPT='%B%F{magenta}%c%B%F{green}${vcs_info_msg_0_}${extra_msg_sync}%B%F{magenta} %{$reset_color%}%% '
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd  theme_precmd

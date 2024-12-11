@@ -6,4 +6,13 @@ cd ${note_dir}
 
 result=$(git pull && git add . && (git diff-index --quiet HEAD || git commit -m 'notesync') && git push)
 
+GIT_REMOTE_RESULT=$(git log HEAD..origin/main --oneline)
+if [ ! -z "$(git status --porcelain)" ]; then 
+  touch ~/.notesync_pending
+elif [[ "${GIT_REMOTE_RESULT}" != "" ]] ; then
+  touch ~/.notesync_pending
+elif [[ -f ~/.notesync_pending ]]; then
+  rm ~/.notesync_pending
+fi
+
 echo ${result}
