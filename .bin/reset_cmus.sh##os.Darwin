@@ -1,5 +1,7 @@
-mkdir -p ~/.config/cmus
+mkdir -p ~/.config/cmus/playlists
+cp -r ~/.config/cmus/playlists ~/config_cmus_playlists_bak
 rm -rf ~/.config/cmus/*
+mv ~/config_cmus_playlists_bak ~/.config/cmus/playlists 
 
 echo unbind common + >> ~/.config/cmus/rc
 echo bind common + vol +5% >> ~/.config/cmus/rc
