@@ -1,9 +1,6 @@
 mkdir -p ~/.config/cmus/playlists
-cp -r ~/.config/cmus/playlists ~/config_cmus_playlists_bak
-rm -rf ~/.config/cmus/*
-mv ~/config_cmus_playlists_bak ~/.config/cmus/playlists 
 
-echo unbind common + >> ~/.config/cmus/rc
+echo unbind common + > ~/.config/cmus/rc
 echo bind common + vol +5% >> ~/.config/cmus/rc
 echo unbind common - >> ~/.config/cmus/rc
 echo bind common - vol -5% >> ~/.config/cmus/rc
@@ -16,3 +13,4 @@ echo set show_remaining_time=true >> ~/.config/cmus/rc
 echo set shuffle=false >> ~/.config/cmus/rc
 
 echo set status_display_program=cmusfm >> ~/.config/cmus/rc
+cmusfm init
