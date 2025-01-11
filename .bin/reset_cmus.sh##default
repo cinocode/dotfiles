@@ -1,5 +1,11 @@
 mkdir -p ~/.config/cmus/playlists
 
+rm .config/cmus/autosave
+rm .config/cmus/cache
+rm .config/cmus/command-history
+rm .config/cmus/lib.pl
+rm .config/cmus/search-history
+
 echo unbind common + > ~/.config/cmus/rc
 echo bind common + vol +5% >> ~/.config/cmus/rc
 echo unbind common - >> ~/.config/cmus/rc
