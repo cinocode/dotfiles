@@ -1,5 +1,6 @@
 export JAVA8_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 export JAVA11_HOME=/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home
 export JAVA17_HOME=/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home
+export JAVA21_HOME=/Library/Java/JavaVirtualMachines/openjdk-21.jdk/Contents/Home
 
-export JAVA_HOME=${JAVA17_HOME}
+export JAVA_HOME=${JAVA21_HOME}
