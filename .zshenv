@@ -3,6 +3,7 @@ export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$
 export PYTHON_CONFIGURE_OPTS="--enable-framework"
 
 export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/code/fortis_util/bin
 export PATH=~/.npm-global/bin:$PATH
 export PATH="/usr/local/node@16/bin:$PATH"
