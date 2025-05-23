@@ -3,13 +3,6 @@ source ~/.config/dots/zshrc.local
 
 result=$(w_ssh pass git pull && w_ssh pass git push)
 
-PASSV_DIR=~/code/.vipappspass
-if [[ -d ${PASSV_DIR} ]]; then
-    cd ${PASSV_DIR}
-    git pull
-    git push
-fi
-
 GIT_REMOTE_RESULT=$(pass git log HEAD..origin/main --oneline)
 if [ ! -z "$(pass git status --porcelain)" ]; then 
   touch ~/.passsync_pending
@@ -17,6 +10,13 @@ elif [[ "${GIT_REMOTE_RESULT}" != "" ]] ; then
   touch ~/.passsync_pending
 elif [[ -f ~/.passsync_pending ]]; then
   rm ~/.passsync_pending
+fi
+
+PASSV_DIR=~/code/.vipappspass
+if [[ -d ${PASSV_DIR} ]]; then
+    cd ${PASSV_DIR}
+    git pull
+    git push
 fi
 
 echo ${result}
