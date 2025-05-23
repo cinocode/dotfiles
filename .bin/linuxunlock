@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+w_ssh echo "Unlocked git key"
+pass -c stardom-world.com
+tmux new-session -d -s ghsync ~/.bin/ghsync_d
+exit 0

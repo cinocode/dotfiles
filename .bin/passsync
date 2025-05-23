@@ -10,8 +10,8 @@ if [[ -d ${PASSV_DIR} ]]; then
     git push
 fi
 
-GIT_REMOTE_RESULT=$(git log HEAD..origin/main --oneline)
-if [ ! -z "$(git status --porcelain)" ]; then 
+GIT_REMOTE_RESULT=$(pass git log HEAD..origin/main --oneline)
+if [ ! -z "$(pass git status --porcelain)" ]; then 
   touch ~/.passsync_pending
 elif [[ "${GIT_REMOTE_RESULT}" != "" ]] ; then
   touch ~/.passsync_pending
