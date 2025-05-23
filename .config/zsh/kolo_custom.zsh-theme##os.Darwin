@@ -10,6 +10,10 @@ theme_precmd () {
         cd "/Users/$(whoami)/.local/share/yadm/repo.git"
         if git status | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit"; then
             zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
+        elif git status | ggrep -Pzoq "Your branch is up to date with 'origin/staging'.*\n+.*nothing to commit"; then
+            zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
+        elif git status | ggrep -Pzoq "Your branch is up to date with 'origin/trunc'.*\n+.*nothing to commit"; then
+            zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
         elif [[ -z $(git ls-files --exclude-standard 2> /dev/null) ]] {
             zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
         } else {
@@ -33,6 +37,10 @@ theme_precmd () {
         extra_msg_sync=""
         if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
             if git status 2> /dev/null | ggrep -Pzoq "Your branch is up to date with 'origin/main'.*\n+.*nothing to commit"; then
+                zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
+            elif git status 2> /dev/null | ggrep -Pzoq "Your branch is up to date with 'origin/staging'.*\n+.*nothing to commit"; then
+                zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
+            elif git status 2> /dev/null | ggrep -Pzoq "Your branch is up to date with 'origin/trunc'.*\n+.*nothing to commit"; then
                 zstyle ':vcs_info:*' formats ' %F{green}[✔]%f'
             else
                 zstyle ':vcs_info:*' formats ' [%b%c%u%B%F{green}]'
