@@ -4,7 +4,7 @@ note_dir=~/doc
 
 cd ${note_dir}
 
-result=$(git pull && git add . && (git diff-index --quiet HEAD || git commit -m 'docsync') && git push)
+result=$(w_ssh git pull && git add . && (git diff-index --quiet HEAD || git commit -m 'docsync') && w_ssh git push)
 
 GIT_REMOTE_RESULT=$(git log HEAD..origin/main --oneline)
 if [ ! -z "$(git status --porcelain)" ]; then 

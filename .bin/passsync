@@ -1,7 +1,7 @@
 #!/bin/bash
 source ~/.config/dots/zshrc.local
 
-result=$(pass git pull && pass git push)
+result=$(w_ssh pass git pull && w_ssh pass git push)
 
 PASSV_DIR=~/code/.vipappspass
 if [[ -d ${PASSV_DIR} ]]; then
