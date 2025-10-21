@@ -1,0 +1,2 @@
+#!/bin/bash
+git show $@ -- ':!**/package-lock.json' ':!package-lock.json' ':!**/yarn.lock' ':!yarn.lock' ':!**/*.svg'
