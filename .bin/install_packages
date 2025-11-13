@@ -90,11 +90,11 @@ ensureInstalled pacman-contrib
 ensureInstalled thunar
 ensureInstalled ranger
 ensureInstalled trash-cli
-ensureInstalled pavucontrol
-ensureInstalled pulseaudio
-ensureInstalled pulseaudio-bluetooth
-ensureInstalled pasystray
-ensureInstalled pulseaudio-ctl
+#ensureInstalled pavucontrol
+#ensureInstalled pulseaudio
+#ensureInstalled pulseaudio-bluetooth
+#ensureInstalled pasystray
+#ensureInstalled pulseaudio-ctl
 ensureInstalled iw
 ensureInstalled dialog
 ensureInstalled wpa_supplicant
