@@ -1,0 +1,2 @@
+
+for file in *.m4a ; do ffmpeg -i "$file" -f flac "$( basename "$file" .m4a ).flac" ; done 
