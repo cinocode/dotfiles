@@ -2,5 +2,4 @@
 w_ssh echo "Unlocked git key"
 pass -c stardom-world.com
 tmux new-session -d -s ghsync ~/.bin/ghsync_d
-~/.bin/mac_pl_sync
 exit 0

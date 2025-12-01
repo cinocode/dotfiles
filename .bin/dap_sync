@@ -15,11 +15,6 @@ else
     TO_DIR="${TARGET_MUS}${1}/"
 fi
 
-mkdir -p "${SOURCE_MUS}Playlists"
-rm -rf "${SOURCE_MUS}Playlists"
-cp -r "${CMUS_PL_DIR}" "${SOURCE_MUS}Playlists"
-find "${SOURCE_MUS}Playlists" -type f -iname '*.m3u' -exec sed -i 's/\/home\/.*\/music/\.\./g' '{}' ';'
-
 if [[ -d "${FROM_DIR}" && -d "${TO_DIR}" ]]; then
     #LC_ALL=de_DE.ISO8859-1 rsync -rltDvP --update --delete --inplace --exclude=".*" "${FROM_DIR}" "${TO_DIR}"
     rsync -rltDvP --update --delete --inplace --exclude=".*" --exclude="/Audiobooks/" "${FROM_DIR}" "${TO_DIR}"

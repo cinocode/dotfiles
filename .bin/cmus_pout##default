@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+SOURCE_MUS="/home/ole/music/"
+CMUS_PL_DIR="/home/ole/.config/cmus/playlists"
+
+mkdir -p "${SOURCE_MUS}Playlists"
+rm -rf "${SOURCE_MUS}Playlists"
+cp -r "${CMUS_PL_DIR}" "${SOURCE_MUS}Playlists"
+find "${SOURCE_MUS}Playlists" -type f -iname '*.m3u' -exec sed -i 's/\/home\/.*\/music/\.\./g' '{}' ';'
