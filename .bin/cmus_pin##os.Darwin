@@ -5,4 +5,4 @@ CMUS_PL_DIR="/Users/ole/.config/cmus/playlists"
 mkdir -p "${CMUS_PL_DIR}"
 rm -rf "${CMUS_PL_DIR}"
 cp -r "${SOURCE_MUS}Playlists" "${CMUS_PL_DIR}"
-find "${CMUS_PL_DIR}" -type f -iname '*.m3u' -exec sed -i 's/\.\.\//\/Users\/ole\/music\//g' '{}' ';'
+find "${CMUS_PL_DIR}" -type f -iname '*.m3u' -exec sed -i 's/\.\.\//\/Users\/ole\/Music\//g' '{}' ';'
