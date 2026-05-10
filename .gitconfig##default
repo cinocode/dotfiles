@@ -36,10 +36,11 @@
 	amend = commit --amend --no-edit
 [include]
 	path = /home/ole/.gitconfig.local
-[credential]
-	helper = /home/ole/.bin/passm-git-helper
+#[credential]
+#	helper = /home/ole/.bin/passm-git-helper
 [http]
 	postBuffer = 524288000
+	sslverify = false
 [url "https://github.com/"]
         insteadOf = "gh:"
         pushInsteadOf = "gh:"

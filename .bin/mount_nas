@@ -4,10 +4,10 @@ if ! whoami | grep -q 'root'; then
 else
     NAS_PATH=/home/ole/nas
     CRED_PATH=/etc/samba/credentials
-    if [[ ! -f ${CRED_PATH}/media ]]; then
+    if [[ ! -f ${CRED_PATH}/usb_hdd ]]; then
         echo Run mount_nas_init && exit 1
     fi
 
     mkdir -p ${NAS_PATH}
-    mount -t cifs //192.168.1.193/media_001 ${NAS_PATH} -o credentials=/etc/samba/credentials/media,workgroup=WORKGROUP,uid=ole,vers=1.0
+    mount -t cifs //192.168.1.181/usb_hdd ${NAS_PATH} -o credentials=/etc/samba/credentials/usb_hdd,workgroup=WORKGROUP,uid=ole,vers=2.0
 fi
