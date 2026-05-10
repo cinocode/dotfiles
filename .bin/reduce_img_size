@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+for var in "$@"
+do
+    IMG_FILE="$var"
+
+    if [[ ! -f $IMG_FILE ]]; then
+        echo "no image found"
+        exit 0
+    fi
+
+    if file "$IMG_FILE" | grep -q "JPEG image data"; then
+        echo "jpegoptim --max=85 --strip-all '$IMG_FILE'"
+        jpegoptim --max=85 --strip-all "$IMG_FILE"
+    elif file "$IMG_FILE" | grep -q "PNG image data"; then
+        echo "optipng -o5 '$IMG_FILE'"
+        optipng -o5 "$IMG_FILE"
+    elif file "$IMG_FILE" | grep -q "Web/P image"; then
+        echo "cwebp -q 80 '${IMG_FILE}' -o '${IMG_FILE}'"
+        cwebp -q 80 "${IMG_FILE}" -o "${IMG_FILE}"
+    else
+        echo "Unhandled file type: '${IMG_FILE}'"
+    fi
+done
