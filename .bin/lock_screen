@@ -11,7 +11,12 @@ feh -YZxF ~/.config/wallpaper/current_blur_1.png &
 echo $! > /tmp/feh.pid
 sleep 0.1
 
-sleep 10 && xset dpms force off &
+if [[ $1 == 'suspend' ]]; then
+    sleep 1 && systemctl suspend &
+else
+    sleep 15 && xset dpms force off &
+fi
+
 i3lock -n -t -i "$IMAGE"
 
 feh --on-last-slide quit -YZxFND 0.06 ~/.config/wallpaper/current_blur_*.png &
@@ -20,5 +25,7 @@ FEHPID=$(cat /tmp/feh.pid)
 
 sleep 1 && xset dpms 0 0 0 &
 sleep 2 && xset s off -dpms &
+
+dv
 
 sleep 120 && pkill live_wallpaper && pkill xwinwrap
