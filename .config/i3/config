@@ -235,7 +235,7 @@ bindsym $mod+u bar mode toggle
 
 bindsym $mod+l exec --no-startup-id ~/.bin/lock_screen
 
-bindsym $mod+Shift+l exec --no-startup-id ~/.bin/lock_screen suspend
+bindsym $mod+Shift+l exec --no-startup-id ~/.bin/lock_screen confirm
 
 bindsym $mod+Shift+a exec xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
 

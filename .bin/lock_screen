@@ -1,5 +1,32 @@
 #!/bin/bash
 IMAGE=~/.config/wallpaper/current_blur_1.png
+CONFIRM_FILE=~/.confirmsuspend
+DO_SUSPEND=false
+
+if [[ $1 == 'suspend' ]]; then
+    DO_SUSPEND=true
+elif [[ $1 == 'confirm' ]]; then
+    touch "${CONFIRM_FILE}"
+    i3-nagbar -t warning -m 'You pressed the suspend shortcut. Do you want to cancel?' -B 'Cancel suspend' 'lock_screen cancel' -B 'Suspend now' 'lock_screen now' &
+    sleep 10
+
+    if [[ -f ${CONFIRM_FILE} ]]; then
+        rm "${CONFIRM_FILE}"
+        pkill i3-nagbar
+        DO_SUSPEND=true
+    else
+        pkill i3-nagbar
+        exit 0
+    fi
+elif [[ $1 == 'cancel' ]]; then
+    rm "${CONFIRM_FILE}"
+    pkill i3-nagbar
+    exit 0
+elif [[ $1 == 'now' ]]; then
+    rm "${CONFIRM_FILE}"
+    pkill i3-nagbar
+    DO_SUSPEND=true
+fi
 
 sleep 1 && xset +dpms &
 sleep 1.5 && xset dpms 15 30 3600 &
@@ -11,7 +38,7 @@ feh -YZxF ~/.config/wallpaper/current_blur_1.png &
 echo $! > /tmp/feh.pid
 sleep 0.1
 
-if [[ $1 == 'suspend' ]]; then
+if [[ $DO_SUSPEND == true ]]; then
     sleep 1 && systemctl suspend &
 else
     sleep 15 && xset dpms force off &
