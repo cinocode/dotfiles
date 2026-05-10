@@ -5,13 +5,12 @@
 #
 
 # i3 config file (v4)
-exec xsetroot -solid "#333333"
+exec --no-startup-id xsetroot -solid "#333333"
 
-exec_always --no-startup-id sleep 0.5 && autorandr --change && sleep 0.5 && live_wallpaper -l
-exec_always --no-startup-id sleep 0.5 && autorandr -l ultrawide && sleep 0.5
-exec_always xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
-exec_always compton --active-opacity 0.85 --inactive-opacity 0.85 --opacity-rule "100:class_g = 'cs2'" --opacity-rule "100:class_g = 'csgo_linux64'" --opacity-rule "100:class_g = 'hl_linux'" --opacity-rule "100:class_g = 'steam_app_default'" --opacity-rule "100:class_g = 'Brave-browser'" --opacity-rule "100:class_g = 'feh'" --opacity-rule "100:class_g = 'vlc'" --opacity-rule "100:class_g = 'mpv'" --opacity-rule "100:class_g = 'jellyfin-desktop'"
-exec_always flashfocus
+exec_always --no-startup-id sleep 0.5 && autorandr --change && sleep 0.5 && live_wallpaper -l -t 300
+exec_always --no-startup-id xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
+exec_always --no-startup-id compton --active-opacity 0.85 --inactive-opacity 0.85 --opacity-rule "100:class_g = 'cs2'" --opacity-rule "100:class_g = 'csgo_linux64'" --opacity-rule "100:class_g = 'hl_linux'" --opacity-rule "100:class_g = 'steam_app_default'" --opacity-rule "100:class_g = 'Brave-browser'" --opacity-rule "100:class_g = 'feh'" --opacity-rule "100:class_g = 'vlc'" --opacity-rule "100:class_g = 'mpv'" --opacity-rule "100:class_g = 'jellyfin-desktop'"
+exec_always --no-startup-id flashfocus
 
 set $bg-color            #333333
 set $inactive-bg-color   #333333
@@ -234,9 +233,9 @@ bindsym $mod+u bar mode toggle
 # Show the first scratchpad window
 #bindsym $mod+minus scratchpad show
 
-bindsym $mod+l exec ~/.bin/lock_screen
+bindsym $mod+l exec --no-startup-id ~/.bin/lock_screen
 
-bindsym $mod+Shift+l exec ~/.bin/lock_screen & systemctl suspend
+bindsym $mod+Shift+l exec --no-startup-id ~/.bin/lock_screen & systemctl suspend
 
 bindsym $mod+Shift+a exec xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
 

@@ -2,6 +2,7 @@
 useLast=false
 saveOnly=false
 alwaysRun=false
+timeout=0
 generateThumbnail=true
 setWallpaper=true
 blur=true
@@ -9,7 +10,15 @@ fit='fill'
 thumbnailStorePath="$HOME/.config/wallpaper"
 vidCur="$thumbnailStorePath/current.mp4"
 thumbnailCur="$thumbnailStorePath/current.png"
-blurredThumbnailCur="$thumbnailStorePath/current_blur.png"
+blurredThumbnailCur1="$thumbnailStorePath/current_blur_1.png"
+blurredThumbnailCur2="$thumbnailStorePath/current_blur_2.png"
+blurredThumbnailCur3="$thumbnailStorePath/current_blur_3.png"
+blurredThumbnailCur4="$thumbnailStorePath/current_blur_4.png"
+blurredThumbnailCur5="$thumbnailStorePath/current_blur_5.png"
+blurredThumbnailCur6="$thumbnailStorePath/current_blur_6.png"
+blurredThumbnailCur7="$thumbnailStorePath/current_blur_7.png"
+blurredThumbnailCur8="$thumbnailStorePath/current_blur_8.png"
+blurredThumbnailCur9="$thumbnailStorePath/current_blur_9.png"
 
 isPlaying=false
 
@@ -24,9 +33,13 @@ declare -a IndexMap=(
   [2]="timeStamp"
 )
 
-while getopts ":anwbf:d:lsh" arg; do
+while getopts ":at:nwbf:d:lsh" arg; do
   case "$arg" in
   "a")
+    alwaysRun=true
+    ;;
+  "t")
+    timeout=$OPTARG
     alwaysRun=true
     ;;
   "n")
@@ -103,7 +116,11 @@ play_video() {
   else
     xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file --input-ipc-server="/tmp/mpvsocket$3" --pause --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   fi
+    #xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file=$timeout --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   PIDs+=($!)
+  if [[ $timeout -gt 0 ]]; then
+    (sleep $timeout && kill_xwinwrap) &
+  fi
 }
 
 pause_video() {
@@ -144,14 +161,46 @@ generate_thumbnail_main() {
   if [ "$(check_if_file_exists "$thumbnailCur")" == true ];then
     rm $thumbnailCur
   fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur")" == true ];then
-    rm $blurredThumbnailCur
+  if [ "$(check_if_file_exists "$blurredThumbnailCur1")" == true ];then
+    rm $blurredThumbnailCur1
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur2")" == true ];then
+    rm $blurredThumbnailCur2
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur3")" == true ];then
+    rm $blurredThumbnailCur3
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur4")" == true ];then
+    rm $blurredThumbnailCur4
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur5")" == true ];then
+    rm $blurredThumbnailCur5
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur6")" == true ];then
+    rm $blurredThumbnailCur6
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur7")" == true ];then
+    rm $blurredThumbnailCur7
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur8")" == true ];then
+    rm $blurredThumbnailCur8
+  fi
+  if [ "$(check_if_file_exists "$blurredThumbnailCur9")" == true ];then
+    rm $blurredThumbnailCur9
   fi
 
   generate_thumbnail_if_not_exists "$video" "$timeStamp" "$thumbnailCur"
 
   if [ $blur == true ]; then
-    convert "$thumbnailCur" -blur "$blurGeometry" "$blurredThumbnailCur"
+    convert "$thumbnailCur" -blur "24x24" "$blurredThumbnailCur1"
+    convert "$thumbnailCur" -blur "22x22" "$blurredThumbnailCur2"
+    convert "$thumbnailCur" -blur "20x20" "$blurredThumbnailCur3"
+    convert "$thumbnailCur" -blur "18x18" "$blurredThumbnailCur4"
+    convert "$thumbnailCur" -blur "16x16" "$blurredThumbnailCur5"
+    convert "$thumbnailCur" -blur "14x14" "$blurredThumbnailCur6"
+    convert "$thumbnailCur" -blur "12x12" "$blurredThumbnailCur7"
+    convert "$thumbnailCur" -blur "10x10" "$blurredThumbnailCur8"
+    convert "$thumbnailCur" -blur "8x8" "$blurredThumbnailCur9"
   fi
 }
 
@@ -260,18 +309,12 @@ main() {
   if [ $saveOnly == true ]; then
       i3_restart
   elif [ $alwaysRun != true ]; then
+    sleep 1
     while true; do
+      sleep 1.5
 
       local blockVid=false
-      if pgrep -x "reaper" >> /dev/null
-      then
-          blockVid=true
-      fi
-      if pgrep -x "xsecurelock" >> /dev/null
-      then
-          blockVid=true
-      fi
-      if pgrep -x "wow_era" >> /dev/null
+      if pgrep -x "i3lock" >> /dev/null
       then
           blockVid=true
       fi
@@ -283,7 +326,6 @@ main() {
         pause_video
         isPlaying=false
       fi
-      sleep 1
     done
   fi
 }
