@@ -7,9 +7,11 @@
 # i3 config file (v4)
 exec xsetroot -solid "#333333"
 
-## autorandr then set wallpaper
-exec_always --no-startup-id sleep 1 && autorandr --change && sleep 1 && /home/ole/.config/wallpaper/random.sh
+exec_always --no-startup-id sleep 0.5 && autorandr --change && sleep 0.5 && live_wallpaper -l
+exec_always --no-startup-id sleep 0.5 && autorandr -l ultrawide && sleep 0.5
 exec_always xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
+exec_always compton --active-opacity 0.85 --inactive-opacity 0.85 --opacity-rule "100:class_g = 'cs2'" --opacity-rule "100:class_g = 'csgo_linux64'" --opacity-rule "100:class_g = 'hl_linux'" --opacity-rule "100:class_g = 'steam_app_default'" --opacity-rule "100:class_g = 'Brave-browser'" --opacity-rule "100:class_g = 'feh'" --opacity-rule "100:class_g = 'vlc'" --opacity-rule "100:class_g = 'mpv'" --opacity-rule "100:class_g = 'jellyfin-desktop'"
+exec_always flashfocus
 
 set $bg-color            #333333
 set $inactive-bg-color   #333333
@@ -20,10 +22,10 @@ set $focus-text-color     #87CEEB
 
 set $black       #282828
 set $darkblack   #1d2021
-set $transparent #000000AA
+set $transparent #00000099
 
 smart_gaps on
-gaps inner 1
+gaps inner 0
 gaps outer 0
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
@@ -158,13 +160,10 @@ bindsym $mod+Control+s move workspace to output right
 
 workspace_auto_back_and_forth yes
 
-assign [window_role="browser"] workspace $ws2
-assign [class="jetbrains-idea"] workspace $ws3
-
 # reload the configuration file
 bindsym $mod+Shift+p exec i3-msg reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+y exec i3-msg restart
+bindsym $mod+Shift+y exec i3_restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+period exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -235,11 +234,9 @@ bindsym $mod+u bar mode toggle
 # Show the first scratchpad window
 #bindsym $mod+minus scratchpad show
 
-bindsym $mod+l exec ~/.bin/i3lock.sh
+bindsym $mod+l exec ~/.bin/lock_screen
 
-bindsym $mod+Shift+l exec ~/.bin/i3lock_fork.sh && systemctl suspend
-
-#bindsym $mod+Shift+l exec i3lock -B=10 --insidevercolor=0000a0bf --insidewrongcolor=ff8000bf --insidecolor=010101bf --ringvercolor=0020ffff --ringwrongcolor=4040ffff --ringcolor=404090ff --textcolor=ffffffff --separatorcolor=aaaaaaff --keyhlcolor=30ccccff --bshlcolor=ff8000ff -r --clock --indicator --timecolor=ffffffff --datecolor=ffffffff --datestr="%d.%m.%Y" && systemctl suspend
+bindsym $mod+Shift+l exec ~/.bin/lock_screen & systemctl suspend
 
 bindsym $mod+Shift+a exec xmodmap /home/ole/code/dvorak_ger_io/xmodmap/Xmodmap
 
@@ -300,9 +297,4 @@ for_window [class="(?i)Veracrypt"] floating enable, move position mouse
 for_window [class="(?i)calc"] floating enable, move position mouse
 
 exec --no-startup-id nm-applet
-#exec --no-startup-id pasystray
-#exec --no-startup-id enpass
-#exec --no-startup-id redshift -l 53.55:9.993
-exec picom
-exec --no-startup-id flashfocus
 exec --no-startup-id urxvt -e ~/.bin/linuxunlock

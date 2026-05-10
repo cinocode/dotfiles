@@ -7,8 +7,7 @@ Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
 ! Transparency
-URxvt*.transparent: true
-URxvt*.shading: 20
+URxvt*.transparent: false
 URxvt*.foreground:#e8e9ca
 URxvt*.color0:    #222222
 URxvt*.color1:    #8b3e2f
@@ -55,7 +54,7 @@ URxvt.keysym.C-Minus:   font-size:decrease
 
 URxvt.geometry:60x35
 URxvt.depth:32
-URxvt*background: rgba:1111/1111/1111/cccc
+urxvt*background: rgba:0000/0000/0200/c800
 
 URxvt.inheritPixmap:false
 URxvt.xftAntialias:true

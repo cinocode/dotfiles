@@ -38,9 +38,23 @@ flash-fullscreen: true
 flash-lone-windows: 'always'
 
 rules:
-  - window-id: brave-browser
+  - window-class: Brave-browser
+    default-opacity: 1.0
+  - window-class: feh
     default-opacity: 1.0
   - window-id: cs2
+    default-opacity: 1.0
+  - window-class: csgo_linux64
+    default-opacity: 1.0
+  - window-class: hl_linux
+    default-opacity: 1.0
+  - window-class: steam_app_default
+    default-opacity: 1.0
+  - window-id: mpv
+    default-opacity: 1.0
+  - window-id: vlc
+    default-opacity: 1.0
+  - window-class: jellyfin-desktop
     default-opacity: 1.0
 
 
