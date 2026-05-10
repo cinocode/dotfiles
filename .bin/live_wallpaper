@@ -1,6 +1,8 @@
 #!/bin/bash
+anyOpts=false
 useLast=false
 saveOnly=false
+restartWm=false
 alwaysRun=false
 timeout=0
 generateThumbnail=true
@@ -33,7 +35,7 @@ declare -a IndexMap=(
   [2]="timeStamp"
 )
 
-while getopts ":at:nwbf:d:lsh" arg; do
+while getopts ":at:nwbf:d:lsrh" arg; do
   case "$arg" in
   "a")
     alwaysRun=true
@@ -62,6 +64,9 @@ while getopts ":at:nwbf:d:lsh" arg; do
     ;;
   "s")
     saveOnly=true
+    ;;
+  "r")
+    restartWm=true
     ;;
   "h")
     cat <<EOL
@@ -192,15 +197,15 @@ generate_thumbnail_main() {
   generate_thumbnail_if_not_exists "$video" "$timeStamp" "$thumbnailCur"
 
   if [ $blur == true ]; then
-    convert "$thumbnailCur" -blur "24x24" "$blurredThumbnailCur1"
-    convert "$thumbnailCur" -blur "22x22" "$blurredThumbnailCur2"
-    convert "$thumbnailCur" -blur "20x20" "$blurredThumbnailCur3"
-    convert "$thumbnailCur" -blur "18x18" "$blurredThumbnailCur4"
-    convert "$thumbnailCur" -blur "16x16" "$blurredThumbnailCur5"
-    convert "$thumbnailCur" -blur "14x14" "$blurredThumbnailCur6"
-    convert "$thumbnailCur" -blur "12x12" "$blurredThumbnailCur7"
-    convert "$thumbnailCur" -blur "10x10" "$blurredThumbnailCur8"
-    convert "$thumbnailCur" -blur "8x8" "$blurredThumbnailCur9"
+    convert "$thumbnailCur" -blur "24x24" "$blurredThumbnailCur1" &
+    convert "$thumbnailCur" -blur "22x22" "$blurredThumbnailCur2" &
+    convert "$thumbnailCur" -blur "20x20" "$blurredThumbnailCur3" &
+    convert "$thumbnailCur" -blur "18x18" "$blurredThumbnailCur4" &
+    convert "$thumbnailCur" -blur "16x16" "$blurredThumbnailCur5" &
+    convert "$thumbnailCur" -blur "14x14" "$blurredThumbnailCur6" &
+    convert "$thumbnailCur" -blur "12x12" "$blurredThumbnailCur7" &
+    convert "$thumbnailCur" -blur "10x10" "$blurredThumbnailCur8" &
+    convert "$thumbnailCur" -blur "8x8" "$blurredThumbnailCur9" &
   fi
 }
 
@@ -306,8 +311,11 @@ main() {
     fi
   fi
 
-  if [ $saveOnly == true ]; then
+  if [ $restartWm == true ]; then
       i3_restart
+      exit 0
+  elif [ $saveOnly == true ]; then
+      exit 0
   elif [ $alwaysRun != true ]; then
     sleep 1
     while true; do
