@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+for var in "$@"
+do
+    ORG_FILE="$var"
+
+    if [[ ! -f $ORG_FILE ]]; then
+        echo "no image found"
+        exit 0
+    fi
+
+    if file "$ORG_FILE" | grep -q "JPEG image data"; then
+        echo "jpegoptim --max=85 --strip-all '$ORG_FILE'"
+        jpegoptim --max=85 --strip-all "$ORG_FILE"
+    elif file "$ORG_FILE" | grep -q "PNG image data"; then
+        echo "optipng -o5 '$ORG_FILE'"
+        optipng -o5 "$ORG_FILE"
+    elif file "$ORG_FILE" | grep -q "Web/P image"; then
+        echo "cwebp -q 80 '${ORG_FILE}' -o '${ORG_FILE}'"
+        cwebp -q 80 "${ORG_FILE}" -o "${ORG_FILE}"
+    elif file "$ORG_FILE" | grep -q "MP4 Base Media"; then
+        ffmpeg -i "${ORG_FILE}" -vcodec libx265 -crf 28 -x265-params pools=3 "_${ORG_FILE}"
+    else
+        echo "Unhandled file type: '${ORG_FILE}'"
+    fi
+done

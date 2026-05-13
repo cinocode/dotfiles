@@ -1,1 +1,0 @@
-ffmpeg -i "${1}" -vcodec libx265 -crf 28 -x265-params pools=3 "_${1}"
