@@ -198,7 +198,7 @@ nnoremap <silent> <leader>gn :Ggrep "new <c-r><c-o><c-w>"<cr>
 nnoremap <silent> <leader>gM :Gcommit --amend<cr>
 nnoremap <silent> <leader>gol :diffget //2<cr>:diffu<cr>
 nnoremap <silent> <leader>gor :diffget //3<cr>:diffu<cr>
-nnoremap <silent> <leader>gs :Gstatus<cr>
+nnoremap <silent> <leader>gs :Git<cr>
 nnoremap <silent> <leader>gpl :silent !clear<cr>:Git pull<cr>
 nnoremap <silent> <leader>gps :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gpu :silent !clear<cr>:Git up<cr>
