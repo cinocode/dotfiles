@@ -130,9 +130,18 @@ oc_not_found=$(which oc | grep 'not found')
 if [ -z $oc_not_found ]; then
     source <(oc completion zsh)
 fi
-export PATH="/usr/local/opt/node@16/bin:$PATH"
 
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+#export PATH="/usr/local/opt/node@16/bin:$PATH"
+#export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+#export PATH="/usr/local/opt/python@3.11/bin:$PATH"
+#export PATH="/Users/ole/.pyenv/shims:$PATH"
 
-export PATH="/usr/local/opt/python@3.11/bin:$PATH"
-export PATH="/Users/ole/.pyenv/shims:$PATH"
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/ole/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

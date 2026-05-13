@@ -6,10 +6,9 @@ export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/code/fortis_util/bin
 export PATH=~/.npm-global/bin:$PATH
-export PATH="/usr/local/node@16/bin:$PATH"
-export PATH="/usr/local/node@16/lib/node_modules:$PATH"
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/python@3.11/bin:$PATH"
+#export PATH="/usr/local/node@16/bin:$PATH"
+#export PATH="/usr/local/node@16/lib/node_modules:$PATH"
+export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
