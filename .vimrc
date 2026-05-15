@@ -98,6 +98,12 @@ endif
 let g:ctrlp_custom_ignore = '\v[\/](\.git|gradle|node_modules|bower_components|public|build)$'
 let g:fortune_vimtips_auto_display = 0
 
+function! PreviewMarkdown()
+    let l:path=expand('%:p')
+    silent execute "!echo ".l:path." > /tmp/lastpreview.log"
+    :execute "bel vert terminal"
+endfunction
+
 map <F2> :set nohls<CR>:let @/ = ""<CR>:set hls<CR>
 "nnoremap / /\v
 "cnoremap %s// %s//
@@ -156,7 +162,7 @@ nnoremap <silent> <leader>lf :LocateFile<cr>
 
 nnoremap <silent> <leader>jb :Buffers<cr>
 nnoremap <silent> <leader>jc :JavaSearchContext<cr>
-nnoremap <silent> <leader>jf :%JavaFormat<cr>
+nnoremap <silent> <leader>jf :w<cr>:! vim_format %<cr>
 nnoremap <silent> <leader>jh :JavaCorrect<cr>
 nnoremap <silent> <leader>ji :JavaImportOrganize<cr>
 nnoremap <silent> <leader>jj :w<cr>:JavaImportOrganize<cr>:%JavaFormat<cr>:Validate<cr>:e<cr>
@@ -227,6 +233,8 @@ nnoremap <silent> <leader>sdv :DBExecSQL SHOW CREATE VIEW <c-r><c-w><cr>
 nnoremap <silent> <leader>sp ^v}:DBExecRangeSQL<cr>
 "nnoremap <silent> <leader>sfc :DBCommit<cr>
 "nnoremap <silent> <leader>sfr :DBRollback<cr>
+
+nmap <silent> <leader>md :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
 
 nnoremap <silent> <leader>rh 5<c-w><
 nnoremap <silent> <leader>rl 5<c-w>>

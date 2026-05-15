@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+if [[ -f 'ci/autolint.sh' ]]; then
+  ./ci/autolint.sh $@
+fi
