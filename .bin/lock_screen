@@ -34,7 +34,7 @@ sleep 1.5 && xset dpms 15 30 3600 &
 live_wallpaper -l &
 sleep 0.7
 
-feh -YZxF ~/.config/wallpaper/current_blur_1.png &
+feh --zoom fill -YxF ~/.config/wallpaper/current_blur_1.png &
 echo $! > /tmp/feh.pid
 sleep 0.1
 
@@ -46,7 +46,7 @@ fi
 
 i3lock -n -t -i "$IMAGE"
 
-feh --on-last-slide quit -YZxFND 0.06 ~/.config/wallpaper/current_blur_*.png &
+feh --zoom fill --on-last-slide quit -YxFND 0.06 ~/.config/wallpaper/current_blur_*.png &
 FEHPID=$(cat /tmp/feh.pid)
 (sleep 0.3 && kill $FEHPID) &
 
