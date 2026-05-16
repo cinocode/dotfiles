@@ -14,11 +14,20 @@ if [[ ! -d "$target_dir" ]]; then
   exit 1
 fi
 
+PASTE_PARAM="-"
+BYTE_PARAM="--printf=%s "
+IFS_PARAM=" "
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  PASTE_PARAM="- -"
+  BYTE_PARAM="-f %z"
+  IFS_PARAM="\t"
+fi
+
 # Find all files with their size in bytes, sort ascending, format output
-find "$target_dir" -type f -exec stat -f '%z' {} \; -print | \
-  paste - - | \
+find "$target_dir" -type f -exec stat "${BYTE_PARAM}" {} \; -print | \
+  paste "${PASTE_PARAM}" | \
   sort -n -k1,1 | \
-  while IFS=$'\t' read -r size filepath; do
+  while IFS=$"${IFS_PARAM}" read -r size filepath; do
     if (( size >= 1099511627776 )); then
       formatted=$(printf '%.2fTB' "$(echo "scale=2; $size / 1099511627776" | bc)")
     elif (( size >= 1073741824 )); then
