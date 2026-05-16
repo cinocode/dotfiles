@@ -1,0 +1,13 @@
+unbind common +
+bind common + vol +5%
+unbind common -
+bind common - vol -5%
+set aaa_mode=artist
+set follow=true
+set repeat=true
+set continue=true
+set show_remaining_time=true
+set shuffle=false
+set status_display_program=cmusfm
+set pl_env_vars=MUSIC_DIR
+set mpris=true

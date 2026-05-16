@@ -14,13 +14,19 @@ else
     FROM_DIR="${SOURCE_MUS}${1}/"
     TO_DIR="${TARGET_MUS}${1}/"
 fi
+PL_TARGET="${TO_DIR}/Playlists"
 
 if [[ -d "${FROM_DIR}" && -d "${TO_DIR}" ]]; then
-    #LC_ALL=de_DE.ISO8859-1 rsync -rltDvP --update --delete --inplace --exclude=".*" "${FROM_DIR}" "${TO_DIR}"
+    if [[ -d "${PL_TARGET}" ]]; then
+        rm -rf "${PL_TARGET}"
+    fi
     rsync -rltDvP --update --delete --inplace --exclude=".*" --exclude="/Audiobooks/" "${FROM_DIR}" "${TO_DIR}"
+    cp -r "${CMUS_PL_DIR}" "${PL_TARGET}"
+    find "${PL_TARGET}" -type f -name "*.m3u" -exec sed -i 's/\x1f.*\x1f/../g' '{}' ';'
     rsync -rltDvP --update --delete --inplace --exclude=".*" "${FROM_DIR}Audiobooks/" "${TARGET_AUDIOB}"
 else
     echo "Music dirs not found"
 fi
 
 umountrm "$DROID_DIR"
+
