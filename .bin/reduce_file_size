@@ -8,6 +8,7 @@ do
         exit 0
     fi
 
+    VIDEO_CASE=false
     if file "$ORG_FILE" | grep -q "JPEG image data"; then
         echo "jpegoptim --max=85 --strip-all '$ORG_FILE'"
         jpegoptim --max=85 --strip-all "$ORG_FILE"
@@ -18,8 +19,13 @@ do
         echo "cwebp -q 80 '${ORG_FILE}' -o '${ORG_FILE}'"
         cwebp -q 80 "${ORG_FILE}" -o "${ORG_FILE}"
     elif file "$ORG_FILE" | grep -q "MP4 Base Media"; then
-        ffmpeg -i "${ORG_FILE}" -vcodec libx265 -crf 28 -x265-params pools=3 "_${ORG_FILE}"
+        VIDEO_CASE=true
+    elif file "$ORG_FILE" | grep -q "Apple iTunes Video"; then
+        VIDEO_CASE=true
     else
         echo "Unhandled file type: '${ORG_FILE}'"
+    fi
+    if [[ "${VIDEO_CASE}" = 'true' ]]; then
+        ffmpeg -i "${ORG_FILE}" -vcodec libx265 -crf 28 -x265-params pools=3 "_${ORG_FILE}"
     fi
 done
