@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+if [[ "$1" = "fetch" ]]; then
+  gitup
+fi
+
+check_prs() {
+    cd
+    cd $2
+    if [[ ! -f '.git/config' ]]; then
+        return 0
+    fi
+    if cat '.git/config' | grep -q 'lht-general'; then
+        SEARCH=$(gh pr list --search "$1")
+        if [[ ! -z $SEARCH ]]; then
+            if echo $SEARCH | grep -vq 'no pull_requests match'; then
+                echo "$2"
+                echo "$SEARCH"
+                echo " "
+            fi
+        fi
+    fi
+}
+
+echo 'Open reviews:'
+echo " "
+cd
+for ghdir in $(find code -type d -maxdepth 1 -mindepth 1); do check_prs "review-requested:@me" "${ghdir}"; done
+
+echo 'My PRs:'
+echo " "
+cd
+for ghdir in $(find code -type d -maxdepth 1 -mindepth 1); do check_prs "author:@me" "${ghdir}"; done
