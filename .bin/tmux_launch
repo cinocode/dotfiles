@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set pipefail -eo pipefail
+if pgrep tmux; then
+    tmux attach -t dotfiles
+else
+    w_ssh echo "Unlocked git key"
+    pass -c stardom-world.com
+
+    tmux new-session -d -s background
+    tmux send-keys -t background 'ghsync_d' Enter
+    #tmux new-window -t background
+    #tmux send-keys -t background 'cmuscontrold' Enter
+
+    tmux new-session -d -s notes
+    tmux send-keys -t notes 'vim ~/note/orga/inbox.txt' Enter
+
+    tmux new-session -d -s dotfiles
+    tmux send-keys -t dotfiles 'w_ssh yadm pull' Enter
+
+    tmux attach -t dotfiles
+fi

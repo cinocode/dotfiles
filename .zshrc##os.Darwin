@@ -146,3 +146,6 @@ export PATH="$PATH:/Users/ole/.lmstudio/bin"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+eval "$(zoxide init zsh)"
+tmux_launch && exit
