@@ -132,3 +132,6 @@ oc_not_found=$(which oc | grep 'not found')
 if [ -z $oc_not_found ]; then
     source <(oc completion zsh)
 fi
+
+eval "$(zoxide init zsh)"
+exec tmux_launch
