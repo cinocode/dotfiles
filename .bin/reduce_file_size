@@ -20,6 +20,8 @@ do
         cwebp -q 80 "${ORG_FILE}" -o "${ORG_FILE}"
     elif file "$ORG_FILE" | grep -q "MP4 Base Media"; then
         VIDEO_CASE=true
+    elif file "$ORG_FILE" | grep -q "MP4 v2"; then
+        VIDEO_CASE=true
     elif file "$ORG_FILE" | grep -q "Apple iTunes Video"; then
         VIDEO_CASE=true
     else
