@@ -17,7 +17,7 @@ if [[ $BASE_NAME = 'ole' ]]; then
         tmux send-keys -t notes 'vim ~/note/orga/inbox.txt' Enter
 
         tmux new-session -d -s dotfiles
-        tmux send-keys -t dotfiles 'w_ssh yadm pull && sleep 5' Enter
+        tmux send-keys -t dotfiles 'w_ssh yadm pull' Enter
 
         tmux attach -t dotfiles
     fi
