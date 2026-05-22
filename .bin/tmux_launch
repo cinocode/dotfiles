@@ -10,8 +10,7 @@ if [[ $BASE_NAME = 'ole' ]]; then
 
         tmux new-session -d -s background
         tmux send-keys -t background 'ghsync_d' Enter
-        #tmux new-window -t background
-        #tmux send-keys -t background 'cmuscontrold' Enter
+        tmux split-window -h -t background 'cmuscontrold'
 
         tmux new-session -d -s notes
         tmux send-keys -t notes 'vim ~/note/orga/inbox.txt' Enter
