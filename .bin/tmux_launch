@@ -21,4 +21,6 @@ if [[ $BASE_NAME = 'ole' ]]; then
 
         tmux attach -t dotfiles
     fi
+else
+    tmux new-session -A -s "${BASE_NAME}" -c "$(pwd)"
 fi
