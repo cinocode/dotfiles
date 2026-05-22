@@ -15,6 +15,7 @@ alias passv="PASSWORD_STORE_DIR=~/code/.vipappspass pass"
 
 alias cat=bat
 
+alias cd="z"
 alias r="ranger $@"
 alias rc="ranger ~/code"
 alias rd="ranger ~/down"
