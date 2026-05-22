@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
+
 set -eo pipefail
-BASE_NAME=$(basename $(pwd))
+
+CUR_DIR=$(pwd)
+BASE_NAME=$(basename "${CUR_DIR}")
+
 if [[ $BASE_NAME = 'ole' ]]; then
     if pgrep tmux; then
-        tmux attach -t dotfiles
+        tmux attach -t dotfiles || tmux att
     else
         w_ssh echo "Unlocked git key"
         pass -c stardom-world.com
 
         tmux new-session -d -s background
         tmux send-keys -t background 'ghsync_d' Enter
-        tmux split-window -h -t background 'cmuscontrold'
+        if [[ $(which cmuscontrold >/dev/null 2>&1) ]]; then
+            tmux split-window -h -t background 'cmuscontrold'
+        fi
 
         tmux new-session -d -s notes
         tmux send-keys -t notes 'vim ~/note/orga/inbox.txt' Enter
