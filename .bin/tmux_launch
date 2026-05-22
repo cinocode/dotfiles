@@ -18,6 +18,8 @@ if [[ $BASE_NAME = 'ole' ]]; then
         tmux new-session -d -s dotfiles
         tmux send-keys -t dotfiles 'w_ssh yadm pull' Enter
 
+        tmux new-session -d -s cmus
+
         tmux attach -t dotfiles
     fi
 else
