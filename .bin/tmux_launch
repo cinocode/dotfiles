@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-set pipefail -eo pipefail
-if [[ -z $TMUX ]]; then
+set -eo pipefail
+BASE_NAME=$(basename $(pwd))
+if [[ $BASE_NAME = 'ole' ]]; then
     if pgrep tmux; then
         tmux attach -t dotfiles
     else

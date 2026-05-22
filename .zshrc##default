@@ -134,4 +134,6 @@ if [ -z $oc_not_found ]; then
 fi
 
 eval "$(zoxide init zsh)"
-exec tmux_launch
+if [[ -z $TMUX ]]; then
+    exec tmux_launch
+fi

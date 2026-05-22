@@ -148,4 +148,6 @@ export PATH="$PATH:/Users/ole/.lmstudio/bin"
 source <(ng completion script)
 
 eval "$(zoxide init zsh)"
-tmux_launch && exit
+if [[ -z $TMUX ]]; then
+    exec tmux_launch
+fi
