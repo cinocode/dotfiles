@@ -6,6 +6,7 @@ source $(brew --prefix nvm)/nvm.sh
 
 export EDITOR=/usr/bin/vim
 export ZSH="/opt/oh-my-zsh"
+export ZSH_TMUX_FIXTERM=true
 ZSH_THEME="kolo_custom"
 DISABLE_AUTO_UPDATE="true"
 source ${ZSH}/oh-my-zsh.sh
