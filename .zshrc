@@ -100,3 +100,5 @@ eval "$(zoxide init zsh)"
 if [[ -z $TMUX ]]; then
     exec tmux_launch
 fi
+
+source ~/.bin/id_keychain.sh
