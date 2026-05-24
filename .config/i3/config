@@ -296,4 +296,3 @@ for_window [class="(?i)Veracrypt"] floating enable, move position mouse
 for_window [class="(?i)calc"] floating enable, move position mouse
 
 exec --no-startup-id nm-applet
-exec --no-startup-id urxvt -e ~/.bin/linuxunlock
