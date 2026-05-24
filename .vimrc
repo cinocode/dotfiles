@@ -1,20 +1,5 @@
-if has("unix")
-	if filereadable(fnamemodify(expand("~"), ':p') . '/.local.vim')
-		so ~/.local.vim
-	endif
-
-	set backupdir=~/.vim/backup/
-	set directory=~/.vim/backup/
-else
-	if filereadable(fnamemodify(expand("~"), ':p') . '/.local.vim')
-		so ~\.local.vim
-	endif
-
-	set backupdir=~\vimfiles\backup\
-	set directory=~\vimfiles\backup\
-	autocmd GUIEnter * cd ~
-
-endif
+set backupdir=~/.vim/backup/
+set directory=~/.vim/backup/
 
 set encoding=utf-8
 setglobal fileencoding=utf-8
@@ -72,7 +57,7 @@ if has("gui_running")
 		set guifont=Consolas:h11:cANSI
 	endif
 elseif has('nvim')
-    colorscheme tokyonight-moon
+	colorscheme tokyonight-moon
 else
 	set background=dark
 	colorscheme base16-default-dark

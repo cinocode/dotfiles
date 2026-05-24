@@ -28,6 +28,8 @@ bindkey "^[[1;5D" backward-word
 alias passv="PASSWORD_STORE_DIR=~/code/.vipappspass pass"
 
 alias cat=bat
+alias vi="/usr/bin/env vi"
+alias vim=nvim
 
 alias cd="z"
 alias r="ranger $@"
