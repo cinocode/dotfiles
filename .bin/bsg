@@ -2,7 +2,10 @@
 
 if [[ ! -z $1 && $1 != "force" ]]; then
     TOKEN="$1"
+elif [[ -f ~/.block_pass ]]; then
+    exit 0
 fi
+
 if [[ -z $2 ]]; then
     WARN_SCRIPT=~/.bin/ak_diab.sh
 else

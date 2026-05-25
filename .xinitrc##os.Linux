@@ -1,1 +1,2 @@
+touch ~/.block_pass
 exec i3

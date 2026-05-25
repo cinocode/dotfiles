@@ -11,6 +11,9 @@ if [[ $BASE_NAME = 'ole' ]]; then
     else
         w_ssh echo "Unlocked git key"
         pass -c stardom-world.com
+        if [[ -f ~/.block_pass ]]; then
+            rm ~/.block_pass
+        fi
 
         tmux new-session -d -s background
         tmux send-keys -t background 'ghsync_d' Enter
