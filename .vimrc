@@ -168,7 +168,7 @@ nnoremap <silent> <leader>jv :Validate<cr>
 nnoremap <silent> <leader>jx :Java<cr>
 " ^ also need refreshproj buildproj :Java
 
-nnoremap <silent> <leader>ga :Git add %<cr>
+nnoremap <silent> <leader>ga :Gwrite<cr>
 nnoremap <silent> <leader>gA :Git add .<cr>
 nnoremap <silent> <leader>gb :Gblame<cr>
 nnoremap <silent> <leader>gd :Gvdiff<cr>
