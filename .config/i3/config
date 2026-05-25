@@ -61,7 +61,7 @@ bindsym Print exec screenshot
 
 # start dmenu (a program launcher)
 #bindsym $mod+e exec dmenu_run
-bindsym $mod+e exec rofi -show run -lines 5 -eh 1 -width 30 -padding 30 -opacity "75" -bw 0 -bc $bg-color -bg $bg-color -fg $text-color -hlbg $bg-color -hlfg #9575cd -font "System San Francisco Display 10"
+bindsym $mod+e exec rofi -no-config -no-lazy-grab -show run -modi run -theme ~/.config/wofi/launcher.rasi
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
