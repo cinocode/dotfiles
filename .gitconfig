@@ -39,3 +39,5 @@
   ff = only
 [init]
   defaultBranch = main
+[advice]
+  skippedCherryPicks = false
