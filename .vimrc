@@ -174,8 +174,8 @@ nnoremap <silent> <leader>gA :Gwrite<cr>:Git commit<cr>
 nnoremap <silent> <leader>gb :Git blame<cr>
 nnoremap <silent> <leader>gc :Git commit<cr>
 nnoremap <silent> <leader>gC :Git commit --amend<cr>
-nnoremap <silent> <leader>gd :Gvdiffsplit<cr>
-nnoremap <silent> <leader>gD :Ghdiffsplit<cr>
+nnoremap <silent> <leader>gd :Ghdiffsplit<cr>
+nnoremap <silent> <leader>gD :Gvdiffsplit<cr>
 nnoremap <silent> <leader>gx :Gread<cr>
 nnoremap <silent> <leader>gX :Gdelete<cr>
 nnoremap <silent> <leader>gf :silent !clear<cr>:Git fetch<cr>
