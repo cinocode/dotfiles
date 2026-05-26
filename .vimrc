@@ -168,39 +168,29 @@ nnoremap <silent> <leader>jv :Validate<cr>
 nnoremap <silent> <leader>jx :Java<cr>
 " ^ also need refreshproj buildproj :Java
 
-nnoremap <silent> <leader>ga :Gwrite<cr>
-nnoremap <silent> <leader>gA :Git add .<cr>
-nnoremap <silent> <leader>gb :Gblame<cr>
-nnoremap <silent> <leader>gd :Gvdiff<cr>
-nnoremap <silent> <leader>gc :Gcommit<cr>
-nnoremap <silent> <leader>gC :Gwrite<cr>:Gcommit<cr>
-nnoremap <silent> <leader>ge :Gedit<cr>:e<cr>
-nnoremap <silent> <leader>gf :silent !clear<cr>:Git fetch<cr>
-nnoremap <silent> <leader>gg :Gedit<cr>:only<cr>:e<cr>
-nnoremap <silent> <leader>gffs :silent !clear<cr>:exec ":Git flow feature start ".input("Feature to start:")<cr>
-nnoremap <silent> <leader>gfff :silent !clear<cr>:exec ":Git flow feature finish ".input("Feature to finish:")<cr>
-nnoremap <silent> <leader>gfrs :silent !clear<cr>:exec ":Git flow release start ".input("Release to start:")<cr>
-nnoremap <silent> <leader>gfrf :silent !clear<cr>:exec ":Git flow release finish ".input("Release to finish:")<cr>
-nnoremap <silent> <leader>gfhs :silent !clear<cr>:exec ":Git flow hotfix start ".input("Hotfix to start:")<cr>
-nnoremap <silent> <leader>gfhf :silent !clear<cr>:exec ":Git flow hotfix finish ".input("Hotfix to finish:")<cr>
-nnoremap <silent> <leader>gh :Glog --<cr>
-nnoremap <silent> <leader>gi :Ggrep "instanceof <c-r><c-o><c-w>"<cr>
-nnoremap <silent> <leader>gl :Glog<cr>
-nnoremap <silent> <leader>gn :Ggrep "new <c-r><c-o><c-w>"<cr>
-nnoremap <silent> <leader>gM :Gcommit --amend<cr>
-nnoremap <silent> <leader>gol :diffget //2<cr>:diffu<cr>
-nnoremap <silent> <leader>gor :diffget //3<cr>:diffu<cr>
 nnoremap <silent> <leader>gs :Git<cr>
-nnoremap <silent> <leader>gpl :silent !clear<cr>:Git pull<cr>
-nnoremap <silent> <leader>gps :silent !clear<cr>:Git push<cr>
-nnoremap <silent> <leader>gpu :silent !clear<cr>:Git up<cr>
-nnoremap <silent> <leader>gr :silent !clear<cr>:exec ":Git rebase -i HEAD~".input("How many commits to rebase:")<cr>
-nnoremap <silent> <leader>gR :silent !clear<cr>:Git rebase --continue<cr>
-nnoremap <silent> <leader>gu :silent !clear<cr>:exec ":Git checkout ".input("Branch:")<cr>
-"nnoremap <silent> <leader>gz :silent !clear<cr>:Git lon<cr>
-"nnoremap <silent> <leader>gz :silent !clear<cr>:!start "C:\Program Files\ConEmu\ConEmu.exe" /cmd -new_console git lg<cr>
+nnoremap <silent> <leader>ga :Gwrite<cr>
+nnoremap <silent> <leader>gA :Gwrite<cr>:Git commit<cr>
+nnoremap <silent> <leader>gb :Git blame<cr>
+nnoremap <silent> <leader>gc :Git commit<cr>
+nnoremap <silent> <leader>gC :Git commit --amend<cr>
+nnoremap <silent> <leader>gd :Gvdiffsplit<cr>
+nnoremap <silent> <leader>gD :Ghdiffsplit<cr>
+nnoremap <silent> <leader>gx :Gread<cr>
+nnoremap <silent> <leader>gX :Gdelete<cr>
+nnoremap <silent> <leader>gf :silent !clear<cr>:Git fetch<cr>
+nnoremap <silent> <leader>gr :Git rebase
+nnoremap <silent> <leader>gi :silent !clear<cr>:exec ":Git rebase -i HEAD~".input("How many commits to rebase:")<cr>
+nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
+nnoremap <silent> <leader>gm :Git merge --no-ff
+nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
+nnoremap <silent> <leader>gl :Git lol<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
+
+nnoremap <silent> <leader>ol :Octo pr list<cr>
+nnoremap <silent> <leader>or :Octo review<cr>
+nnoremap <silent> <leader>os :Octo review submit<cr>
 
 nnoremap <silent> <leader>nb :NERDTree C:\Users\Public\Documents\dev\code\basta\php\basta<cr>
 nnoremap <silent> <leader>nc :NERDTree C:\Users\Public\Documents\dev\code<cr>

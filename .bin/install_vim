@@ -186,3 +186,36 @@ else
     cd "${NVIM_BUNDLES}"
     git clone https://github.com/purarue/yadm-git.vim.git
 fi
+
+if [[ -d "${NVIM_BUNDLES}/octo.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/octo.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/pwntester/octo.nvim.git
+fi
+
+if [[ -d "${NVIM_BUNDLES}/plenary.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/plenary.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/nvim-lua/plenary.nvim.git
+fi
+
+if [[ -d "${NVIM_BUNDLES}/fzf-lua" ]]; then
+    cd "${NVIM_BUNDLES}/fzf-lua"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/ibhagwan/fzf-lua.git
+fi
+
+
+if [[ -d "${NVIM_BUNDLES}/nvim-web-devicons" ]]; then
+    cd "${NVIM_BUNDLES}/nvim-web-devicons"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/nvim-tree/nvim-web-devicons.git
+fi
