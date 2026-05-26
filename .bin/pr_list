@@ -23,10 +23,8 @@ check_prs() {
 
 echo 'Open reviews:'
 echo " "
-cd
-for ghdir in $(find code -type d -maxdepth 1 -mindepth 1); do check_prs "review-requested:@me" "${ghdir}"; done
+for ghdir in $(gitup -l | tail -n +4); do check_prs "review-requested:@me" "${ghdir}"; done
 
 echo 'My PRs:'
 echo " "
-cd
-for ghdir in $(find code -type d -maxdepth 1 -mindepth 1); do check_prs "author:@me" "${ghdir}"; done
+for ghdir in $(gitup -l | tail -n +4); do check_prs "author:@me" "${ghdir}"; done
