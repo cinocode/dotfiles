@@ -13,7 +13,7 @@
 [push]
   default = current
 [alias]
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit --all --max-count=20
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit --all --max-count=40
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=20
   ln = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all --max-count=40
   lm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
