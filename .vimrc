@@ -57,7 +57,7 @@ if has("gui_running")
 		set guifont=Consolas:h11:cANSI
 	endif
 elseif has('nvim')
-	colorscheme tokyonight-moon
+	colorscheme tokyonight-night
 else
 	set background=dark
 	colorscheme base16-default-dark
