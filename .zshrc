@@ -69,6 +69,8 @@ alias mpv="mpv --sid=no"
 alias raspi='source ~/.bin/id_keychain.sh && ssh pi@192.168.1.181'
 alias ssh_media='source ~/.bin/id_keychain.sh && ssh ole@192.168.1.172'
 
+alias jobsk='kill -KILL ${${(v)jobstates##*:*:}%=*}'
+
 export TERM=screen-256color
 setopt autocd # assume "cd" when a command is a directory
 
