@@ -6,32 +6,28 @@ Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-! Black colours
+*foreground: #a9b1d6
+*background: #1a1b26
+*cursorColor: #a9b1d6
+*highlightColor:#3A3F4B
+*color0: #1a1b26
+*color8: #4e5173
+*color1: #F7768E
+*color9: #F7768E
+*color2: #9ECE6A
+*color10: #9ECE6A
+*color3: #E0AF68
+*color11: #E0AF68
+*color4: #7AA2F7
+*color12: #7AA2F7
+*color5: #9a7ecc
+*color13: #9a7ecc
+*color6: #4abaaf
+*color14: #4abaaf
+*color7: #acb0d0
+*color15: #acb0d0
 
-! Transparency
 URxvt*.transparent: false
-URxvt*.foreground:    #A9B1D6
-URxvt*.background:    #1A1B26
-URxvt*.cursorColor:   #A9B1D6
-URxvt*.highlightColor:#3A3F4B
-URxvt*.color0:        #1A1B26
-URxvt*.color1:        #F7768E
-URxvt*.color2:        #E0AF68
-URxvt*.color3:        #9ECE6A
-URxvt*.color4:        #7AA2F7
-URxvt*.color5:        #9A7ECC
-URxvt*.color6:        #4ABAAF
-URxvt*.color7:        #ACB0D0
-URxvt*.color8:        #4E5173
-URxvt*.color9:        #E06C75
-URxvt*.color10:       #D19A66
-URxvt*.color11:       #98C379
-URxvt*.color12:       #61AFEF
-URxvt*.color13:       #C678DD
-URxvt*.color14:       #56B6C2
-URxvt*.color15:       #ABB2BF
-
-! ! Misc plugin junk
 URxvt*.scrollBar: false
 URxvt*.perl-ext-common:  default,matcher,vtwheel,clipboard,selection-to-clipboard,fullscreen,font-size
 URxvt.clipboard.autocopy: true
@@ -63,7 +59,7 @@ urxvt*background: rgba:0000/0000/0200/c800
 
 URxvt.inheritPixmap:false
 URxvt.xftAntialias:true
-URxvt.termName:rxvt
+URxvt.termName:rxvt-256color
 
 rofi.color-enabled: true
 rofi.color-window: #393939, #393939, #268bd2
