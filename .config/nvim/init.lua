@@ -9,6 +9,17 @@ require("octo").setup({
   default_remote = { "origin" }, -- order to try remotes
   default_delete_branch = true, -- whether to delete branch when merging pull request with either `Octo pr merge` or from picker (can be overridden with `delete`/`nodelete` argument to `Octo pr merge`)
   mappings = {
+    pull_request = {
+      add_comment = { lhs = "<C-c>", desc = "add comment" },
+      add_reply = { lhs = "<C-r>", desc = "add reply" },
+    },
+    review_thread = {
+      add_comment = { lhs = "<C-c>", desc = "add comment" },
+      add_reply = { lhs = "<C-r>", desc = "add reply" },
+    },
+    review_diff = {
+      add_review_comment = { lhs = "<C-c>", desc = "add a new review comment", mode = { "n", "x" } },
+    },
     notification = {
       read = { lhs = "<C-m>", desc = "mark notification as read" },
       done = { lhs = "<C-d>", desc = "mark notification as done" },
