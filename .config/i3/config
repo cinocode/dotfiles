@@ -5,6 +5,7 @@
 #
 
 # i3 config file (v4)
+exec --no-startup-id touch ~/.block_pass
 exec --no-startup-id xsetroot -solid "#333333"
 
 exec_always --no-startup-id sleep 0.5 && autorandr --change && sleep 0.5 && live_wallpaper -l -t 300
