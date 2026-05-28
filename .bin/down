@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+if [[ ! -z $1 && ("$1" = 'all' || "$1" = "mvn" ) ]]; then
+    if [[ -f ".dev/pomxml" ]]; then
+        rm .dev/pomxml
+    fi
+    mvn clean
+fi
+
+
+if [[ ! -z $1 && ("$1" = 'all' || "$1" = "npm" ) ]]; then
+    if [[ -f ".dev/pkgjson" ]]; then
+        rm .dev/pkgjson
+    fi
+    if [[ -d "src/main/frontend/node_modules" ]]; then
+        rm -rf "src/main/frontend/node_modules"
+        mkdir "src/main/frontend/node_modules"
+    fi
+fi
+
+if [[ ! -z $1 && ("$1" = 'all' || "$1" = "docker" ) ]]; then
+    docker-compose down
+else
+    docker-compose stop
+fi

@@ -2,7 +2,74 @@
 
 set -eo pipefail
 
-mvn -T 1.1C clean package
-docker-compose up -d
-nf ci
-start $@
+mkdir -p .dev
+
+SKIP_BUILD="false"
+if [[ -f "pom.xml" ]]; then
+    POMSUM=$(sha1 -q "pom.xml")
+    if [[ -f ".dev/pomxml" ]]; then
+        LASTSUM=$(cat ".dev/pomxml")
+        if [[ "$POMSUM" = "$LASTSUM" ]]; then
+            SKIP_BUILD="true"
+        fi
+    fi
+fi
+
+SKIP_PKG="false"
+if [[ -f "src/main/frontend/package.json" ]]; then
+    PKGSUM=$(sha1 -q "src/main/frontend/package.json")
+    if [[ -f ".dev/pkgjson" ]]; then
+        LASTSUM=$(cat ".dev/pkgjson")
+        if [[ "$PKGSUM" = "$LASTSUM" ]]; then
+            SKIP_PKG="true"
+        fi
+    fi
+fi
+
+if [[ "$SKIP_BUILD" != "true" ]]; then
+    mvn -T 1.1C clean package
+
+    echo "$POMSUM" > ".dev/pomxml"
+fi
+
+if [[ -f docker-compose.yml && -z "$(docker-compose ps --services --filter 'status=running')" ]]; then
+    docker-compose up -d
+
+    sleep 2
+    DOCKERPS="$(docker ps)"
+    if echo "$DOCKERPS" | grep 'seconds ago' | grep 'Up' | grep -q 'seconds'; then
+        if cat "pom.xml" | grep -q 'coversheet'; then
+            sleep 30
+        else
+            sleep 1
+        fi
+    elif echo "$DOCKERPS" | grep 'Up' | grep -q 'seconds'; then
+        if [[ "$SKIP_PKG" = "true" ]]; then
+            if cat "pom.xml" | grep -q 'coversheet'; then
+                sleep 5
+            else
+                sleep 1
+            fi
+        fi
+    fi
+fi
+
+if [[ "$SKIP_PKG" != "true" ]]; then
+    nf ci
+    echo "$PKGSUM" > ".dev/pkgjson"
+fi
+
+ENV_ARGS="."
+if [[ ! -z $1 ]]; then
+  ENV_ARGS="$1"
+fi
+
+trap "kill 0" EXIT
+
+nf run-script start &
+feId=$!
+(source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
+
+wait
+
+kill $feId

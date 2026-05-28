@@ -44,8 +44,6 @@ alias mt="mvn test"
 alias mcp="mvn -T 1.1C clean package -Dmaven.test.skip=true"
 alias mcpt="mvn -T 1.1C clean package"
 
-alias build="nf ci && mcpt && docker-compose up -d"
-alias down="docker-compose down && mvn clean"
 alias jobsk='kill -KILL ${${(v)jobstates##*:*:}%=*}'
 
 alias n='vim ~/note/orga/inbox.txt'

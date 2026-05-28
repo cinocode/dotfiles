@@ -47,6 +47,7 @@ gradlew.bat
 #ignore intellij
 *.iml
 scratch.sql
+.dev/
 
 *oh_custom_ignore*
 .zextract/
