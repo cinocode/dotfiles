@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+mvn -T 1.1C clean package
+docker-compose up -d
+nf ci
+start $@

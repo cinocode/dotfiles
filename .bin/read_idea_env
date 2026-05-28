@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+target="$1"
+if [[ -f "$target" ]]; then
+  xml_file="$target"
+else
+  xml_file="$target/.idea/runConfigurations/run__local_.xml"
+fi
+
+if [[ ! -f "$xml_file" ]]; then
+  echo "Error: run configuration file not found at $xml_file" >&2
+  exit 1
+fi
+
+# Export every <env name="..." value="..." /> entry
+while IFS= read -r line; do
+  raw_name="$(echo "$line" | sed -e 's/.*name="\([^"]*\)".*/\1/')"
+  value="$(echo "$line" | sed -e 's/.*value="\([^"]*\)".*/\1/')"
+
+  # Replace IntelliJ $USER_HOME$ macro with the real home directory
+  value="${value//\$USER_HOME\$/${HOME}}"
+
+  # Sanitize name: replace characters invalid for shell identifiers with underscores
+  safe_name="$(echo "$raw_name" | sed -e 's/[^a-zA-Z0-9_]/_/g')"
+
+  export "$safe_name=$value"
+done < <(grep '<env ' "$xml_file")
+
+# Export ACTIVE_PROFILES as SPRING_PROFILES_ACTIVE
+profiles="$(grep 'ACTIVE_PROFILES' "$xml_file" | sed -e 's/.*value="\([^"]*\)".*/\1/')"
+if [[ -n "$profiles" ]]; then
+  export SPRING_PROFILES_ACTIVE="$profiles"
+fi

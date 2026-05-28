@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+ENV_ARGS="."
+if [[ ! -z $1 ]]; then
+  ENV_ARGS="$1"
+fi
+
+if [[ -f docker-compose.yml ]]; then
+  docker-compose up -d
+fi
+
+trap "kill 0" EXIT
+
+nf run-script start &
+feId=$!
+(source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
+beId=$!
+
+wait
+
+kill $feId
+kill $beId

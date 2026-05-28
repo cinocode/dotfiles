@@ -40,10 +40,13 @@ alias rp="ranger ~/pic"
 alias rv="ranger ~/vid"
 
 alias cl="source ~/.bin/codelist $@"
+alias mt="mvn test"
 alias mcp="mvn -T 1.1C clean package -Dmaven.test.skip=true"
-alias msb="mvn -T 1.1C spring-boot:run"
-alias mct="mvn test"
 alias mcpt="mvn -T 1.1C clean package"
+
+alias build="nf ci && mcpt && docker-compose up -d"
+alias down="docker-compose down && mvn clean"
+alias jobsk='kill -KILL ${${(v)jobstates##*:*:}%=*}'
 
 alias n='vim ~/note/orga/inbox.txt'
 alias t="trash-put $@"
@@ -51,11 +54,6 @@ alias t="trash-put $@"
 alias tscs="TS_NODE_COMPILER_OPTIONS='{\"strict\": true}' ts-node"
 alias tscl="ts-node"
 alias ktl="kotlinc-jvm -Djava.awt.headless=false"
-
-alias dcu="sudo docker-compose up -d"
-alias dcfu="docker_fresh && sudo docker-compose up -d"
-alias dcd="sudo docker-compose down"
-alias dcr="sudo docker-compose down && sudo docker-compose up -d"
 
 alias ktformat='ktlint -F "src/**/*.kt"'
 alias ktpr='pretty && ktformat'
@@ -68,8 +66,6 @@ alias mpv="mpv --sid=no"
 
 alias raspi='source ~/.bin/id_keychain.sh && ssh pi@192.168.1.181'
 alias ssh_media='source ~/.bin/id_keychain.sh && ssh ole@192.168.1.172'
-
-alias jobsk='kill -KILL ${${(v)jobstates##*:*:}%=*}'
 
 export TERM=screen-256color
 setopt autocd # assume "cd" when a command is a directory
