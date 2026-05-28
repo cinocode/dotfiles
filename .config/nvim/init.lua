@@ -26,4 +26,10 @@ require("octo").setup({
       unsubscribe = { lhs = "<C-u>", desc = "unsubscribe from notifications" },
     },
   },
+  poll = {
+    enabled = true,            -- opt-in polling for remote changes
+    interval = 15000,          -- polling interval in milliseconds (default: 10s)
+    notify_on_refresh = false, -- notify when a buffer is auto-refreshed
+    notify_on_change = true,   -- notify when remote changed but buffer has local edits
+  },
 })
