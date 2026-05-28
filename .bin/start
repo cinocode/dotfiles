@@ -16,9 +16,7 @@ trap "kill 0" EXIT
 nf run-script start &
 feId=$!
 (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
-beId=$!
 
 wait
 
 kill $feId
-kill $beId
