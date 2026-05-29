@@ -1,2 +1,6 @@
 #!/bin/bash
-find "$1" -type f -exec md5sum '{}' ';' | sort | uniq --all-repeated=separate -w 15 >> ~/find_dupes.sh
+if [[ -z $2 ]]; then
+    find "$1" -type f -exec md5sum '{}' ';' | sort | uniq --all-repeated=separate -w 15 >> ~/find_dupes.sh
+else
+    find $@ -type f -exec md5sum '{}' ';' | sort | uniq --all-repeated=separate -w 15 >> ~/find_dupes.sh
+fi
