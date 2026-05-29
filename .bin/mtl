@@ -1,0 +1,6 @@
+#!/bin/bash
+while true
+do
+    mt $@ || sleep 7
+    sleep 3
+done

@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ -z $1 ]]; then
+    mvn test
+else
+    mvn test -Dtest="$1"
+fi
