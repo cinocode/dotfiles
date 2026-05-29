@@ -22,7 +22,7 @@ elif [[ -f "package.json" ]]; then
     PKGJSON="package.json"
 fi
 if [[ ! -z "${PKGJSON}" ]]; then
-    PKGSUM="$(sha1 -q ${PKGJSON})$(git rev-parse HEAD)"
+    PKGSUM="$(sha1 -q ${PKGJSON})"
     if [[ -f ".dev/pkgjson" ]]; then
         LASTSUM=$(cat ".dev/pkgjson")
         if [[ "$PKGSUM" = "$LASTSUM" ]]; then
