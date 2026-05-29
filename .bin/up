@@ -6,7 +6,7 @@ mkdir -p .dev
 
 SKIP_BUILD="false"
 if [[ -f "pom.xml" ]]; then
-    POMSUM=$(sha1 -q "pom.xml")
+    POMSUM="$(sha1 -q pom.xml)$(git rev-parse HEAD)"
     if [[ -f ".dev/pomxml" ]]; then
         LASTSUM=$(cat ".dev/pomxml")
         if [[ "$POMSUM" = "$LASTSUM" ]]; then
@@ -17,7 +17,12 @@ fi
 
 SKIP_PKG="false"
 if [[ -f "src/main/frontend/package.json" ]]; then
-    PKGSUM=$(sha1 -q "src/main/frontend/package.json")
+    PKGJSON="src/main/frontend/package.json"
+elif [[ -f "package.json" ]]; then
+    PKGJSON="package.json"
+fi
+if [[ ! -z "${PKGJSON}" ]]; then
+    PKGSUM="$(sha1 -q ${PKGJSON})$(git rev-parse HEAD)"
     if [[ -f ".dev/pkgjson" ]]; then
         LASTSUM=$(cat ".dev/pkgjson")
         if [[ "$PKGSUM" = "$LASTSUM" ]]; then
@@ -64,12 +69,17 @@ if [[ ! -z $1 ]]; then
   ENV_ARGS="$1"
 fi
 
-trap "kill 0" EXIT
+cleanupRun() {
+    kill $feId
+    kill $beId
+    docker-compose stop
+}
+
+trap "cleanupRun" EXIT
 
 nf run-script start &
 feId=$!
 (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
+beId=$!
 
 wait
-
-kill $feId

@@ -9,7 +9,6 @@ if [[ ! -z $1 && ("$1" = 'all' || "$1" = "mvn" ) ]]; then
     mvn clean
 fi
 
-
 if [[ ! -z $1 && ("$1" = 'all' || "$1" = "npm" ) ]]; then
     if [[ -f ".dev/pkgjson" ]]; then
         rm .dev/pkgjson
@@ -22,6 +21,6 @@ fi
 
 if [[ ! -z $1 && ("$1" = 'all' || "$1" = "docker" ) ]]; then
     docker-compose down
-else
+elif [[ -f docker-compose.yml && ! -z "$(docker-compose ps --services --filter 'status=running')" ]]; then
     docker-compose stop
 fi

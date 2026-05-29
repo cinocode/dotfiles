@@ -43,6 +43,8 @@ alias cl="source ~/.bin/codelist $@"
 alias mt="mvn test"
 alias mcp="mvn -T 1.1C clean package -Dmaven.test.skip=true"
 alias mcpt="mvn -T 1.1C clean package"
+alias doup="docker-compose up -d"
+alias dodown="docker-compose down"
 
 alias jobsk='kill -KILL ${${(v)jobstates##*:*:}%=*}'
 
