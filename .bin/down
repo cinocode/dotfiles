@@ -2,12 +2,10 @@
 
 set -eo pipefail
 
-if [[ ! -z $1 && ("$1" = 'all' || "$1" = "mvn" ) ]]; then
-    if [[ -f ".dev/pomxml" ]]; then
-        rm .dev/pomxml
-    fi
-    mvn clean
+if [[ -f ".dev/pomxml" ]]; then
+    rm .dev/pomxml
 fi
+mvn clean
 
 if [[ ! -z $1 && ("$1" = 'all' || "$1" = "npm" ) ]]; then
     if [[ -f ".dev/pkgjson" ]]; then
