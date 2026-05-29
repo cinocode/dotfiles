@@ -179,11 +179,13 @@ nnoremap <silent> <leader>gD :Gvdiffsplit<cr>
 nnoremap <silent> <leader>gx :Gread<cr>
 nnoremap <silent> <leader>gX :Gdelete<cr>
 nnoremap <silent> <leader>gf :silent !clear<cr>:Git fetch<cr>
+nnoremap <silent> <leader>gF :silent !clear<cr>:Git pull<cr>
 nnoremap <silent> <leader>gr :Git rebase
 nnoremap <silent> <leader>gi :silent !clear<cr>:exec ":Git rebase -i HEAD~".input("How many commits to rebase:")<cr>
 nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
+nnoremap <silent> <leader>gP :Git push
 nnoremap <silent> <leader>gl :Git lol<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
