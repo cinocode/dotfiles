@@ -169,6 +169,15 @@ else
 fi
 ln -sf "${VIM_BUNDLES}/typescript" "${NVIM_BUNDLES}/typescript"
 
+if [[ -d "${VIM_BUNDLES}/vim-tmux-navigator" ]]; then
+    cd "${VIM_BUNDLES}/vim-tmux-navigator"
+    git pull
+else
+    cd "${VIM_BUNDLES}"
+    git clone https://github.com/christoomey/vim-tmux-navigator.git
+fi
+ln -sf "${VIM_BUNDLES}/vim-tmux-navigator" "${NVIM_BUNDLES}/vim-tmux-navigator"
+
 # nvim_plugins
 
 if [[ -d "${NVIM_BUNDLES}/tokyonight.nvim" ]]; then
