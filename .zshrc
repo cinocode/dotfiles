@@ -46,6 +46,7 @@ alias doup="docker-compose up -d"
 alias dodown="docker-compose down"
 
 alias jobsk='kill -KILL ${${(v)jobstates##*:*:}%=*}'
+alias golf="vimgolf-finder random"
 
 alias n='vim ~/note/orga/inbox.txt'
 alias t="trash-put $@"
