@@ -146,11 +146,18 @@ nnoremap <silent> <leader>ac mmgg"*yG`m
 vnoremap <silent> <leader>ac "*y
 nnoremap <silent> <leader>lf :LocateFile<cr>
 
-nnoremap <silent> <leader>jb :Buffers<cr>
-nnoremap <silent> <leader>jc :JavaSearchContext<cr>
+nnoremap <silent> <leader>ji :lua require'jdtls'.organize_imports()<CR>
+nnoremap <silent> <leader>je :lua require('jdtls').extract_variable()<CR>
+nnoremap <silent> <leader>jE :lua require('jdtls').extract_variable(true)<CR>
+nnoremap <silent> <leader>jb :JdtCompile<CR>
+nnoremap <silent> <leader>jc :lua require('jdtls').extract_constant()<CR>
+nnoremap <silent> <leader>jC :lua require('jdtls').extract_constant(true)<CR>
+nnoremap <silent> <leader>jm :lua require('jdtls').extract_method(true)<CR>
+nnoremap <silent> <leader>jt :lua require'jdtls'.test_class()<CR>
+nnoremap <silent> <leader>jT :lua require'jdtls'.test_nearest_method()<CR>
+
 nnoremap <silent> <leader>jf :w<cr>:! vim_format %<cr>
 nnoremap <silent> <leader>jh :JavaCorrect<cr>
-nnoremap <silent> <leader>ji :JavaImportOrganize<cr>
 nnoremap <silent> <leader>jj :w<cr>:JavaImportOrganize<cr>:%JavaFormat<cr>:Validate<cr>:e<cr>
 nnoremap <silent> <leader>jgb :JavaGetSet<cr>
 vnoremap <silent> <leader>jgb :JavaGetSet<cr>
@@ -160,13 +167,10 @@ nnoremap <silent> <leader>jgg :JavaGet<cr>
 vnoremap <silent> <leader>jgg :JavaGet<cr>
 nnoremap <silent> <leader>jgs :JavaSet<cr>
 vnoremap <silent> <leader>jgs :JavaSet<cr>
-nnoremap <silent> <leader>jm :JavaHierarchy<cr>
 nnoremap <silent> <leader>jr :exec ":JavaRename ".input("Rename to:")<cr>
 nnoremap <silent> <leader>js :JavaSearch<cr>
-nnoremap <silent> <leader>jt :JavaTypeHierarchy<cr>
 nnoremap <silent> <leader>jv :Validate<cr>
 nnoremap <silent> <leader>jx :Java<cr>
-" ^ also need refreshproj buildproj :Java
 
 nnoremap <silent> <leader>gs :Git<cr>
 nnoremap <silent> <leader>ga :Gwrite<cr>

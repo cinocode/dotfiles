@@ -243,3 +243,28 @@ else
     cd "${NVIM_BUNDLES}"
     git clone https://github.com/lewis6991/gitsigns.nvim.git
 fi
+
+if [[ -d "${NVIM_BUNDLES}/nvim-cmp" ]]; then
+    cd "${NVIM_BUNDLES}/nvim-cmp"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/hrsh7th/nvim-cmp.git
+fi
+
+if [[ -d "${NVIM_BUNDLES}/cmp-nvim-lsp" ]]; then
+    cd "${NVIM_BUNDLES}/cmp-nvim-lsp"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/hrsh7th/cmp-nvim-lsp.git
+fi
+
+if [[ -d "${NVIM_BUNDLES}/nvim-jdtls" ]]; then
+    cd "${NVIM_BUNDLES}/nvim-jdtls"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://codeberg.org/mfussenegger/nvim-jdtls.git
+fi
+mkdir -p ~/.local/share/jdtls_data
