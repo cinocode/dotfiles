@@ -235,3 +235,11 @@ else
     cd "${NVIM_BUNDLES}"
     git clone https://github.com/rachartier/tiny-glimmer.nvim.git
 fi
+
+if [[ -d "${NVIM_BUNDLES}/gitsigns.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/gitsigns.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/lewis6991/gitsigns.nvim.git
+fi
