@@ -10,6 +10,15 @@ check_command_found() {
   fi
 }
 
+if [[ ! -z "$1" ]]; then
+  check_command_found "$1"
+  if [[ -z "$MISSING_COMMANDS" ]]; then
+    exit 0
+  else
+    exit 1
+  fi
+fi
+
 check_command_found "zsh"
 check_command_found "git"
 check_command_found "yadm"

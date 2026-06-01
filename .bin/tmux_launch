@@ -17,7 +17,7 @@ if [[ $BASE_NAME = 'ole' ]]; then
 
         tmux new-session -d -s background
         tmux send-keys -t background 'ghsync_d' Enter
-        if [[ $(which cmuscontrold >/dev/null 2>&1) ]]; then
+        if package_check "cmuscontrold"; then
             tmux split-window -h -t background 'cmuscontrold'
         fi
 
