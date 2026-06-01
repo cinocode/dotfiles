@@ -21,6 +21,15 @@ cmp.setup {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+require('nvim-treesitter').setup {
+  opts = {
+    ensure_installed = { 'bash', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'java' }
+  },
+  auto_install = true,
+  highlight = { enable = true },
+  indent = { enable = true },
+}
+
 require("octo").setup({
 	picker = "fzf-lua", -- or "telescope" or "snacks" or "default"
 	picker_config = {
