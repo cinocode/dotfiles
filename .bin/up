@@ -69,6 +69,11 @@ if [[ ! -z $1 ]]; then
   ENV_ARGS="$1"
 fi
 
+MVN_EXTRA_ARGS=""
+if [[ -f ".dev/mvn_extra_args" ]]; then
+  MVN_EXTRA_ARGS="$(cat .dev/mvn_extra_args)"
+fi
+
 cleanupRun() {
     kill $feId
     kill $beId
@@ -79,7 +84,7 @@ trap "cleanupRun" EXIT
 
 nf run-script start &
 feId=$!
-(source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
+(source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run "${MVN_EXTRA_ARGS}") &
 beId=$!
 
 wait
