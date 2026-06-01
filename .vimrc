@@ -24,8 +24,8 @@ set ttimeoutlen=50	" Make Esc work faster
 syntax on
 set autoindent
 set sts=0
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 if has("autocmd")
