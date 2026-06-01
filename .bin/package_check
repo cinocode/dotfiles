@@ -24,6 +24,10 @@ check_command_found "zoxide"
 check_command_found "jdtls"
 check_command_found "java"
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  check_command_found "imgcat"
+fi
+
 if [[ ! -z $MISSING_COMMANDS ]]; then
   echo "Missing commands: ${MISSING_COMMANDS}"
 fi
