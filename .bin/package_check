@@ -33,7 +33,10 @@ check_command_found "fzf"
 check_command_found "zoxide"
 
 check_command_found "jdtls"
-check_command_found "java"
+if [[ -z ${JAVA_HOME} || ! -d ${JAVA_HOME} ]]; then
+  echo 'java home not set'
+  exit 1
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   check_command_found "imgcat"
