@@ -47,7 +47,11 @@ gradlew.bat
 #ignore intellij
 *.iml
 scratch.sql
+.zextract/
+
+# used bin ~/.bin/up
 .dev/
 
-*oh_custom_ignore*
-.zextract/
+# jdtls ignores
+.settings/org.eclipse.*.prefs
+.factorypath
