@@ -9,6 +9,10 @@ if [[ $BASE_NAME = 'ole' ]]; then
     if pgrep tmux; then
         tmux attach -t dotfiles || tmux att
     else
+        if ! package_check; then
+            sleep 5 && bash && exit 0
+        fi
+
         w_ssh echo "Unlocked git key"
         pass -c stardom-world.com
         if [[ -f ~/.block_pass ]]; then
