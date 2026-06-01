@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+MISSING_COMMANDS=""
+
+check_command_found() {
+  if ! command -v "$1" >/dev/null 2>&1
+  then
+    MISSING_COMMANDS="${MISSING_COMMANDS}${1} "
+  fi
+}
+
+check_command_found "zsh"
+check_command_found "git"
+check_command_found "yadm"
+
+check_command_found "vim"
+check_command_found "nvim"
+
+check_command_found "tmux"
+check_command_found "sesh"
+check_command_found "fzf"
+check_command_found "zoxide"
+
+check_command_found "jdtls"
+check_command_found "java"
+
+if [[ ! -z $MISSING_COMMANDS ]]; then
+  echo "Missing commands: ${MISSING_COMMANDS}"
+fi
