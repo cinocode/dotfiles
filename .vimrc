@@ -146,15 +146,7 @@ nnoremap <silent> <leader>ac mmgg"*yG`m
 vnoremap <silent> <leader>ac "*y
 nnoremap <silent> <leader>lf :LocateFile<cr>
 
-"gd" definition
-"gra" (Normal and Visual mode) is mapped to vim.lsp.buf.code_action()
-"gri" is mapped to vim.lsp.buf.implementation()
-"grn" is mapped to vim.lsp.buf.rename()
-"grr" is mapped to vim.lsp.buf.references()
-"grt" is mapped to vim.lsp.buf.type_definition()
-"grx" is mapped to vim.lsp.codelens.run()
-"gO" is mapped to vim.lsp.buf.document_symbol()
-nnoremap <silent> <leader>ji :lua require'jdtls'.organize_imports()<CR>
+nnoremap <silent> <leader>jf :lua require'jdtls'.organize_imports()<CR>
 nnoremap <silent> <leader>je :lua require('jdtls').extract_variable()<CR>
 nnoremap <silent> <leader>jE :lua require('jdtls').extract_variable(true)<CR>
 nnoremap <silent> <leader>jb :JdtCompile<CR>
@@ -163,22 +155,13 @@ nnoremap <silent> <leader>jC :lua require('jdtls').extract_constant(true)<CR>
 nnoremap <silent> <leader>jm :lua require('jdtls').extract_method(true)<CR>
 nnoremap <silent> <leader>jt :lua require'jdtls'.test_class()<CR>
 nnoremap <silent> <leader>jT :lua require'jdtls'.test_nearest_method()<CR>
-
-nnoremap <silent> <leader>jf :w<cr>:! vim_format %<cr>
-nnoremap <silent> <leader>jh :JavaCorrect<cr>
-nnoremap <silent> <leader>jj :w<cr>:JavaImportOrganize<cr>:%JavaFormat<cr>:Validate<cr>:e<cr>
-nnoremap <silent> <leader>jgb :JavaGetSet<cr>
-vnoremap <silent> <leader>jgb :JavaGetSet<cr>
-nnoremap <silent> <leader>jgc :JavaConstructor<cr>
-vnoremap <silent> <leader>jgc :JavaConstructor<cr>
-nnoremap <silent> <leader>jgg :JavaGet<cr>
-vnoremap <silent> <leader>jgg :JavaGet<cr>
-nnoremap <silent> <leader>jgs :JavaSet<cr>
-vnoremap <silent> <leader>jgs :JavaSet<cr>
-nnoremap <silent> <leader>jr :exec ":JavaRename ".input("Rename to:")<cr>
-nnoremap <silent> <leader>js :JavaSearch<cr>
-nnoremap <silent> <leader>jv :Validate<cr>
-nnoremap <silent> <leader>jx :Java<cr>
+nnoremap <silent> <leader>jr :lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>jd :lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <leader>ju :lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>ja :lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>ji :lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <leader>jx :lua vim.lsp.codelens.run()<CR>
+nnoremap <silent> <leader>js :lua vim.lsp.buf.document_symbol()<CR>
 
 nnoremap <silent> <leader>gs :Git<cr>
 nnoremap <silent> <leader>ga :Gwrite<cr>
