@@ -146,6 +146,14 @@ nnoremap <silent> <leader>ac mmgg"*yG`m
 vnoremap <silent> <leader>ac "*y
 nnoremap <silent> <leader>lf :LocateFile<cr>
 
+"gd" definition
+"gra" (Normal and Visual mode) is mapped to vim.lsp.buf.code_action()
+"gri" is mapped to vim.lsp.buf.implementation()
+"grn" is mapped to vim.lsp.buf.rename()
+"grr" is mapped to vim.lsp.buf.references()
+"grt" is mapped to vim.lsp.buf.type_definition()
+"grx" is mapped to vim.lsp.codelens.run()
+"gO" is mapped to vim.lsp.buf.document_symbol()
 nnoremap <silent> <leader>ji :lua require'jdtls'.organize_imports()<CR>
 nnoremap <silent> <leader>je :lua require('jdtls').extract_variable()<CR>
 nnoremap <silent> <leader>jE :lua require('jdtls').extract_variable(true)<CR>
