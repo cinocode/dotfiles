@@ -4,9 +4,10 @@ set -eo pipefail
 
 mkdir -p .dev
 
-DOCKER_FILE="docker-compose.yml"
-if [[ -f ".config/local/compose.yaml" ]]; then
-  DOCKER_FILE=".config/local/compose.yaml"
+if [[ -f ".dev/docker_path" ]]; then
+  DOCKER_FILE="$(cat .dev/docker_path)"
+else
+  DOCKER_FILE="docker-compose.yml"
 fi
 
 SKIP_BUILD="false"
@@ -74,7 +75,6 @@ if [[ ! -z $1 ]]; then
   ENV_ARGS="$1"
 fi
 
-MVN_EXTRA_ARGS=""
 if [[ -f ".dev/mvn_extra_args" ]]; then
   MVN_EXTRA_ARGS="$(cat .dev/mvn_extra_args)"
 fi
@@ -89,7 +89,11 @@ trap "cleanupRun" EXIT
 
 nf run-script start &
 feId=$!
-(source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run "${MVN_EXTRA_ARGS}") &
+if [[ -z $MVN_EXTRA_ARGS ]]; then
+  (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
+else
+  (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run "${MVN_EXTRA_ARGS}") &
+fi
 beId=$!
 
 wait

@@ -2,9 +2,10 @@
 
 set -eo pipefail
 
-DOCKER_FILE="docker-compose.yml"
-if [[ -f ".config/local/compose.yaml" ]]; then
-  DOCKER_FILE=".config/local/compose.yaml"
+if [[ -f ".dev/docker_path" ]]; then
+  DOCKER_FILE="$(cat .dev/docker_path)"
+else
+  DOCKER_FILE="docker-compose.yml"
 fi
 
 if [[ -f ".dev/pomxml" ]]; then
