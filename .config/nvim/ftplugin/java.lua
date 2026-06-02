@@ -25,6 +25,16 @@ local config = {
   -- for a list of options
   settings = {
     java = {
+      completion = {
+        importOrder = {
+          "com",
+          "de",
+          "net",
+          "org",
+          "java",
+          "javax",
+        }
+      }
     }
   },
 
