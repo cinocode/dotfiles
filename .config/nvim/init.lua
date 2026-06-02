@@ -42,18 +42,23 @@ require("octo").setup({
 		pull_request = {
 			add_comment = { lhs = "<C-c>", desc = "add comment" },
 			add_reply = { lhs = "<C-r>", desc = "add reply" },
+			resolve_thread = { lhs = "<C-a>", desc = "resolve PR thread" },
+			unresolve_thread = { lhs = "<C-t>", desc = "unresolve PR thread" },
+			add_reviewer = { lhs = "<C-e>", desc = "unresolve PR thread" },
 		},
 		review_thread = {
 			add_comment = { lhs = "<C-c>", desc = "add comment" },
 			add_reply = { lhs = "<C-r>", desc = "add reply" },
+			resolve_thread = { lhs = "<C-a>", desc = "resolve PR thread" },
+			unresolve_thread = { lhs = "<C-t>", desc = "unresolve PR thread" },
 		},
 		review_diff = {
 			add_review_comment = { lhs = "<C-c>", desc = "add a new review comment", mode = { "n", "x" } },
 		},
 		notification = {
-			read = { lhs = "<C-m>", desc = "mark notification as read" },
-			done = { lhs = "<C-d>", desc = "mark notification as done" },
-			unsubscribe = { lhs = "<C-u>", desc = "unsubscribe from notifications" },
+			read = { lhs = "<C-r>", desc = "mark notification as read" },
+			done = { lhs = "<C-a>", desc = "mark notification as done" },
+			unsubscribe = { lhs = "<C-t>", desc = "unsubscribe from notifications" },
 		},
 	},
 	poll = {

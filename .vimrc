@@ -185,10 +185,12 @@ nnoremap <silent> <leader>gl :Git lol<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
 
+nnoremap <silent> <leader>op :Octo pr<cr>
 nnoremap <silent> <leader>ol :Octo pr list<cr>
 nnoremap <silent> <leader>or :Octo review<cr>
 nnoremap <silent> <leader>os :Octo review submit<cr>
 nnoremap <silent> <leader>oD :Octo review discard<cr>
+nnoremap <silent> <leader>oc :Octo review comments<cr>
 nnoremap <silent> <leader>on :Octo notification list<cr>
 
 nnoremap <silent> <leader>nb :NERDTree C:\Users\Public\Documents\dev\code\basta\php\basta<cr>
