@@ -4,6 +4,11 @@ set -eo pipefail
 
 mkdir -p .dev
 
+DOCKER_FILE="docker-compose.yml"
+if [[ -f ".config/local/compose.yaml" ]]; then
+  DOCKER_FILE=".config/local/compose.yaml"
+fi
+
 SKIP_BUILD="false"
 if [[ -f "pom.xml" ]]; then
     POMSUM="$(sha1 -q pom.xml)$(git rev-parse HEAD)"
@@ -37,8 +42,8 @@ if [[ "$SKIP_BUILD" != "true" ]]; then
     echo "$POMSUM" > ".dev/pomxml"
 fi
 
-if [[ -f docker-compose.yml && -z "$(docker-compose ps --services --filter 'status=running')" ]]; then
-    docker-compose up -d
+if [[ -f "$DOCKER_FILE" && -z "$(docker-compose -f ${DOCKER_FILE} ps --services --filter 'status=running')" ]]; then
+    docker-compose -f "${DOCKER_FILE}" up -d
 
     sleep 2
     DOCKERPS="$(docker ps)"
@@ -77,7 +82,7 @@ fi
 cleanupRun() {
     kill $feId
     kill $beId
-    docker-compose stop
+    docker-compose -f "${DOCKER_FILE}" stop
 }
 
 trap "cleanupRun" EXIT

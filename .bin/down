@@ -2,6 +2,11 @@
 
 set -eo pipefail
 
+DOCKER_FILE="docker-compose.yml"
+if [[ -f ".config/local/compose.yaml" ]]; then
+  DOCKER_FILE=".config/local/compose.yaml"
+fi
+
 if [[ -f ".dev/pomxml" ]]; then
     rm .dev/pomxml
 fi
@@ -18,7 +23,7 @@ if [[ ! -z $1 && ("$1" = 'all' || "$1" = "npm" ) ]]; then
 fi
 
 if [[ ! -z $1 && ("$1" = 'all' || "$1" = "docker" ) ]]; then
-    docker-compose down
+    docker-compose -f "$DOCKER_FILE" down
 elif [[ -f docker-compose.yml && ! -z "$(docker-compose ps --services --filter 'status=running')" ]]; then
-    docker-compose stop
+    docker-compose "$DOCKER_FILE" stop
 fi
