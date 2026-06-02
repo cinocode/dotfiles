@@ -276,3 +276,11 @@ else
     cd "${NVIM_BUNDLES}"
     git clone https://github.com/nvim-treesitter/nvim-treesitter.git
 fi
+
+if [[ -d "${NVIM_BUNDLES}/rnvimr" ]]; then
+    cd "${NVIM_BUNDLES}/rnvimr"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/kevinhwang91/rnvimr.git
+fi
