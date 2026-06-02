@@ -58,6 +58,9 @@ if has("gui_running")
 	endif
 elseif has('nvim')
 	colorscheme tokyonight-night
+
+  let g:rnvimr_enable_ex = 1
+  let g:rnvimr_enable_picker = 1
 else
 	set background=dark
 	colorscheme base16-default-dark
@@ -67,9 +70,6 @@ endif
 let macvim_skip_colorscheme=1
 let macvim_skip_cmd_opt_movement=1
 let macvim_hig_shift_movement=1
-
-let g:rnvimr_enable_ex = 1
-let g:rnvimr_enable_picker = 1
 
 highlight DoubleWhite ctermbg=240 guibg=#333333
 call matchadd('DoubleWhite', ' \{2,\}')
@@ -195,8 +195,6 @@ nnoremap <silent> <leader>os :Octo review submit<cr>
 nnoremap <silent> <leader>oD :Octo review discard<cr>
 nnoremap <silent> <leader>oc :Octo review comments<cr>
 nnoremap <silent> <leader>on :Octo notification list<cr>
-
-nnoremap <silent> <leader>f :RnvimrToggle<cr>
 
 nnoremap <silent> <leader>nb :NERDTree C:\Users\Public\Documents\dev\code\basta\php\basta<cr>
 nnoremap <silent> <leader>nc :NERDTree C:\Users\Public\Documents\dev\code<cr>
