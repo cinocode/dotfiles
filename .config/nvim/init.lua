@@ -40,24 +40,24 @@ require("octo").setup({
 	default_delete_branch = true, -- whether to delete branch when merging pull request with either `Octo pr merge` or from picker (can be overridden with `delete`/`nodelete` argument to `Octo pr merge`)
 	mappings = {
 		pull_request = {
-			add_comment = { lhs = "<C-c>", desc = "add comment" },
-			add_reply = { lhs = "<C-r>", desc = "add reply" },
-			resolve_thread = { lhs = "<C-a>", desc = "resolve PR thread" },
-			unresolve_thread = { lhs = "<C-t>", desc = "unresolve PR thread" },
-			add_reviewer = { lhs = "<C-e>", desc = "unresolve PR thread" },
+			add_comment = { lhs = "<leader>oc", desc = "add comment" },
+			add_reply = { lhs = "<leader>oC", desc = "add reply" },
+			resolve_thread = { lhs = "<leader>ot", desc = "resolve PR thread" },
+			unresolve_thread = { lhs = "<leader>oT", desc = "unresolve PR thread" },
+			add_reviewer = { lhs = "<leader>oa", desc = "unresolve PR thread" },
 		},
 		review_thread = {
-			add_comment = { lhs = "<C-c>", desc = "add comment" },
-			add_reply = { lhs = "<C-r>", desc = "add reply" },
-			resolve_thread = { lhs = "<C-a>", desc = "resolve PR thread" },
-			unresolve_thread = { lhs = "<C-t>", desc = "unresolve PR thread" },
+			add_comment = { lhs = "<leader>oc", desc = "add comment" },
+			add_reply = { lhs = "<leader>oC", desc = "add reply" },
+			resolve_thread = { lhs = "<leader>ot", desc = "resolve PR thread" },
+			unresolve_thread = { lhs = "<leader>oT", desc = "unresolve PR thread" },
 		},
 		review_diff = {
-			add_review_comment = { lhs = "<C-c>", desc = "add a new review comment", mode = { "n", "x" } },
+			add_review_comment = { lhs = "<leader>oc", desc = "add a new review comment", mode = { "n", "x" } },
 		},
 		notification = {
-			read = { lhs = "<C-r>", desc = "mark notification as read" },
-			done = { lhs = "<C-a>", desc = "mark notification as done" },
+			read = { lhs = "<C-m>", desc = "mark notification as read" },
+			done = { lhs = "<C-r>", desc = "mark notification as done" },
 			unsubscribe = { lhs = "<C-t>", desc = "unsubscribe from notifications" },
 		},
 	},
