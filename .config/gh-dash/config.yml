@@ -38,11 +38,11 @@ defaults:
         width: 0.45
         height: 0.6
         position: auto
-    prsLimit: 20
+    prsLimit: 25
     prApproveComment: LGTM
-    issuesLimit: 20
-    notificationsLimit: 20
-    view: prs
+    issuesLimit: 50
+    notificationsLimit: 50
+    view: notifications
     layout:
         prs:
             updatedAt:
@@ -80,12 +80,10 @@ defaults:
             assignees:
                 width: 20
                 hidden: true
-    refetchIntervalMinutes: 30
+    refetchIntervalMinutes: 10
 keybindings:
   prs:
     - key: g
-      command: pr_review {{.RepoName}} {{.PrNumber}} {{.HeadRefName}} origin
-    - key: G
       command: pr_review {{.RepoName}} {{.PrNumber}} {{.HeadRefName}}
 repoPaths: {}
 theme:
