@@ -2,10 +2,25 @@
 set -eo pipefail
 
 branch="$1"
+base_branch="$2"
+
+if [[ "$1" = "main" || "$1" = "staging" || "$1" = "production" || "$1" = "trunc" ]]; then
+  echo "Git status is not clean"
+  exit 0
+fi
+
+if ! git status --porcelain; then
+  echo "Git status is not clean"
+  exit 0
+fi
 
 gitup -p .
 
-git checkout staging
+if [[ ! -z "$base_branch" ]]; then
+  git checkout "$base_branch"
+else
+  git checkout staging || git checkout trunc || git checkout main
+fi
 git merge --no-ff "$branch"
 git push origin staging
 
