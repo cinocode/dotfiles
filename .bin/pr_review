@@ -3,17 +3,16 @@ reponame="$(basename $1)"
 prnum="$2"
 branch="$3"
 
-if [[ -z $4 ]]; then
-  checkout_tar="$branch"
-else
-  checkout_tar="$4/$branch"
-fi
-
 if [[ "$reponame" = "vcoversheet" ]]; then
   reponame="coversheet"
 elif [[ "$reponame" = "tshiftbook" ]]; then
   reponame="shiftbook"
 fi
 
-sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && git fetch --prune && git checkout $checkout_tar && nvim -c \"Octo pr edit $prnum\"" Enter
+if tmux list-sessions | grep -q "$reponame"; then
+  if ! tmux list-windows -t "$reponame" | grep -qv zsh; then
+    sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && git fetch --prune && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter
+  fi
+fi
+
 sesh connect "code/$reponame"

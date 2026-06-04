@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+branch="$1"
+if git branch -a | grep "$branch" | grep -q -qv origin; then
+  git checkout "$branch"
+else
+  git checkout "origin/$branch"
+fi
