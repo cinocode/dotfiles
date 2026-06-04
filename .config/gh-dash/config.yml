@@ -84,6 +84,8 @@ defaults:
 keybindings:
   prs:
     - key: g
+      command: pr_review {{.RepoName}} {{.PrNumber}} {{.HeadRefName}} origin
+    - key: G
       command: pr_review {{.RepoName}} {{.PrNumber}} {{.HeadRefName}}
 repoPaths: {}
 theme:
