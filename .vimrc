@@ -29,47 +29,17 @@ set shiftwidth=2
 set expandtab
 
 if has("autocmd")
-	autocmd FileType java setlocal ts=4 sts=0 sw=4 expandtab
-	autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType vb setlocal ts=3 sts=3 sw=3 expandtab
-	autocmd FileType py setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType java setlocal ts=4 sts=0 sw=4 expandtab
+  autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType vb setlocal ts=3 sts=3 sw=3 expandtab
+  autocmd FileType py setlocal ts=4 sts=4 sw=4 expandtab
 endif
 
 let linez=40
 let columnz=120
 autocmd GUIEnter * let &lines=linez | let &columns=columnz
 autocmd GUIEnter * if has("diff") && &diff | set lines=60 columns=200 | endif
-if has("gui_running")
-	set guioptions-=m  "remove menu bar
-	set guioptions-=T  "remove toolbar
-	set guioptions-=r  "remove right-hand scroll bar
-	set guioptions-=L  "remove left-hand scroll bar
-
-	colorscheme blayden
-	hi link CtrlSpaceStatus IncSearch
-
-	if has("gui_gtk2")
-		set guifont=Inconsolata\ 12
-	elseif has("gui_macvim")
-		set guifont=Menlo\ Regular:h14
-	elseif has("gui_win32")
-		set guifont=Consolas:h11:cANSI
-	endif
-elseif has('nvim')
-	colorscheme tokyonight-night
-
-  let g:rnvimr_enable_ex = 1
-  let g:rnvimr_enable_picker = 1
-else
-	set background=dark
-	colorscheme base16-default-dark
-	hi Normal ctermbg=none
-endif
-
-let macvim_skip_colorscheme=1
-let macvim_skip_cmd_opt_movement=1
-let macvim_hig_shift_movement=1
 
 highlight DoubleWhite ctermbg=240 guibg=#333333
 call matchadd('DoubleWhite', ' \{2,\}')
@@ -88,9 +58,9 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|gradle|node_modules|bower_components|p
 let g:fortune_vimtips_auto_display = 0
 
 function! PreviewMarkdown()
-    let l:path=expand('%:p')
-    silent execute "!echo ".l:path." > /tmp/lastpreview.log"
-    :execute "bel vert terminal"
+  let l:path=expand('%:p')
+  silent execute "!echo ".l:path." > /tmp/lastpreview.log"
+  :execute "bel vert terminal"
 endfunction
 
 map <F2> :set nohls<CR>:let @/ = ""<CR>:set hls<CR>
@@ -106,18 +76,18 @@ let mapleader = ","
 nnore \ ,
 "these block my \ function as ,
 if mapcheck("\c")
-	nunmap \c
+  nunmap \c
 endif
 if mapcheck("\p")
-	nunmap \p
+  nunmap \p
 endif
 if mapcheck("\n")
-	nunmap \n
+  nunmap \n
 endif
 if has("browse")
-	nnoremap <c-s> :if expand("%") == ""<CR>browse confirm w<CR>else<CR>confirm w<CR>endif<CR><CR>
+  nnoremap <c-s> :if expand("%") == ""<CR>browse confirm w<CR>else<CR>confirm w<CR>endif<CR><CR>
 else
-	nnoremap <c-s> :w<cr>
+  nnoremap <c-s> :w<cr>
 endif
 inoremap <c-s> <esc>:w<cr>
 "nnoremap <c-n> :wall<cr>
@@ -230,7 +200,6 @@ nnoremap <silent> <leader>tt :JUnit %<cr>
 " map <unique> <Leader>tz	<Plug>AM_tt
 
 nnoremap <silent> <leader>va :setlocal ts=4 sts=0 sw=4 expandtab<cr>
-nnoremap <silent> <leader>vb :CtrlPBuffer<cr>
 nnoremap <silent> <leader>vc :silent !clear<cr>
 nnoremap <silent> <leader>vd :call DoWindowSwap()<cr>
 nnoremap <silent> <leader>ve :EvervimNotebookList<cr>
@@ -262,3 +231,39 @@ vmap <silent>sf			<Plug>SQLU_Formatter<CR>
 "nmap <silent>scp			<Plug>SQLU_CreateProcedure<CR>
 
 inoremap <c-d> <c-x><c-u>
+
+if has('nvim')
+  colorscheme tokyonight-night
+
+  let g:rnvimr_enable_ex = 1
+  let g:rnvimr_enable_picker = 1
+else
+  nnoremap <silent> <leader>vf :CtrlP<cr>
+  nnoremap <silent> <leader>vb :CtrlPBuffer<cr>
+
+  if has("gui_running")
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+
+    colorscheme blayden
+    hi link CtrlSpaceStatus IncSearch
+
+    if has("gui_gtk2")
+      set guifont=Inconsolata\ 12
+    elseif has("gui_macvim")
+      set guifont=Menlo\ Regular:h14
+    elseif has("gui_win32")
+      set guifont=Consolas:h11:cANSI
+    endif
+  else
+    set background=dark
+    colorscheme base16-default-dark
+    hi Normal ctermbg=none
+  endif
+
+  let macvim_skip_colorscheme=1
+  let macvim_skip_cmd_opt_movement=1
+  let macvim_hig_shift_movement=1
+endif

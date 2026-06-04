@@ -31,6 +31,8 @@ check_command_found "tmux"
 check_command_found "sesh"
 check_command_found "fzf"
 check_command_found "zoxide"
+check_command_found "rg"
+check_command_found "cmake"
 
 check_command_found "jdtls"
 if [[ -z ${JAVA_HOME} || ! -d ${JAVA_HOME} ]]; then

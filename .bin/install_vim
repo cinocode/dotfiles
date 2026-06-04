@@ -59,7 +59,6 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/ctrlpvim/ctrlp.vim.git ctrlp
 fi
-ln -sf "${VIM_BUNDLES}/ctrlp" "${NVIM_BUNDLES}/ctrlp"
 
 if [[ -d "${VIM_BUNDLES}/ctrlspace" ]]; then
     cd "${VIM_BUNDLES}/ctrlspace"
@@ -284,3 +283,21 @@ else
     cd "${NVIM_BUNDLES}"
     git clone https://github.com/kevinhwang91/rnvimr.git
 fi
+
+if [[ -d "${NVIM_BUNDLES}/telescope.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/telescope.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/nvim-telescope/telescope.nvim.git
+fi
+
+if [[ -d "${NVIM_BUNDLES}/telescope-fzf-native.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/telescope-fzf-native.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/nvim-telescope/telescope-fzf-native.nvim.git
+fi
+cd "${NVIM_BUNDLES}/telescope-fzf-native.nvim"
+cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install
