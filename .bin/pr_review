@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+reponame="$(basename $1)"
+prnum="$2"
+branch="$3"
+
+if [[ "$reponame" = "vcoversheet" ]]; then
+  reponame="coversheet"
+elif [[ "$reponame" = "tshiftbook" ]]; then
+  reponame="shiftbook"
+fi
+
+sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && git fetch --prune && git checkout origin/$branch && nvim -c \"Octo pr edit $prnum\"" Enter
+sesh connect "code/$reponame"
