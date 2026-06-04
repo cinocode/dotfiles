@@ -1,0 +1,12 @@
+#!/bin/bash
+set -eo pipefail
+
+branch="$1"
+
+git fetch --prune
+
+git checkout staging
+git merge --no-ff "$branch"
+git push origin staging
+
+pr_delete "$branch"

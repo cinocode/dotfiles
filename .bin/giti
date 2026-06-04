@@ -1,6 +1,0 @@
-#!/bin/bash
-git checkout staging
-git merge --no-ff $1
-git push origin staging
-git branch -D $1
-git push origin ":${1}"
