@@ -3,7 +3,7 @@ set -eo pipefail
 
 branch="$1"
 
-git fetch --prune
+gitup -p .
 
 if git branch -a | grep -q "$branch"; then
   git branch -D "$branch"

@@ -3,7 +3,7 @@ set -eo pipefail
 
 branch="$1"
 
-git fetch --prune
+gitup -p .
 
 git checkout staging
 git merge --no-ff "$branch"

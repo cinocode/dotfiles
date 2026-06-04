@@ -11,7 +11,7 @@ fi
 
 if tmux list-sessions | grep -q "$reponame"; then
   if ! tmux list-windows -t "$reponame" | grep -qv zsh; then
-    sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && git fetch --prune && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter
+    sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && gitup -p . && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter
   fi
 fi
 

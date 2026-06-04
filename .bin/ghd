@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-tmux new-session -d -s github_dash > /dev/null && tmux send-keys -t github_dash '(gitup > /dev/null & gh dash) && exit' Enter
+tmux new-session -d -s github_dash > /dev/null && tmux send-keys -t github_dash '(gitup -p > /dev/null & gh dash) && exit' Enter
 sesh connect github_dash
