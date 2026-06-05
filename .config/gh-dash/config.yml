@@ -83,7 +83,7 @@ defaults:
     refetchIntervalMinutes: 10
 keybindings:
   prs:
-    - key: g
+    - key: i
       command: pr_review {{.RepoName}} {{.PrNumber}} {{.HeadRefName}}
 repoPaths: {}
 theme:
