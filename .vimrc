@@ -151,6 +151,7 @@ nnoremap <silent> <leader>gl :Git lol<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
 
+nnoremap <silent> <leader>oo :Octo pr refresh<cr>
 nnoremap <silent> <leader>op :Octo pr<cr>
 nnoremap <silent> <leader>ol :Octo pr list<cr>
 nnoremap <silent> <leader>or :Octo review<cr>
@@ -158,26 +159,6 @@ nnoremap <silent> <leader>os :Octo review submit<cr>
 nnoremap <silent> <leader>oD :Octo review discard<cr>
 nnoremap <silent> <leader>oc :Octo review comments<cr>
 nnoremap <silent> <leader>on :Octo notification list<cr>
-
-nnoremap <silent> <leader>nb :NERDTree C:\Users\Public\Documents\dev\code\basta\php\basta<cr>
-nnoremap <silent> <leader>nc :NERDTree C:\Users\Public\Documents\dev\code<cr>
-nnoremap <silent> <leader>nf :NERDTreeFind<cr>
-nnoremap <silent> <leader>nn :NERDTreeToggle<cr>
-nnoremap <silent> <leader>nt :NERDTree C:\Users\Public\Documents\dev\code\tcws_workspace<cr>
-nnoremap <silent> <leader>pb :ProjectBuild<cr>
-nnoremap <silent> <leader>pg :!python %<cr>
-nnoremap <silent> <leader>pi :ProjectInfo<cr>
-nnoremap <silent> <leader>pl :ProjectList<cr>
-nnoremap <silent> <leader>pp :ProjectProblems!<cr>:cw<cr>
-nnoremap <silent> <leader>pr :ProjectRefresh<cr>
-nnoremap <silent> <leader>ps :ProjectSettings<cr>
-nnoremap <silent> <leader>pt :ProjectsTree<cr>
-nnoremap <silent> <leader>sdv :DBExecSQL SHOW CREATE VIEW <c-r><c-w><cr>
-nnoremap <silent> <leader>sp ^v}:DBExecRangeSQL<cr>
-"nnoremap <silent> <leader>sfc :DBCommit<cr>
-"nnoremap <silent> <leader>sfr :DBRollback<cr>
-
-nmap <silent> <leader>vd :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
 
 nnoremap <silent> <leader>rh 5<c-w><
 nnoremap <silent> <leader>rl 5<c-w>>
@@ -192,6 +173,7 @@ nnoremap <silent> <leader>ti :JUnitImpl<cr>
 nnoremap <silent> <leader>tt :JUnit %<cr>
 " map <unique> <Leader>tz	<Plug>AM_tt
 
+nnoremap <silent> <leader>vd :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
 nnoremap <silent> <leader>va :setlocal ts=4 sts=0 sw=4 expandtab<cr>
 nnoremap <silent> <leader>vc :silent !clear<cr>
 nnoremap <silent> <leader>vs :call DoWindowSwap()<cr>
