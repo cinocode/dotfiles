@@ -67,7 +67,6 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/vim-ctrlspace/vim-ctrlspace.git ctrlspace
 fi
-ln -sf "${VIM_BUNDLES}/ctrlspace" "${NVIM_BUNDLES}/ctrlspace"
 
 if [[ -d "${VIM_BUNDLES}/editorconfig" ]]; then
     cd "${VIM_BUNDLES}/editorconfig"

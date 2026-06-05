@@ -1,3 +1,6 @@
+require('telescope').setup()
+require('telescope').load_extension('fzf')
+
 vim.cmd("source ~/.vimrc")
 
 local cmp = require'cmp'
@@ -29,12 +32,6 @@ require('nvim-treesitter').setup {
   highlight = { enable = true },
   indent = { enable = true },
 }
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>vf', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>vg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>vb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>vh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 require("octo").setup({
 	picker = "fzf-lua", -- or "telescope" or "snacks" or "default"

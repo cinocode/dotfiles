@@ -48,13 +48,6 @@ call matchadd('ColorColumn', '\%121v', 120)
 set list
 set listchars=nbsp:¡,eol:¬,tab:»\ ,extends:>,precedes:<,trail:·
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
-let g:ctrlspace_use_tabline = 1
-let g:ctrlp_show_hidden = 1
-if exists("g:ctrlp_user_command")
-  unlet g:ctrlp_user_command
-endif
-let g:ctrlp_custom_ignore = '\v[\/](\.git|gradle|node_modules|bower_components|public|build)$'
 let g:fortune_vimtips_auto_display = 0
 
 function! PreviewMarkdown()
@@ -184,7 +177,7 @@ nnoremap <silent> <leader>sp ^v}:DBExecRangeSQL<cr>
 "nnoremap <silent> <leader>sfc :DBCommit<cr>
 "nnoremap <silent> <leader>sfr :DBRollback<cr>
 
-nmap <silent> <leader>md :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
+nmap <silent> <leader>vd :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
 
 nnoremap <silent> <leader>rh 5<c-w><
 nnoremap <silent> <leader>rl 5<c-w>>
@@ -201,15 +194,13 @@ nnoremap <silent> <leader>tt :JUnit %<cr>
 
 nnoremap <silent> <leader>va :setlocal ts=4 sts=0 sw=4 expandtab<cr>
 nnoremap <silent> <leader>vc :silent !clear<cr>
-nnoremap <silent> <leader>vd :call DoWindowSwap()<cr>
+nnoremap <silent> <leader>vs :call DoWindowSwap()<cr>
 nnoremap <silent> <leader>ve :EvervimNotebookList<cr>
 nnoremap <silent> <leader>vl :call ToggleList("Location List", 'l')<cr>:e<cr>
 nnoremap <silent> <leader>vm :call MarkWindowSwap()<cr>
 nnoremap <silent> <leader>vn :exec ":e " . g:notepath<cr>
 nnoremap <silent> <leader>vo :diffoff<cr>
 nnoremap <silent> <leader>vO :diffoff<cr><c-w><c-w>:diffoff<cr>
-nnoremap <silent> <leader>vs :VimShellPop<cr>
-nnoremap <silent> <leader>vS :VimShell<cr>
 nnoremap <silent> <leader>vt :diffthis<cr>
 nnoremap <silent> <leader>vT :diffthis<cr><c-w><c-w>:diffthis<cr>
 nnoremap <silent> <leader>vu :diffupdate<cr>
@@ -232,14 +223,39 @@ vmap <silent>sf			<Plug>SQLU_Formatter<CR>
 
 inoremap <c-d> <c-x><c-u>
 
+nnoremap <silent> <space>s :w<CR>
+nnoremap <silent> <space>l :wa<CR>
+
+nnoremap <silent> <leader>md mD<CR>
+nnoremap <silent> <space>md 'D<CR>
+nnoremap <silent> <leader>mr mR<CR>
+nnoremap <silent> <space>mr 'R<CR>
+nnoremap <silent> <leader>mn mN<CR>
+nnoremap <silent> <space>mn 'N<CR>
+nnoremap <silent> <leader>ms mS<CR>
+nnoremap <silent> <space>ms 'S<CR>
+nnoremap <silent> <leader>mg mG<CR>
+nnoremap <silent> <space>mg 'G<CR>
+nnoremap <silent> <leader>mc mC<CR>
+nnoremap <silent> <space>mc 'C<CR>
+nnoremap <silent> <leader>mt mT<CR>
+nnoremap <silent> <space>mt 'T<CR>
+nnoremap <silent> <leader>mz mZ<CR>
+nnoremap <silent> <space>mz 'Z<CR>
+
 if has('nvim')
   colorscheme tokyonight-night
 
   let g:rnvimr_enable_ex = 1
   let g:rnvimr_enable_picker = 1
+
+  nnoremap <silent> <space>f :lua require('telescope.builtin').find_files()<CR>
+  nnoremap <silent> <space>g :lua require('telescope.builtin').live_grep()<CR>
+  nnoremap <silent> <space>b :lua require('telescope.builtin').buffers()<CR>
+  nnoremap <silent> <space>h :lua require('telescope.builtin').help_tags()<CR>
 else
-  nnoremap <silent> <leader>vf :CtrlP<cr>
-  nnoremap <silent> <leader>vb :CtrlPBuffer<cr>
+  nnoremap <silent> <space>f :CtrlP<cr>
+  nnoremap <silent> <space>b :CtrlPBuffer<cr>
 
   if has("gui_running")
     set guioptions-=m  "remove menu bar
@@ -262,6 +278,13 @@ else
     colorscheme base16-default-dark
     hi Normal ctermbg=none
   endif
+
+  let g:ctrlspace_use_tabline = 1
+  let g:ctrlp_show_hidden = 1
+  if exists("g:ctrlp_user_command")
+    unlet g:ctrlp_user_command
+  endif
+  let g:ctrlp_custom_ignore = '\v[\/](\.git|gradle|node_modules|bower_components|public|build)$'
 
   let macvim_skip_colorscheme=1
   let macvim_skip_cmd_opt_movement=1
