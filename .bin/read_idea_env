@@ -2,11 +2,14 @@
 
 set -euo pipefail
 
-target="$1"
-if [[ -f "$target" ]]; then
+target="local"
+if [[ ! -z "$1" ]]; then
+  target="$1"
+fi
+if echo "$target" | grep -q 'runConfigurations'; then
   xml_file="$target"
 else
-  xml_file="$target/.idea/runConfigurations/run__local_.xml"
+  xml_file=".idea/runConfigurations/run__${target}_.xml"
 fi
 
 if [[ ! -f "$xml_file" ]]; then

@@ -2,11 +2,13 @@
 
 set -eo pipefail
 
+ENV_ARGS="$1"
+
 mkdir -p .dev
 
 if [[ -f ".dev/docker_path" ]]; then
   DOCKER_FILE="$(cat .dev/docker_path)"
-else
+elif [[ -f "docker-compose.yml" ]]; then
   DOCKER_FILE="docker-compose.yml"
 fi
 
@@ -70,11 +72,6 @@ if [[ "$SKIP_PKG" != "true" ]]; then
     echo "$PKGSUM" > ".dev/pkgjson"
 fi
 
-ENV_ARGS="."
-if [[ ! -z $1 ]]; then
-  ENV_ARGS="$1"
-fi
-
 if [[ -f ".dev/mvn_extra_args" ]]; then
   MVN_EXTRA_ARGS="$(cat .dev/mvn_extra_args)"
 fi
@@ -82,7 +79,9 @@ fi
 cleanupRun() {
     kill $feId
     kill $beId
-    docker-compose -f "${DOCKER_FILE}" stop
+    if [[ -f ${DOCKER_FILE} ]]; then
+      docker-compose -f "${DOCKER_FILE}" stop 
+    fi
 }
 
 trap "cleanupRun" EXIT
