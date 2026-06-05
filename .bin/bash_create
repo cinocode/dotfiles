@@ -12,10 +12,10 @@ echo "#!/bin/bash" >> "$target_file"
 echo "set -eo pipefail" >> "$target_file"
 chmod +x "$target_file"
 
-if echo "$target_file" | grep -q 'doc/dots'; then
-  setup_doc_dots
-else
+if [[ "$2" = "yadm" ]]; then
   yadm add "$target_file"
+elif [[ "$2" = "doc" ]]; then
+  setup_doc_dots
 fi
 
 nvim "$target_file"
