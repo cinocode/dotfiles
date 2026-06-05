@@ -1,6 +1,0 @@
-#!/bin/bash
-set -eo pipefail
-
-if [[ -f .dev/jenkins ]]; then
-  open "$(cat .dev/jenkins)"
-fi
