@@ -21,17 +21,18 @@ if [[ $BASE_NAME = 'ole' ]]; then
 
         tmux new-session -d -s background
         tmux send-keys -t background 'ghsync_d' Enter
-        if package_check "cmuscontrold"; then
-            tmux split-window -h -t background 'cmuscontrold'
-        fi
 
         tmux new-session -d -s notes
         tmux send-keys -t notes 'cd note && vim orga/inbox.txt' Enter
 
         tmux new-session -d -s dotfiles
-        tmux send-keys -t dotfiles 'w_ssh yadm pull' Enter
+        tmux send-keys -t dotfiles 'yadm pull' Enter
 
         tmux new-session -d -s cmus
+
+        if package_check tmux_launch_extra; then
+          tmux_launch_extra
+        fi
 
         tmux attach -t dotfiles
     fi
