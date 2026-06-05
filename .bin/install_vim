@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# vim_plugins, nvim_plugins
+# vim_plugins, uvim_plugins
 VIM_BUNDLES="${HOME}/.vim/pack/bundle/start"
 NVIM_BUNDLES="${HOME}/.local/share/nvim/site/pack/bundle/start"
 mkdir -p "${VIM_BUNDLES}"
@@ -14,7 +14,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/danielwe/base16-vim.git colors_base16
 fi
-ln -sf "${VIM_BUNDLES}/colors_base16" "${NVIM_BUNDLES}/colors_base16"
+if [[ ! -L "${NVIM_BUNDLES}/colors_base16" ]]; then
+  ln -sf "${VIM_BUNDLES}/colors_base16" "${NVIM_BUNDLES}/colors_base16"
+fi
 
 if [[ -d "${VIM_BUNDLES}/colors_blayden" ]]; then
     cd "${VIM_BUNDLES}/colors_blayden"
@@ -23,7 +25,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/cinocode/vim-blayden.git colors_blayden
 fi
-ln -sf "${VIM_BUNDLES}/colors_blayden" "${NVIM_BUNDLES}/colors_blayden"
+if [[ ! -L "${NVIM_BUNDLES}/colors_blayden" ]]; then
+  ln -sf "${VIM_BUNDLES}/colors_blayden" "${NVIM_BUNDLES}/colors_blayden"
+fi
 
 if [[ -d "${VIM_BUNDLES}/colors_scroll" ]]; then
     cd "${VIM_BUNDLES}/colors_scroll"
@@ -32,7 +36,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/vim-scripts/ScrollColors.git colors_scroll
 fi
-ln -sf "${VIM_BUNDLES}/colors_scroll" "${NVIM_BUNDLES}/colors_scroll"
+if [[ ! -L "${NVIM_BUNDLES}/colors_scroll" ]]; then
+  ln -sf "${VIM_BUNDLES}/colors_scroll" "${NVIM_BUNDLES}/colors_scroll"
+fi
 
 if [[ -d "${VIM_BUNDLES}/colors_solarized" ]]; then
     cd "${VIM_BUNDLES}/colors_solarized"
@@ -41,7 +47,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/altercation/vim-colors-solarized.git colors_solarized
 fi
-ln -sf "${VIM_BUNDLES}/colors_solarized" "${NVIM_BUNDLES}/colors_solarized"
+if [[ ! -L "${NVIM_BUNDLES}/colors_solarized" ]]; then
+  ln -sf "${VIM_BUNDLES}/colors_solarized" "${NVIM_BUNDLES}/colors_solarized"
+fi
 
 if [[ -d "${VIM_BUNDLES}/colors_vividchalk" ]]; then
     cd "${VIM_BUNDLES}/colors_vividchalk"
@@ -50,7 +58,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tpope/vim-vividchalk.git colors_vividchalk
 fi
-ln -sf "${VIM_BUNDLES}/colors_vividchalk" "${NVIM_BUNDLES}/colors_vividchalk"
+if [[ ! -L "${NVIM_BUNDLES}/colors_vividchalk" ]]; then
+  ln -sf "${VIM_BUNDLES}/colors_vividchalk" "${NVIM_BUNDLES}/colors_vividchalk"
+fi
 
 if [[ -d "${VIM_BUNDLES}/ctrlp" ]]; then
     cd "${VIM_BUNDLES}/ctrlp"
@@ -75,7 +85,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/sgur/vim-editorconfig.git editorconfig
 fi
-ln -sf "${VIM_BUNDLES}/editorconfig" "${NVIM_BUNDLES}/editorconfig"
+if [[ ! -L "${NVIM_BUNDLES}/editorconfig" ]]; then
+  ln -sf "${VIM_BUNDLES}/editorconfig" "${NVIM_BUNDLES}/editorconfig"
+fi
 
 if [[ -d "${VIM_BUNDLES}/exchange" ]]; then
     cd "${VIM_BUNDLES}/exchange"
@@ -84,7 +96,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tommcdo/vim-exchange.git exchange
 fi
-ln -sf "${VIM_BUNDLES}/exchange" "${NVIM_BUNDLES}/exchange"
+if [[ ! -L "${NVIM_BUNDLES}/exchange" ]]; then
+  ln -sf "${VIM_BUNDLES}/exchange" "${NVIM_BUNDLES}/exchange"
+fi
 
 if [[ -d "${VIM_BUNDLES}/f11" ]]; then
     cd "${VIM_BUNDLES}/f11"
@@ -93,7 +107,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/cinocode/vim-f11.git f11
 fi
-ln -sf "${VIM_BUNDLES}/f11" "${NVIM_BUNDLES}/f11"
+if [[ ! -L "${NVIM_BUNDLES}/f11" ]]; then
+  ln -sf "${VIM_BUNDLES}/f11" "${NVIM_BUNDLES}/f11"
+fi
 
 if [[ -d "${VIM_BUNDLES}/recover" ]]; then
     cd "${VIM_BUNDLES}/recover"
@@ -102,7 +118,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/chrisbra/Recover.vim.git recover
 fi
-ln -sf "${VIM_BUNDLES}/recover" "${NVIM_BUNDLES}/recover"
+if [[ ! -L "${NVIM_BUNDLES}/recover" ]]; then
+  ln -sf "${VIM_BUNDLES}/recover" "${NVIM_BUNDLES}/recover"
+fi
 
 if [[ -d "${VIM_BUNDLES}/shellcheck" ]]; then
     cd "${VIM_BUNDLES}/shellcheck"
@@ -111,7 +129,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/itspriddle/vim-shellcheck.git shellcheck
 fi
-ln -sf "${VIM_BUNDLES}/shellcheck" "${NVIM_BUNDLES}/shellcheck"
+if [[ ! -L "${NVIM_BUNDLES}/shellcheck" ]]; then
+  ln -sf "${VIM_BUNDLES}/shellcheck" "${NVIM_BUNDLES}/shellcheck"
+fi
 
 if [[ -d "${VIM_BUNDLES}/tpope_fugitive" ]]; then
     cd "${VIM_BUNDLES}/tpope_fugitive"
@@ -120,7 +140,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tpope/vim-fugitive.git tpope_fugitive
 fi
-ln -sf "${VIM_BUNDLES}/tpope_fugitive" "${NVIM_BUNDLES}/tpope_fugitive"
+if [[ ! -L "${NVIM_BUNDLES}/tpope_fugitive" ]]; then
+  ln -sf "${VIM_BUNDLES}/tpope_fugitive" "${NVIM_BUNDLES}/tpope_fugitive"
+fi
 
 if [[ -d "${VIM_BUNDLES}/tpope_surround" ]]; then
     cd "${VIM_BUNDLES}/tpope_surround"
@@ -129,7 +151,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tpope/vim-surround.git tpope_surround
 fi
-ln -sf "${VIM_BUNDLES}/tpope_surround" "${NVIM_BUNDLES}/tpope_surround"
+if [[ ! -L "${NVIM_BUNDLES}/tpope_surround" ]]; then
+  ln -sf "${VIM_BUNDLES}/tpope_surround" "${NVIM_BUNDLES}/tpope_surround"
+fi
 
 if [[ -d "${VIM_BUNDLES}/tpope_unimpaired" ]]; then
     cd "${VIM_BUNDLES}/tpope_unimpaired"
@@ -138,7 +162,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tpope/vim-unimpaired.git tpope_unimpaired
 fi
-ln -sf "${VIM_BUNDLES}/tpope_unimpaired" "${NVIM_BUNDLES}/tpope_unimpaired"
+if [[ ! -L "${NVIM_BUNDLES}/tpope_unimpaired" ]]; then
+  ln -sf "${VIM_BUNDLES}/tpope_unimpaired" "${NVIM_BUNDLES}/tpope_unimpaired"
+fi
 
 if [[ -d "${VIM_BUNDLES}/tpope_vinegar" ]]; then
     cd "${VIM_BUNDLES}/tpope_vinegar"
@@ -147,7 +173,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tpope/vim-vinegar.git tpope_vinegar
 fi
-ln -sf "${VIM_BUNDLES}/tpope_vinegar" "${NVIM_BUNDLES}/tpope_vinegar"
+if [[ ! -L "${NVIM_BUNDLES}/tpope_vinegar" ]]; then
+  ln -sf "${VIM_BUNDLES}/tpope_vinegar" "${NVIM_BUNDLES}/tpope_vinegar"
+fi
 
 if [[ -d "${VIM_BUNDLES}/tpope_repeat" ]]; then
     cd "${VIM_BUNDLES}/tpope_repeat"
@@ -156,7 +184,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/tpope/vim-repeat.git tpope_repeat
 fi
-ln -sf "${VIM_BUNDLES}/tpope_repeat" "${NVIM_BUNDLES}/tpope_repeat"
+if [[ ! -L "${NVIM_BUNDLES}/tpope_repeat" ]]; then
+  ln -sf "${VIM_BUNDLES}/tpope_repeat" "${NVIM_BUNDLES}/tpope_repeat"
+fi
 
 if [[ -d "${VIM_BUNDLES}/typescript" ]]; then
     cd "${VIM_BUNDLES}/typescript"
@@ -165,7 +195,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/leafgarland/typescript-vim.git typescript
 fi
-ln -sf "${VIM_BUNDLES}/typescript" "${NVIM_BUNDLES}/typescript"
+if [[ ! -L "${NVIM_BUNDLES}/typescript" ]]; then
+  ln -sf "${VIM_BUNDLES}/typescript" "${NVIM_BUNDLES}/typescript"
+fi
 
 if [[ -d "${VIM_BUNDLES}/vim-tmux-navigator" ]]; then
     cd "${VIM_BUNDLES}/vim-tmux-navigator"
@@ -174,7 +206,9 @@ else
     cd "${VIM_BUNDLES}"
     git clone https://github.com/christoomey/vim-tmux-navigator.git
 fi
-ln -sf "${VIM_BUNDLES}/vim-tmux-navigator" "${NVIM_BUNDLES}/vim-tmux-navigator"
+if [[ ! -L "${NVIM_BUNDLES}/vim-tmux-navigator" ]]; then
+  ln -sf "${VIM_BUNDLES}/vim-tmux-navigator" "${NVIM_BUNDLES}/vim-tmux-navigator"
+fi
 
 # nvim_plugins
 
