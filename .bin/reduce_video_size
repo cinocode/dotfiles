@@ -1,0 +1,24 @@
+#!/bin/bash
+set -eo pipefail
+
+org_file="$1"
+
+if [[ ! -f $org_file ]]; then
+  echo "no video found"
+  exit 0
+fi
+
+dir_name=$(dirname $org_file)
+file_name=$(basename $org_file)
+if [[ -z "$2" ]]; then
+  temp_file="$dir_name/_$file_name"
+else
+  temp_file="$2"
+fi
+
+if [[ -f "$temp_file" ]]; then
+  echo "temp file '$temp_file' already exists"
+  exit 0
+fi
+
+ffmpeg -i "${org_file}" -vcodec libx265 -crf 28 -x265-params pools=3 "${temp_file}"

@@ -1,33 +1,36 @@
 #!/usr/bin/env bash
 for var in "$@"
 do
-    ORG_FILE="$var"
+  org_file="$var"
 
-    if [[ ! -f $ORG_FILE ]]; then
-        echo "no image found"
-        exit 0
-    fi
+  if [[ ! -f $org_file ]]; then
+    echo "no file found at '$org_file'"
+    exit 0
+  fi
 
-    VIDEO_CASE=false
-    if file "$ORG_FILE" | grep -q "JPEG image data"; then
-        echo "jpegoptim --max=85 --strip-all '$ORG_FILE'"
-        jpegoptim --max=85 --strip-all "$ORG_FILE"
-    elif file "$ORG_FILE" | grep -q "PNG image data"; then
-        echo "optipng -o5 '$ORG_FILE'"
-        optipng -o5 "$ORG_FILE"
-    elif file "$ORG_FILE" | grep -q "Web/P image"; then
-        echo "cwebp -q 80 '${ORG_FILE}' -o '${ORG_FILE}'"
-        cwebp -q 80 "${ORG_FILE}" -o "${ORG_FILE}"
-    elif file "$ORG_FILE" | grep -q "MP4 Base Media"; then
-        VIDEO_CASE=true
-    elif file "$ORG_FILE" | grep -q "MP4 v2"; then
-        VIDEO_CASE=true
-    elif file "$ORG_FILE" | grep -q "Apple iTunes Video"; then
-        VIDEO_CASE=true
-    else
-        echo "Unhandled file type: '${ORG_FILE}'"
-    fi
-    if [[ "${VIDEO_CASE}" = 'true' ]]; then
-        ffmpeg -i "${ORG_FILE}" -vcodec libx265 -crf 28 -x265-params pools=3 "_${ORG_FILE}"
-    fi
+  video_case=false
+  if file "$org_file" | grep -q "JPEG image data"; then
+    echo "jpegoptim --max=85 --strip-all '$org_file'"
+    jpegoptim --max=85 --strip-all "$org_file"
+  elif file "$org_file" | grep -q "PNG image data"; then
+    echo "optipng -o5 '$org_file'"
+    optipng -o5 "$org_file"
+  elif file "$org_file" | grep -q "Web/P image"; then
+    echo "cwebp -q 80 '${org_file}' -o '${org_file}'"
+    cwebp -q 80 "${org_file}" -o "${org_file}"
+  elif file "$org_file" | grep -q "MP4 Base Media"; then
+    video_case=true
+  elif file "$org_file" | grep -q "MP4 v2"; then
+    video_case=true
+  elif file "$org_file" | grep -q "Apple iTunes Video"; then
+    video_case=true
+  else
+    echo "Unhandled file type: '${org_file}'"
+  fi
+  if [[ "${video_case}" = 'true' ]]; then
+    dir_name=$(dirname $org_file)
+    file_name=$(basename $org_file)
+    temp_file="$dir_name/_$file_name"
+    ffmpeg -i "${org_file}" -vcodec libx265 -crf 28 -x265-params pools=3 "${temp_file}"
+  fi
 done
