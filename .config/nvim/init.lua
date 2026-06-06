@@ -1,7 +1,10 @@
+vim.cmd("source ~/.vimrc")
+
 require('telescope').setup()
 require('telescope').load_extension('fzf')
-
-vim.cmd("source ~/.vimrc")
+require("telescope").load_extension("yadm_files")
+require("telescope").load_extension("git_or_files")
+require("telescope").load_extension("git_or_yadm_files")
 
 local cmp = require'cmp'
 cmp.setup {

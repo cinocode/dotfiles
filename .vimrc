@@ -232,6 +232,11 @@ if has('nvim')
   let g:rnvimr_enable_picker = 1
 
   nnoremap <silent> <space>f :lua require('telescope.builtin').find_files()<CR>
+  nnoremap <silent> <space>r :lua require('telescope.builtin').oldfiles()<CR>
+  nnoremap <silent> <space>t :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
+  nnoremap <silent> <space>i :lua require('telescope.builtin').loclist()<CR>
+  nnoremap <silent> <space>d :Telescope git_or_yadm_files<CR>
+  nnoremap <silent> <space>a :Telescope git_branches<CR>
   nnoremap <silent> <space>g :lua require('telescope.builtin').live_grep()<CR>
   nnoremap <silent> <space>b :lua require('telescope.builtin').buffers()<CR>
   nnoremap <silent> <space>h :lua require('telescope.builtin').help_tags()<CR>
