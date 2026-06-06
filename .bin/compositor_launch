@@ -1,0 +1,70 @@
+#!/bin/bash
+
+dots_dir="${HOME}/.config/dots"
+offline_flag="$dots_dir/.compositor_offline"
+mode="toggle"
+if [[ ! -z "$1" ]]; then
+  mode="$1"
+fi
+component="$2"
+transpval="0.85"
+
+if [[ "$mode" = "toggle" ]]; then
+  if [[ -f "$offline_flag" ]]; then
+    mode=start
+  else
+    mode=stop
+  fi
+elif [[ "$mode" = "transp" ]]; then
+  if pgrep --quiet flashfocus; then
+    mode="transp_off"
+  else
+    mode="transp_on"
+  fi
+fi
+
+if [[ "$mode" = "transp_off" ]]; then
+  transpval="1"
+  pkill flashfocus
+  mode="restart"
+  component="picom"
+elif [[ "$mode" = "transp_on" ]]; then
+  pkill flashfocus
+  flashfocus >/dev/null 2>&1 &
+  mode="restart"
+  component="picom"
+fi
+
+if [[ "$mode" = "stop" || "$mode" = "restart" ]]; then
+  if [[ -z "$component" ]]; then
+    mkdir -p "$dots_dir"
+    touch "$offline_flag"
+  fi
+
+  if [[ -z "$component" || "$component" = "wallpaper" ]]; then
+    pkill xwinwrap
+    pkill live_wallpaper
+  fi
+  if [[ -z "$component" || "$component" = "flashfocus" ]]; then
+    pkill flashfocus
+  fi
+  if [[ -z "$component" || "$component" = "picom" ]]; then
+    pkill picom
+  fi
+fi
+
+if [[ "$mode" = "start" || "$mode" = "restart" ]]; then
+  if [[ -z "$component" && -f "$offline_flag" ]]; then
+    rm "$offline_flag"
+  fi
+
+  if [[ -z "$component" || "$component" = "picom" ]]; then
+    picom --active-opacity "$transpval" --inactive-opacity "$transpval" --opacity-rule "100:class_g = 'cs2'" --opacity-rule "100:class_g = 'csgo_linux64'" --opacity-rule "100:class_g = 'hl_linux'" --opacity-rule "100:class_g = 'steam_app_default'" --opacity-rule "100:class_g = 'Brave-browser'" --opacity-rule "100:class_g = 'feh'" --opacity-rule "100:class_g = 'vlc'" --opacity-rule "100:class_g = 'mpv'" --opacity-rule "100:class_g = 'jellyfin-desktop'" >/dev/null 2>&1 &
+  fi
+  if [[ -z "$component" || "$component" = "flashfocus" ]]; then
+    flashfocus >/dev/null 2>&1 &
+  fi
+  if [[ -z "$component" || "$component" = "wallpaper" ]]; then
+    live_wallpaper -l -t 300 >/dev/null 2>&1 &
+  fi
+fi

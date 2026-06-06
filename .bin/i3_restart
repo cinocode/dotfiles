@@ -1,6 +1,2 @@
 #!/usr/bin/env bash
-pkill live_wallpaper &
-pkill xwinwrap &
-pkill compton &
-pkill flashfocus &
-sleep 0.5 && i3-msg restart
+compositor_launch stop && sleep 0.25 && i3-msg restart
