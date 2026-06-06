@@ -1,0 +1,3 @@
+#!/bin/bash
+compositor_launch stop
+$@ && compositor_launch start
