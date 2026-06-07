@@ -1,0 +1,6 @@
+#!/bin/sh
+if zfs list | grep -q zbackup; then
+  zoutp="$(zfs list | grep zbackup | head -n 1)"
+  space="$(awk -F ' ' '{print $3}' <<< $zoutp)"
+  echo "$space "
+fi
