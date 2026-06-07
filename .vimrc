@@ -240,6 +240,12 @@ if has('nvim')
   nnoremap <silent> <space>g :lua require('telescope.builtin').live_grep()<CR>
   nnoremap <silent> <space>b :lua require('telescope.builtin').buffers()<CR>
   nnoremap <silent> <space>h :lua require('telescope.builtin').help_tags()<CR>
+  nnoremap <silent> <space>u :lua require('telescope.builtin').keymaps()<CR>
+
+  nnoremap <silent> <space>q <cmd>lua require('flash').treesitter_search()<CR>
+  nnoremap <silent> <space>j <cmd>lua require('flash').jump()<CR>
+  nnoremap <silent> <space>k <cmd>lua require('flash').treesitter()<CR>
+  nnoremap <silent> <space>x <cmd>lua require('flash').remote()<CR>
 else
   nnoremap <silent> <space>f :CtrlP<cr>
   nnoremap <silent> <space>b :CtrlPBuffer<cr>
