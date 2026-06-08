@@ -56,7 +56,7 @@ urxvt*background: rgba:0000/0000/0200/c800
 
 URxvt.inheritPixmap:false
 URxvt.xftAntialias:true
-! ! URxvt.termName:rxvt-256color
+URxvt.termName:screen-256color
 
 rofi.color-enabled: true
 rofi.color-window: #393939, #393939, #268bd2
