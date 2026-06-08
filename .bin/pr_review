@@ -9,10 +9,16 @@ elif [[ "$reponame" = "tshiftbook" ]]; then
   reponame="shiftbook"
 fi
 
+checkout_and_open_pr() {
+  sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && gitup -p . && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter
+}
+
 if tmux list-sessions | grep -q "$reponame"; then
-  if tmux list-windows -t "$reponame" | grep -v ranger | grep -qv vim; then
-    sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && gitup -p . && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter
+  if ! tmux list-windows -t "$reponame" | grep -v ranger | grep -qv vim; then
+    checkout_and_open_pr
   fi
+else
+  checkout_and_open_pr
 fi
 
 sesh connect "code/$reponame"
