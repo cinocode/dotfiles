@@ -1,0 +1,153 @@
+#!/bin/bash
+set -eo pipefail
+
+input_url="$1"
+vods_file="$HOME/note/media/twitch_vods.txt"
+mpv_socket="$2"
+
+seconds=0
+unsaved_sec=0
+saved_sec=0
+
+parse_time_to_seconds() {
+  local ts="$1"
+  local hours=0 minutes=0 seconds=0
+
+  if [[ -n "$ts" ]]; then
+    # Strip the ?t= prefix
+    ts="${ts#\?t=}"
+    # Extract hours (if present)
+    if [[ "$ts" =~ ([0-9]+)h ]]; then
+      hours="${BASH_REMATCH[1]}"
+    fi
+    # Extract minutes (if present)
+    if [[ "$ts" =~ ([0-9]+)m ]]; then
+      minutes="${BASH_REMATCH[1]}"
+    fi
+    # Extract seconds (if present)
+    if [[ "$ts" =~ ([0-9]+)s ]]; then
+      seconds="${BASH_REMATCH[1]}"
+    fi
+  fi
+
+  echo $(( hours * 3600 + minutes * 60 + seconds ))
+}
+
+format_seconds() {
+  local sec="$1"
+  local hours=$(( sec / 3600 ))
+  local minutes=$(( (sec % 3600) / 60 ))
+  local remaining=$(( sec % 60 ))
+  local result="?t="
+
+  if [[ $hours -gt 0 ]]; then
+    result+="${hours}h"
+  fi
+  if [[ $minutes -gt 0 ]]; then
+    result+="${minutes}m"
+  fi
+  result+="${remaining}s"
+
+  echo "$result"
+}
+
+persistTimestamp() {
+  add_seconds="$1"
+  mode="$2"
+
+  # Extract video ID from the input URL (the number after twitch.tv/videos/)
+  video_id="$(echo "$input_url" | sed -E 's|.*twitch\.tv/videos/([0-9]+).*|\1|')"
+  if [[ -z "$video_id" ]]; then
+    echo "Error: could not extract video ID from URL: $input_url" >&2
+    exit 1
+  fi
+
+  # Check that the video ID exists in the file
+  if ! grep -q "twitch\.tv/videos/${video_id}" "$vods_file"; then
+    echo "Error: no line with video ID $video_id found in $vods_file" >&2
+    exit 1
+  fi
+
+  # Extract the time signature from the matching line in the file
+  time_sig="$(grep "twitch\.tv/videos/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
+
+  total_seconds=$(parse_time_to_seconds "$time_sig")
+  if [[ "$mode" = "add" ]]; then
+    total_seconds=$(( total_seconds + add_seconds ))
+  elif [[ "$mode" = "set" ]]; then
+    total_seconds=$add_seconds
+  fi
+
+  # Format total seconds back to ?t=XhYmZs (dropping zero hours/minutes)
+
+  new_time_sig=$(format_seconds "$total_seconds")
+
+  # Update only the matching line
+  # Case A: the line has an existing time signature  -> replace it
+  # Case B: the line has no time signature            -> insert one
+  if [[ -n "$time_sig" ]]; then
+    sed -i "\|twitch\.tv/videos/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
+  else
+    sed -i "\|twitch\.tv/videos/${video_id}|s|\(twitch\.tv/videos/${video_id}\)|\1${new_time_sig}|" "$vods_file"
+  fi
+
+  echo "Updated video ${video_id}: ${total_seconds}s ($new_time_sig)"
+}
+
+doSaveIfMissing() {
+  if [[ $unsaved_sec -gt $1 ]]; then
+    echo "having gt 30 unsaved"
+
+    if [[ "$type" = "full" ]]; then
+      echo "persisting target pos full: $seconds"
+      persistTimestamp "$seconds" "set"
+    elif [[ "$type" = "partial" ]]; then
+      echo "persisting partial pos: $unsaved_sec"
+      persistTimestamp "$unsaved_sec" "add"
+    fi
+    saved_sec=$seconds
+  fi
+}
+
+while true
+do
+  sleep 2
+  if [[ ! -z "$type" ]]; then
+    sleep 8
+  fi
+
+  output=$(echo '{ "command": ["get_property_string", "time-pos"] }' | socat - "$mpv_socket" || echo 'null')
+  if [[ "$output" = "null" ]]; then
+    position="null"
+  else
+    position="$(echo "$output" | jq .data | tr '"' ' ' | cut -d'.' -f 1 | sed 's/^[ \t]*//;s/[ \t]*$//')"
+  fi
+  if [[ "$position" = "null" ]]; then
+    if [[ -z "$type" ]]; then
+      echo 'not started yet'
+    else
+      doSaveIfMissing 60
+      rm "$mpv_socket"
+      tmux kill-window
+    fi
+  else
+    if [[ $position -gt 1 ]]; then
+      if [[ -z "$type" ]]; then
+        if [[ $position -gt 180 ]]; then
+          type="full"
+          saved_sec=$position
+          echo full
+        else
+          type="partial"
+          echo partial
+        fi
+      fi
+
+      seconds=$position
+      echo "seconds: $seconds"
+      unsaved_sec=$((seconds-saved_sec))
+      echo "unsaved: $unsaved_sec"
+      doSaveIfMissing 900
+    fi
+  fi
+done

@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eo pipefail
+
+mpv_socket="/tmp/mpv_$(date +"%H%M%S")_stream"
+
+streamlink --ringbuffer-size=200M -p mpv -a "--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB --input-ipc-server=$mpv_socket" "$1" "$2" &
+tmux split-window -h -t background vod_ts "$1" "$mpv_socket"

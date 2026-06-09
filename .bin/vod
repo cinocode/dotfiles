@@ -1,9 +1,12 @@
 #!/bin/bash
 set -eo pipefail
 
+# in seconds POSITION=$(echo '{ "command": ["get_property_string", "time-pos"] }' | socat - /tmp/mpvstream | jq .data | tr '"' ' ' | cut -d'.' -f 1)
+
 if [[ -z "$1" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
+  #seconds="$(echo "$link" | sed 's/.*\?t=')"
 elif [[ $1 = https* ]]; then
   link="$1"
 else
@@ -15,4 +18,5 @@ if [[ ! -z "$2" ]]; then
   quality="$2"
 fi
 
-tmux new-window -n stream -t background: streamlink --ringbuffer-size=200M -p mpv -a '--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB ' "$link" "$quality"
+tmux new-window -n stream -t background: 
+tmux send-keys -t background "vod_launch \"$link\" \"$quality\"" Enter

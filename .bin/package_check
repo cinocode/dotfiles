@@ -40,6 +40,10 @@ check_command_found "zoxide"
 check_command_found "rg"
 check_command_found "cmake"
 
+check_command_found "socat"
+check_command_found "jq"
+check_command_found "streamlink"
+
 check_command_found "jdtls"
 if [[ -z ${JAVA_HOME} || ! -d ${JAVA_HOME} ]]; then
   echo 'java home not set'
