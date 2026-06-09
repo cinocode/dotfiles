@@ -1,3 +1,0 @@
-#!/bin/bash
-set -eo pipefail
-streamlink -p mpv https://www.twitch.tv/$1 best

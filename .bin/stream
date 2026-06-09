@@ -1,0 +1,18 @@
+#!/bin/bash
+set -eo pipefail
+
+if [[ -z "$1" ]]; then
+  line="$(cat ~/note/media/twitch_vods.txt | head -n 10 | fzf)"
+  link="$(awk '{print $1}' <<< $line)"
+elif [[ $1 = https* ]]; then
+  link="$1"
+else
+  link="https://www.twitch.tv/$1" best
+fi
+quality="best"
+
+if [[ -z $TMUX ]]; then
+  streamlink -p mpv "$link" "$quality"
+else
+  tmux new-window -n stream -t background: streamlink -p mpv "$link" "$quality"
+fi
