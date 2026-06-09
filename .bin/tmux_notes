@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eo pipefail
+
+tmux new-session -d -s notes > /dev/null
+
+tmux send-keys -t notes 'cd note && nvim -c "Git pull" && notesync && exit' Enter
+
+sesh connect notes
