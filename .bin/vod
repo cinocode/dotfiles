@@ -7,7 +7,7 @@ if [[ -z "$1" ]]; then
 elif [[ $1 = https* ]]; then
   link="$1"
 else
-  link="https://www.twitch.tv/$1" best
+  link="https://www.twitch.tv/$1"
 fi
 
 quality="best"
