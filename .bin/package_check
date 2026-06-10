@@ -10,6 +10,12 @@ check_command_found() {
   fi
 }
 
+check_yay_found() {
+  if [[ -z "$(yay -Qs "$1")" ]]; then
+    MISSING_COMMANDS="${MISSING_COMMANDS}${1} "
+  fi
+}
+
 if [[ ! -z "$1" ]]; then
   check_command_found "$1"
   if [[ -z "$MISSING_COMMANDS" ]]; then
@@ -42,6 +48,8 @@ fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   check_command_found "imgcat"
+else
+  check_yay_found "mpv-mpris"
 fi
 
 if [[ ! -z $MISSING_COMMANDS ]]; then
