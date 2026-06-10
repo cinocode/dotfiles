@@ -7,7 +7,9 @@ if [[ "$reponame" = "vcoversheet" ]]; then
   reponame="coversheet"
 elif [[ "$reponame" = "tshiftbook" ]]; then
   reponame="shiftbook"
+elif [[ "$reponame" = "vipapps-tom" ]]; then
+  reponame="tom"
 fi
 
-sleep 0.1 && tmux send-keys -t "$reponame" "git status --porcelain && gitup -p . && sleep 0.1 && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter
+sleep 0.3 && tmux send-keys -t "$reponame" "git status --porcelain && gitup -p . && sleep 0.1 && pr_checkout $branch && nvim -c \"Octo pr edit $prnum\"" Enter &
 sesh connect "code/$reponame"
