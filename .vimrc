@@ -21,6 +21,9 @@ set bs=2
 set timeoutlen=1200	" A little bit more time for macros
 set ttimeoutlen=50	" Make Esc work faster
 
+let g:auto_save = 1
+let g:auto_save_silent = 1
+
 syntax on
 set autoindent
 set sts=0
