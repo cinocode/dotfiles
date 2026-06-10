@@ -1,8 +1,10 @@
 #!/bin/bash
 set -eo pipefail
 
-tmux new-session -d -s notes > /dev/null
+if ! tmux list-sessions | grep -q notes; then
+  tmux new-session -d -s notes > /dev/null
 
-tmux send-keys -t notes 'cd note && nvim -c "Git pull" && notesync && exit' Enter
+  tmux send-keys -t notes 'cd note && nvim -c "Git pull" && notesync && exit' Enter
+fi
 
 sesh connect notes

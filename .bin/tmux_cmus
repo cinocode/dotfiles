@@ -1,12 +1,14 @@
 #!/bin/bash
 set -eo pipefail
 
-tmux new-session -d -s cmus > /dev/null
+if ! tmux list-sessions | grep -q cmus; then
+  tmux new-session -d -s cmus > /dev/null
 
-tmux split-window -h -t cmus 'cava'
-tmux resize-pane -t cmus -R 10
+  tmux split-window -h -t cmus 'cava'
+  tmux resize-pane -t cmus -R 10
 
-tmux last-pane -t cmus
-tmux send-keys -t cmus 'cmus && tmux kill-window' Enter
+  tmux last-pane -t cmus
+  tmux send-keys -t cmus 'cmus && tmux kill-window' Enter
+fi
 
 sesh connect cmus
