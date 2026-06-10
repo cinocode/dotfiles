@@ -15,8 +15,4 @@ if [[ ! -z "$2" ]]; then
   quality="$2"
 fi
 
-if [[ -z $TMUX ]]; then
-  streamlink -p mpv "$link" "$quality"
-else
-  tmux new-window -n stream -t background: streamlink -p mpv "$link" "$quality"
-fi
+tmux new-window -n stream -t background: streamlink --ringbuffer-size=200M -p mpv -a '--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB ' "$link" "$quality"
