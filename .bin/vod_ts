@@ -8,6 +8,7 @@ mpv_socket="$2"
 seconds=0
 unsaved_sec=0
 saved_sec=0
+startup_attempts=0
 
 parse_time_to_seconds() {
   local ts="$1"
@@ -52,7 +53,7 @@ format_seconds() {
 }
 
 persistTimestamp() {
-  add_seconds="$1"
+  seconds_to_add_or_set="$1"
   mode="$2"
 
   # Extract video ID from the input URL (the number after twitch.tv/videos/)
@@ -71,27 +72,29 @@ persistTimestamp() {
   # Extract the time signature from the matching line in the file
   time_sig="$(grep "twitch\.tv/videos/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
 
-  total_seconds=$(parse_time_to_seconds "$time_sig")
+  time_in_file=$(parse_time_to_seconds "$time_sig")
   if [[ "$mode" = "add" ]]; then
-    total_seconds=$(( total_seconds + add_seconds ))
+    total_seconds=$(( time_in_file + seconds_to_add_or_set ))
   elif [[ "$mode" = "set" ]]; then
-    total_seconds=$add_seconds
+    total_seconds=$seconds_to_add_or_set
   fi
 
-  # Format total seconds back to ?t=XhYmZs (dropping zero hours/minutes)
+  if [[ $total_seconds -gt $time_in_file ]]; then
+    new_time_sig=$(format_seconds "$total_seconds")
 
-  new_time_sig=$(format_seconds "$total_seconds")
+    # Update only the matching line
+    # Case A: the line has an existing time signature  -> replace it
+    # Case B: the line has no time signature            -> insert one
+    if [[ -n "$time_sig" ]]; then
+      sed -i "\|twitch\.tv/videos/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
+    else
+      sed -i "\|twitch\.tv/videos/${video_id}|s|\(twitch\.tv/videos/${video_id}\)|\1${new_time_sig}|" "$vods_file"
+    fi
 
-  # Update only the matching line
-  # Case A: the line has an existing time signature  -> replace it
-  # Case B: the line has no time signature            -> insert one
-  if [[ -n "$time_sig" ]]; then
-    sed -i "\|twitch\.tv/videos/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
+    echo "Updated video ${video_id}: ${total_seconds}s ($new_time_sig)"
   else
-    sed -i "\|twitch\.tv/videos/${video_id}|s|\(twitch\.tv/videos/${video_id}\)|\1${new_time_sig}|" "$vods_file"
+    echo "Skipped persisting time since its before the saved ts"
   fi
-
-  echo "Updated video ${video_id}: ${total_seconds}s ($new_time_sig)"
 }
 
 doSaveIfMissing() {
@@ -100,7 +103,9 @@ doSaveIfMissing() {
 
     if [[ "$type" = "full" ]]; then
       echo "persisting target pos full: $seconds"
-      persistTimestamp "$seconds" "set"
+      secondsWithBuffer=$(( seconds - 150 ))
+      echo "reducing with buffer to: $secondsWithBuffer"
+      persistTimestamp "$secondsWithBuffer" "set"
     elif [[ "$type" = "partial" ]]; then
       echo "persisting partial pos: $unsaved_sec"
       persistTimestamp "$unsaved_sec" "add"
@@ -114,6 +119,14 @@ do
   sleep 2
   if [[ ! -z "$type" ]]; then
     sleep 8
+  else
+    startup_attempts=$(( startup_attempts + 1 ))
+    if [[ $startup_attempts -gt 15 ]]; then
+      echo 'nothing started in 30s - leaving'
+      rm "$mpv_socket"
+      sleep 15
+      tmux kill-window
+    fi
   fi
 
   output=$(echo '{ "command": ["get_property_string", "time-pos"] }' | socat - "$mpv_socket" || echo 'null')
@@ -128,6 +141,7 @@ do
     else
       doSaveIfMissing 60
       rm "$mpv_socket"
+      sleep 15
       tmux kill-window
     fi
   else
