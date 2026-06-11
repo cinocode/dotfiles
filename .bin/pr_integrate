@@ -19,9 +19,16 @@ gitup -p .
 if [[ ! -z "$base_branch" ]]; then
   git checkout "$base_branch"
 else
-  git checkout staging || git checkout trunc || git checkout main
+  git checkout staging || git checkout trunc || git checkout main || git checkout master
+  base_branch="$(git branch --show-current)"
 fi
+
+git checkout "$branch"
+git rebase "$base_branch"
+
+git checkout "$base_branch"
 git merge --no-ff "$branch"
+
 git push origin staging
 
 pr_delete "$branch"
