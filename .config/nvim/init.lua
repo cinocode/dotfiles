@@ -271,3 +271,9 @@ require("tiny-glimmer").setup({
 			priority = 2048,  -- Higher values appear above other plugins
 		},
 	})
+
+require("sudoku").setup({
+  persist_settings = false,
+  persist_games = false,
+  default_mappings = true
+})

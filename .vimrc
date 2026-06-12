@@ -115,6 +115,11 @@ nnoremap <silent> <leader>ac mmgg"*yG`m
 vnoremap <silent> <leader>ac "*y
 nnoremap <silent> <leader>lf :LocateFile<cr>
 
+nnoremap <silent> <leader>pk :KillKillKill<CR>
+nnoremap <silent> <leader>pt :Tetris<CR>
+nnoremap <silent> <leader>pm :Nvimesweeper<CR>
+nnoremap <silent> <leader>ps :Sudoku<CR>
+
 nnoremap <silent> <leader>jf :lua require'jdtls'.organize_imports()<CR>
 nnoremap <silent> <leader>je :lua require('jdtls').extract_variable()<CR>
 nnoremap <silent> <leader>jE :lua require('jdtls').extract_variable(true)<CR>
