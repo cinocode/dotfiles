@@ -99,7 +99,7 @@ persistTimestamp() {
 
 doSaveIfMissing() {
   if [[ $unsaved_sec -gt $1 ]]; then
-    echo "having gt 30 unsaved"
+    echo "having gt $1 unsaved"
 
     if [[ "$type" = "full" ]]; then
       echo "persisting target pos full: $seconds"
@@ -108,9 +108,11 @@ doSaveIfMissing() {
       persistTimestamp "$secondsWithBuffer" "set"
     elif [[ "$type" = "partial" ]]; then
       echo "persisting partial pos: $unsaved_sec"
-      persistTimestamp "$unsaved_sec" "add"
+      secondsWithBuffer=$(( seconds - 15 ))
+      echo "reducing with buffer to: $secondsWithBuffer"
+      persistTimestamp "$secondsWithBuffer" "add"
     fi
-    saved_sec=$seconds
+    saved_sec=$secondsWithBuffer
   fi
 }
 
@@ -124,7 +126,6 @@ do
     if [[ $startup_attempts -gt 15 ]]; then
       echo 'nothing started in 30s - leaving'
       rm "$mpv_socket"
-      sleep 15
       tmux kill-window
     fi
   fi
@@ -139,9 +140,8 @@ do
     if [[ -z "$type" ]]; then
       echo 'not started yet'
     else
-      doSaveIfMissing 60
+      doSaveIfMissing 30
       rm "$mpv_socket"
-      sleep 15
       tmux kill-window
     fi
   else
@@ -150,17 +150,15 @@ do
         if [[ $position -gt 180 ]]; then
           type="full"
           saved_sec=$position
-          echo full
         else
           type="partial"
-          echo partial
         fi
+
+        echo "type=$type"
       fi
 
       seconds=$position
-      echo "seconds: $seconds"
       unsaved_sec=$((seconds-saved_sec))
-      echo "unsaved: $unsaved_sec"
       doSaveIfMissing 900
     fi
   fi
