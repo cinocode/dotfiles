@@ -108,7 +108,7 @@ doSaveIfMissing() {
       persistTimestamp "$secondsWithBuffer" "set"
     elif [[ "$type" = "partial" ]]; then
       echo "persisting partial pos: $unsaved_sec"
-      secondsWithBuffer=$(( seconds - 15 ))
+      secondsWithBuffer=$(( unsaved_seconds - 15 ))
       echo "reducing with buffer to: $secondsWithBuffer"
       persistTimestamp "$secondsWithBuffer" "add"
     fi
