@@ -23,6 +23,7 @@ set ttimeoutlen=50	" Make Esc work faster
 
 let g:auto_save = 1
 let g:auto_save_silent = 1
+let g:auto_save_write_all_buffers = 1
 
 syntax on
 set autoindent
@@ -181,8 +182,8 @@ nnoremap <silent> <leader>ti :JUnitImpl<cr>
 nnoremap <silent> <leader>tt :JUnit %<cr>
 " map <unique> <Leader>tz	<Plug>AM_tt
 
+nnoremap <silent> <leader>va :AutoSaveToggle<cr>
 nnoremap <silent> <leader>vd :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
-nnoremap <silent> <leader>va :setlocal ts=4 sts=0 sw=4 expandtab<cr>
 nnoremap <silent> <leader>vc :silent !clear<cr>
 nnoremap <silent> <leader>vs :call DoWindowSwap()<cr>
 nnoremap <silent> <leader>ve :EvervimNotebookList<cr>
