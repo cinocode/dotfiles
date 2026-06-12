@@ -6,16 +6,18 @@ if [[ ! -z "$2" ]]; then
   quality="$2"
 fi
 
-tmux new-window -n stream -t background: 
+ts_marker="$(date +"%H%M%S")"
+tmux new-window -n "stream$ts_marker" -t background: 
+
 if [[ -z "$1" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\"" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$ts_marker\"" Enter
 else
   if [[ $1 = https* ]]; then
     link="$1"
   else
     link="https://www.twitch.tv/$1"
   fi
-  tmux send-keys -t background "streamlink --ringbuffer-size=500M -p mpv -a '--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB' \"$link\" \"$quality\" && tmux kill-window" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\"" Enter
 fi

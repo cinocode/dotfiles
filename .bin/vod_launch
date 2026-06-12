@@ -1,7 +1,16 @@
 #!/bin/bash
 set -eo pipefail
 
-mpv_socket="/tmp/mpv_$(date +"%H%M%S")_stream"
+socket_args=""
+if [[ ! -z "$3" ]]; then
+  mpv_socket="/tmp/mpv_${3}_stream"
+  socket_args=" --input-ipc-server=$mpv_socket"
+  tmux split-window -v -t background vod_ts "$1" "$mpv_socket"
+  tmux last-pane -t background
+fi
 
-streamlink --ringbuffer-size=500M -p mpv -a "--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB --input-ipc-server=$mpv_socket" "$1" "$2" &
-tmux split-window -h -t background vod_ts "$1" "$mpv_socket"
+streamlink --ringbuffer-size=500M -p mpv -a "--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB $socket_args" "$1" "$2"
+
+if [[ -z "$mpv_socket" ]]; then
+  tmux kill-window
+fi
