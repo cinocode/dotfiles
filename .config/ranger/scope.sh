@@ -68,7 +68,7 @@ handle_extension() {
         pdf)
             ## Preview as text conversion
             pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | \
-              fmt -w "${PV_WIDTH}" && exit 5
+             fmt -w "${PV_WIDTH}" && exit 5
             mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | \
               fmt -w "${PV_WIDTH}" && exit 5
             exiftool "${FILE_PATH}" && exit 5
@@ -154,10 +154,9 @@ handle_image() {
             exit 7;;
 
         ## Video
-         video/*)
-             # Thumbnail
-             timeout -s KILL 0.5 ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-             exit 1;;
+        video/*)
+            # Thumbnail
+            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 812 -q 6 && exit 6;;
 
         ## PDF
         # application/pdf)
