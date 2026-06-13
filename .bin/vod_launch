@@ -23,7 +23,6 @@ if [[ ! -z "$4" ]]; then
   tmux last-pane -t background
 fi
 
-echo "streamlink \"$rb_args\" -p mpv -a \"$cache_args $socket_args\" \"$1\" \"$2\""
 streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 
 if [[ -z "$mpv_socket" ]]; then
