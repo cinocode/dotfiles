@@ -1,15 +1,30 @@
 #!/bin/bash
 set -eo pipefail
 
+if [[ "$3" = "c0" ]]; then
+  rb_args="--ringbuffer-size=16M"
+  cache_args="--cache=no"
+elif [[ "$3" = "c1" ]]; then
+  rb_args="--ringbuffer-size=200M"
+  cache_args="--cache=yes --cache-secs=600 --demuxer-max-bytes=400MiB --demuxer-max-back-bytes=100MiB"
+elif [[ "$3" = "c2" ]]; then
+  rb_args="--ringbuffer-size=500M"
+  cache_args="--cache=yes --cache-secs=1800 --demuxer-max-bytes=750MiB --demuxer-max-back-bytes=150MiB"
+else
+  rb_args="--ringbuffer-size=1000M"
+  cache_args="--cache=yes --cache-secs=3600 --demuxer-max-bytes=1250MiB --demuxer-max-back-bytes=250MiB"
+fi
+
 socket_args=""
-if [[ ! -z "$3" ]]; then
+if [[ ! -z "$4" ]]; then
   mpv_socket="/tmp/mpv_${3}_stream"
   socket_args=" --input-ipc-server=$mpv_socket"
   tmux split-window -v -t background vod_ts "$1" "$mpv_socket"
   tmux last-pane -t background
 fi
 
-streamlink --ringbuffer-size=1000M -p mpv -a "--cache=yes --cache-secs=3600 --demuxer-max-bytes=1250MiB --demuxer-max-back-bytes=250MiB $socket_args" "$1" "$2"
+echo "streamlink \"$rb_args\" -p mpv -a \"$cache_args $socket_args\" \"$1\" \"$2\""
+streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 
 if [[ -z "$mpv_socket" ]]; then
   tmux kill-window

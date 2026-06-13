@@ -1,23 +1,51 @@
 #!/bin/bash
 set -eo pipefail
 
+link="vods"
 quality="best"
-if [[ ! -z "$2" ]]; then
-  quality="$2"
+cache="c3"
+
+if [[ $1 = https* ]]; then
+  cache="c0"
+  link="$1"
+elif [[ "$1" = "1080p" ]]; then
+  quality="1080p60,1080p,720p60,720p,best"
+elif [[ "$1" = "720p" ]]; then
+  quality="720p60,720p,480p,best"
+elif [[ "$1" = "420p" ]]; then
+  quality="480p,worst"
+elif [[ "$1" = "c0" || "$1" = "c1" || "$1" = "c2" || "$1" = "c3" ]]; then
+  cache="$1"
+else
+  cache="c0"
+  link="https://www.twitch.tv/$1"
+fi
+
+if [[ "$2" = "1080p" ]]; then
+  quality="1080p60,1080p,720p60,720p,best"
+elif [[ "$2" = "720p" ]]; then
+  quality="720p60,720p,480p,best"
+elif [[ "$2" = "420p" ]]; then
+  quality="480p,worst"
+elif [[ "$2" = "c0" || "$2" = "c1" || "$2" = "c2" || "$2" = "c3" ]]; then
+  cache="$2"
+fi
+
+if [[ "$3" = "c0" || "$3" = "c1" || "$3" = "c2" || "$3" = "c3" ]]; then
+  cache="$3"
 fi
 
 ts_marker="$(date +"%H%M%S")"
 tmux new-window -n "stream$ts_marker" -t background: 
 
-if [[ -z "$1" ]]; then
+if [[ -z "$link" ]]; then
+  exit 0
+fi
+
+if [[ "$1" = "vods" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$ts_marker\"" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$ts_marker\"" Enter
 else
-  if [[ $1 = https* ]]; then
-    link="$1"
-  else
-    link="https://www.twitch.tv/$1"
-  fi
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\"" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\"" Enter
 fi
