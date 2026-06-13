@@ -9,7 +9,7 @@ if [[ ! -z "$3" ]]; then
   tmux last-pane -t background
 fi
 
-streamlink --ringbuffer-size=500M -p mpv -a "--cache=yes --cache-secs=3600 --demuxer-max-bytes=1000MiB $socket_args" "$1" "$2"
+streamlink --ringbuffer-size=1000M -p mpv -a "--cache=yes --cache-secs=3600 --demuxer-max-bytes=1250MiB --demuxer-max-back-bytes=250MiB $socket_args" "$1" "$2"
 
 if [[ -z "$mpv_socket" ]]; then
   tmux kill-window

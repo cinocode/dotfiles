@@ -92,6 +92,7 @@ persistTimestamp() {
     fi
 
     echo "Updated video ${video_id}: ${total_seconds}s ($new_time_sig)"
+    saved_sec=$seconds_to_add_or_set
   else
     echo "Skipped persisting time since its before the saved ts"
   fi
@@ -112,7 +113,6 @@ doSaveIfMissing() {
       echo "reducing with buffer to: $secondsWithBuffer"
       persistTimestamp "$secondsWithBuffer" "add"
     fi
-    saved_sec=$secondsWithBuffer
   fi
 }
 
