@@ -92,27 +92,29 @@ persistTimestamp() {
     fi
 
     echo "Updated video ${video_id}: ${total_seconds}s ($new_time_sig)"
-    saved_sec=$seconds_to_add_or_set
+    if [[ "$mode" = "add" ]]; then
+      saved_sec=$((saved_sec + seconds_to_add_or_set))
+    elif [[ "$mode" = "set" ]]; then
+      saved_sec=$seconds_to_add_or_set
+    fi
   else
     echo "Skipped persisting time since its before the saved ts"
   fi
 }
 
 doSaveIfMissing() {
-  if [[ $unsaved_sec -gt $1 ]]; then
-    echo "having gt $1 unsaved"
+  if [[ "$type" = "full" ]]; then
+    mode="set"
+    secondsWithBuffer=$(( seconds - 150 ))
+  elif [[ "$type" = "partial" ]]; then
+    mode="add"
+    secondsWithBuffer=$(( unsaved_sec - 15 ))
+  fi
 
-    if [[ "$type" = "full" ]]; then
-      echo "persisting target pos full: $seconds"
-      secondsWithBuffer=$(( seconds - 150 ))
-      echo "reducing with buffer to: $secondsWithBuffer"
-      persistTimestamp "$secondsWithBuffer" "set"
-    elif [[ "$type" = "partial" ]]; then
-      echo "persisting partial pos: $unsaved_sec"
-      secondsWithBuffer=$(( unsaved_sec - 15 ))
-      echo "reducing with buffer to: $secondsWithBuffer"
-      persistTimestamp "$secondsWithBuffer" "add"
-    fi
+  if [[ $secondsWithBuffer -gt $1 ]]; then
+    echo "having gt $1 unsaved - seconds '$seconds' - bufferreduced '$secondsWithBuffer' - type '$type'"
+
+    persistTimestamp "$secondsWithBuffer" "$mode"
   fi
 }
 
