@@ -142,7 +142,7 @@ do
     if [[ -z "$type" ]]; then
       echo 'not started yet'
     else
-      doSaveIfMissing 30
+      doSaveIfMissing 15
       rm "$mpv_socket"
       tmux kill-window
     fi
