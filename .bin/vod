@@ -11,7 +11,7 @@ if [[ $1 = https* ]]; then
 elif [[ "$1" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
 elif [[ "$1" = "720p" ]]; then
-  quality="720p60,720p,480p,best"
+  quality="720p,720p60,480p,best"
 elif [[ "$1" = "420p" ]]; then
   quality="480p,worst"
 elif [[ "$1" = "c0" || "$1" = "c1" || "$1" = "c2" || "$1" = "c3" ]]; then
@@ -24,7 +24,7 @@ fi
 if [[ "$2" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
 elif [[ "$2" = "720p" ]]; then
-  quality="720p60,720p,480p,best"
+  quality="720p,720p60,480p,best"
 elif [[ "$2" = "420p" ]]; then
   quality="480p,worst"
 elif [[ "$2" = "c0" || "$2" = "c1" || "$2" = "c2" || "$2" = "c3" ]]; then
