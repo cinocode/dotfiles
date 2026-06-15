@@ -38,11 +38,7 @@ fi
 ts_marker="$(date +"%H%M%S")"
 tmux new-window -n "stream$ts_marker" -t background: 
 
-if [[ -z "$link" ]]; then
-  exit 0
-fi
-
-if [[ "$1" = "vods" ]]; then
+if [[ "$link" = "vods" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
   tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$ts_marker\"" Enter

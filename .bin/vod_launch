@@ -23,7 +23,12 @@ if [[ ! -z "$4" ]]; then
   tmux last-pane -t background
 fi
 
-streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
+
+if [[ $1 = *youtube.com* ]]; then
+  yt play "$1"
+else
+  streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
+fi
 
 if [[ -z "$mpv_socket" ]]; then
   tmux kill-window
