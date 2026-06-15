@@ -29,5 +29,3 @@ if [[ $1 = *youtube.com* ]]; then
 else
   streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 fi
-
-exit

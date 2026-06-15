@@ -41,7 +41,7 @@ tmux new-window -n "stream$ts_marker" -t background:
 if [[ "$link" = "vods" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$ts_marker\"" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$ts_marker\" && exit" Enter
 else
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\"" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" && exit" Enter
 fi
