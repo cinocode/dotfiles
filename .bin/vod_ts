@@ -128,7 +128,7 @@ do
     if [[ $startup_attempts -gt 15 ]]; then
       echo 'nothing started in 30s - leaving'
       rm "$mpv_socket"
-      tmux kill-window
+      exit
     fi
   fi
 
@@ -144,7 +144,7 @@ do
     else
       doSaveIfMissing 15
       rm "$mpv_socket"
-      tmux kill-window
+      exit
     fi
   else
     if [[ $position -gt 1 ]]; then

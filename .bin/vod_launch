@@ -17,7 +17,7 @@ fi
 
 socket_args=""
 if [[ ! -z "$4" ]]; then
-  mpv_socket="/tmp/mpv_${3}_stream"
+  mpv_socket="/tmp/mpv_${4}_stream"
   socket_args=" --input-ipc-server=$mpv_socket"
   tmux split-window -v -t background vod_ts "$1" "$mpv_socket"
   tmux last-pane -t background
@@ -30,6 +30,4 @@ else
   streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 fi
 
-if [[ -z "$mpv_socket" ]]; then
-  tmux kill-window
-fi
+exit
