@@ -36,14 +36,14 @@ if [[ "$3" = "c0" || "$3" = "c1" || "$3" = "c2" || "$3" = "c3" ]]; then
 fi
 
 ts_marker="$(date +"%H%M%S")"
-tmux new-window -n "stream$ts_marker" -t background: 
-
+vl_ts_marker=""
 if [[ "$link" = "vods" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
-  if [[ ! -z "$link" ]]; then
-    tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$ts_marker\" && exit" Enter
-  fi
-else
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" && exit" Enter
+  vl_ts_marker="$ts_marker"
+fi
+
+if [[ ! -z "$link" ]]; then
+  tmux new-window -n "stream$ts_marker" -t background: 
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$vl_ts_marker\" && exit" Enter
 fi
