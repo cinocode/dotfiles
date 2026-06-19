@@ -38,7 +38,7 @@ fi
 ts_marker="$(date +"%H%M%S")"
 vl_ts_marker=""
 if [[ "$link" = "vods" ]]; then
-  line="$(cat ~/note/media/twitch_vods.txt | head -n 20 | fzf)"
+  line="$(cat ~/note/media/twitch_vods.txt | head -n 30 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
   vl_ts_marker="$ts_marker"
 fi
