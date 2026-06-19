@@ -45,5 +45,5 @@ fi
 
 if [[ ! -z "$link" ]]; then
   tmux new-window -n "stream$ts_marker" -t background: 
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$vl_ts_marker\" && exit" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$vl_ts_marker\" && exit || exit" Enter
 fi
