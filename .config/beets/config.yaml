@@ -31,6 +31,7 @@ original_date: yes
 import:
   from_scratch: yes
   log: ~/.local/share/beets/beets.log
+  quiet_fallback: asis
 
 match:
   preferred:
