@@ -3,6 +3,7 @@ library: ~/.local/share/beets/library.db
 plugins:
   - scrub
   - info
+  - musicbrainz
   - duplicates
   - fromfilename
   - fuzzy
