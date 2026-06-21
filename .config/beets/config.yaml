@@ -9,7 +9,6 @@ plugins:
   - fuzzy
   - fetchart
   - lastgenre
-  - lyrics
   - the
   - replaygain
   - missing
