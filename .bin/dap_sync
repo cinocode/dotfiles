@@ -6,7 +6,9 @@ TARGET_AUDIOB="${DROID_DIR}/SD card/Audiobooks/"
 CMUS_PL_DIR="/home/ole/doc/playlists"
 TMP_PL_DIR="/home/ole/tmppldir"
 
-mount_droid "$DROID_DIR"
+if [[ ! -d "$DROID_DIR" ]]; then
+  mount_droid "$DROID_DIR"
+fi
 
 if [[ -z $1 ]]; then
     FROM_DIR="${SOURCE_MUS}"
@@ -26,10 +28,9 @@ if [[ -d "${FROM_DIR}" && -d "${TO_DIR}" ]]; then
     fi
     rsync -rltDvP --update --delete --inplace --exclude=".*" --exclude="/Audiobooks/" "${FROM_DIR}" "${TO_DIR}"
     mv "${TMP_PL_DIR}" "${PL_TARGET}"
-    rsync -rltDvP --update --delete --inplace --exclude=".*" "${FROM_DIR}Audiobooks/" "${TARGET_AUDIOB}"
+    rsync -rltDvP --update --delete --inplace --exclude="!Smart AudioBook Player Statistics" --exclude="**/position.sabp.dat" --exclude=".*" "${FROM_DIR}Audiobooks/" "${TARGET_AUDIOB}"
 else
     echo "Music dirs not found"
 fi
 
 umountrm "$DROID_DIR"
-
