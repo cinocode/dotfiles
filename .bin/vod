@@ -42,7 +42,10 @@ vl_ts_marker=""
 if [[ "$link" = "vods" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 30 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
-  vl_ts_marker="$ts_marker"
+
+  if [[ $link != *youtu* ]]; then
+    vl_ts_marker="$ts_marker"
+  fi
 fi
 
 if [[ ! -z "$link" ]]; then

@@ -23,9 +23,35 @@ if [[ ! -z "$4" ]]; then
   tmux last-pane -t background
 fi
 
+waitForYtStartup() {
+  ytstarted="false"
+  if [[ $1 = *?t=* ]]; then
+    seek_to="$(echo $1 | sed 's/.*?t=//g')"
+  fi
+  while true
+  do
+    if ps ax | grep -v grep | grep mpv | grep -q 'no-ytdl'; then
+      if [[ "$ytstarted" = "true" ]]; then
+        sleep 5
+      else
+        ytstarted="true"
+        if [[ "$seek_to" ]]; then
+          sleep 1
+          mpvYtSock="$(ps ax | grep mpv | grep -v grep | grep no-ytdl | sed 's/.*input-ipc-server=//g')"
+          echo "{ \"command\": [ \"seek\", \"$seek_to\", \"absolute\" ] }" | socat - "$mpvYtSock"
+        fi
+      fi
+    elif [[ "$ytstarted" = "true" ]]; then
+      exit 0
+    fi
+    sleep 1
+  done
+}
 
-if [[ $1 = *youtube.com* ]]; then
-  yt play "$1"
+if [[ $1 = *youtu* ]]; then
+  yt playurl "$1" &
+  waitForYtStartup "$1"
+  exit 0
 else
   streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 fi
