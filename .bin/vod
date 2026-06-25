@@ -16,6 +16,8 @@ elif [[ "$1" = "420p" ]]; then
   quality="480p,worst"
 elif [[ "$1" = "c0" || "$1" = "c1" || "$1" = "c2" || "$1" = "c3" ]]; then
   cache="$1"
+elif [[ $1 = tok:* ]]; then
+  link="https://www.tiktok.com/@$(echo $1 | cut -d ':' -f 2)"
 elif [[ ! -z "$1" ]]; then
   cache="c0"
   link="https://www.twitch.tv/$1"
