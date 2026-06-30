@@ -221,6 +221,17 @@ if [[ ! -L "${NVIM_BUNDLES}/vim-auto-save" ]]; then
   ln -sf "${VIM_BUNDLES}/vim-auto-save" "${NVIM_BUNDLES}/vim-auto-save"
 fi
 
+if [[ -d "${VIM_BUNDLES}/vim-flog" ]]; then
+    cd "${VIM_BUNDLES}/vim-flog"
+    git pull
+else
+    cd "${VIM_BUNDLES}"
+    git clone https://github.com/rbong/vim-flog.git
+fi
+if [[ ! -L "${NVIM_BUNDLES}/vim-flog" ]]; then
+  ln -sf "${VIM_BUNDLES}/vim-flog" "${NVIM_BUNDLES}/vim-flog"
+fi
+
 # nvim_plugins
 
 if [[ -d "${NVIM_BUNDLES}/tokyonight.nvim" ]]; then

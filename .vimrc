@@ -156,9 +156,11 @@ nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gP :Git push
-nnoremap <silent> <leader>gh :Telescope git_file_history<CR>
+nnoremap <silent> <leader>gh :Flogsplit -path=%<CR>
+nnoremap <silent> <leader>gH :Telescope git_file_history<CR>
 nnoremap <silent> <leader>go :Telescope git_branches<CR>
-nnoremap <silent> <leader>gl :Git lol<cr>
+nnoremap <silent> <leader>gl :Flogsplit<cr>
+nnoremap <silent> <leader>gL :Git lol<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
 
