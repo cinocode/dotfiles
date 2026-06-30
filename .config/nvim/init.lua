@@ -5,6 +5,7 @@ require('telescope').load_extension('fzf')
 require("telescope").load_extension("yadm_files")
 require("telescope").load_extension("git_or_files")
 require("telescope").load_extension("git_or_yadm_files")
+require("telescope").load_extension("git_file_history")
 
 local cmp = require'cmp'
 cmp.setup {
