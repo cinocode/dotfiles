@@ -5,7 +5,7 @@ if ! tmux list-sessions | grep -q notes; then
   (notesync >/dev/null 2>&1) &
   tmux new-session -d -s notes > /dev/null
 
-  tmux send-keys -t notes 'cd note && nvim "$(find . -type f | fzf)" && notesync && exit' Enter
+  tmux send-keys -t notes 'cd note && nvim "$(find . -type f -regex ".*txt" | fzf)" && notesync && exit' Enter
 fi
 
 sesh connect notes
