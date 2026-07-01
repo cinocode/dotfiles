@@ -49,6 +49,8 @@ gradlew.bat
 scratch.sql
 .zextract/
 
+.claude/
+
 # used bin ~/.bin/up
 .dev/
 
