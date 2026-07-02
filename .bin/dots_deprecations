@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euxo pipefail
+
+VIM_BUNDLES="${HOME}/.vim/pack/bundle/start"
+NVIM_BUNDLES="${HOME}/.local/share/nvim/site/pack/bundle/start"
+
+# 2026
+
+if [[ -d "${NVIM_BUNDLES}/telescope-git-file-history.nvim" ]]; then
+  rm -rf "${NVIM_BUNDLES}/telescope-git-file-history.nvim"
+fi

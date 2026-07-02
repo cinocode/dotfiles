@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+fallback_yadm="true"
+if [[ -d ".git" ]]; then
+  fallback_yadm="false"
+elif pwd | grep -q 'code/'; then
+  fallback_yadm="false"
+fi
+
+if [[ "$fallback_yadm" = "true" ]]; then
+  yadm $@
+else
+  git $@
+fi

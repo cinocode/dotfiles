@@ -144,8 +144,10 @@ nnoremap <silent> <leader>gA :Gwrite<cr>:Git commit<cr>
 nnoremap <silent> <leader>gb :Git blame<cr>
 nnoremap <silent> <leader>gc :Git commit<cr>
 nnoremap <silent> <leader>gC :Git commit --amend<cr>
-nnoremap <silent> <leader>gd :Ghdiffsplit<cr>
-nnoremap <silent> <leader>gD :Gvdiffsplit<cr>
+nnoremap <silent> <leader>gd :DiffviewOpen -- %<CR>
+nnoremap <silent> <leader>gD :Ghdiffsplit<CR>
+nnoremap <silent> <leader>gv :DiffviewOpen origin/HEAD..HEAD<CR>
+nnoremap <silent> <leader>gV :DiffviewOpen
 nnoremap <silent> <leader>gx :Gread<cr>
 nnoremap <silent> <leader>gX :Gdelete<cr>
 nnoremap <silent> <leader>gf :silent !clear<cr>:Git fetch<cr>
@@ -156,8 +158,10 @@ nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gP :Git push
-nnoremap <silent> <leader>gh :Flogsplit -path=%<CR>
-nnoremap <silent> <leader>gH :Telescope git_file_history<CR>
+nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>
+vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>
+nnoremap <silent> <leader>gH :Flogsplit -path=%<CR>
+nnoremap <silent> <leader>gq :DiffviewClose<CR>
 nnoremap <silent> <leader>go :Telescope git_branches<CR>
 nnoremap <silent> <leader>gl :Flogsplit<cr>
 nnoremap <silent> <leader>gL :Git lol<cr>
