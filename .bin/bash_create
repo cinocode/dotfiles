@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -euxo pipefail
 
 target_file="$1"
 
@@ -9,7 +9,7 @@ if [[ -f "$target_file" ]]; then
 fi
 
 echo "#!/bin/bash" >> "$target_file"
-echo "set -eo pipefail" >> "$target_file"
+echo "set -euxo pipefail" >> "$target_file"
 chmod +x "$target_file"
 
 if [[ "$2" = "yadm" ]]; then
