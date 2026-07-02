@@ -274,6 +274,7 @@ require("octo").setup({
 	},
 	default_remote = { "origin" }, -- order to try remotes
 	default_delete_branch = true, -- whether to delete branch when merging pull request with either `Octo pr merge` or from picker (can be overridden with `delete`/`nodelete` argument to `Octo pr merge`)
+  use_local_fs = true, -- use local files on right side of reviews
 	mappings = {
 		pull_request = {
 			add_comment = { lhs = "<leader>oc", desc = "add comment" },
