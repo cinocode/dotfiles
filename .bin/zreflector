@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo reflector -a 12 --score 30 --download-timeout 2 --connection-timeout 2 --sort rate -f 15 --save /etc/pacman.d/mirrorlist
+sudo reflector --protocol https -a 12 --score 30 --download-timeout 2 --connection-timeout 2 --sort rate -f 15 --save /etc/pacman.d/mirrorlist
