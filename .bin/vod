@@ -23,7 +23,9 @@ elif [[ ! -z "$1" ]]; then
   link="https://www.twitch.tv/$1"
 fi
 
-if [[ "$2" = "1080p" ]]; then
+if [[ "$2" = "await" ]]; then
+  await_mode="true"
+elif [[ "$2" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
 elif [[ "$2" = "720p" ]]; then
   quality="720p,720p60,480p,best"
@@ -49,6 +51,9 @@ if [[ "$link" = "vods" ]]; then
 fi
 
 if [[ ! -z "$link" ]]; then
+  if [[ ! -z "$await_mode" ]]; then
+    vl_ts_marker="await"
+  fi
   tmux new-window -n "stream$ts_marker" -t background: 
   tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$vl_ts_marker\" && exit || exit" Enter
 fi

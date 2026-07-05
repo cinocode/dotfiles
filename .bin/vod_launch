@@ -16,7 +16,7 @@ else
 fi
 
 socket_args=""
-if [[ ! -z "$4" ]]; then
+if [[ ! -z "$4" && "$4" != "await" ]]; then
   mpv_socket="/tmp/mpv_${4}_stream"
   socket_args=" --input-ipc-server=$mpv_socket"
   tmux split-window -v -t background vod_ts "$1" "$mpv_socket"
@@ -52,6 +52,13 @@ if [[ $1 = *youtu* ]]; then
   yt playurl "$1" &
   waitForYtStartup "$1"
   exit 0
+elif [[ "$4" = "await" ]]; then
+  cont_lookup="true"
+  while [[ "$cont_lookup" = "true" ]]; do
+    cont_lookup="false"
+    streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2" || cont_lookup="true"
+    sleep 10
+  done
 else
   streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 fi
