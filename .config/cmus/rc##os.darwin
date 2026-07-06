@@ -2,6 +2,7 @@ unbind common +
 bind common + vol +5%
 unbind common -
 bind common - vol -5%
+bind common ; shell ~/.bin/cmus_update
 set aaa_mode=artist
 set follow=true
 set repeat=true

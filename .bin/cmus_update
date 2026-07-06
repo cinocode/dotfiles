@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -euo pipefail
+
+if [[ -d "$MUSIC_DIR" ]]; then
+  cmus-remote -C clear
+  cmus-remote -C "add ${MUSIC_DIR}"
+  cmus-remote -C "update-cache -f"
+fi
