@@ -27,6 +27,14 @@ cmp.setup {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local proj_path = vim.fn.getcwd() .. "/src/main/frontend"
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", proj_path , "--ngProbeLocations", proj_path}
+vim.lsp.config('angularls', {
+  cmd = cmd,
+
+})
+vim.lsp.enable('angularls')
+
 require('nvim-treesitter').setup {
   opts = {
     ensure_installed = { 'bash', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'java' }
