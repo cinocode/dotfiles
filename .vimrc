@@ -45,6 +45,7 @@ set sts=0
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set nofoldenable
 
 if has("autocmd")
   autocmd FileType java setlocal ts=4 sts=0 sw=4 expandtab

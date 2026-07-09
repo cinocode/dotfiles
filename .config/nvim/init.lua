@@ -27,14 +27,35 @@ cmp.setup {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local proj_path = null
+local startAngular = false
+if vim.fn.filereadable(vim.fn.getcwd() .. "/src/main/frontend/package.json") then
+  proj_path = vim.fn.getcwd() .. "/src/main/frontend"
+  startAngular = true
+elseif vim.fn.filereadable(vim.fn.getcwd() .. "/package.json") then
+  proj_path = vim.fn.getcwd() .. "/package.json"
+  startAngular = true
+end
+if startAngular then
+  local cmd = {"ngserver", "--stdio", "--tsProbeLocations", proj_path , "--ngProbeLocations", proj_path}
+  vim.lsp.config('angularls', {
+    cmd = cmd,
+    filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx', 'htmlangular' },
+    root_markers = { "angular.json", "package.json", "nx.json" }
+  })
+  vim.lsp.enable('angularls')
+end
+
 require('nvim-treesitter').setup {
   opts = {
-    ensure_installed = { 'bash', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'java' }
+    ensure_installed = { 'bash', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'java', 'typescript', 'javascript', 'kotlin', 'angular' }
   },
   auto_install = true,
   highlight = { enable = true },
   indent = { enable = true },
 }
+vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo[0][0].foldmethod = 'expr'
 
 local actions = require("diffview.actions")
 
