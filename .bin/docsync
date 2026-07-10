@@ -1,5 +1,8 @@
 #!/bin/bash
-source ~/.config/dots/zshrc.local
+
+if [[ -f ~/.config/dots/zshrc.local ]]; then
+  source ~/.config/dots/zshrc.local
+fi
 note_dir=~/doc
 
 cd ${note_dir}
