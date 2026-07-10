@@ -27,6 +27,7 @@ fi
 
 check_command_found "zsh"
 check_command_found "git"
+check_command_found "gh"
 check_command_found "yadm"
 check_command_found "pass"
 
@@ -39,6 +40,9 @@ check_command_found "fzf"
 check_command_found "zoxide"
 check_command_found "rg"
 check_command_found "cmake"
+
+check_command_found "delta"
+check_command_found "bat"
 
 check_command_found "socat"
 check_command_found "jq"
