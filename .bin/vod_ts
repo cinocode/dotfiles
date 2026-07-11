@@ -106,12 +106,14 @@ doSaveIfMissing() {
   if [[ "$type" = "full" ]]; then
     mode="set"
     secondsWithBuffer=$(( seconds - 150 ))
+    unSecondsWithBuffer=$(( unsaved_sec - 150 ))
   elif [[ "$type" = "partial" ]]; then
     mode="add"
     secondsWithBuffer=$(( unsaved_sec - 15 ))
+    unSecondsWithBuffer=$secondsWithBuffer
   fi
 
-  if [[ $secondsWithBuffer -gt $1 ]]; then
+  if [[ $unSecondsWithBuffer -gt $1 ]]; then
     echo "having gt $1 unsaved - seconds '$seconds' - bufferreduced '$secondsWithBuffer' - type '$type'"
 
     persistTimestamp "$secondsWithBuffer" "$mode"
