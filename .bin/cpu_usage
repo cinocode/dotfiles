@@ -1,11 +1,11 @@
 #!/bin/bash
 set -eo pipefail
 
-cpu_usage_pct="$((100-$(vmstat 2 2|tail -1|awk '{print $15}')))"
+cpu_usage_pct="$((100-$(vmstat 2 3|tail -1|awk '{print $15}')))"
 
 if [[ -z "$1" ]]; then
   echo "$cpu_usage_pct"
-elif [[ "$cpu_usage_pct" -lt "$1" ]]; then
+elif [ "$cpu_usage_pct" -lt "$1" ]; then
   exit 0
 else
   exit 1

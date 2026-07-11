@@ -109,10 +109,8 @@ kill_xwinwrap() {
 
 play_video() {
   if [ $alwaysRun == true ]; then
-    echo wrong_xwinwrapping
     xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   else
-    echo xwinwrapping
     xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file --input-ipc-server="/tmp/mpvsocket$3" --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   fi
   PIDs+=($!)
@@ -122,7 +120,7 @@ play_video() {
 }
 
 toggle_video() {
-  if [ isPlaying == true ]; then
+  if [ $isPlaying == true ]; then
     isPlaying=false
   else
     isPlaying=true
@@ -285,16 +283,13 @@ main() {
       exit 0
   elif [ $alwaysRun != true ]; then
     while true; do
-      echo looping
       sleep 10
 
-      if [ isPlaying == true ]; then
-        if ! cpu_usage 15; then
-          echo pausing
+      if [ $isPlaying == true ]; then
+        if ! cpu_usage 12; then
           toggle_video
         fi
-      elif cpu_usage 5; then
-          echo resuming
+      elif cpu_usage 6; then
         toggle_video
       fi
     done
