@@ -163,8 +163,9 @@ vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>
 nnoremap <silent> <leader>gH :Flogsplit -path=%<CR>
 nnoremap <silent> <leader>gq :DiffviewClose<CR>
 nnoremap <silent> <leader>go :Telescope git_branches<CR>
-nnoremap <silent> <leader>gl :Flogsplit<cr>
-nnoremap <silent> <leader>gL :Git lol<cr>
+nnoremap <silent> <leader>gk :Flogsplit -all -auto-update -reflog<cr>
+nnoremap <silent> <leader>gl :Flogsplit -all -auto-update<cr>
+nnoremap <silent> <leader>gL :Flog -all -auto-update<cr>:Git<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
 
