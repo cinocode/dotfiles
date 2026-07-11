@@ -17,17 +17,22 @@ parse_time_to_seconds() {
   if [[ -n "$ts" ]]; then
     # Strip the ?t= prefix
     ts="${ts#\?t=}"
-    # Extract hours (if present)
-    if [[ "$ts" =~ ([0-9]+)h ]]; then
-      hours="${BASH_REMATCH[1]}"
-    fi
-    # Extract minutes (if present)
-    if [[ "$ts" =~ ([0-9]+)m ]]; then
-      minutes="${BASH_REMATCH[1]}"
-    fi
-    # Extract seconds (if present)
-    if [[ "$ts" =~ ([0-9]+)s ]]; then
-      seconds="${BASH_REMATCH[1]}"
+
+    if [[ $input_url = *youtu* ]]; then
+      seconds="$ts"
+    else
+      # Extract hours (if present)
+      if [[ "$ts" =~ ([0-9]+)h ]]; then
+        hours="${BASH_REMATCH[1]}"
+      fi
+      # Extract minutes (if present)
+      if [[ "$ts" =~ ([0-9]+)m ]]; then
+        minutes="${BASH_REMATCH[1]}"
+      fi
+      # Extract seconds (if present)
+      if [[ "$ts" =~ ([0-9]+)s ]]; then
+        seconds="${BASH_REMATCH[1]}"
+      fi
     fi
   fi
 
@@ -57,20 +62,35 @@ persistTimestamp() {
   mode="$2"
 
   # Extract video ID from the input URL (the number after twitch.tv/videos/)
-  video_id="$(echo "$input_url" | sed -E 's|.*twitch\.tv/videos/([0-9]+).*|\1|')"
+  if [[ $input_url = *youtu* ]]; then
+    video_id="$(echo "$input_url" | sed -E 's|.*youtu\.be/([a-zA-Z0-9]+).*|\1|')"
+  else
+    video_id="$(echo "$input_url" | sed -E 's|.*twitch\.tv/videos/([0-9]+).*|\1|')"
+  fi
   if [[ -z "$video_id" ]]; then
     echo "Error: could not extract video ID from URL: $input_url" >&2
     exit 1
   fi
 
   # Check that the video ID exists in the file
-  if ! grep -q "twitch\.tv/videos/${video_id}" "$vods_file"; then
-    echo "Error: no line with video ID $video_id found in $vods_file" >&2
-    exit 1
+  if [[ $input_url = *youtu* ]]; then
+    if ! grep -q "youtu\.be/${video_id}" "$vods_file"; then
+      echo "Error: no line with video ID $video_id found in $vods_file" >&2
+      exit 1
+    fi
+  else
+    if ! grep -q "twitch\.tv/videos/${video_id}" "$vods_file"; then
+      echo "Error: no line with video ID $video_id found in $vods_file" >&2
+      exit 1
+    fi
   fi
 
   # Extract the time signature from the matching line in the file
-  time_sig="$(grep "twitch\.tv/videos/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
+  if [[ $input_url = *youtu* ]]; then
+    time_sig="$(grep "youtu\.be/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
+  else
+    time_sig="$(grep "twitch\.tv/videos/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
+  fi
 
   time_in_file=$(parse_time_to_seconds "$time_sig")
   if [[ "$mode" = "add" ]]; then
@@ -80,15 +100,24 @@ persistTimestamp() {
   fi
 
   if [[ $total_seconds -gt $time_in_file ]]; then
-    new_time_sig=$(format_seconds "$total_seconds")
 
-    # Update only the matching line
-    # Case A: the line has an existing time signature  -> replace it
-    # Case B: the line has no time signature            -> insert one
-    if [[ -n "$time_sig" ]]; then
-      sed -i "\|twitch\.tv/videos/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
+    if [[ $input_url = *youtu* ]]; then
+      new_time_sig="?t=$total_seconds"
+      if [[ -n "$time_sig" ]]; then
+        sed -i "\|youtu\.be/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
+      else
+        sed -i "\|youtu\.be/${video_id}|s|\(youtu\.be/${video_id}\)|\1${new_time_sig}|" "$vods_file"
+      fi
     else
-      sed -i "\|twitch\.tv/videos/${video_id}|s|\(twitch\.tv/videos/${video_id}\)|\1${new_time_sig}|" "$vods_file"
+      new_time_sig=$(format_seconds "$total_seconds")
+      # Update only the matching line
+      # Case A: the line has an existing time signature  -> replace it
+      # Case B: the line has no time signature            -> insert one
+      if [[ -n "$time_sig" ]]; then
+        sed -i "\|twitch\.tv/videos/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
+      else
+        sed -i "\|twitch\.tv/videos/${video_id}|s|\(twitch\.tv/videos/${video_id}\)|\1${new_time_sig}|" "$vods_file"
+      fi
     fi
 
     echo "Updated video ${video_id}: ${total_seconds}s ($new_time_sig)"

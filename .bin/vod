@@ -50,9 +50,7 @@ if [[ "$link" = "vods" ]]; then
   line="$(cat ~/note/media/twitch_vods.txt | head -n 30 | fzf)"
   link="$(awk '{print $1}' <<< $line)"
 
-  if [[ $link != *youtu* ]]; then
-    vl_ts_marker="$ts_marker"
-  fi
+  vl_ts_marker="$ts_marker"
 elif [[ "$link" = "live" ]]; then
   line="$(vod_online picker | fzf)"
   link="$(awk '{print $1}' <<< $line)"
@@ -64,12 +62,10 @@ elif [[ "$link" = "combo" ]]; then
   link="$(awk '{print $1}' <<< $line)"
   rm "$tmp_picker_file"
 
-  if [[ $link != *youtu* ]]; then
-    if echo $line | grep -q 'is live on'; then
-      cache="c0"
-    else
-      vl_ts_marker="$ts_marker"
-    fi
+  if echo $line | grep -q 'is live on'; then
+    cache="c0"
+  else
+    vl_ts_marker="$ts_marker"
   fi
 fi
 
