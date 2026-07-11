@@ -8,6 +8,11 @@ cache="c3"
 if [[ $1 = https* ]]; then
   cache="c0"
   link="$1"
+elif [[ "$1" = "live" ]]; then
+  link="live"
+  cache="c0"
+elif [[ "$1" = "combo" ]]; then
+  link="combo"
 elif [[ "$1" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
 elif [[ "$1" = "720p" ]]; then
@@ -47,6 +52,24 @@ if [[ "$link" = "vods" ]]; then
 
   if [[ $link != *youtu* ]]; then
     vl_ts_marker="$ts_marker"
+  fi
+elif [[ "$link" = "live" ]]; then
+  line="$(vod_online picker | fzf)"
+  link="$(awk '{print $1}' <<< $line)"
+elif [[ "$link" = "combo" ]]; then
+  tmp_picker_file="/tmp/vod_picker_opts"
+  vod_online picker > $tmp_picker_file
+  cat ~/note/media/twitch_vods.txt | head -n 30 >> "$tmp_picker_file"
+  line="$(cat $tmp_picker_file | fzf)"
+  link="$(awk '{print $1}' <<< $line)"
+  rm "$tmp_picker_file"
+
+  if [[ $link != *youtu* ]]; then
+    if echo $line | grep -q 'is live on'; then
+      cache="c0"
+    else
+      vl_ts_marker="$ts_marker"
+    fi
   fi
 fi
 
