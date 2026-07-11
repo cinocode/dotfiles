@@ -65,6 +65,6 @@ if [[ "$mode" = "start" || "$mode" = "restart" ]]; then
     flashfocus >/dev/null 2>&1 &
   fi
   if [[ -z "$component" || "$component" = "wallpaper" ]]; then
-    live_wallpaper -l -t 300 >/dev/null 2>&1 &
+    live_wallpaper -l >/dev/null 2>&1 &
   fi
 fi

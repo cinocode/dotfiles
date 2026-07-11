@@ -12,17 +12,9 @@ fit='fill'
 thumbnailStorePath="$HOME/.config/wallpaper"
 vidCur="$thumbnailStorePath/current.mp4"
 thumbnailCur="$thumbnailStorePath/current.png"
-blurredThumbnailCur1="$thumbnailStorePath/current_blur_1.png"
-blurredThumbnailCur2="$thumbnailStorePath/current_blur_2.png"
-blurredThumbnailCur3="$thumbnailStorePath/current_blur_3.png"
-blurredThumbnailCur4="$thumbnailStorePath/current_blur_4.png"
-blurredThumbnailCur5="$thumbnailStorePath/current_blur_5.png"
-blurredThumbnailCur6="$thumbnailStorePath/current_blur_6.png"
-blurredThumbnailCur7="$thumbnailStorePath/current_blur_7.png"
-blurredThumbnailCur8="$thumbnailStorePath/current_blur_8.png"
-blurredThumbnailCur9="$thumbnailStorePath/current_blur_9.png"
+blurredThumbnailCur="$thumbnailStorePath/current_blur.png"
 
-isPlaying=false
+isPlaying=true
 
 PIDFILE="/var/run/user/$UID/vwp.pid"
 
@@ -117,18 +109,25 @@ kill_xwinwrap() {
 
 play_video() {
   if [ $alwaysRun == true ]; then
+    echo wrong_xwinwrapping
     xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   else
-    xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file --input-ipc-server="/tmp/mpvsocket$3" --pause --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
+    echo xwinwrapping
+    xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file --input-ipc-server="/tmp/mpvsocket$3" --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   fi
-    #xwinwrap -ov -ni -g $1 -- mpv --fs --panscan="1.0" --loop-file=$timeout --no-audio --no-osc --no-osd-bar -wid WID --no-input-default-bindings "$2" &
   PIDs+=($!)
   if [[ $timeout -gt 0 ]]; then
     (sleep $timeout && kill_xwinwrap) &
   fi
 }
 
-pause_video() {
+toggle_video() {
+  if [ isPlaying == true ]; then
+    isPlaying=false
+  else
+    isPlaying=true
+  fi
+
   for ((i = 1; i <= ${#Monitors[@]}; i++)); do
     echo '{"command": ["cycle", "pause"]}' | socat - "/tmp/mpvsocket$i"
   done
@@ -166,46 +165,14 @@ generate_thumbnail_main() {
   if [ "$(check_if_file_exists "$thumbnailCur")" == true ];then
     rm $thumbnailCur
   fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur1")" == true ];then
-    rm $blurredThumbnailCur1
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur2")" == true ];then
-    rm $blurredThumbnailCur2
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur3")" == true ];then
-    rm $blurredThumbnailCur3
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur4")" == true ];then
-    rm $blurredThumbnailCur4
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur5")" == true ];then
-    rm $blurredThumbnailCur5
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur6")" == true ];then
-    rm $blurredThumbnailCur6
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur7")" == true ];then
-    rm $blurredThumbnailCur7
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur8")" == true ];then
-    rm $blurredThumbnailCur8
-  fi
-  if [ "$(check_if_file_exists "$blurredThumbnailCur9")" == true ];then
-    rm $blurredThumbnailCur9
+  if [ "$(check_if_file_exists "$blurredThumbnailCur")" == true ];then
+    rm $blurredThumbnailCur
   fi
 
   generate_thumbnail_if_not_exists "$video" "$timeStamp" "$thumbnailCur"
 
   if [ $blur == true ]; then
-    convert "$thumbnailCur" -blur "24x24" "$blurredThumbnailCur1" &
-    convert "$thumbnailCur" -blur "22x22" "$blurredThumbnailCur2" &
-    convert "$thumbnailCur" -blur "20x20" "$blurredThumbnailCur3" &
-    convert "$thumbnailCur" -blur "18x18" "$blurredThumbnailCur4" &
-    convert "$thumbnailCur" -blur "16x16" "$blurredThumbnailCur5" &
-    convert "$thumbnailCur" -blur "14x14" "$blurredThumbnailCur6" &
-    convert "$thumbnailCur" -blur "12x12" "$blurredThumbnailCur7" &
-    convert "$thumbnailCur" -blur "10x10" "$blurredThumbnailCur8" &
-    convert "$thumbnailCur" -blur "8x8" "$blurredThumbnailCur9" &
+    convert "$thumbnailCur" -blur "24x24" "$blurredThumbnailCur" &
   fi
 }
 
@@ -317,22 +284,18 @@ main() {
   elif [ $saveOnly == true ]; then
       exit 0
   elif [ $alwaysRun != true ]; then
-    sleep 1
     while true; do
-      sleep 1.5
+      echo looping
+      sleep 10
 
-      local blockVid=false
-      if pgrep -x "i3lock" >> /dev/null
-      then
-          blockVid=true
-      fi
-
-      if [ $blockVid == false ] && [ $isPlaying == false ]; then
-        pause_video
-        isPlaying=true
-      elif [ $blockVid == true ] && [ $isPlaying == true ]; then
-        pause_video
-        isPlaying=false
+      if [ isPlaying == true ]; then
+        if ! cpu_usage 15; then
+          echo pausing
+          toggle_video
+        fi
+      elif cpu_usage 5; then
+          echo resuming
+        toggle_video
       fi
     done
   fi
