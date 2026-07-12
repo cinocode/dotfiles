@@ -4,7 +4,7 @@ set -eo pipefail
 link="vods"
 quality="best"
 cache="c3"
-yt_profile="yt_max"
+yt_profile="1440p"
 
 if [[ $1 = https* ]]; then
   cache="c0"
@@ -79,6 +79,9 @@ fi
 if [[ ! -z "$link" ]]; then
   if [[ ! -z "$await_mode" ]]; then
     vl_ts_marker="await"
+  elif ! vod_online "$link" "quiet"; then
+    echo "Nothing to play: $link"
+    exit 1
   fi
   tmux new-window -n "stream$ts_marker" -t background: 
   tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$yt_profile\" \"$vl_ts_marker\" && exit || exit" Enter

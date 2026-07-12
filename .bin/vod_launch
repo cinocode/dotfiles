@@ -1,4 +1,4 @@
-#!/bin/bash
+#/!/bin/bash
 set -eo pipefail
 
 if [[ "$3" = "c0" ]]; then
@@ -26,18 +26,16 @@ if [[ ! -z "$5" && "$5" != "await" ]]; then
 fi
 
 if [[ $1 = *youtu* ]]; then
+  echo "mpv --profile=$yt_profile $cache_args $socket_args $1 &"
+  sleep 3
   mpv --profile=$yt_profile $cache_args $socket_args "$1" &
   mpv_id=$!
   while pgrep mpv | grep -q "$mpv_id"; do
     sleep 15
   done
-elif [[ "$5" = "await" ]]; then
-  cont_lookup="true"
-  while [[ "$cont_lookup" = "true" ]]; do
-    cont_lookup="false"
-    streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2" || cont_lookup="true"
-    sleep 10
-  done
 else
+  if [[ "$5" = "await" ]]; then
+    vod_online "$1" "await"
+  fi
   streamlink "$rb_args" -p mpv -a "$cache_args $socket_args" "$1" "$2"
 fi
