@@ -63,11 +63,11 @@ persistTimestamp() {
 
   # Extract video ID from the input URL (the number after twitch.tv/videos/)
   if [[ $input_url = *www.youtube.com/live* ]]; then
-    video_id="$(echo "$input_url" | sed -E 's|.*youtube\.com/live/([a-zA-Z0-9]+).*|\1|')"
+    video_id="$(echo "$input_url" | sed -E 's|.*youtube\.com/live/([a-zA-Z0-9_\-]+).*|\1|')"
   elif [[ $input_url = *www.youtube.com/watch* ]]; then
     video_id="$(echo "$input_url" | sed -E 's|.*youtube\.com/watch\?v=([a-zA-Z0-9_\-]+).*|\1|')"
   elif [[ $input_url = *youtu* ]]; then
-    video_id="$(echo "$input_url" | sed -E 's|.*youtu\.be/([a-zA-Z0-9]+).*|\1|')"
+    video_id="$(echo "$input_url" | sed -E 's|.*youtu\.be/([a-zA-Z0-9_\-]+).*|\1|')"
   else
     video_id="$(echo "$input_url" | sed -E 's|.*twitch\.tv/videos/([0-9]+).*|\1|')"
   fi
