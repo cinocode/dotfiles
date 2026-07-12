@@ -15,21 +15,23 @@ else
   cache_args="--cache=yes --cache-secs=3600 --demuxer-max-bytes=1250MiB --demuxer-max-back-bytes=250MiB"
 fi
 
+yt_profile="$4"
+
 socket_args=""
-if [[ ! -z "$4" && "$4" != "await" ]]; then
-  mpv_socket="/tmp/mpv_${4}_stream"
+if [[ ! -z "$5" && "$5" != "await" ]]; then
+  mpv_socket="/tmp/mpv_${5}_stream"
   socket_args=" --input-ipc-server=$mpv_socket"
   tmux split-window -v -t background vod_ts "$1" "$mpv_socket"
   tmux last-pane -t background
 fi
 
 if [[ $1 = *youtu* ]]; then
-  mpv $cache_args $socket_args "$1" &
+  mpv --profile=$yt_profile $cache_args $socket_args "$1" &
   mpv_id=$!
   while pgrep mpv | grep -q "$mpv_id"; do
     sleep 15
   done
-elif [[ "$4" = "await" ]]; then
+elif [[ "$5" = "await" ]]; then
   cont_lookup="true"
   while [[ "$cont_lookup" = "true" ]]; do
     cont_lookup="false"

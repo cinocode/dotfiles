@@ -4,6 +4,7 @@ set -eo pipefail
 link="vods"
 quality="best"
 cache="c3"
+yt_profile="yt_max"
 
 if [[ $1 = https* ]]; then
   cache="c0"
@@ -15,10 +16,13 @@ elif [[ "$1" = "combo" ]]; then
   link="combo"
 elif [[ "$1" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
+  yt_profile="1080p"
 elif [[ "$1" = "720p" ]]; then
   quality="720p,720p60,480p,best"
+  yt_profile="720p"
 elif [[ "$1" = "420p" ]]; then
   quality="480p,worst"
+  yt_profile="480p"
 elif [[ "$1" = "c0" || "$1" = "c1" || "$1" = "c2" || "$1" = "c3" ]]; then
   cache="$1"
 elif [[ $1 = tok:* ]]; then
@@ -32,10 +36,13 @@ if [[ "$2" = "await" ]]; then
   await_mode="true"
 elif [[ "$2" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
+  yt_profile="1080p"
 elif [[ "$2" = "720p" ]]; then
   quality="720p,720p60,480p,best"
+  yt_profile="720p"
 elif [[ "$2" = "420p" ]]; then
   quality="480p,worst"
+  yt_profile="480p"
 elif [[ "$2" = "c0" || "$2" = "c1" || "$2" = "c2" || "$2" = "c3" ]]; then
   cache="$2"
 fi
@@ -74,5 +81,5 @@ if [[ ! -z "$link" ]]; then
     vl_ts_marker="await"
   fi
   tmux new-window -n "stream$ts_marker" -t background: 
-  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$vl_ts_marker\" && exit || exit" Enter
+  tmux send-keys -t background "vod_launch \"$link\" \"$quality\" \"$cache\" \"$yt_profile\" \"$vl_ts_marker\" && exit || exit" Enter
 fi
