@@ -62,7 +62,11 @@ persistTimestamp() {
   mode="$2"
 
   # Extract video ID from the input URL (the number after twitch.tv/videos/)
-  if [[ $input_url = *youtu* ]]; then
+  if [[ $input_url = *www.youtube.com/live* ]]; then
+    video_id="$(echo "$input_url" | sed -E 's|.*youtube\.com/live/([a-zA-Z0-9]+).*|\1|')"
+  elif [[ $input_url = *www.youtube.com/watch* ]]; then
+    video_id="$(echo "$input_url" | sed -E 's|.*youtube\.com/watch\?v=([a-zA-Z0-9_\-]+).*|\1|')"
+  elif [[ $input_url = *youtu* ]]; then
     video_id="$(echo "$input_url" | sed -E 's|.*youtu\.be/([a-zA-Z0-9]+).*|\1|')"
   else
     video_id="$(echo "$input_url" | sed -E 's|.*twitch\.tv/videos/([0-9]+).*|\1|')"
@@ -73,7 +77,17 @@ persistTimestamp() {
   fi
 
   # Check that the video ID exists in the file
-  if [[ $input_url = *youtu* ]]; then
+  if [[ $input_url = *www.youtube.com/live* ]]; then
+    if ! grep -q "youtube\.com/live/${video_id}" "$vods_file"; then
+      echo "Error: no line with video ID $video_id found in $vods_file" >&2
+      exit 1
+    fi
+  elif [[ $input_url = *www.youtube.com/watch* ]]; then
+    if ! grep -q "youtube\.com/watch?v=${video_id}" "$vods_file"; then
+      echo "Error: no line with video ID $video_id found in $vods_file" >&2
+      exit 1
+    fi
+  elif [[ $input_url = *youtu* ]]; then
     if ! grep -q "youtu\.be/${video_id}" "$vods_file"; then
       echo "Error: no line with video ID $video_id found in $vods_file" >&2
       exit 1
@@ -86,7 +100,11 @@ persistTimestamp() {
   fi
 
   # Extract the time signature from the matching line in the file
-  if [[ $input_url = *youtu* ]]; then
+  if [[ $input_url = *www.youtube.com/live* ]]; then
+    time_sig="$(grep "youtube\.com/live/${video_id}" "$vods_file" | sed -n 's|.*[&\?]t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
+  elif [[ $input_url = *www.youtube.com/watch* ]]; then
+    time_sig="$(grep "youtube\.com/watch?v=${video_id}" "$vods_file" | sed -n 's|.*[&\?]t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
+  elif [[ $input_url = *youtu* ]]; then
     time_sig="$(grep "youtu\.be/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
   else
     time_sig="$(grep "twitch\.tv/videos/${video_id}" "$vods_file" | sed -n 's|.*\?t=\([^ ]*\).*|\1|p' | sed 's/^/?t=/')"
@@ -101,7 +119,13 @@ persistTimestamp() {
 
   if [[ $total_seconds -gt $time_in_file ]]; then
 
-    if [[ $input_url = *youtu* ]]; then
+    if [[ $input_url = *www.youtube.com/live* ]]; then
+      new_time_sig="?t=$total_seconds"
+      sed -i "s|youtube\.com/live/${video_id}[^ ]*|youtube.com/live/${video_id}${new_time_sig}|g" "$vods_file"
+    elif [[ $input_url = *www.youtube.com/watch* ]]; then
+      new_time_sig="\&t=$total_seconds"
+      sed -i "s|youtube\.com/watch?v=${video_id}[^ ]*|youtube.com/watch?v=${video_id}${new_time_sig}|g" "$vods_file"
+    elif [[ $input_url = *youtu* ]]; then
       new_time_sig="?t=$total_seconds"
       if [[ -n "$time_sig" ]]; then
         sed -i "\|youtu\.be/${video_id}|s|\?t=[^ ]*|${new_time_sig}|" "$vods_file"
