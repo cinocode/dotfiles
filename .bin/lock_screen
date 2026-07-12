@@ -32,7 +32,7 @@ sleep 1 && xset +dpms &
 sleep 1.5 && xset dpms 15 30 3600 &
 
 if [[ $DO_SUSPEND == true ]]; then
-    sleep 1 && systemctl suspend &
+    sleep 1 && poto suspend &
 else
     sleep 5 && xset dpms force off &
 fi
