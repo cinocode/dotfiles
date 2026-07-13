@@ -3,7 +3,7 @@ set -eo pipefail
 
 link="vods"
 quality="best"
-cache="c3"
+cache="c2"
 yt_profile="1440p"
 
 if [[ $1 = https* ]]; then
