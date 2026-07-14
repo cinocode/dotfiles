@@ -187,10 +187,10 @@ nnoremap <silent> <leader>gA :Gwrite<cr>:Git commit<cr>
 nnoremap <silent> <leader>gb :Git blame<cr>
 nnoremap <silent> <leader>gc :Git commit<cr>
 nnoremap <silent> <leader>gC :Git commit --amend<cr>
-nnoremap <silent> <leader>gd :DiffviewOpen -- %<CR>
+nnoremap <silent> <leader>gd :DiffviewOpen -- %<CR>,b
 nnoremap <silent> <leader>gD :Ghdiffsplit<CR>
-nnoremap <silent> <leader>gv :DiffviewOpen origin/HEAD..HEAD<CR>
-nnoremap <silent> <leader>gV :DiffviewOpen
+nnoremap <silent> <leader>gv :DiffviewOpen origin/HEAD..HEAD<CR><c-w>l<c-w>j
+nnoremap <silent> <leader>gV :DiffviewOpen<space>
 nnoremap <silent> <leader>gx :Gread<cr>
 nnoremap <silent> <leader>gX :Gdelete<cr>
 nnoremap <silent> <leader>gf :silent !clear<cr>:Git fetch<cr>
@@ -201,8 +201,8 @@ nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gP :Git push
-nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>
-vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>
+nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>,b
+vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>,b
 nnoremap <silent> <leader>gH :Flogsplit -path=%<CR>
 nnoremap <silent> <leader>gq :tabclose<CR>
 nnoremap <silent> <leader>go :Telescope git_branches<CR>
@@ -293,10 +293,11 @@ if has('nvim')
   let g:rnvimr_enable_picker = 1
 
   nnoremap <silent> <space>f :lua require('telescope.builtin').find_files()<CR>
-  nnoremap <silent> <space>r :lua require('telescope.builtin').oldfiles()<CR>
+  nnoremap <silent> <space>o :lua require('telescope.builtin').oldfiles()<CR>
   nnoremap <silent> <space>t :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
   nnoremap <silent> <space>i :lua require('telescope.builtin').loclist()<CR>
   nnoremap <silent> <space>d :Telescope git_or_yadm_files<CR>
+  nnoremap <silent> <space>r :Telescope yadm_files<CR>
   nnoremap <silent> <space>g :lua require('telescope.builtin').live_grep()<CR>
   nnoremap <silent> <space>b :lua require('telescope.builtin').buffers()<CR>
   nnoremap <silent> <space>h :lua require('telescope.builtin').help_tags()<CR>
