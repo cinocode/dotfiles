@@ -5,6 +5,12 @@ NVIM_BUNDLES="${HOME}/.local/share/nvim/site/pack/bundle/start"
 mkdir -p "${VIM_BUNDLES}"
 mkdir -p "${NVIM_BUNDLES}"
 
+if [[ ! -L "${HOME}/.git" ]]; then
+  if [[ -d "${HOME}/.local/share/yadm/repo.git" ]]; then
+    ln -s "${HOME}/.local/share/yadm/repo.git" "${HOME}/.git"
+  fi
+fi
+
 # vim_plugins
 
 if [[ -d "${VIM_BUNDLES}/colors_base16" ]]; then
