@@ -2,7 +2,14 @@
 
 set -eo pipefail
 
-ENV_ARGS="$1"
+if [[ "$1" = "--legacy" ]]; then
+  LEGACY_PEER_DEPS="true"
+else
+  ENV_ARGS="$1"
+fi
+if [[ "$2" = "--legacy" ]]; then
+  LEGACY_PEER_DEPS="true"
+fi
 
 mkdir -p .dev
 
@@ -14,62 +21,70 @@ fi
 
 SKIP_BUILD="false"
 if [[ -f "pom.xml" ]]; then
-    POMSUM="$(sha1 -q pom.xml)$(git rev-parse HEAD)"
-    if [[ -f ".dev/pomxml" ]]; then
-        LASTSUM=$(cat ".dev/pomxml")
-        if [[ "$POMSUM" = "$LASTSUM" ]]; then
-            SKIP_BUILD="true"
-        fi
+  POMSUM="$(sha1 -q pom.xml)$(git rev-parse HEAD)"
+  if [[ -f ".dev/pomxml" ]]; then
+    LASTSUM=$(cat ".dev/pomxml")
+    if [[ "$POMSUM" = "$LASTSUM" ]]; then
+      SKIP_BUILD="true"
     fi
+  fi
+else
+  SKIP_MAVEN="true"
 fi
 
 SKIP_PKG="false"
 if [[ -f "src/main/frontend/package.json" ]]; then
-    PKGJSON="src/main/frontend/package.json"
+  PKGJSON="src/main/frontend/package.json"
 elif [[ -f "package.json" ]]; then
-    PKGJSON="package.json"
+  PKGJSON="package.json"
+else
+  SKIP_NPM="true"
 fi
 if [[ ! -z "${PKGJSON}" ]]; then
-    PKGSUM="$(sha1 -q ${PKGJSON})"
-    if [[ -f ".dev/pkgjson" ]]; then
-        LASTSUM=$(cat ".dev/pkgjson")
-        if [[ "$PKGSUM" = "$LASTSUM" ]]; then
-            SKIP_PKG="true"
-        fi
+  PKGSUM="$(sha1 -q ${PKGJSON})"
+  if [[ -f ".dev/pkgjson" ]]; then
+    LASTSUM=$(cat ".dev/pkgjson")
+    if [[ "$PKGSUM" = "$LASTSUM" ]]; then
+      SKIP_PKG="true"
     fi
+  fi
 fi
 
-if [[ "$SKIP_BUILD" != "true" ]]; then
-    mvn -T 1.1C clean package
+if [[ -z "$SKIP_MAVEN" && "$SKIP_BUILD" != "true" ]]; then
+  mvn -T 1.1C clean package
 
-    echo "$POMSUM" > ".dev/pomxml"
+  echo "$POMSUM" > ".dev/pomxml"
 fi
 
 if [[ -f "$DOCKER_FILE" && -z "$(docker-compose -f ${DOCKER_FILE} ps --services --filter 'status=running')" ]]; then
-    docker-compose -f "${DOCKER_FILE}" up -d
+  docker-compose -f "${DOCKER_FILE}" up &
 
-    sleep 2
-    DOCKERPS="$(docker ps)"
-    if echo "$DOCKERPS" | grep 'seconds ago' | grep 'Up' | grep -q 'seconds'; then
-        if cat "pom.xml" | grep -q 'coversheet'; then
-            sleep 30
-        else
-            sleep 1
-        fi
-    elif echo "$DOCKERPS" | grep 'Up' | grep -q 'seconds'; then
-        if [[ "$SKIP_PKG" = "true" ]]; then
-            if cat "pom.xml" | grep -q 'coversheet'; then
-                sleep 5
-            else
-                sleep 1
-            fi
-        fi
+  sleep 2
+  DOCKERPS="$(docker ps)"
+  if echo "$DOCKERPS" | grep 'seconds ago' | grep 'Up' | grep -q 'seconds'; then
+    if cat "pom.xml" | grep -q 'coversheet'; then
+      sleep 30
+    else
+      sleep 1
     fi
+  elif echo "$DOCKERPS" | grep 'Up' | grep -q 'seconds'; then
+    if [[ "$SKIP_PKG" = "true" ]]; then
+      if cat "pom.xml" | grep -q 'coversheet'; then
+        sleep 5
+      else
+        sleep 1
+      fi
+    fi
+  fi
 fi
 
-if [[ "$SKIP_PKG" != "true" ]]; then
+if [[ -z "$SKIP_NPM" && "$SKIP_PKG" != "true" ]]; then
+  if [[ "$LEGACY_PEER_DEPS" = "true" ]]; then
+    nf ci --legacy-peer-deps
+  else
     nf ci
-    echo "$PKGSUM" > ".dev/pkgjson"
+  fi
+  echo "$PKGSUM" > ".dev/pkgjson"
 fi
 
 if [[ -f ".dev/mvn_extra_args" ]]; then
@@ -77,22 +92,31 @@ if [[ -f ".dev/mvn_extra_args" ]]; then
 fi
 
 cleanupRun() {
+  if [[ ! -z "$feId" ]]; then
     kill $feId
+  fi
+  if [[ ! -z "$beId" ]]; then
     kill $beId
-    if [[ -f ${DOCKER_FILE} ]]; then
-      docker-compose -f "${DOCKER_FILE}" stop 
-    fi
+  fi
+  if [[ -f ${DOCKER_FILE} ]]; then
+    docker-compose -f "${DOCKER_FILE}" stop 
+  fi
 }
 
 trap "cleanupRun" EXIT
 
-nf run-script start &
-feId=$!
-if [[ -z $MVN_EXTRA_ARGS ]]; then
-  (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
-else
-  (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run "${MVN_EXTRA_ARGS}") &
+if [[ -z "$SKIP_NPM" ]]; then
+  nf run-script start &
+  feId=$!
 fi
-beId=$!
+
+if [[ -z "$SKIP_MAVEN" ]]; then
+  if [[ -z $MVN_EXTRA_ARGS ]]; then
+    (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
+  else
+    (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run "${MVN_EXTRA_ARGS}") &
+  fi
+  beId=$!
+fi
 
 wait
