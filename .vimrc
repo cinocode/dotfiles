@@ -84,6 +84,7 @@ augroup MyFlogSettings
   autocmd FileType floggraph nno <buffer> con :<C-U>exec flog#Format('Floggit checkout --quiet -b'.input("New branch name:").' %h')<CR>
   autocmd FileType floggraph nno <buffer> cpn :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --quiet -u origin %l')<CR>
   autocmd FileType floggraph nno <buffer> cpb :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --quiet origin %l')<CR>
+  autocmd FileType floggraph nno <buffer> cpB :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --force origin %l')<CR>
   autocmd FileType floggraph nno <buffer> cuo :<C-U>exec flog#Format("Floggit branch --set-upstream-to origin %l")<CR>
   autocmd FileType floggraph nno <buffer> cu<Space> :<C-U>Floggit branch --set-upstream-to<Space>
 
