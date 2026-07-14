@@ -60,6 +60,49 @@ function! PreviewMarkdown()
   :execute "bel vert terminal"
 endfunction
 
+augroup MyFlogSettings
+" dq      - Close all temporary |flog-side-window|s.
+" [r ]r   - jump between commits with ref names
+" a       -toggle show all branches
+" gr      - toggle reflog
+" crc     - revert the commit under the cursor
+" col     - checkout local branch from remote refs
+" ri      - start interactive rebase using commit under cursor as root
+" ru      - start interactive rebase using upstream as root
+" rp      - start interactive rebase using push as root
+" rw      - start interactive rebase with reword for commit under cursor
+" rd      - start interactive rebase with drop for commit under cursor
+" rr      - rebase continue
+" rs      - rebase skip
+" ra      - rebase abort
+" r<\s    - rebase command line start
+" cm<\s   - merge command line start
+" co<\s   - checkout command line start
+
+  autocmd FileType floggraph nno <buffer> coo :<C-U>exec flog#Format('Floggit checkout --quiet %h')<CR>
+  autocmd FileType floggraph nno <buffer> cob :<C-U>exec flog#Format('Floggit checkout --quiet %l')<CR>
+  autocmd FileType floggraph nno <buffer> con :<C-U>exec flog#Format('Floggit checkout --quiet -b'.input("New branch name:").' %h')<CR>
+  autocmd FileType floggraph nno <buffer> cpn :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --quiet -u origin %l')<CR>
+  autocmd FileType floggraph nno <buffer> cpb :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --quiet origin %l')<CR>
+  autocmd FileType floggraph nno <buffer> cuo :<C-U>exec flog#Format("Floggit branch --set-upstream-to origin %l")<CR>
+  autocmd FileType floggraph nno <buffer> cu<Space> :<C-U>Floggit branch --set-upstream-to<Space>
+
+  autocmd FileType floggraph nno <buffer> cmc :<C-U>exec flog#Format('vertical belowright Floggit -b -t merge --quiet --no-edit --no-ff %l')<CR>
+  autocmd FileType floggraph nno <buffer> cmm :<C-U>exec flog#Format('vertical belowright Floggit -b -t merge --quiet %l')<CR>
+
+  autocmd FileType floggraph nno <buffer> re :<C-U>exec flog#Format('vertical belowright Floggit -b -t rebase --quiet %h')<CR>
+  autocmd FileType floggraph nno <buffer> rh :<C-U>exec flog#Format('vertical belowright Floggit -t rebase -i %h')<CR>
+
+  autocmd FileType floggraph nno <buffer> gf :Git fetch<CR>
+  autocmd FileType floggraph nno <buffer> gp :Git pull<CR>
+
+  autocmd FileType floggraph nno <buffer> grh :<C-U>exec flog#Format("Floggit reset --hard %h")<CR>
+  autocmd FileType floggraph nno <buffer> gcp :<C-U>exec flog#Format("Floggit cherry-pick --quiet %h")<CR>
+
+  autocmd FileType floggraph nno <buffer> dlb :<C-U>exec flog#Format('vertical belowright Floggit -b -t branch --quiet -D %l')<CR>
+  autocmd FileType floggraph nno <buffer> drb :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --quiet origin :%l')<CR>
+augroup END
+
 map <F2> :set nohls<CR>:let @/ = ""<CR>:set hls<CR>
 "nnoremap / /\v
 "cnoremap %s// %s//
