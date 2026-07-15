@@ -27,6 +27,6 @@ if [[ -f "$DOCKER_FILE" ]]; then
   if [[ ! -z $1 && ("$1" = 'all' || "$1" = "docker" ) ]]; then
     docker-compose -f "$DOCKER_FILE" down
   elif [[ -f docker-compose.yml && ! -z "$(docker-compose ps --services --filter 'status=running')" ]]; then
-    docker-compose "$DOCKER_FILE" stop
+    docker-compose -f "$DOCKER_FILE" stop
   fi
 fi
