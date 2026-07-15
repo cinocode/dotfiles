@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eo pipefail
+
+yadm pull
+
+dots_deprecations
+setup_doc_dots

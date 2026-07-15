@@ -5,9 +5,19 @@ set -eo pipefail
 CUR_DIR=$(pwd)
 BASE_NAME=$(basename "${CUR_DIR}")
 
+dotfilesAttach() {
+  if ! tmux list-sessions | grep -q dotfiles; then
+    tmux new-session -d -s dotfiles
+    tmux send-keys -t dotfiles 'dots_setup && exit' Enter
+    tmux split-pane -t dotfiles
+  fi
+
+  tmux attach -t dotfiles
+}
+
 if [[ $BASE_NAME = 'ole' ]]; then
     if pgrep tmux; then
-        tmux attach -t dotfiles || tmux att
+        dotfilesAttach
     else
         if ! package_check; then
             sleep 5 && bash && exit 0
@@ -22,14 +32,11 @@ if [[ $BASE_NAME = 'ole' ]]; then
         tmux new-session -d -s background
         tmux send-keys -t background 'ghsync_d' Enter
 
-        tmux new-session -d -s dotfiles
-        tmux send-keys -t dotfiles 'yadm pull' Enter
-
         if package_check tmux_launch_extra; then
           tmux_launch_extra
         fi
 
-        tmux attach -t dotfiles
+        dotfilesAttach
     fi
 else
     tmux new-session -A -s "${BASE_NAME}" -c "$(pwd)"

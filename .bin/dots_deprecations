@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -eo pipefail
 
 VIM_BUNDLES="${HOME}/.vim/pack/bundle/start"
 NVIM_BUNDLES="${HOME}/.local/share/nvim/site/pack/bundle/start"
