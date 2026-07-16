@@ -409,6 +409,22 @@ else
     git clone https://github.com/MunifTanjim/nui.nvim.git
 fi
 
+if [[ -d "${NVIM_BUNDLES}/trouble.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/trouble.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/folke/trouble.nvim.git
+fi
+
+if [[ -d "${NVIM_BUNDLES}/gh-addressed.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/gh-addressed.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/dlvhdr/gh-addressed.nvim.git
+fi
+
 if [[ -d "${NVIM_BUNDLES}/telescope.nvim" ]]; then
     cd "${NVIM_BUNDLES}/telescope.nvim"
     git pull

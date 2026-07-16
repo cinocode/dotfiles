@@ -206,6 +206,7 @@ nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>,b
 vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>,b
 nnoremap <silent> <leader>gH :Flogsplit -path=%<CR>
 nnoremap <silent> <leader>gq :tabclose<CR>
+nnoremap <silent> <leader>gt :GhReviewComments<cr>
 nnoremap <silent> <leader>go :Telescope git_branches<CR>
 nnoremap <silent> <leader>gk :Flogsplit -all -auto-update -reflog<cr>
 nnoremap <silent> <leader>gl :Flogsplit -all -auto-update<cr>
