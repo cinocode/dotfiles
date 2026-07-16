@@ -7,11 +7,9 @@ cache="c2"
 yt_profile="1440p"
 
 if [[ $1 = https* ]]; then
-  cache="c0"
   link="$1"
 elif [[ "$1" = "live" ]]; then
   link="live"
-  cache="c0"
 elif [[ "$1" = "combo" ]]; then
   link="combo"
 elif [[ "$1" = "1080p" ]]; then
@@ -28,7 +26,6 @@ elif [[ "$1" = "c0" || "$1" = "c1" || "$1" = "c2" || "$1" = "c3" ]]; then
 elif [[ $1 = tok:* ]]; then
   link="https://www.tiktok.com/@$(echo $1 | cut -d ':' -f 2)"
 elif [[ ! -z "$1" ]]; then
-  cache="c0"
   link="https://www.twitch.tv/$1"
 fi
 
@@ -69,9 +66,7 @@ elif [[ "$link" = "combo" ]]; then
   link="$(awk '{print $1}' <<< $line)"
   rm "$tmp_picker_file"
 
-  if echo $line | grep -q 'is live on'; then
-    cache="c0"
-  else
+  if ! echo $line | grep -q 'is live on'; then
     vl_ts_marker="$ts_marker"
   fi
 fi
