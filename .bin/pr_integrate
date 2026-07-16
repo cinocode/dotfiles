@@ -27,7 +27,7 @@ git checkout "$branch"
 git rebase "$base_branch"
 
 git checkout "$base_branch"
-git merge --no-ff "$branch"
+git merge --no-edit --no-ff "$branch"
 
 git push origin "$base_branch"
 
