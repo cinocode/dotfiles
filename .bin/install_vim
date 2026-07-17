@@ -238,6 +238,17 @@ if [[ ! -L "${NVIM_BUNDLES}/vim-flog" ]]; then
   ln -sf "${VIM_BUNDLES}/vim-flog" "${NVIM_BUNDLES}/vim-flog"
 fi
 
+if [[ -d "${VIM_BUNDLES}/undotree" ]]; then
+    cd "${VIM_BUNDLES}/undotree"
+    git pull
+else
+    cd "${VIM_BUNDLES}"
+    git clone https://github.com/mbbill/undotree.git
+fi
+if [[ ! -L "${NVIM_BUNDLES}/undotree" ]]; then
+  ln -sf "${VIM_BUNDLES}/undotree" "${NVIM_BUNDLES}/undotree"
+fi
+
 # nvim_plugins
 
 if [[ -d "${NVIM_BUNDLES}/tokyonight.nvim" ]]; then

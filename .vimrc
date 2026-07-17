@@ -1,5 +1,19 @@
 set backupdir=~/.vim/backup/
 set directory=~/.vim/backup/
+if has("persistent_undo")
+  let target_path = expand('~/.vim/undodir')
+  if !isdirectory(target_path)
+    call mkdir(target_path, "p", 0700)
+  endif
+  let &undodir=target_path
+  set undofile
+endif
+
+augroup UndoTreeSettings
+  au FileType undotree let b:auto_save = 0
+augroup END
+let g:undotree_WindowLayout = 2
+let g:undotree_SetFocusWhenToggle = 1
 
 set encoding=utf-8
 setglobal fileencoding=utf-8
@@ -228,6 +242,7 @@ nnoremap <silent> <leader>rl 5<c-w>>
 nnoremap <silent> <leader>rj 5<c-w>-
 nnoremap <silent> <leader>rk 5<c-w>+
 
+nnoremap <silent> <leader>u :UndotreeToggle<cr>
 nnoremap <silent> <leader>s :ShellCheck<cr>:copen<cr><c-w><c-k>:cfirst<cr>
 
 nnoremap <silent> <leader>ta :JUnit *<cr>
