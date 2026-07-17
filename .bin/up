@@ -119,4 +119,17 @@ if [[ -z "$SKIP_MAVEN" ]]; then
   beId=$!
 fi
 
+if [[ -z "$SKIP_MAVEN" ]]; then
+  port_check "wait" "8080"
+fi
+if [[ -z "$SKIP_NPM" ]]; then
+  angular_port="4200"
+  if cat "$PKGJSON" | grep -q '--port 4202'; then
+    angular_port="4202"
+  fi
+  port_check "wait" "$angular_port"
+
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --incognito "http://localhost:$angular_port"
+fi
+
 wait
