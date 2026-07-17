@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+wait_mode="false"
+step=0
+step_size=0.25
+timeout=1200
+
+port_check() {
+  nc -zv "localhost" "$1"
+  if [[ "$?" = "0" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+for var in "$@"
+do
+  if [[ "$var" = "wait" ]]; then
+    wait_mode="true"
+  elif [[ "$wait_mode" = "true" ]]; then
+    while [[ "$step" -lt "$timeout" ]]; do
+      if port_check "$var"; then
+        break
+      fi
+      step=$(( step + 1 ))
+      sleep "$step_size"
+    done
+  else
+    port_check "$var"
+  fi
+done
