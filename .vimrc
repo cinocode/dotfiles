@@ -155,6 +155,8 @@ nnoremap <c-w>o <c-w>o:e<cr>
 nnoremap <c-z> :qa<cr>
 nnoremap <silent> <c-w>z :wincmd z<bar>cclose<bar>lclose<cr>:DBResultsClose<cr>
 
+xnoremap p P
+xnoremap P p
 nnoremap Y y$
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
