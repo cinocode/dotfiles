@@ -294,8 +294,6 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down 34px
 for_window [class="(?i)Veracrypt"] floating enable, move position mouse
 for_window [class="(?i)calc"] floating enable, move position mouse
 
-assign [class="steam"] $ws3
-assign [class="steamwebhelper"] $ws3
 assign [class="discord-ptb"] $ws3
 
 exec --no-startup-id nm-applet
