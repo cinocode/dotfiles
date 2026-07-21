@@ -58,24 +58,7 @@ fi
 
 if [[ -f "$DOCKER_FILE" && -z "$(docker-compose -f ${DOCKER_FILE} ps --services --filter 'status=running')" ]]; then
   docker-compose -f "${DOCKER_FILE}" up &
-
-  sleep 2
-  DOCKERPS="$(docker ps)"
-  if echo "$DOCKERPS" | grep 'seconds ago' | grep 'Up' | grep -q 'seconds'; then
-    if cat "pom.xml" | grep -q 'coversheet'; then
-      sleep 30
-    else
-      sleep 1
-    fi
-  elif echo "$DOCKERPS" | grep 'Up' | grep -q 'seconds'; then
-    if [[ "$SKIP_PKG" = "true" ]]; then
-      if cat "pom.xml" | grep -q 'coversheet'; then
-        sleep 5
-      else
-        sleep 1
-      fi
-    fi
-  fi
+  DOCKER_STARTING="true"
 fi
 
 if [[ -z "$SKIP_NPM" && "$SKIP_PKG" != "true" ]]; then
@@ -110,6 +93,19 @@ if [[ -z "$SKIP_NPM" ]]; then
   feId=$!
 fi
 
+if [[ "$DOCKER_STARTING" = "true" ]]; then
+  while true; do
+    sleep 1
+    if [[ "$(docker-compose -f "$DOCKER_FILE" logs --since=90s | grep 'DATABASE IS READY TO USE!' | wc -l)" -gt 0 ]]; then
+      break;
+    elif [[ "$(docker-compose -f "$DOCKER_FILE" logs --since=90s | grep 'mariadbd: ready for connections' | wc -l)" -gt 0 ]]; then
+      break;
+    elif [[ "$(docker-compose -f "$DOCKER_FILE" logs --since=90s | grep 'MessageTypeServiceStart' | grep 'Done processing the packet of type' | wc -l)" -gt 0 ]]; then
+      break;
+    fi
+  done
+fi
+
 if [[ -z "$SKIP_MAVEN" ]]; then
   if [[ -z $MVN_EXTRA_ARGS ]]; then
     (source read_idea_env "$ENV_ARGS" && mvn -T 1.1C spring-boot:run) &
@@ -124,7 +120,7 @@ if [[ -z "$SKIP_MAVEN" ]]; then
 fi
 if [[ -z "$SKIP_NPM" ]]; then
   angular_port="4200"
-  if cat "$PKGJSON" | grep -q '--port 4202'; then
+  if cat "$PKGJSON" | grep -q "port 4202"; then
     angular_port="4202"
   fi
   port_check "wait" "$angular_port"
