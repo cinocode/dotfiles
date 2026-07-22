@@ -81,6 +81,9 @@ cleanupRun() {
   if [[ ! -z "$beId" ]]; then
     kill $beId
   fi
+  if [[ ! -z "$chromeId" ]]; then
+    kill $chromeId
+  fi
   if [[ -f ${DOCKER_FILE} ]]; then
     docker-compose -f "${DOCKER_FILE}" stop 
   fi
@@ -125,7 +128,8 @@ if [[ -z "$SKIP_NPM" ]]; then
   fi
   port_check "wait" "$angular_port"
 
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --incognito "http://localhost:$angular_port"
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --incognito --auto-open-devtools-for-tabs --user-data-dir="$HOME/.local/share/chrome_dev" "http://localhost:$angular_port" >/dev/null 2>&1 &
+  chromeId="$!"
 fi
 
 wait
