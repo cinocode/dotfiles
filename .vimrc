@@ -65,13 +65,23 @@ highlight ColorColumn ctermbg=darkgreen
 call matchadd('ColorColumn', '\%121v', 120)
 set list
 set listchars=nbsp:¡,eol:¬,tab:»\ ,extends:>,precedes:<,trail:·
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ \[%{strlen(&ft)?&ft:'none'}]\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 let g:fortune_vimtips_auto_display = 0
 
 function! PreviewMarkdown()
   let l:path=expand('%:p')
   silent execute "!echo ".l:path." > /tmp/lastpreview.log"
   :execute "bel vert terminal"
+endfunction
+
+function! ToggleGstatus() abort
+  for l:winnr in range(1, winnr('$'))
+    if !empty(getwinvar(l:winnr, 'fugitive_status'))
+      exe l:winnr 'close'
+      return
+    endif
+  endfor
+  keepalt Git
 endfunction
 
 augroup MyFlogSettings
@@ -198,13 +208,13 @@ nnoremap <silent> <leader>ji :lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>jx :lua vim.lsp.codelens.run()<CR>
 nnoremap <silent> <leader>js :lua vim.lsp.buf.document_symbol()<CR>
 
-nnoremap <silent> <leader>gs :Git<cr>
+nnoremap <silent> <leader>gs :call ToggleGstatus()<cr>
 nnoremap <silent> <leader>ga :Gwrite<cr>
 nnoremap <silent> <leader>gA :Gwrite<cr>:Git commit<cr>
 nnoremap <silent> <leader>gb :Git blame<cr>
 nnoremap <silent> <leader>gc :Git commit<cr>
 nnoremap <silent> <leader>gC :Git commit --amend<cr>
-nnoremap <silent> <leader>gd :DiffviewOpen -- %<CR>,b
+nnoremap <silent> <leader>gd :DiffviewOpen -- %<CR>:DiffviewToggleFiles<CR>
 nnoremap <silent> <leader>gD :Ghdiffsplit<CR>
 nnoremap <silent> <leader>gv :DiffviewOpen origin/HEAD..HEAD<CR><c-w>l<c-w>j
 nnoremap <silent> <leader>gV :DiffviewOpen<space>
@@ -218,8 +228,8 @@ nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gP :Git push
-nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>,b
-vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>,b
+nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>:DiffviewToggleFiles<CR>
+vnoremap <silent> <leader>gh :'<,'>DiffviewFileHistory %<CR>:DiffviewToggleFiles<CR>
 nnoremap <silent> <leader>gH :Flogsplit -path=%<CR>
 nnoremap <silent> <leader>gq :tabclose<CR>
 nnoremap <silent> <leader>gt :GhReviewComments<cr>
