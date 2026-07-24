@@ -436,6 +436,22 @@ else
     git clone https://github.com/dlvhdr/gh-addressed.nvim.git
 fi
 
+if [[ -d "${NVIM_BUNDLES}/tree-sitter-projects" ]]; then
+    cd "${NVIM_BUNDLES}/tree-sitter-projects"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/ca-mantis-shrimp/tree-sitter-projects
+fi
+
+if [[ -d "${NVIM_BUNDLES}/Todoist.nvim" ]]; then
+    cd "${NVIM_BUNDLES}/Todoist.nvim"
+    git pull
+else
+    cd "${NVIM_BUNDLES}"
+    git clone https://github.com/ca-mantis-shrimp/Todoist.nvim.git
+fi
+
 if [[ -d "${NVIM_BUNDLES}/telescope.nvim" ]]; then
     cd "${NVIM_BUNDLES}/telescope.nvim"
     git pull

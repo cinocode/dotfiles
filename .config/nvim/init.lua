@@ -36,6 +36,21 @@ require('nvim-treesitter').setup {
   indent = { enable = true },
 }
 
+require("todoist").setup({
+  api_key = vim.env.TODOIST_API_KEY
+})
+
+vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
+callback = function()
+require("nvim-treesitter.parsers").projects = {
+ install_info = {
+  path = vim.env.HOME .. "/.local/share/nvim/site/pack/bundle/start/tree-sitter-projects",
+  files = { "src/parser.c" },
+ },
+ filetype = "projects",
+}
+end})
+
 local actions = require("diffview.actions")
 
 require("diffview").setup({

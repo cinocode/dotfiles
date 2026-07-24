@@ -101,3 +101,4 @@ if [[ -z $TMUX ]]; then
 fi
 
 source ~/.bin/id_keychain.sh
+export TODOIST_API_KEY="$(pass todoist.com_api_key | head -n 1)"

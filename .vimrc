@@ -208,6 +208,8 @@ nnoremap <silent> <leader>ji :lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>jx :lua vim.lsp.codelens.run()<CR>
 nnoremap <silent> <leader>js :lua vim.lsp.buf.document_symbol()<CR>
 
+nnoremap <silent> <leader>do :TodoistFullSync<cr>
+
 nnoremap <silent> <leader>gs :call ToggleGstatus()<cr>
 nnoremap <silent> <leader>ga :Gwrite<cr>
 nnoremap <silent> <leader>gA :Gwrite<cr>:Git commit<cr>
