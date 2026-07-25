@@ -25,6 +25,9 @@ elif [[ "$1" = "c0" || "$1" = "c1" || "$1" = "c2" || "$1" = "c3" ]]; then
   cache="$1"
 elif [[ $1 = tok:* ]]; then
   link="https://www.tiktok.com/@$(echo $1 | cut -d ':' -f 2)"
+elif [[ $1 = record:* ]]; then
+  record_stream="$(echo $1 | cut -d ':' -f 2)"
+  link="https://www.twitch.tv/$record_stream"
 elif [[ ! -z "$1" ]]; then
   link="https://www.twitch.tv/$1"
 fi
@@ -74,6 +77,8 @@ fi
 if [[ ! -z "$link" ]]; then
   if [[ ! -z "$await_mode" ]]; then
     vl_ts_marker="await"
+  elif [[ ! -z "$record_stream" ]]; then
+    vl_ts_marker="record"
   elif ! vod_online "$link" "quiet"; then
     echo "Nothing to play: $link"
     exit 1
