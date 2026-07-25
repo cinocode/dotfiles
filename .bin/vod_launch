@@ -28,7 +28,7 @@ fi
 playNewestRecording() {
   sleep 5
   vod_file_name="$(ls -1 -t "$HOME/tor/streams" | head -n 1)"
-  mpv "$HOME/tor/streams/$vod_file_name"
+  mpv --save-position-on-quit "$HOME/tor/streams/$vod_file_name"
 }
 
 if [[ $1 = *youtu* ]]; then
@@ -37,6 +37,8 @@ if [[ $1 = *youtu* ]]; then
   while pgrep mpv | grep -q "$mpv_id"; do
     sleep 15
   done
+elif [[ -f "$1" ]]; then
+  mpv --save-position-on-quit "$1"
 else
   if [[ "$5" = "await" ]]; then
     vod_online "$1" "await"

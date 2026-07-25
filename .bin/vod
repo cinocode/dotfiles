@@ -12,6 +12,8 @@ elif [[ "$1" = "live" ]]; then
   link="live"
 elif [[ "$1" = "combo" ]]; then
   link="combo"
+elif [[ "$1" = "files" ]]; then
+  link="files"
 elif [[ "$1" = "1080p" ]]; then
   quality="1080p60,1080p,720p60,720p,best"
   yt_profile="1080p"
@@ -71,6 +73,11 @@ elif [[ "$link" = "combo" ]]; then
 
   if ! echo $line | grep -q 'is live on'; then
     vl_ts_marker="$ts_marker"
+  fi
+elif [[ "$link" = "files" ]]; then
+  link="$(ls -1 ~/tor/streams | fzf)"
+  if [[ ! -z "$link" ]]; then
+    link="$HOME/tor/streams/$link"
   fi
 fi
 
