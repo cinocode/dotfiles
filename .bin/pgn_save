@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+database_file="$HOME/doc/chess/castlemebebi.pgn"
+
+if [[ "$1" = "monitor" ]]; then
+  monitor_mode="true"
+elif [[ ! -z "$1" ]]; then
+  database_file="$1"
+fi
+
+if [[ ! -f "$database_file" ]]; then
+  echo "Database '$database_file' not found"
+  exit 1
+fi
+
+saveGame() {
+  clipboard="$(xclip -selection clipboard -o)"
+
+  if [[ -z "$last_clipboard" || "$clipboard" != "$last_clipboard" ]]; then
+    if ! echo "$clipboard" | grep -q "\[Date"; then
+      echo "No [Date ...] tag"
+      return 1
+    elif ! echo "$clipboard" | grep -q "\[Result"; then
+      echo "No [Resul ...] tag"
+      return 1
+    fi
+
+    # date not found in database validation
+    # verify whitespace / newline handling
+    # verify lines post > lines pre
+
+    lines_pre="$(wc -l $database_file | cut -w -f 1)"
+
+    # save
+    echo "" >> "$database_file"
+    echo "$clipboard" >> "$database_file"
+
+    lines_post="$(wc -l $database_file | cut -w -f 1)"
+    if [[ "$lines_post" -lt $((lines-pre + 5)) ]]; then
+      echo "not many lines persisted"
+      return 1
+    fi
+  fi
+
+  last_clipboard="$clipboard"
+}
+
+if [[ "$monitor_mode" = "true" ]]; then
+  while true; do
+    saveGame
+    sleep 10
+  done
+else
+  saveGame
+fi
