@@ -226,6 +226,7 @@ nnoremap <silent> <leader>gr :Git rebase
 nnoremap <silent> <leader>gi :silent !clear<cr>:exec ":Git rebase -i HEAD~".input("How many commits to rebase:")<cr>
 nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
+nnoremap <silent> <leader>gM :!pr_integrate<cr>
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gP :Git push
 nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>:DiffviewToggleFiles<CR>
@@ -240,8 +241,8 @@ nnoremap <silent> <leader>gL :tabnew<cr>:Flog -all -auto-update<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
 
-nnoremap <silent> <leader>oo :Octo pr refresh<cr>
-nnoremap <silent> <leader>op :Octo pr<cr>
+nnoremap <silent> <leader>op :Octo pr create<cr>
+nnoremap <silent> <leader>ob :Octo pr browser<cr>
 nnoremap <silent> <leader>ol :Octo pr list<cr>
 nnoremap <silent> <leader>or :Octo review<cr>
 nnoremap <silent> <leader>os :Octo review submit<cr>

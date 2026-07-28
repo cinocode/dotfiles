@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-branch="$1"
-base_branch="$2"
+if [[ -z "$1" ]]; then
+  branch="$(git branch --show-current)"
+else
+  branch="$1"
+fi
+if [[ ! -z "$2" ]]; then
+  base_branch="$2"
+fi
 
-if [[ "$1" = "main" || "$1" = "staging" || "$1" = "production" || "$1" = "trunc" ]]; then
-  echo "Git status is not clean"
+if [[ "$branch" = "main" || "$branch" = "staging" || "$branch" = "production" || "$branch" = "trunc" ]]; then
+  echo "Branch can not be main,staging,production,trunc"
   exit 0
 fi
 
