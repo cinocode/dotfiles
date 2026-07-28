@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eo pipefail
 
 VIM_BUNDLES="${HOME}/.vim/pack/bundle/start"

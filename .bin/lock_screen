@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 IMAGE=~/.config/wallpaper/current_blur.png
 CONFIRM_FILE=~/.confirmsuspend
 DO_SUSPEND=false

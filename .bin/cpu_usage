@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eo pipefail
 
 cpu_usage_pct="$((100-$(vmstat 2 3|tail -1|awk '{print $15}')))"
