@@ -226,7 +226,8 @@ nnoremap <silent> <leader>gr :Git rebase
 nnoremap <silent> <leader>gi :silent !clear<cr>:exec ":Git rebase -i HEAD~".input("How many commits to rebase:")<cr>
 nnoremap <silent> <leader>gI :silent !clear<cr>:Git rebase --continue<cr>
 nnoremap <silent> <leader>gm :Git merge --no-ff
-nnoremap <silent> <leader>gM :!pr_integrate<cr>
+nnoremap <silent> <leader>gu :!pr_integrate update_only<cr>
+nnoremap <silent> <leader>gU :!pr_integrate<cr>
 nnoremap <silent> <leader>gp :silent !clear<cr>:Git push<cr>
 nnoremap <silent> <leader>gP :Git push
 nnoremap <silent> <leader>gh :DiffviewFileHistory %<CR>:DiffviewToggleFiles<CR>

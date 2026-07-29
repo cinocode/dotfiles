@@ -3,6 +3,9 @@ set -eo pipefail
 
 if [[ -z "$1" ]]; then
   branch="$(git branch --show-current)"
+elif [[ "$1" = "update_only" ]]; then
+  branch="$(git branch --show-current)"
+  update_only="true"
 else
   branch="$1"
 fi
@@ -32,9 +35,11 @@ fi
 git checkout "$branch"
 git rebase "$base_branch"
 
-git checkout "$base_branch"
-git merge --no-edit --no-ff "$branch"
+if [[ -z "$update_only" ]]; then
+  git checkout "$base_branch"
+  git merge --no-edit --no-ff "$branch"
 
-git push origin "$base_branch"
+  git push origin "$base_branch"
 
-pr_delete "$branch"
+  pr_delete "$branch"
+fi
