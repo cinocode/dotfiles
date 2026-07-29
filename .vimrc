@@ -111,6 +111,8 @@ augroup MyFlogSettings
   autocmd FileType floggraph nno <buffer> cpB :<C-U>exec flog#Format('vertical belowright Floggit -b -t push --force origin %l')<CR>
   autocmd FileType floggraph nno <buffer> cuo :<C-U>exec flog#Format("Floggit branch --set-upstream-to origin %l")<CR>
   autocmd FileType floggraph nno <buffer> cu<Space> :<C-U>Floggit branch --set-upstream-to<Space>
+  autocmd FileType floggraph nno <buffer> gvh :<C-U>exec flog#Format('DiffviewOpen %h..HEAD')<CR>
+  autocmd FileType floggraph nno <buffer> gvt :<C-U>exec flog#Format('DiffviewOpen %h..%h~1')<CR>
 
   autocmd FileType floggraph nno <buffer> cmc :<C-U>exec flog#Format('vertical belowright Floggit -b -t merge --quiet --no-edit --no-ff %l')<CR>
   autocmd FileType floggraph nno <buffer> cmm :<C-U>exec flog#Format('vertical belowright Floggit -b -t merge --quiet %l')<CR>
@@ -118,7 +120,7 @@ augroup MyFlogSettings
   autocmd FileType floggraph nno <buffer> re :<C-U>exec flog#Format('vertical belowright Floggit -b -t rebase --quiet %h')<CR>
   autocmd FileType floggraph nno <buffer> rh :<C-U>exec flog#Format('vertical belowright Floggit -t rebase -i %h')<CR>
 
-  autocmd FileType floggraph nno <buffer> gf :Git fetch<CR>
+  autocmd FileType floggraph nno <buffer> gf :Git fetch --prune<CR>
   autocmd FileType floggraph nno <buffer> gp :Git pull<CR>
 
   autocmd FileType floggraph nno <buffer> grh :<C-U>exec flog#Format("Floggit reset --hard %h")<CR>
