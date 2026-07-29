@@ -256,6 +256,8 @@ nnoremap <silent> <leader>rl 5<c-w>>
 nnoremap <silent> <leader>rj 5<c-w>-
 nnoremap <silent> <leader>rk 5<c-w>+
 
+nnoremap <silent> <leader>f :!va_autolint %<cr>
+nnoremap <silent> <leader>F :!va_autolint<cr>
 nnoremap <silent> <leader>u :UndotreeToggle<cr>
 nnoremap <silent> <leader>s :ShellCheck<cr>:copen<cr><c-w><c-k>:cfirst<cr>
 
