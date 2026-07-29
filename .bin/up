@@ -105,6 +105,8 @@ if [[ "$DOCKER_STARTING" = "true" ]]; then
       break;
     elif [[ "$(docker-compose -f "$DOCKER_FILE" logs --since=90s | grep 'MessageTypeServiceStart' | grep 'Done processing the packet of type' | wc -l)" -gt 0 ]]; then
       break;
+    elif [[ "$ENV_ARGS" = "default" ]]; then
+      break;
     fi
   done
 fi
