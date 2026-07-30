@@ -1,34 +1,29 @@
 #!/usr/bin/env bash
 
-NL=$'\n'
-
-search_prs() {
-    cd
-    cd $2
-    if [[ ! -f '.git/config' ]]; then
-        return 0
-    fi
-    if cat '.git/config' | grep -q 'lht-general'; then
-        SEARCH=$(gh pr list --search "$1")
-        if [[ ! -z $SEARCH ]]; then
-            if echo $SEARCH | grep -vq 'no pull_requests match'; then
-                OUTPUT="${OUTPUT}${2}${NL}"
-                OUTPUT="${OUTPUT}${SEARCH}${NL}"
-            fi
-        fi
-    fi
-}
-
-check_prs() {
-    OUTPUT="Open reviews:${NL}"
-    for ghdir in $(gitup -l | tail -n +4); do search_prs "review-requested:@me" "${ghdir}"; done
-
-
-    OUTPUT="${OUTPUT}${NL}My PRs:${NL}"
-    for ghdir in $(gitup -l | tail -n +4); do search_prs "author:@me" "${ghdir}"; done
-    printf "$OUTPUT"
-}
-
-(sleep 0.1 && tmux split-window) &
 gitup > /dev/null &
-check_prs
+
+checkPr() {
+  repo="$(printf "$1" | jq -r '.repository.nameWithOwner')"
+  repoName="$(printf "$1" | jq -r '.repository.name')"
+  number="$(printf "$1" | jq -r '.number')"
+  url="https://github.com/$repo/pull/$number"
+
+  prInfo="$(gh pr view --json reviewRequests,reviewDecision,author,number,title,updatedAt $url)"
+  author="$(printf "$prInfo" | jq -r '.author.name')"
+  reviewDecision="$(printf "$prInfo" | jq -r '.reviewDecision')"
+  title="$(printf "$prInfo" | jq -r '.title')"
+  updatedAt="$(printf "$prInfo" | jq -r '.updatedAt')"
+  if [[ "$author" = "Ole Hansen" ]]; then
+    if [[ "$reviewDecision" = "APPROVED" ]]; then
+      echo "Approved: $repoName - $number - $title - $updated"
+    elif [[ "$reviewDecision" = "CHANGES_REQUESTED" ]]; then
+      echo "Changes Requested: $repoName - $number - $title - $updated"
+    fi
+  else
+    if [[ ! -z "$(printf "$prInfo" | jq -c '.reviewRequests[] | select( .login | contains("u898296"))')" ]]; then
+      echo "To Review: $repoName - $number - $title - $updatedAt"
+    fi
+  fi
+}
+
+gh search prs --owner lht-general --involves @me --state open --sort updated --json number,repository | jq -c '.[]' | while read -r prItem; do checkPr "$prItem" ; done
