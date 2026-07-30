@@ -252,6 +252,7 @@ nnoremap <silent> <leader>os :Octo review submit<cr>
 nnoremap <silent> <leader>oD :Octo review discard<cr>
 nnoremap <silent> <leader>oc :Octo review comments<cr>
 nnoremap <silent> <leader>on :Octo notification list<cr>
+nnoremap <silent> <leader>ot :Octo thread resolve<cr>zc
 
 nnoremap <silent> <leader>rh 5<c-w><
 nnoremap <silent> <leader>rl 5<c-w>>

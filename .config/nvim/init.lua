@@ -278,7 +278,6 @@ require("octo").setup({
 		pull_request = {
 			add_comment = { lhs = "<leader>oc", desc = "add comment" },
 			add_reply = { lhs = "<leader>oC", desc = "add reply" },
-			resolve_thread = { lhs = "<leader>ot", desc = "resolve PR thread" },
 			unresolve_thread = { lhs = "<leader>oT", desc = "unresolve PR thread" },
 			add_reviewer = { lhs = "<leader>oa", desc = "ad reviewer" },
 			approve_pr = { lhs = "<leader>oS", desc = "approve PR" },
@@ -291,7 +290,6 @@ require("octo").setup({
 		review_thread = {
 			add_comment = { lhs = "<leader>oc", desc = "add comment" },
 			add_reply = { lhs = "<leader>oC", desc = "add reply" },
-			resolve_thread = { lhs = "<leader>ot", desc = "resolve PR thread" },
 			unresolve_thread = { lhs = "<leader>oT", desc = "unresolve PR thread" },
 			react_thumbs_up = { lhs = "<leader>oe", desc = "add/remove 👍 reaction" },
 			react_rocket = { lhs = "<leader>oi", desc = "add/remove 🚀 reaction" },
