@@ -244,7 +244,9 @@ nnoremap <silent> <leader>gL :tabnew<cr>:Flog -all -auto-update<cr>
 nnoremap <silent> <leader>gz :call SendCommand('git lg')<cr>
 nnoremap <silent> <leader>gZ :call SendCommandStay('git lg')<cr>
 
-nnoremap <silent> <leader>op :Octo pr create<cr>:!gh pr ready --undo<cr>
+nnoremap <silent> <leader>op :Octo pr create<cr>
+nnoremap <silent> <leader>od :!gh pr ready --undo<cr>
+nnoremap <silent> <leader>oD :!gh pr ready<cr>
 nnoremap <silent> <leader>ob :Octo pr browser<cr>
 nnoremap <silent> <leader>ol :Octo pr list<cr>
 nnoremap <silent> <leader>or :Octo review<cr>
