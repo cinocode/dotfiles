@@ -37,13 +37,7 @@ else
     sleep 5 && xset dpms force off &
 fi
 
-compositor_launch stop
-compositor_launch start picom
-compositor_launch start flashfocus
-
 i3lock -n -t -i "$IMAGE"
-
-compositor_launch start wallpaper
 
 sleep 1 && xset dpms 0 0 0 &
 sleep 2 && xset s off -dpms &
