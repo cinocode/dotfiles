@@ -56,5 +56,5 @@ scratch.sql
 hooks/prepare-commit-msg
 
 # jdtls ignores
-.settings/org.eclipse.*.prefs
+**/.settings/org.eclipse.*.prefs
 .factorypath
