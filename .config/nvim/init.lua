@@ -26,7 +26,6 @@ cmp.setup {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 local proj_path = null
 local startAngular = false
 if vim.fn.filereadable(vim.fn.getcwd() .. "/src/main/frontend/package.json") then

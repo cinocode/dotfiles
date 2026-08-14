@@ -466,3 +466,11 @@ ulimit -n 20000
 if ! package_check ngserver; then
   npm install -g @angular/language-server
 fi
+
+if ! package_check kotlin-lsp; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew install JetBrains/utils/kotlin-lsp
+  else
+    yay -S kotlin-lsp
+  fi
+fi
