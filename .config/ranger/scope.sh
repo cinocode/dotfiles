@@ -47,6 +47,13 @@ PYGMENTIZE_STYLE=${PYGMENTIZE_STYLE:-autumn}
 OPENSCAD_IMGSIZE=${RNGR_OPENSCAD_IMGSIZE:-1000,1000}
 OPENSCAD_COLORSCHEME=${RNGR_OPENSCAD_COLORSCHEME:-Tomorrow Night}
 
+handle_skips() {
+  case "${FILE_EXTENSION_LOWER}" in
+    part)
+      exit 1;;
+  esac
+}
+
 handle_extension() {
     case "${FILE_EXTENSION_LOWER}" in
         ## Archive
@@ -156,7 +163,7 @@ handle_image() {
         ## Video
         video/*)
             # Thumbnail
-            ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 812 -q 6 && exit 6;;
+            timeout -k 1s 2s ffmpegthumbnailer -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 812 -q 6 && exit 6;;
 
         ## PDF
         # application/pdf)
@@ -337,6 +344,7 @@ handle_fallback() {
     exit 1
 }
 
+handle_skips
 
 MIMETYPE="$( file --dereference --brief --mime-type -- "${FILE_PATH}" )"
 if [[ "${PV_IMAGE_ENABLED}" == 'True' ]]; then
