@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
-
 if [[ -f ".dev/docker_path" ]]; then
   DOCKER_FILE="$(cat .dev/docker_path)"
 elif [[ -f "docker-compose.yml" ]]; then
