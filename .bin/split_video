@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+filepath="$1"
+segment_sec="28800"
+if [[ ! -z "$2" ]]; then
+  segment_sec="$2"
+fi
+
+if [[ ! -f "$filepath" ]]; then
+  echo "File not found"
+  exit 1
+fi
+
+dirpath="$(dirname $filepath)"
+filename="$(basename $filepath | cut -d '.' -f 1)"
+fileending="$(basename $filepath | cut -d '.' -f 2)"
+
+echo $filename
+echo $fileending
+
+ffmpeg -i "$filepath" -acodec copy -f segment -segment_time "$segment_sec" -vcodec copy -reset_timestamps 1 -map 0 "$dirpath/${filename}_p%d.$fileending"
