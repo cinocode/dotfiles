@@ -1,7 +1,7 @@
 #!/bin/zsh
 source ~/.config/dots/java_home.sh
 
-export EDITOR=/usr/bin/vim
+export EDITOR=nvim
 export ZSH="/opt/oh-my-zsh"
 export ZSH_TMUX_FIXTERM=true
 ZSH_THEME="kolo_custom"
