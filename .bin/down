@@ -19,6 +19,7 @@ if [[ ! -z $1 && ("$1" = 'all' || "$1" = "npm" ) ]]; then
         rm -rf "src/main/frontend/node_modules"
         mkdir "src/main/frontend/node_modules"
     fi
+    npm cache clear -f
 fi
 
 if [[ -f "$DOCKER_FILE" ]]; then
