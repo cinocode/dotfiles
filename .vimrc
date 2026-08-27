@@ -51,7 +51,10 @@ if has("autocmd")
   autocmd BufLeave *.java silent execute ':!va_autolint "%"'
   autocmd BufLeave *.kt silent execute ':!va_autolint "%"'
   autocmd BufLeave *.ts silent execute ':!va_autolint "%"'
+  autocmd BufLeave *.js silent execute ':!va_autolint "%"'
   autocmd BufLeave *.html silent execute ':!va_autolint "%"'
+  autocmd BufLeave *.cs silent execute ':!va_autolint "%"'
+  autocmd BufLeave *.scss silent execute ':!va_autolint "%"'
   autocmd FileType java setlocal ts=4 sts=0 sw=4 expandtab
   autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType cs setlocal ts=4 sts=4 sw=4 expandtab
