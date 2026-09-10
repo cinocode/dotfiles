@@ -76,6 +76,54 @@ set listchars=nbsp:¡,eol:¬,tab:»\ ,extends:>,precedes:<,trail:·
 set statusline=%<%f\ \[%{strlen(&ft)?&ft:'none'}]\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 let g:fortune_vimtips_auto_display = 0
 
+function! CleanFilenames()
+  silent execute "normal ggguG"
+  silent execute "%s/\\./_/ge"
+  silent execute "%s/ /_/ge"
+
+  silent execute "%s/¿/_/ge"
+  silent execute "%s/&ndash;//ge"
+
+  silent execute "%s/'m/m/ge"
+  silent execute "%s/'s/s/ge"
+  silent execute "%s/'re/re/ge"
+  silent execute "%s/n't/nt/ge"
+  silent execute "%s/'/_/ge"
+
+  silent execute "%s/(/_/ge"
+  silent execute "%s/)/_/ge"
+  silent execute "%s/[/_/ge"
+  silent execute "%s/]/_/ge"
+  silent execute "%s/;/_/ge"
+  silent execute "%s/,/_/ge"
+  silent execute "%s/-/_/ge"
+  silent execute "%s/–/_/ge"
+  silent execute "%s/!/_/ge"
+  silent execute "%s/?/_/ge"
+  silent execute "%s/=/_/ge"
+
+  silent execute "%s/_mp4/.mp4/ge"
+  silent execute "%s/_mkv/.mkv/ge"
+  silent execute "%s/_flv/.flv/ge"
+  silent execute "%s/_avi/.avi/ge"
+  silent execute "%s/_txt/.txt/ge"
+  silent execute "%s/_jpg/.jpg/ge"
+  silent execute "%s/_jpeg/.jpeg/ge"
+  silent execute "%s/_gif/.gif/ge"
+  silent execute "%s/_webp/.webp/ge"
+
+  silent execute "%s/_\\././ge"
+
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+endfunction
+
 function! PreviewMarkdown()
   let l:path=expand('%:p')
   silent execute "!echo ".l:path." > /tmp/lastpreview.log"
@@ -283,6 +331,7 @@ nnoremap <silent> <leader>tt :JUnit %<cr>
 nnoremap <silent> <leader>va :AutoSaveToggle<cr>
 nnoremap <silent> <leader>vd :call PreviewMarkdown()<CR>clear<CR>glo $(cat /tmp/lastpreview.log) && exit<CR>
 nnoremap <silent> <leader>vc :silent !clear<cr>
+nnoremap <silent> <leader>vf :call CleanFilenames()<CR>
 nnoremap <silent> <leader>vs :call DoWindowSwap()<cr>
 nnoremap <silent> <leader>ve :EvervimNotebookList<cr>
 nnoremap <silent> <leader>vl :call ToggleList("Location List", 'l')<cr>:e<cr>

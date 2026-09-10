@@ -288,7 +288,7 @@ main() {
       if [ $isPlaying == true ]; then
         if pgrep --quiet i3lock; then
           toggle_video
-        elif ! cpu_usage 14; then
+        elif ! cpu_usage 15; then
           toggle_video
         fi
       elif ! pgrep --quiet i3lock; then
