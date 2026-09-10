@@ -22,6 +22,8 @@ do
     video_case=true
   elif file "$org_file" | grep -q "MP4 v2"; then
     video_case=true
+  elif file "$org_file" | grep -q "MPEG transport stream data"; then
+    video_case=true
   elif file "$org_file" | grep -q "Apple iTunes Video"; then
     video_case=true
   elif file "$org_file" | grep -q 'video/quicktime'; then

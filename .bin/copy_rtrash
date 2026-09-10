@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -eo pipefail
+
+source=$1
+target=$2
+
+if [[ -z "$1" ]]; then
+  echo "Arg 1 has to be source"
+  exit 1
+elif [[ ! -f "$1" ]]; then
+  echo "Arg 1 has to be a file"
+  exit 1
+fi
+if [[ -z "$2" ]]; then
+  echo "Arg 2 has to be target"
+  exit 1
+elif [[ ! -d "$2" ]]; then
+  echo "Arg 2 has to be a directory"
+  exit 1
+fi
+
+source_dir="$(dirname "$source")"
+source_file="$(basename "$source")"
+comp_file="_$source_file"
+
+reduce_file_size "$source"
+
+cp "$source_dir/$comp_file" "${target}/$source_file"
+
+trash-put "${source}"
+trash-put "$source_dir/$comp_file"
+
+if [[ -f "$HOME/tor/nr/video_size/to_process" ]]; then
+  echo "# /home/ole/${target}/$source_file" >> "$HOME/tor/nr/video_size/to_process"
+fi

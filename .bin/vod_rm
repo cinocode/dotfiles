@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+filename="$(basename "$1")"
+main_loc="$HOME/tor/streams/$filename"
+alt_loc="/mnt/ntfs_ssd/streams/$filename"
+
+if [[ -f "$main_loc" ]] || [[ -L "$main_loc" ]]; then
+  rm $main_loc
+fi
+
+if [[ -f "$alt_loc" ]] || [[ -L "$alt_loc" ]]; then
+  rm $alt_loc
+fi
