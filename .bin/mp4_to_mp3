@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-for var in "$@"
-do
-  dirpath="$(dirname "$var")"
-  filename="$(basename "$var" | cut -d '.' -f 1)"
-  fileending="$(basename "$var" | cut -d '.' -f 2)"
+if [[ ! -f "$2" ]]; then
+  ffmpeg -i "$1" -vn -c:a libmp3lame -q:a 2 "$2"
+else
+  for var in "$@"
+  do
+    dirpath="$(dirname "$var")"
+    filename="$(basename "$var" | cut -d '.' -f 1)"
+    fileending="$(basename "$var" | cut -d '.' -f 2)"
 
   # -q:a 0 = max quality, 2-3 good budget compromise
   ffmpeg -i "$dirpath/$filename.$fileending" -vn -c:a libmp3lame -q:a 2 "$dirpath/$filename.mp3"
 done
+fi

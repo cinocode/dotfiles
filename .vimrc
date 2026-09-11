@@ -112,16 +112,17 @@ function! CleanFilenames()
   silent execute "%s/_gif/.gif/ge"
   silent execute "%s/_webp/.webp/ge"
 
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
+  silent execute "%s/__/_/ge"
   silent execute "%s/_\\././ge"
-
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
-  silent execute "%s/__/_/ge"
+  silent execute "%s/_\\././ge"
+  silent execute "%s/_\\././ge"
 endfunction
 
 function! PreviewMarkdown()
