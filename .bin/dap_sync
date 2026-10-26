@@ -26,6 +26,7 @@ if [[ -d "${FROM_DIR}" && -d "${TO_DIR}" ]]; then
     if [[ -d "${PL_TARGET}" ]]; then
         rm -rf "${PL_TARGET}"
     fi
+
     rsync -rltDvP --update --delete --inplace --exclude=".*" --exclude="/Audiobooks/" "${FROM_DIR}" "${TO_DIR}"
     mv "${TMP_PL_DIR}" "${PL_TARGET}"
     rsync -rltDvP --update --delete --inplace --exclude="!Smart AudioBook Player Statistics" --exclude="**/position.sabp.dat" --exclude=".*" "${FROM_DIR}Audiobooks/" "${TARGET_AUDIOB}"

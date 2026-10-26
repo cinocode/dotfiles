@@ -1,2 +1,4 @@
 #!/bin/bash
-feh --auto-rotate -rZzxFYND "$@"
+#feh --auto-rotate --image-bg="black" -rZzxYND "$@"
+#feh --auto-rotate --image-bg="black" --scale-down --zoom fill -rzxYND "$@"
+feh --auto-rotate --image-bg="black" --scale-down -rZzxYND "$@"
