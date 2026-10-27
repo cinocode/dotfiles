@@ -44,4 +44,8 @@ if [[ -z "$update_only" ]]; then
   sleep 2
 
   pr_delete "$branch"
+
+  sleep 1
+
+  git fetch --prune
 fi
